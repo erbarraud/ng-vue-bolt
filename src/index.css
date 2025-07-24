@@ -1,0 +1,57 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Ensure proper font loading and base styles */
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+/* Ensure Tailwind utilities work properly */
+#app {
+  min-height: 100vh;
+}
+
+/* Custom component styles */
+@layer components {
+  .nav-link {
+    @apply px-3 py-2 rounded-md text-sm font-medium flex items-center transition-all duration-200;
+  }
+  
+  .nav-link-active {
+    @apply bg-green-600 text-white shadow-md;
+  }
+  
+  .nav-link-inactive {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+  }
+}
+
+/* Force flex display for navigation */
+.navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+}
+
+/* Ensure proper spacing */
+.space-x-1 > * + * {
+  margin-left: 0.25rem !important;
+}
