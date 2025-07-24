@@ -9,6 +9,7 @@ import LineCheck from '../views/LineCheck.vue'
 import LiveScanning from '../views/LiveScanning.vue'
 import BoardInspector from '../views/BoardInspector.vue'
 import BoardFinder from '../views/BoardFinder.vue'
+import FullInspection from '../views/FullInspection.vue'
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: '/finder',
     name: 'BoardFinder',
     component: BoardFinder
+  },
+  {
+    path: '/inspection/:boardId?',
+    name: 'FullInspection',
+    component: FullInspection
   }
 ]
 
