@@ -72,6 +72,7 @@ export default {
         'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         'inter': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
+      colors: {
         'neural': {
           50: '#ecfdf5',
           100: '#d1fae5',
@@ -84,6 +85,7 @@ export default {
           800: '#065f46',
           900: '#064e3b',
         }
+      },
       boxShadow: {
         'emerald': '0 10px 25px -3px rgba(16, 185, 129, 0.1), 0 4px 6px -2px rgba(16, 185, 129, 0.05)',
         'emerald-lg': '0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.04)',
