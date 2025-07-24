@@ -136,7 +136,7 @@
         
         <div class="space-y-4">
           <!-- Soft Maple Order -->
-          <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <div class="bg-white border border-gray-300 rounded-lg p-6">
             <div class="flex items-center justify-between">
               <div class="flex-1">
                 <div class="flex items-center justify-between mb-2">
@@ -179,7 +179,7 @@
           </div>
 
           <!-- White Oak Order -->
-          <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <div class="bg-white border border-gray-300 rounded-lg p-6">
             <div class="flex items-center justify-between">
               <div class="flex-1">
                 <div class="flex items-center justify-between mb-2">

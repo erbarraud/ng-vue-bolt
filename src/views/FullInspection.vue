@@ -130,9 +130,9 @@
     <!-- Board Images and Analysis -->
     <div class="space-y-6 mb-6">
       <!-- Face 1 -->
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="bg-white rounded-lg shadow border border-gray-200 p-6">
         <h3 class="text-xl font-bold text-gray-900 mb-4">Face 1</h3>
-        <div class="h-48 rounded-lg border border-gray-200 mb-4 overflow-hidden bg-gray-50 relative">
+        <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
           <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-cover" />
           
           <!-- Defect Overlay Areas -->
@@ -163,9 +163,9 @@
       </div>
 
       <!-- Face 2 -->
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="bg-white rounded-lg shadow border border-gray-200 p-6">
         <h3 class="text-xl font-bold text-gray-900 mb-4">Face 2</h3>
-        <div class="h-48 rounded-lg border border-gray-200 mb-4 overflow-hidden bg-gray-50 relative">
+        <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
           <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-cover" />
           
           <!-- Defect Overlay Areas -->

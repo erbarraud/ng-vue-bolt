@@ -80,7 +80,7 @@
 
       <!-- Main Content Area -->
       <div class="lg:col-span-3">
-        <div class="bg-white rounded-lg shadow border-2 border-emerald-200" v-if="currentBoard">
+        <div class="bg-white rounded-lg shadow border-2 border-emerald-300" v-if="currentBoard">
           <div class="p-6">
             <!-- Board Header -->
             <div class="flex items-center justify-between mb-6">
@@ -161,7 +161,7 @@
               <!-- Face 1 -->
               <div>
                 <h4 class="font-semibold text-gray-900 mb-3">Face 1</h4>
-                <div class="h-32 rounded-lg border border-gray-200 mb-3 overflow-hidden bg-gray-50 relative">
+                <div class="h-32 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-50 relative">
                   <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-cover" />
                   
                   <!-- Defect Overlay Areas -->
@@ -196,7 +196,7 @@
               <!-- Face 2 -->
               <div>
                 <h4 class="font-semibold text-gray-900 mb-3">Face 2</h4>
-                <div class="h-32 rounded-lg border border-gray-200 mb-3 overflow-hidden bg-gray-50 relative">
+                <div class="h-32 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-50 relative">
                   <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-cover" />
                   
                   <!-- Defect Overlay Areas -->
