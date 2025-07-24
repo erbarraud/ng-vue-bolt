@@ -58,10 +58,10 @@
 
 @layer base {
   * {
-    border-color: theme(colors.gray.200);
+    border-color: hsl(var(--border));
   }
   body {
-    background-color: theme(colors.white);
-    color: theme(colors.gray.900);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
