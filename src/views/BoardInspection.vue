@@ -102,11 +102,11 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
         </Button>
@@ -118,11 +118,11 @@
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
           <FileText class="w-4 h-4 mr-2" />
-          See rejected rules
+          See Rejected Rules
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
         </Button>
