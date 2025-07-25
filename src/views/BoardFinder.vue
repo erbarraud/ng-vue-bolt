@@ -116,25 +116,6 @@
               placeholder="Max"
               class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             />
-          </div>
-        </div>
-
-        <!-- Date Range Filter -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
-          <div class="flex space-x-2">
-            <input
-              v-model="filters.dateRange.start"
-              type="date"
-              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            />
-            <input
-              v-model="filters.dateRange.end"
-              type="date"
-              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            />
-          </div>
-        </div>
       </div>
 
       <!-- Filter Summary -->
@@ -559,7 +540,6 @@ const filters = ref({
   dryStatus: '',
   batch: '',
   valueRange: { min: '', max: '' },
-  defectCount: { min: '', max: '' },
   dateRange: { start: '', end: '' }
 })
 
@@ -718,16 +698,6 @@ const filteredBoards = computed(() => {
     }
 
     // Defect count filter
-    if (filters.value.defectCount.min || filters.value.defectCount.max) {
-      const defectCount = parseInt(board.totalDefects)
-      if (filters.value.defectCount.min && defectCount < parseInt(filters.value.defectCount.min)) {
-        return false
-      }
-      if (filters.value.defectCount.max && defectCount > parseInt(filters.value.defectCount.max)) {
-        return false
-      }
-    }
-
     return true
   })
 })
@@ -780,7 +750,6 @@ const clearAllFilters = () => {
     dryStatus: '',
     batch: '',
     valueRange: { min: '', max: '' },
-    defectCount: { min: '', max: '' },
     dateRange: { start: '', end: '' }
   }
   searchQuery.value = ''
@@ -794,8 +763,6 @@ const hasActiveFilters = computed(() => {
     filters.value.batch ||
     filters.value.valueRange.min ||
     filters.value.valueRange.max ||
-    filters.value.defectCount.min ||
-    filters.value.defectCount.max ||
     filters.value.dateRange.start ||
     filters.value.dateRange.end
 })
