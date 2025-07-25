@@ -102,30 +102,30 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
-        </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
-        </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-emerald-600 border-emerald-300 hover:bg-gray-50 bg-white">
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-emerald-600 bg-white border-2 border-emerald-300 rounded-md hover:bg-gray-50 transition-colors">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
-        </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-red-600 border-red-300 hover:bg-gray-50 bg-white">
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-red-600 bg-white border-2 border-red-300 rounded-md hover:bg-gray-50 transition-colors">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
-        </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <FileText class="w-4 h-4 mr-2" />
           See rejected rules
-        </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
-        </Button>
+        </button>
       </div>
     </div>
 
