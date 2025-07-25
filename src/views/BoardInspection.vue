@@ -102,27 +102,27 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <Button variant="outline" size="sm" class="flex items-center">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-emerald-700 border-emerald-300 hover:bg-emerald-50">
+        <Button variant="outline" size="sm" class="flex items-center text-emerald-600 border-emerald-300 hover:bg-emerald-50">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-red-700 border-red-300 hover:bg-red-50">
+        <Button variant="outline" size="sm" class="flex items-center text-red-600 border-red-300 hover:bg-red-50">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
           <FileText class="w-4 h-4 mr-2" />
           See rejected rules
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center">
+        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-700">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
         </Button>
