@@ -192,20 +192,18 @@
                         <Play v-if="order.canStart" class="w-3 h-3 mx-auto" />
                         <Settings v-else class="w-3 h-3 mx-auto" />
                       </button>
-                      <div class="flex space-x-0.5">
-                        <button 
-                          class="w-8 h-5 p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors" 
-                          title="Edit Order"
-                        >
-                          <Edit class="w-3 h-3 mx-auto" />
-                        </button>
-                        <button 
-                          class="w-8 h-5 p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded transition-colors" 
-                          title="View Details"
-                        >
-                          <Eye class="w-3 h-3 mx-auto" />
-                        </button>
-                      </div>
+                      <button 
+                        class="w-8 h-6 p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors" 
+                        title="Edit Order"
+                      >
+                        <Edit class="w-3 h-3 mx-auto" />
+                      </button>
+                      <button 
+                        class="w-8 h-6 p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded transition-colors" 
+                        title="View Details"
+                      >
+                        <Eye class="w-3 h-3 mx-auto" />
+                      </button>
                     </div>
                   </td>
                 </tr>
