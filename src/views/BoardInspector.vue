@@ -133,8 +133,8 @@
     <div class="mb-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 1</h3>
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div class="h-32 bg-gray-100 flex items-center justify-center relative">
-          <img src="/image.png" alt="Board Face 1" class="w-full h-full object-cover" />
+        <div class="bg-gray-100 flex items-center justify-center relative">
+          <img src="/image.png" alt="Board Face 1" class="w-full h-auto object-contain" />
         </div>
       </div>
       <!-- Defect Tags -->
@@ -152,8 +152,8 @@
     <div class="mb-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 2</h3>
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div class="h-32 bg-gray-100 flex items-center justify-center relative">
-          <img src="/image.png" alt="Board Face 2" class="w-full h-full object-cover" />
+        <div class="bg-gray-100 flex items-center justify-center relative">
+          <img src="/image.png" alt="Board Face 2" class="w-full h-auto object-contain" />
         </div>
       </div>
       <!-- Defect Tags -->
