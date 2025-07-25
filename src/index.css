@@ -4,41 +4,25 @@
 
 @layer base {
   :root {
-    /* Define the exact green shades from Neural Grader */
-    --header-bg: 22 163 74; /* green-600 equivalent */
-    --header-border: 21 128 61; /* darker green for border */
-    --green-500: 34 197 94;
-    --green-600: 22 163 74;
-    --green-700: 21 128 61;
-    --green-800: 22 101 52;
-    
-    /* Define the exact green shades from Neural Grader */
-    --header-bg: 22 163 74; /* green-600 equivalent */
-    --header-border: 21 128 61; /* darker green for border */
-    --green-500: 34 197 94;
-    --green-600: 22 163 74;
-    --green-700: 21 128 61;
-    --green-800: 22 101 52;
-    
-    --background: 0 0% 98%;
-    --foreground: 0 0% 20%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 20%;
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
-    --primary: 0 0% 20%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 22 163 74; /* Update secondary to match Neural Grader green */
-    --secondary-foreground: 255 255 255; /* White text on green */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 20%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 20%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 160 84% 39%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -47,25 +31,25 @@
     --radius: 0.5rem
   }
   .dark {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 20%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 20%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
-    --primary: 0 0% 20%;
-    --primary-foreground: 0 0% 100%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 63.9%;
     --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 20%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 160 84% 39%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -81,137 +65,6 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-  }
-  
-  /* Font adjustments for headers */
-  h1, h2, h3, h4, h5, h6 {
-    color: rgb(17 24 39);
-    font-weight: 600;
-  }
-  
-  /* Neural Grader green header styling */
-  .bg-secondary {
-    background-color: rgb(22 163 74) !important; /* green-600 */
-  }
-  
-  .border-green-700 {
-    border-color: rgb(21 128 61) !important; /* green-700 */
-  }
-  
-  /* Text on green background */
-  .bg-secondary h1,
-  .bg-secondary .text-xl,
-  .bg-secondary a,
-  .bg-secondary button {
-    color: white !important;
-  }
-  
-  /* Hover states for navigation items on green background */
-  .bg-secondary a:hover,
-  .bg-secondary button:hover {
-    background-color: rgba(21, 128, 61, 0.3) !important; /* green-700 with opacity */
-    border-radius: 0.5rem;
-  }
-  
-  /* Match Neural Grader's header height and spacing */
-  header {
-    height: 64px; /* Exactly h-16 */
-  }
-}
-
-/* Add custom utility classes */
-@layer utilities {
-  .bg-green-600 {
-    background-color: rgb(22 163 74);
-  }
-  
-  .border-green-700 {
-    border-color: rgb(21 128 61);
-  }
-  
-  .bg-green-600 {
-    background-color: rgb(22 163 74);
-  }
-  
-  .border-green-700 {
-    border-color: rgb(21 128 61);
-  }
-  
-  .bg-gray-50 {
-    background-color: rgb(249 250 251);
-  }
-  .border-gray-200 {
-    border-color: rgb(229 231 235);
-  }
-  .text-gray-900 {
-    color: rgb(17 24 39);
-  }
-  .text-gray-600 {
-    color: rgb(75 85 99);
-  }
-  .text-gray-500 {
-    color: rgb(107 114 128);
-  }
-}
-
-/* Override shadcn component styles */
-/* Make cards flatter with subtle borders */
-.ui-card,
-[class*="card"] {
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
-  border: 1px solid rgb(229 231 235) !important;
-}
-
-/* Update button styles to be less prominent */
-.ui-button,
-[class*="button"] {
-  font-weight: 500;
-}
-
-/* Make badges lighter */
-.ui-badge,
-[class*="badge"] {
-  font-weight: 600;
-  border: 1px solid;
-}
-
-/* Cleaner input styles */
-.ui-input,
-[class*="input"] {
-  border-color: rgb(229 231 235);
-  background-color: white;
-}
-
-/* Update navigation/header background */
-header,
-nav,
-.navigation,
-[class*="navigation"],
-[class*="header"] {
-  background-color: white !important;
-  border-bottom: 1px solid rgb(229 231 235) !important;
-  box-shadow: none !important;
-}
-
-/* Page background adjustment */
-body,
-#app,
-.main-layout,
-[class*="layout"] {
-  background-color: rgb(249 250 251) !important;
-}
-
-/* Status badge variants */
-.badge-running {
-  background-color: rgb(220 252 231);
-  color: rgb(22 101 52);
-  border-color: rgb(187 247 208);
-}
-
-.badge-scheduled {
-  background-color: rgb(219 234 254);
-  color: rgb(30 64 175);
-  border-color: rgb(191 219 254);
   }
 }
 
