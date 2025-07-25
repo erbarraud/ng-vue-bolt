@@ -116,7 +116,7 @@
         <!-- Upcoming Orders -->
         <div>
           <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">Upcoming Orders (2)</h2>
+            <h2 class="text-2xl font-bold text-gray-900">Upcoming Orders (5)</h2>
             <Button variant="outline" asChild>
               <router-link to="/orders/all">
                 Show All
@@ -278,6 +278,51 @@ const upcomingOrders = ref([
     status: 'Scheduled',
     statusDetail: 'Pending Setup',
     targetMix: '60% Select, 30% #1 Common, 10% #2 Common',
+    canStart: false
+  },
+  {
+    id: 'ORD-20250703-004',
+    priority: 3,
+    name: 'Cherry - Cabinet Grade',
+    species: 'Cherry',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '1,800 bf',
+    date: 'Jul 3, 2025',
+    time: '8:00 AM - 2:00 PM',
+    shift: 'Morning Shift',
+    status: 'Scheduled',
+    statusDetail: 'Ready to Start',
+    targetMix: '50% FAS, 30% Select, 20% #1 Common',
+    canStart: true
+  },
+  {
+    id: 'ORD-20250703-005',
+    priority: 4,
+    name: 'Hard Maple - Premium',
+    species: 'Hard Maple',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '3,600 bf',
+    date: 'Jul 3, 2025',
+    time: '2:00 PM - 8:00 PM',
+    shift: 'Afternoon Shift',
+    status: 'Scheduled',
+    statusDetail: 'Pending Setup',
+    targetMix: '45% FAS, 35% Select, 20% #1 Common',
+    canStart: false
+  },
+  {
+    id: 'ORD-20250704-006',
+    priority: 5,
+    name: 'Walnut - Select Grade',
+    species: 'Walnut',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '1,200 bf',
+    date: 'Jul 4, 2025',
+    time: '9:00 AM - 3:00 PM',
+    shift: 'Morning Shift',
+    status: 'Scheduled',
+    statusDetail: 'Material Pending',
+    targetMix: '60% FAS, 25% Select, 15% #1 Common',
     canStart: false
   }
 ])
