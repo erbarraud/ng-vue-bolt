@@ -311,8 +311,10 @@ const upcomingOrders = ref([
     targetMix: '60% Select, 30% #1 Common, 10% #2 Common',
     canStart: false
   }
-]
-)
+])
+</script>
+
+<style scoped>
 .sortable-chosen {
   background: #ecfdf5;
 }
