@@ -282,35 +282,6 @@
 
     <!-- Third Line: Shift Status and System Alerts -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Shift Status -->
-      <Card class="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
-        <CardContent class="p-6">
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center">
-            <Calendar class="w-5 h-5 text-emerald-600 mr-2" />
-            <span class="text-lg font-bold text-emerald-800">Shift Status</span>
-          </div>
-          <Button class="bg-emerald-600 hover:bg-emerald-700">
-            <Clock class="w-4 h-4 mr-2" />
-            Extend (+1h)
-          </Button>
-        </div>
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-semibold text-slate-700">Current:</span>
-            <Badge variant="secondary">No Active Shift</Badge>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-semibold text-slate-700">Next:</span>
-            <div class="flex items-center">
-              <Badge variant="default" class="bg-emerald-100 text-emerald-700">Morning Shift</Badge>
-              <span class="ml-2 text-sm text-slate-600">Friday, 7:00 AM - 3:00 PM</span>
-            </div>
-          </div>
-        </div>
-        </CardContent>
-      </Card>
-
       <!-- System Alerts -->
       <Card>
         <CardContent class="p-6">
