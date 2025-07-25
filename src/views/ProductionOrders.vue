@@ -177,15 +177,31 @@
                   </td>
                   <td class="px-4 py-3">
                     <div class="flex flex-col space-y-1">
-                      <Button size="sm" class="w-16 text-xs px-1 py-0.5 h-6" :disabled="!order.canStart" :variant="order.canStart ? 'default' : 'outline'" :title="order.canStart ? 'Start Order' : 'Setup Required'">
+                      <Button 
+                        size="sm" 
+                        class="w-16 h-6" 
+                        :disabled="!order.canStart" 
+                        :variant="order.canStart ? 'default' : 'outline'" 
+                        :title="order.canStart ? 'Start Order' : 'Setup Required'"
+                      >
                         <Play v-if="order.canStart" class="w-3 h-3" />
                         <Settings v-else class="w-3 h-3" />
                       </Button>
                       <div class="flex space-x-0.5">
-                        <Button variant="outline" size="sm" class="w-8 text-xs px-1 py-0.5 h-5" title="Edit Order">
+                        <Button 
+                          variant="outline" 
+                          size="icon" 
+                          class="w-8 h-5" 
+                          title="Edit Order"
+                        >
                           <Edit class="w-3 h-3" />
                         </Button>
-                        <Button variant="outline" size="sm" class="w-8 text-xs px-1 py-0.5 h-5" title="View Details">
+                        <Button 
+                          variant="outline" 
+                          size="icon" 
+                          class="w-8 h-5" 
+                          title="View Details"
+                        >
                           <Eye class="w-3 h-3" />
                         </Button>
                       </div>
