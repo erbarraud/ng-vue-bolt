@@ -137,69 +137,6 @@
         </div>
       </div>
 
-      <!-- Dimensions Section -->
-      <div class="mt-6">
-        <h4 class="text-md font-semibold text-gray-900 mb-3">Dimensions</h4>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <!-- Length -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Length (ft)</label>
-            <div class="flex space-x-2">
-              <input
-                v-model="filters.dimensions.lengthMin"
-                type="number"
-                placeholder="Min"
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              />
-              <input
-                v-model="filters.dimensions.lengthMax"
-                type="number"
-                placeholder="Max"
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              />
-            </div>
-          </div>
-
-          <!-- Width -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Width (in)</label>
-            <div class="flex space-x-2">
-              <input
-                v-model="filters.dimensions.widthMin"
-                type="number"
-                placeholder="Min"
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              />
-              <input
-                v-model="filters.dimensions.widthMax"
-                type="number"
-                placeholder="Max"
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              />
-            </div>
-          </div>
-
-          <!-- Thickness -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Thickness (in)</label>
-            <div class="flex space-x-2">
-              <input
-                v-model="filters.dimensions.thicknessMin"
-                type="number"
-                placeholder="Min"
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              />
-              <input
-                v-model="filters.dimensions.thicknessMax"
-                type="number"
-                placeholder="Max"
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Filter Summary -->
       <div v-if="hasActiveFilters" class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
         <div class="text-sm text-emerald-700">
@@ -623,14 +560,6 @@ const filters = ref({
   batch: '',
   valueRange: { min: '', max: '' },
   defectCount: { min: '', max: '' },
-  dimensions: {
-    lengthMin: '',
-    lengthMax: '',
-    widthMin: '',
-    widthMax: '',
-    thicknessMin: '',
-    thicknessMax: ''
-  },
   dateRange: { start: '', end: '' }
 })
 
@@ -852,14 +781,6 @@ const clearAllFilters = () => {
     batch: '',
     valueRange: { min: '', max: '' },
     defectCount: { min: '', max: '' },
-    dimensions: {
-      lengthMin: '',
-      lengthMax: '',
-      widthMin: '',
-      widthMax: '',
-      thicknessMin: '',
-      thicknessMax: ''
-    },
     dateRange: { start: '', end: '' }
   }
   searchQuery.value = ''
@@ -875,12 +796,6 @@ const hasActiveFilters = computed(() => {
     filters.value.valueRange.max ||
     filters.value.defectCount.min ||
     filters.value.defectCount.max ||
-    filters.value.dimensions.lengthMin ||
-    filters.value.dimensions.lengthMax ||
-    filters.value.dimensions.widthMin ||
-    filters.value.dimensions.widthMax ||
-    filters.value.dimensions.thicknessMin ||
-    filters.value.dimensions.thicknessMax ||
     filters.value.dateRange.start ||
     filters.value.dateRange.end
 })
