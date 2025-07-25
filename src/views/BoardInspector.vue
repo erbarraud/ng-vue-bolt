@@ -10,10 +10,10 @@
         <div class="text-right">
           <div class="text-sm text-gray-600">Order: B-4873 - Red Oak 4/4 Premium</div>
         </div>
-        <button class="flex items-center px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50">
+        <Button variant="outline">
           <List class="w-4 h-4 mr-2" />
           View All Boards in This Order
-        </button>
+        </Button>
       </div>
     </div>
 
@@ -149,30 +149,10 @@
           <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-contain" />
           
           <!-- Defect Overlay Areas -->
-          <div v-if="isDefectVisible('face1', 'Knot')" class="absolute top-4 left-8 w-8 h-8 bg-red-500 bg-opacity-70 rounded-full border-2 border-red-600"></div>
-          <div v-if="isDefectVisible('face1', 'Split')" class="absolute top-8 right-12 w-12 h-3 bg-orange-500 bg-opacity-70 border border-orange-600"></div>
           <div v-if="isDefectVisible('face1', 'Wane')" class="absolute bottom-4 left-4 w-16 h-6 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform -skew-x-12"></div>
-          <div v-if="isDefectVisible('face1', 'Stain')" class="absolute top-12 left-20 w-14 h-10 bg-purple-500 bg-opacity-60 rounded-lg border border-purple-600"></div>
-          <div v-if="isDefectVisible('face1', 'Pitch Pocket')" class="absolute bottom-8 right-8 w-6 h-8 bg-blue-500 bg-opacity-70 rounded border border-blue-600"></div>
-          <div v-if="isDefectVisible('face1', 'Shake')" class="absolute top-16 right-6 w-2 h-12 bg-gray-600 bg-opacity-80 border border-gray-700"></div>
         </div>
         
-        <!-- Defect Tags -->
-        <div class="flex flex-wrap gap-2 text-xs mb-4">
-          <button
-            v-for="defect in defectTypes"
-            :key="defect.name"
-            @click="toggleDefect('face1', defect.name)"
-            :class="[
-              'px-3 py-1 rounded-full font-medium transition-all duration-200',
-              isDefectVisible('face1', defect.name) 
-                ? defect.activeClass 
-                : 'bg-gray-200 text-gray-500'
-            ]"
-          >
-            {{ defect.name }}
-          </button>
-        </div>
+        <div class="text-sm font-medium text-gray-900">Wane</div>
       </div>
 
       <!-- Face 2 -->
@@ -182,29 +162,10 @@
           <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-contain" />
           
           <!-- Defect Overlay Areas -->
-          <div v-if="isDefectVisible('face2', 'Knot')" class="absolute top-6 right-10 w-7 h-7 bg-red-500 bg-opacity-70 rounded-full border-2 border-red-600"></div>
-          <div v-if="isDefectVisible('face2', 'Check')" class="absolute bottom-6 left-8 w-14 h-2 bg-orange-500 bg-opacity-70 border border-orange-600"></div>
           <div v-if="isDefectVisible('face2', 'Wane')" class="absolute bottom-3 right-4 w-10 h-8 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform skew-y-12"></div>
-          <div v-if="isDefectVisible('face2', 'Decay')" class="absolute top-8 left-12 w-16 h-8 bg-purple-500 bg-opacity-60 rounded border border-purple-600"></div>
-          <div v-if="isDefectVisible('face2', 'Hole')" class="absolute top-12 right-16 w-4 h-6 bg-blue-500 bg-opacity-70 rounded border border-blue-600"></div>
         </div>
         
-        <!-- Defect Tags -->
-        <div class="flex flex-wrap gap-2 text-xs mb-4">
-          <button
-            v-for="defect in face2DefectTypes"
-            :key="defect.name"
-            @click="toggleDefect('face2', defect.name)"
-            :class="[
-              'px-3 py-1 rounded-full font-medium transition-all duration-200',
-              isDefectVisible('face2', defect.name) 
-                ? defect.activeClass 
-                : 'bg-gray-200 text-gray-500'
-            ]"
-          >
-            {{ defect.name }}
-          </button>
-        </div>
+        <div class="text-sm font-medium text-gray-900">Wane</div>
       </div>
     </div>
 
@@ -212,7 +173,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
       <!-- Face 1 Clear Cuttings -->
       <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-        <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
+        <h4 class="text-lg font-semibold text-gray-900 mb-6">Clear Cuttings (Face 1)</h4>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-gray-900">6' 2 3/4" × 5 3/8"</span>
@@ -222,10 +183,10 @@
             <span class="text-gray-900">2' × 4 13/16"</span>
             <span class="font-semibold text-gray-900">9.64 units</span>
           </div>
-          <div class="border-t border-gray-200 pt-3">
+          <div class="border-t border-gray-200 pt-4 mt-6">
             <div class="flex items-center justify-between">
               <span class="font-semibold text-gray-900">Total Units:</span>
-              <span class="text-2xl font-bold text-gray-900">43</span>
+              <span class="text-2xl font-bold text-emerald-600">43</span>
             </div>
           </div>
         </div>
@@ -233,7 +194,7 @@
 
       <!-- Face 2 Clear Cuttings -->
       <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-        <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
+        <h4 class="text-lg font-semibold text-gray-900 mb-6">Clear Cuttings (Face 2)</h4>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-gray-900">3' 3 3/4" × 5 3/16"</span>
@@ -243,70 +204,35 @@
             <span class="text-gray-900">3' 5 3/4" × 4 7/8"</span>
             <span class="font-semibold text-gray-900">16.83 units</span>
           </div>
-          <div class="border-t border-gray-200 pt-3">
+          <div class="border-t border-gray-200 pt-4 mt-6">
             <div class="flex items-center justify-between">
               <span class="font-semibold text-gray-900">Total Units:</span>
-              <span class="text-2xl font-bold text-gray-900">34</span>
+              <span class="text-2xl font-bold text-emerald-600">34</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import {
-  ChevronLeft, ChevronRight, Clock, Ruler, Layers, Package, AlertCircle, TrendingUp,
-  Filter, CheckCircle, XCircle, FileText, TreePine, Droplets, List,
-  ArrowLeftRight, Box, DollarSign, AlertTriangle
+  ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets, List,
+  ArrowLeftRight, Box, DollarSign, AlertTriangle, TrendingUp, Filter, CheckCircle, XCircle, FileText
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 
 // Defect visibility state
 const defectVisibility = ref({
   face1: {
-    'Knot': true,
-    'Split': true,
-    'Wane': true,
-    'Stain': true,
-    'Pitch Pocket': true,
-    'Shake': true
+    'Wane': true
   },
   face2: {
-    'Knot': true,
-    'Check': true,
-    'Wane': true,
-    'Decay': true,
-    'Hole': true
+    'Wane': true
   }
 })
-
-// Defect types for Face 1
-const defectTypes = ref([
-  { name: 'Knot', activeClass: 'bg-red-100 text-red-800' },
-  { name: 'Split', activeClass: 'bg-orange-100 text-orange-800' },
-  { name: 'Wane', activeClass: 'bg-yellow-100 text-yellow-800' },
-  { name: 'Stain', activeClass: 'bg-purple-100 text-purple-800' },
-  { name: 'Pitch Pocket', activeClass: 'bg-blue-100 text-blue-800' },
-  { name: 'Shake', activeClass: 'bg-gray-100 text-gray-800' }
-])
-
-// Defect types for Face 2
-const face2DefectTypes = ref([
-  { name: 'Knot', activeClass: 'bg-red-100 text-red-800' },
-  { name: 'Check', activeClass: 'bg-orange-100 text-orange-800' },
-  { name: 'Wane', activeClass: 'bg-yellow-100 text-yellow-800' },
-  { name: 'Decay', activeClass: 'bg-purple-100 text-purple-800' },
-  { name: 'Hole', activeClass: 'bg-blue-100 text-blue-800' }
-])
-
-// Toggle defect visibility
-const toggleDefect = (face, defectName) => {
-  defectVisibility.value[face][defectName] = !defectVisibility.value[face][defectName]
-}
 
 // Check if defect is visible
 const isDefectVisible = (face, defectName) => {
