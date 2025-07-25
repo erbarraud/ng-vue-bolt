@@ -246,55 +246,69 @@
             <div class="border-b border-gray-200 mb-8"></div>
 
             <!-- Board Specifications -->
-            <div class="grid grid-cols-7 gap-8 mb-8">
+            <div class="grid grid-cols-7 gap-6 mb-8">
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <Tag class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Length</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <Ruler class="w-5 h-5 text-amber-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Length</span>
+                  </div>
+                  <div class="text-lg font-bold text-gray-900">{{ currentBoard.length }}</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">{{ currentBoard.length }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <Tag class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Width</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <ArrowLeftRight class="w-5 h-5 text-blue-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Width</span>
+                  </div>
+                  <div class="text-lg font-bold text-gray-900">{{ currentBoard.width }}</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">{{ currentBoard.width }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <Layers class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Thickness</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <Layers class="w-5 h-5 text-purple-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Thickness</span>
+                  </div>
+                  <div class="text-lg font-bold text-gray-900">{{ currentBoard.thickness }}</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">{{ currentBoard.thickness }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <Package class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Volume</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <Box class="w-5 h-5 text-green-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Volume</span>
+                  </div>
+                  <div class="text-lg font-bold text-gray-900">{{ currentBoard.volume }}</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">{{ currentBoard.volume }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <DollarSign class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Value</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <DollarSign class="w-5 h-5 text-emerald-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Value</span>
+                  </div>
+                  <div class="text-lg font-bold text-emerald-600">{{ currentBoard.value }}</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">{{ currentBoard.value }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <AlertCircle class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Total Defects</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <AlertTriangle class="w-5 h-5 text-red-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Total Defects</span>
+                  </div>
+                  <div class="text-lg font-bold text-red-600">{{ currentBoard.totalDefects }}</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">{{ currentBoard.totalDefects }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-2">
-                  <Percent class="w-4 h-4 text-gray-500 mr-1" />
-                  <span class="text-sm text-gray-600">Yield</span>
+                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                  <div class="flex items-center justify-center mb-2">
+                    <TrendingUp class="w-5 h-5 text-indigo-600 mr-1" />
+                    <span class="text-sm font-medium text-gray-700">Yield</span>
+                  </div>
+                  <div class="text-lg font-bold text-gray-900">N/A</div>
                 </div>
-                <div class="text-lg font-bold text-gray-900">N/A</div>
               </div>
             </div>
 
@@ -412,7 +426,7 @@ import { ref, computed } from 'vue'
 import { 
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
   AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
-  Tag, Percent
+  Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 
 const searchQuery = ref('')
