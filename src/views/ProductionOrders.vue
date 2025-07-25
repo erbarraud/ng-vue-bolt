@@ -144,9 +144,6 @@
                   </td>
                   <td class="px-4 py-3">
                     <div class="flex items-start">
-                      <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-                        <TreePine class="w-4 h-4 text-emerald-600" />
-                      </div>
                       <div>
                         <div class="text-sm font-bold text-gray-900">{{ order.name }}</div>
                         <div class="text-xs text-emerald-600 font-medium">{{ order.id }}</div>
