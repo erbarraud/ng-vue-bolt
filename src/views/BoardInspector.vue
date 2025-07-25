@@ -141,31 +141,70 @@
     </div>
 
     <!-- Board Images and Analysis -->
-    <div class="space-y-4 mb-6">
+    <div class="space-y-6 mb-6">
       <!-- Face 1 -->
-      <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-2">Face 1</h4>
-        <div class="border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative">
+      <div class="bg-white rounded-lg shadow border border-gray-200 p-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">Face 1</h3>
+        <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
           <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-contain" />
           
           <!-- Defect Overlay Areas -->
+          <div v-if="isDefectVisible('face1', 'Knot')" class="absolute top-4 left-8 w-8 h-8 bg-red-500 bg-opacity-70 rounded-full border-2 border-red-600"></div>
+          <div v-if="isDefectVisible('face1', 'Split')" class="absolute top-8 right-12 w-12 h-3 bg-orange-500 bg-opacity-70 border border-orange-600"></div>
           <div v-if="isDefectVisible('face1', 'Wane')" class="absolute bottom-4 left-4 w-16 h-6 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform -skew-x-12"></div>
+          <div v-if="isDefectVisible('face1', 'Stain')" class="absolute top-12 left-20 w-14 h-10 bg-purple-500 bg-opacity-60 rounded-lg border border-purple-600"></div>
+          <div v-if="isDefectVisible('face1', 'Pitch Pocket')" class="absolute bottom-8 right-8 w-6 h-8 bg-blue-500 bg-opacity-70 rounded border border-blue-600"></div>
+          <div v-if="isDefectVisible('face1', 'Shake')" class="absolute top-16 right-6 w-2 h-12 bg-gray-600 bg-opacity-80 border border-gray-700"></div>
         </div>
         
-        <div class="text-sm font-medium text-gray-900">Wane</div>
+        <!-- Defect Tags -->
+        <div class="flex flex-wrap gap-2 text-xs mb-4">
+          <button
+            v-for="defect in defectTypes"
+            :key="defect.name"
+            @click="toggleDefect('face1', defect.name)"
+            :class="[
+              'px-3 py-1 rounded-full font-medium transition-all duration-200',
+              isDefectVisible('face1', defect.name) 
+                ? defect.activeClass 
+                : 'bg-gray-200 text-gray-500'
+            ]"
+          >
+            {{ defect.name }}
+          </button>
+        </div>
       </div>
 
       <!-- Face 2 -->
-      <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-2">Face 2</h4>
-        <div class="border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative">
+      <div class="bg-white rounded-lg shadow border border-gray-200 p-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">Face 2</h3>
+        <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
           <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-contain" />
           
           <!-- Defect Overlay Areas -->
+          <div v-if="isDefectVisible('face2', 'Knot')" class="absolute top-6 right-10 w-7 h-7 bg-red-500 bg-opacity-70 rounded-full border-2 border-red-600"></div>
+          <div v-if="isDefectVisible('face2', 'Check')" class="absolute bottom-6 left-8 w-14 h-2 bg-orange-500 bg-opacity-70 border border-orange-600"></div>
           <div v-if="isDefectVisible('face2', 'Wane')" class="absolute bottom-3 right-4 w-10 h-8 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform skew-y-12"></div>
+          <div v-if="isDefectVisible('face2', 'Decay')" class="absolute top-8 left-12 w-16 h-8 bg-purple-500 bg-opacity-60 rounded border border-purple-600"></div>
+          <div v-if="isDefectVisible('face2', 'Hole')" class="absolute top-12 right-16 w-4 h-6 bg-blue-500 bg-opacity-70 rounded border border-blue-600"></div>
         </div>
         
-        <div class="text-sm font-medium text-gray-900">Wane</div>
+        <!-- Defect Tags -->
+        <div class="flex flex-wrap gap-2 text-xs mb-4">
+          <button
+            v-for="defect in face2DefectTypes"
+            :key="defect.name"
+            @click="toggleDefect('face2', defect.name)"
+            :class="[
+              'px-3 py-1 rounded-full font-medium transition-all duration-200',
+              isDefectVisible('face2', defect.name) 
+                ? defect.activeClass 
+                : 'bg-gray-200 text-gray-500'
+            ]"
+          >
+            {{ defect.name }}
+          </button>
+        </div>
       </div>
     </div>
 
@@ -245,7 +284,7 @@ const defectVisibility = ref({
   face2: {
     'Knot': true,
     'Check': true,
-    'Warp': true,
+    'Wane': true,
     'Decay': true,
     'Hole': true
   }
@@ -265,7 +304,7 @@ const defectTypes = ref([
 const face2DefectTypes = ref([
   { name: 'Knot', activeClass: 'bg-red-100 text-red-800' },
   { name: 'Check', activeClass: 'bg-orange-100 text-orange-800' },
-  { name: 'Warp', activeClass: 'bg-yellow-100 text-yellow-800' },
+  { name: 'Wane', activeClass: 'bg-yellow-100 text-yellow-800' },
   { name: 'Decay', activeClass: 'bg-purple-100 text-purple-800' },
   { name: 'Hole', activeClass: 'bg-blue-100 text-blue-800' }
 ])
