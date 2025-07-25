@@ -11,14 +11,14 @@
 
           <!-- Navigation Links -->
           <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-1">
+            <div class="flex items-center space-x-1">
               <router-link
                 to="/"
                 :class="[
                   $route.name === 'Dashboard'
                     ? 'text-white shadow-lg ring-2 ring-primary/50'
                     : 'text-white hover:bg-primary/80 hover:text-white',
-                  'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
+                  'px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
                 :style="$route.name === 'Dashboard' ? 'background-color: #204739' : ''"
               >
@@ -31,7 +31,7 @@
                   $route.name === 'ProductionOrders' || $route.name === 'CreateProductionOrder'
                     ? 'text-white shadow-lg ring-2 ring-primary/50'
                     : 'text-white hover:bg-primary/80 hover:text-white',
-                  'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
+                  'px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
                 :style="($route.name === 'ProductionOrders' || $route.name === 'CreateProductionOrder') ? 'background-color: #204739' : ''"
               >
@@ -44,7 +44,7 @@
                   $route.name === 'BoardFinder'
                     ? 'text-white shadow-lg ring-2 ring-primary/50'
                     : 'text-white hover:bg-primary/80 hover:text-white',
-                  'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
+                  'px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
                 :style="$route.name === 'BoardFinder' ? 'background-color: #204739' : ''"
               >
@@ -57,7 +57,7 @@
                   $route.name === 'LineCheck'
                     ? 'text-white shadow-lg ring-2 ring-primary/50'
                     : 'text-white hover:bg-primary/80 hover:text-white',
-                  'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
+                  'px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
                 :style="$route.name === 'LineCheck' ? 'background-color: #204739' : ''"
               >
@@ -71,7 +71,7 @@
                     ['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning'].includes($route.name)
                       ? 'text-white shadow-lg ring-2 ring-primary/50'
                       : 'text-white hover:bg-primary/80 hover:text-white',
-                    'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
+                    'px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                   ]"
                   :style="['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning'].includes($route.name) ? 'background-color: #204739' : ''"
                 >
