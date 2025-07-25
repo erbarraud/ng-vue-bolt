@@ -53,11 +53,6 @@ const routes = [
     component: LineCheck
   },
   {
-    path: '/scanning',
-    name: 'LiveScanning',
-    component: LiveScanning
-  },
-  {
     path: '/inspector',
     name: 'BoardInspector',
     component: BoardInspector

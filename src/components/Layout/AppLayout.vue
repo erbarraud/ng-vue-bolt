@@ -98,13 +98,6 @@
                   >
                     Claims Management
                   </router-link>
-                  <router-link
-                    to="/scanning"
-                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
-                    @click="showToolsMenu = false"
-                  >
-                    Live Scanning
-                  </router-link>
                 </div>
               </div>
               <button class="text-emerald-100 hover:bg-emerald-800 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md">

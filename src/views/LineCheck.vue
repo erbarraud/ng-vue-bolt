@@ -660,10 +660,9 @@
 <script setup>
 import { ref } from 'vue'
 import { 
-  Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info, Settings, Expand, X, Download
+  Camera, Settings, Expand, X, Download, RefreshCw, Maximize
 } from 'lucide-vue-next'
 
-const activeTab = ref('live')
 const row1ViewMode = ref('grid')
 const row2ViewMode = ref('grid')
 const selectedRow1Camera = ref('entry')
