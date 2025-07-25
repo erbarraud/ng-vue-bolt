@@ -183,9 +183,9 @@
                     </div>
                   </td>
                   <td class="px-4 py-3">
-                    <div class="flex flex-col space-y-1">
+                    <div class="flex items-center space-x-2">
                       <button 
-                        class="w-16 h-6 p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
+                        class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
                         :disabled="!order.canStart" 
                         :title="order.canStart ? 'Start Order' : 'Setup Required'"
                       >
@@ -193,16 +193,16 @@
                         <Settings v-else class="w-3 h-3 mx-auto" />
                       </button>
                       <button 
-                        class="w-8 h-6 p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors" 
+                        class="p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors" 
                         title="Edit Order"
                       >
-                        <Edit class="w-3 h-3 mx-auto" />
+                        <Edit class="w-3 h-3" />
                       </button>
                       <button 
-                        class="w-8 h-6 p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded transition-colors" 
+                        class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded transition-colors" 
                         title="View Details"
                       >
-                        <Eye class="w-3 h-3 mx-auto" />
+                        <Eye class="w-3 h-3" />
                       </button>
                     </div>
                   </td>
