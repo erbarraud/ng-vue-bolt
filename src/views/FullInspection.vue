@@ -13,7 +13,7 @@
         <button class="flex items-center px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50">
           <List class="w-4 h-4 mr-2" />
           View All Boards in This Order
-        </button>
+        </Button>
       </div>
     </div>
 
@@ -100,30 +100,30 @@
     <!-- Inspector Tools -->
     <div class="bg-white rounded-lg shadow p-6 mb-6">
       <div class="flex flex-wrap gap-4">
-        <button class="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors">
+        <Button variant="secondary">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
-        </button>
-        <button class="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors">
+        </Button>
+        <Button variant="secondary">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
-        </button>
-        <button class="flex items-center px-4 py-2 bg-emerald-200 text-emerald-700 rounded-lg hover:bg-emerald-300 font-medium transition-colors">
+        </Button>
+        <Button variant="outline" class="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
-        </button>
-        <button class="flex items-center px-4 py-2 bg-red-200 text-red-700 rounded-lg hover:bg-red-300 font-medium transition-colors">
+        </Button>
+        <Button variant="outline" class="border-red-300 text-red-700 hover:bg-red-50">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
-        </button>
-        <button class="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors">
+        </Button>
+        <Button variant="secondary">
           <FileText class="w-4 h-4 mr-2" />
           See rejected rules
-        </button>
-        <button class="flex items-center px-4 py-2 bg-purple-200 text-purple-700 rounded-lg hover:bg-purple-300 font-medium transition-colors">
+        </Button>
+        <Button variant="outline" class="border-purple-300 text-purple-700 hover:bg-purple-50">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
-        </button>
+        </Button>
       </div>
     </div>
 

@@ -19,10 +19,10 @@
               class="pl-10 pr-3 py-2 w-full border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring"
             />
           </div>
-          <button class="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+          <Button variant="outline">
             <Filter class="w-4 h-4 mr-2" />
             Filters
-          </button>
+          </Button>
         </div>
         <div class="flex items-center space-x-2">
           <span class="text-sm text-gray-600">Show</span>
@@ -138,22 +138,22 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center space-x-4 mb-6">
-              <button class="flex items-center px-3 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">
+              <Button variant="outline" size="sm">
                 <EyeOff class="w-4 h-4 mr-2" />
                 Hide filtered defects
-              </button>
-              <button class="flex items-center px-3 py-2 text-sm text-emerald-600 border border-emerald-300 rounded-md hover:bg-emerald-50">
+              </Button>
+              <Button variant="outline" size="sm" class="border-emerald-300 text-emerald-600 hover:bg-emerald-50">
                 <CheckCircle class="w-4 h-4 mr-2" />
                 Agree with NG AI
-              </button>
-              <button class="flex items-center px-3 py-2 text-sm text-red-600 border border-red-300 rounded-md hover:bg-red-50">
+              </Button>
+              <Button variant="outline" size="sm" class="border-red-300 text-red-600 hover:bg-red-50">
                 <XCircle class="w-4 h-4 mr-2" />
                 Disagree with NG AI
-              </button>
-              <button class="flex items-center px-3 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">
+              </Button>
+              <Button variant="outline" size="sm">
                 <FileText class="w-4 h-4 mr-2" />
                 See Rejected Grades
-              </button>
+              </Button>
             </div>
 
             <!-- Board Images -->
@@ -280,12 +280,11 @@
 
             <!-- Full Inspection Button -->
             <div class="text-right">
-              <router-link
-                :to="`/inspection/${currentBoard.id}`"
-                class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5"
-              >
-                Full Inspection
-              </router-link>
+              <Button asChild>
+                <router-link :to="`/inspection/${currentBoard.id}`">
+                  Full Inspection
+                </router-link>
+              </Button>
             </div>
           </div>
         </div>

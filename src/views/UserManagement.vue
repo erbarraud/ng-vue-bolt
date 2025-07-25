@@ -75,13 +75,10 @@
             <option value="Inactive">Inactive</option>
           </select>
         </div>
-        <button 
-          @click="showAddUserModal = true"
-          class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5 flex items-center"
-        >
+        <Button @click="showAddUserModal = true">
           <UserPlus class="w-4 h-4 mr-2" />
           Add User
-        </button>
+        </Button>
       </div>
 
       <!-- Users Table -->

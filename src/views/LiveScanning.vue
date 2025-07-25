@@ -11,14 +11,14 @@
       <div class="bg-gray-800 rounded-lg p-6 mb-8">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-4">
-            <button class="flex items-center px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 font-medium transition-colors">
+            <Button variant="secondary" class="bg-gray-700 hover:bg-gray-600">
               <Pause class="w-4 h-4 mr-2" />
               Pause
-            </button>
-            <button class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors">
+            </Button>
+            <Button>
               <RefreshCw class="w-4 h-4 mr-2" />
               Refresh
-            </button>
+            </Button>
             <div class="flex items-center space-x-2">
               <span class="text-gray-300 text-sm">Refresh Rate:</span>
               <select class="bg-gray-700 text-white px-3 py-1 rounded text-sm">
@@ -33,10 +33,10 @@
               <div class="text-sm text-gray-400">Current Time</div>
               <div class="text-lg font-semibold text-white">05:06:55 PM</div>
             </div>
-            <button class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors">
+            <Button>
               <Maximize class="w-4 h-4 mr-2" />
               Full Screen
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -127,9 +127,9 @@
               </div>
             </div>
 
-            <button class="w-full mt-4 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors">
+            <Button class="w-full mt-4">
               View All Recent Boards
-            </button>
+            </Button>
           </div>
         </div>
       </div>

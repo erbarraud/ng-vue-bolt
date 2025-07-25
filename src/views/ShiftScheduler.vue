@@ -8,10 +8,10 @@
 
     <!-- Override Schedule Button -->
     <div class="mb-6">
-      <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5 flex items-center">
+      <Button>
         <Calendar class="w-4 h-4 mr-2" />
         Override Schedule
-      </button>
+      </Button>
     </div>
 
     <!-- Holiday Management Section -->
@@ -61,9 +61,9 @@
             <div class="font-medium text-gray-900 mb-4">Monday</div>
             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-32 flex flex-col items-center justify-center">
               <div class="text-gray-500 text-sm mb-3">No shifts scheduled</div>
-              <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors">
+              <Button size="sm">
                 Add Shift
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -134,9 +134,9 @@
             <div class="font-medium text-gray-900 mb-4">Saturday</div>
             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-32 flex flex-col items-center justify-center">
               <div class="text-gray-500 text-sm mb-3">Weekend - No shifts</div>
-              <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors">
+              <Button size="sm">
                 Add Shift
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -145,18 +145,18 @@
             <div class="font-medium text-gray-900 mb-4">Sunday</div>
             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-32 flex flex-col items-center justify-center">
               <div class="text-gray-500 text-sm mb-3">Weekend - No shifts</div>
-              <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors">
+              <Button size="sm">
                 Add Shift
-              </button>
+              </Button>
             </div>
           </div>
         </div>
 
         <!-- Central Add Shift Button for Monday -->
         <div class="mt-6 text-center">
-          <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5">
+          <Button>
             Add Shift for Monday
-          </button>
+          </Button>
         </div>
       </div>
     </div>

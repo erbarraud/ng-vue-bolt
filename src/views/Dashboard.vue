@@ -82,7 +82,7 @@
           <CardContent class="p-6">
           <div class="flex items-center justify-between mb-6">
             <h3 class="text-xl font-bold text-slate-900">Boards Processed per Hour</h3>
-            <Button variant="outline" size="sm" class="text-emerald-600 border-emerald-200 hover:bg-emerald-50">
+            <Button variant="outline" size="sm">
               <Download class="w-4 h-4 mr-2" />
               Export
             </Button>
@@ -101,7 +101,7 @@
         <CardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-slate-900">Recent Orders</h3>
-          <Button variant="link" class="text-emerald-600 hover:text-emerald-700 p-0">
+          <Button variant="link">
             View All
             <ChevronRight class="w-4 h-4 ml-1" />
           </Button>

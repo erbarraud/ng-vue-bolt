@@ -1,25 +1,25 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-6">
-    <!-- Page Header -->
+          <Button>
     <div class="mb-8">
       <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Board Inspector</h1>
-      <p class="text-gray-600 mt-1">Detailed inspection and grading of individual lumber boards</p>
-    </div>
+          </Button>
+          <Button variant="secondary">
 
     <!-- Board Navigation -->
-    <div class="bg-white rounded-lg shadow p-6 mb-8">
-      <div class="flex items-center justify-between mb-4">
+          </Button>
+          <Button variant="outline" class="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
         <div class="flex items-center space-x-4">
           <button class="p-2 text-gray-400 hover:text-gray-600">
-            <ChevronLeft class="w-5 h-5" />
-          </button>
+          </Button>
+          <Button variant="outline" class="border-red-300 text-red-700 hover:bg-red-50">
           <div>
             <h2 class="text-2xl font-extrabold text-gray-900">BRD-4625</h2>
-            <div class="text-sm text-gray-600">Order B-4873 - Red Oak 4/4 Premium</div>
-          </div>
+          </Button>
+          <Button variant="outline" class="border-yellow-300 text-yellow-700 hover:bg-yellow-50">
           <button class="p-2 text-gray-400 hover:text-gray-600">
             <ChevronRight class="w-5 h-5" />
-          </button>
+          </Button>
         </div>
         <div class="flex items-center space-x-2">
           <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm font-medium rounded-full">1COMMON</span>
@@ -180,13 +180,13 @@
 
     <!-- Action Buttons -->
     <div class="flex items-center justify-between">
-      <button class="flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-medium transition-colors">
+      <Button class="bg-purple-600 hover:bg-purple-700">
         <BookOpen class="w-4 h-4 mr-2" />
         Add to Reference Bundle
-      </button>
-      <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5">
+      </Button>
+      <Button>
         Complete Full Inspection
-      </button>
+      </Button>
     </div>
   </div>
 </template>

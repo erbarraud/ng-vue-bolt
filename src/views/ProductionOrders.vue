@@ -104,7 +104,7 @@
               </div>
 
               <div class="flex justify-end">
-                <Button variant="outline" class="flex items-center">
+                <Button variant="outline">
                   <Power class="w-4 h-4 mr-2" />
                   Stop & Complete
                 </Button>

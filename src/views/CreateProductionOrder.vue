@@ -273,19 +273,17 @@
 
       <!-- Form Actions -->
       <div class="flex items-center justify-end space-x-4">
-        <button
-          type="button"
+        <Button
+          variant="outline"
           @click="$router.push('/orders')"
-          class="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-medium px-6 py-3 rounded-lg transition-all duration-200"
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           type="submit"
-          class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5"
         >
           Save Order
-        </button>
+        </Button>
       </div>
     </form>
   </div>
