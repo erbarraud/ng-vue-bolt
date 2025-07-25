@@ -1,23 +1,25 @@
 <template>
   <div class="min-h-screen bg-slate-50">
-    <!-- Navigation Header -->
-    <nav class="bg-white border-b border-gray-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header with Neural Grader structure but green bg -->
+    <header class="bg-secondary border-b border-gray-200">
+      <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <!-- Logo and Brand -->
+          <!-- Left side - App Title (matching Neural Grader) -->
           <div class="flex items-center">
-            <img src="/Asset 3@4x 1.png" alt="Neural Grader Logo" class="h-10 w-auto mr-3" />
+            <h1 class="text-xl font-semibold text-white">
+              Neural Grader
+            </h1>
           </div>
 
-          <!-- Navigation Links -->
+          <!-- Right side - Navigation Links -->
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-1">
               <router-link
                 to="/"
                 :class="[
                   $route.name === 'Dashboard'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                    ? 'bg-white bg-opacity-20 text-white'
+                    : 'text-white text-opacity-80 hover:bg-white hover:bg-opacity-10 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200'
                 ]"
               >
@@ -28,8 +30,8 @@
                 to="/orders"
                 :class="[
                   $route.name === 'ProductionOrders' || $route.name === 'CreateProductionOrder'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                    ? 'bg-white bg-opacity-20 text-white'
+                    : 'text-white text-opacity-80 hover:bg-white hover:bg-opacity-10 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200'
                 ]"
               >
@@ -40,8 +42,8 @@
                 to="/finder"
                 :class="[
                   $route.name === 'BoardFinder'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                    ? 'bg-white bg-opacity-20 text-white'
+                    : 'text-white text-opacity-80 hover:bg-white hover:bg-opacity-10 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200'
                 ]"
               >
@@ -52,8 +54,8 @@
                 to="/line"
                 :class="[
                   $route.name === 'LineCheck'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                    ? 'bg-white bg-opacity-20 text-white'
+                    : 'text-white text-opacity-80 hover:bg-white hover:bg-opacity-10 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200'
                 ]"
               >
@@ -65,13 +67,13 @@
                   @click="showToolsMenu = !showToolsMenu"
                   :class="[
                     ['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning', 'BoardInspector'].includes($route.name)
-                      ? 'bg-gray-100 text-gray-900'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                      ? 'bg-white bg-opacity-20 text-white'
+                      : 'text-white text-opacity-80 hover:bg-white hover:bg-opacity-10 hover:text-white',
                     'px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200'
                   ]"
                 >
                   Tools
-                  <ChevronDown class="w-4 h-4 ml-1" />
+                  <ChevronDown class="w-4 h-4 ml-1 text-white" />
                 </button>
                 <div
                   v-if="showToolsMenu"
@@ -114,26 +116,26 @@
                   </router-link>
                 </div>
               </div>
-              <button class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200">
+              <button class="text-white text-opacity-80 hover:bg-white hover:bg-opacity-10 hover:text-white px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-200">
                 Support
-                <ChevronDown class="w-4 h-4 ml-1" />
+                <ChevronDown class="w-4 h-4 ml-1 text-white" />
               </button>
             </div>
           </div>
 
           <!-- Right side -->
           <div class="flex items-center space-x-4">
-            <button class="relative text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-50 transition-all duration-200">
-              <Bell class="h-5 w-5" />
+            <button class="relative text-white text-opacity-80 hover:text-white p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all duration-200">
+              <Bell class="h-5 w-5 text-white" />
               <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center shadow-lg">3</span>
             </button>
-            <div class="h-8 w-8 bg-gray-100 rounded-full flex items-center justify-center">
-              <User class="h-5 w-5 text-gray-600" />
+            <div class="h-8 w-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+              <User class="h-5 w-5 text-white" />
             </div>
           </div>
         </div>
       </div>
-    </nav>
+    </header>
 
     <!-- Main Content -->
     <main>

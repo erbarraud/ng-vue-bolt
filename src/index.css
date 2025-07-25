@@ -72,6 +72,17 @@
     color: rgb(17 24 39);
     font-weight: 600;
   }
+  
+  /* Green header specific styling */
+  .bg-secondary h1,
+  .bg-secondary .text-xl {
+    color: white !important; /* White text on green background */
+  }
+  
+  /* Match Neural Grader's header height and spacing */
+  header {
+    height: 64px; /* Exactly h-16 */
+  }
 }
 
 /* Add custom utility classes */
