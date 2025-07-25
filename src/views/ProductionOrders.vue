@@ -156,14 +156,8 @@
                   </td>
                   <td class="px-4 py-3">
                     <div class="space-y-1">
-                      <div class="flex items-center">
-                        <TreePine class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-xs font-medium text-gray-900">{{ order.species }}</span>
-                      </div>
-                      <div class="flex items-center">
-                        <Droplets class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-xs text-gray-600">{{ order.dryStatus }}</span>
-                      </div>
+                      <div class="text-xs font-medium text-gray-900">{{ order.species }}</div>
+                      <div class="text-xs text-gray-600">{{ order.dryStatus }}</div>
                       <div class="text-xs text-gray-500 truncate max-w-32" :title="order.targetMix">
                         {{ order.targetMix }}
                       </div>
@@ -171,14 +165,8 @@
                   </td>
                   <td class="px-4 py-3">
                     <div class="space-y-0.5">
-                      <div class="flex items-center">
-                        <Calendar class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-xs font-medium text-gray-900">{{ order.date }}</span>
-                      </div>
-                      <div class="flex items-center">
-                        <Clock class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-xs text-gray-600">{{ order.time }}</span>
-                      </div>
+                      <div class="text-xs font-medium text-gray-900">{{ order.date }}</div>
+                      <div class="text-xs text-gray-600">{{ order.time }}</div>
                       <div class="text-xs text-gray-500 truncate">{{ order.shift }}</div>
                     </div>
                   </td>
