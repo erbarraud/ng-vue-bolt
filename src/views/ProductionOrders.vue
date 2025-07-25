@@ -125,7 +125,6 @@
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Order Details</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Species & Grade Mix</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Schedule</th>
-                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Customer Requirements</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Status</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Actions</th>
                 </tr>
@@ -171,16 +170,6 @@
                         <span class="text-sm text-gray-600">1:00 PM - 6:00 PM</span>
                       </div>
                       <div class="text-xs text-gray-500">Afternoon Shift</div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-1">
-                      <div class="text-sm font-medium text-gray-900">Artisan Furniture</div>
-                      <div class="text-xs text-gray-600">Custom Grade Requirements</div>
-                      <div class="flex flex-wrap gap-1 mt-2">
-                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">No Wane</span>
-                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Min 6" Width</span>
-                      </div>
                     </div>
                   </td>
                   <td class="px-6 py-4">
@@ -249,16 +238,6 @@
                         <span class="text-sm text-gray-600">9:00 AM - 5:00 PM</span>
                       </div>
                       <div class="text-xs text-gray-500">Morning + Afternoon Shift</div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-1">
-                      <div class="text-sm font-medium text-gray-900">Flooring Inc.</div>
-                      <div class="text-xs text-gray-600">NHLA Standard + Custom</div>
-                      <div class="flex flex-wrap gap-1 mt-2">
-                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded">Max 8% MC</span>
-                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Uniform Color</span>
-                      </div>
                     </div>
                   </td>
                   <td class="px-6 py-4">
