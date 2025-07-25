@@ -232,88 +232,96 @@
 
       <!-- Main Content Area -->
       <div class="lg:col-span-3">
-        <div class="bg-white rounded-lg shadow border-2 border-emerald-300" v-if="currentBoard">
-          <div class="p-6">
+        <div class="bg-white rounded-lg border-2 border-emerald-500" v-if="currentBoard">
+          <div class="p-8">
             <!-- Board Header -->
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center space-x-4">
-                <h2 class="text-2xl font-bold text-gray-900">Board {{ currentBoard.id }}</h2>
-                <span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded">{{ currentBoard.grade }}</span>
-              </div>
+            <div class="flex items-center space-x-4 mb-8">
+              <h2 class="text-2xl font-bold text-gray-900">Board {{ currentBoard.id }}</h2>
+              <span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded">{{ currentBoard.grade }}</span>
             </div>
 
+            <!-- Divider -->
+            <div class="border-b border-gray-200 mb-8"></div>
+
             <!-- Board Specifications -->
-            <div class="grid grid-cols-6 gap-6 mb-6">
+            <div class="grid grid-cols-7 gap-8 mb-8">
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Ruler class="w-4 h-4 text-gray-400 mr-1" />
-                  <span class="text-sm text-gray-600">Length</span>
+                <div class="flex items-center justify-center mb-2">
+                  <Tag class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Length</span>
                 </div>
-                <div class="font-semibold text-gray-900">{{ currentBoard.length }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.length }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Ruler class="w-4 h-4 text-gray-400 mr-1" />
-                  <span class="text-sm text-gray-600">Width</span>
+                <div class="flex items-center justify-center mb-2">
+                  <Tag class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Width</span>
                 </div>
-                <div class="font-semibold text-gray-900">{{ currentBoard.width }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.width }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Layers class="w-4 h-4 text-gray-400 mr-1" />
-                  <span class="text-sm text-gray-600">Thickness</span>
+                <div class="flex items-center justify-center mb-2">
+                  <Tag class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Thickness</span>
                 </div>
-                <div class="font-semibold text-gray-900">{{ currentBoard.thickness }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.thickness }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Package class="w-4 h-4 text-gray-400 mr-1" />
-                  <span class="text-sm text-gray-600">Volume</span>
+                <div class="flex items-center justify-center mb-2">
+                  <Layers class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Volume</span>
                 </div>
-                <div class="font-semibold text-gray-900">{{ currentBoard.volume }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.volume }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <DollarSign class="w-4 h-4 text-gray-400 mr-1" />
-                  <span class="text-sm text-gray-600">Value</span>
+                <div class="flex items-center justify-center mb-2">
+                  <DollarSign class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Value</span>
                 </div>
-                <div class="font-semibold text-emerald-600">{{ currentBoard.value }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.value }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <AlertCircle class="w-4 h-4 text-gray-400 mr-1" />
-                  <span class="text-sm text-gray-600">Total Defects</span>
+                <div class="flex items-center justify-center mb-2">
+                  <Clock class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Total Defects</span>
                 </div>
-                <div class="font-semibold text-gray-900">{{ currentBoard.totalDefects }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.totalDefects }}</div>
+              </div>
+              <div class="text-center">
+                <div class="flex items-center justify-center mb-2">
+                  <Percent class="w-4 h-4 text-gray-400 mr-2" />
+                  <span class="text-sm text-gray-500">Yield</span>
+                </div>
+                <div class="text-lg font-bold text-gray-900">N/A</div>
               </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center space-x-4 mb-6">
-              <Button variant="outline" size="sm">
+            <div class="flex items-center space-x-4 mb-8">
+              <Button variant="outline" size="sm" class="text-gray-600 border-gray-300">
                 <EyeOff class="w-4 h-4 mr-2" />
                 Hide filtered defects
               </Button>
-              <Button variant="outline" size="sm" class="border-emerald-300 text-emerald-600 hover:bg-emerald-50">
+              <Button variant="outline" size="sm" class="text-emerald-600 border-emerald-300 hover:bg-emerald-50">
                 <CheckCircle class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="border-red-300 text-red-600 hover:bg-red-50">
+              <Button variant="outline" size="sm" class="text-red-600 border-red-300 hover:bg-red-50">
                 <XCircle class="w-4 h-4 mr-2" />
                 Disagree with NG AI
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" class="text-gray-600 border-gray-300">
                 <FileText class="w-4 h-4 mr-2" />
                 See Rejected Grades
               </Button>
             </div>
 
             <!-- Board Images -->
-            <div class="space-y-6 mb-6">
+            <div class="space-y-8 mb-8">
               <!-- Face 1 -->
               <div>
-                <h4 class="font-semibold text-gray-900 mb-3">Face 1</h4>
-                <div class="h-32 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-50 relative">
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">Face 1</h4>
+                <div class="h-40 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-100 relative">
                   <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-cover" />
                   
                   <!-- Defect Overlay Areas -->
@@ -325,30 +333,14 @@
                   <div v-if="isDefectVisible('face1', 'Shake')" class="absolute top-12 right-4 w-1 h-8 bg-gray-600 bg-opacity-80 border border-gray-700"></div>
                 </div>
                 
-                <!-- Inline Defect Tags -->
-                <div class="flex flex-wrap gap-1 text-xs">
-                  <button
-                    v-for="defect in defectTypes"
-                    :key="defect.name"
-                    @click="toggleDefect('face1', defect.name)"
-                    :class="[
-                      'px-2 py-1 rounded flex items-center transition-all duration-200',
-                      isDefectVisible('face1', defect.name) 
-                        ? defect.activeClass 
-                        : 'bg-gray-200 text-gray-500'
-                    ]"
-                  >
-                    <Eye v-if="isDefectVisible('face1', defect.name)" class="w-3 h-3 mr-1" />
-                    <EyeOff v-else class="w-3 h-3 mr-1" />
-                    {{ defect.name }}
-                  </button>
-                </div>
+                <!-- Defect Label -->
+                <div class="text-sm font-medium text-gray-900">Wane</div>
               </div>
 
               <!-- Face 2 -->
               <div>
-                <h4 class="font-semibold text-gray-900 mb-3">Face 2</h4>
-                <div class="h-32 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-50 relative">
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">Face 2</h4>
+                <div class="h-40 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-100 relative">
                   <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-cover" />
                   
                   <!-- Defect Overlay Areas -->
@@ -360,47 +352,29 @@
                   <div v-if="isDefectVisible('face2', 'Shake')" class="absolute bottom-8 left-4 w-1 h-6 bg-gray-600 bg-opacity-80 border border-gray-700"></div>
                 </div>
                 
-                <!-- Inline Defect Tags -->
-                <div class="flex flex-wrap gap-1 text-xs">
-                  <button
-                    v-for="defect in defectTypes"
-                    :key="defect.name"
-                    @click="toggleDefect('face2', defect.name)"
-                    :class="[
-                      'px-2 py-1 rounded flex items-center transition-all duration-200',
-                      isDefectVisible('face2', defect.name) 
-                        ? defect.activeClass 
-                        : 'bg-gray-200 text-gray-500'
-                    ]"
-                  >
-                    <Eye v-if="isDefectVisible('face2', defect.name)" class="w-3 h-3 mr-1" />
-                    <EyeOff v-else class="w-3 h-3 mr-1" />
-                    {{ defect.name }}
-                  </button>
-                </div>
+                <!-- Defect Label -->
+                <div class="text-sm font-medium text-gray-900">Wane</div>
               </div>
             </div>
 
             <!-- Clear Cuttings -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <!-- Face 1 Clear Cuttings -->
               <div>
-                <h4 class="font-semibold text-gray-900 mb-3">Clear Cuttings (Face 1)</h4>
-                <div class="bg-gray-50 rounded-lg p-4">
-                  <div class="space-y-2">
-                    <div class="flex items-center justify-between text-sm">
-                      <span class="text-gray-600">6' 2 3/4" × 5 3/8"</span>
-                      <span class="bg-emerald-600 text-white px-2 py-1 rounded text-xs font-medium">33.28 units</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                      <span class="text-gray-600">2' × 4 13/16"</span>
-                      <span class="bg-emerald-600 text-white px-2 py-1 rounded text-xs font-medium">9.64 units</span>
-                    </div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-700">6' 2 3/4" × 5 3/8"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-medium">33.28 units</span>
                   </div>
-                  <div class="mt-4 pt-3 border-t border-gray-200">
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-700">2' × 4 13/16"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-medium">9.64 units</span>
+                  </div>
+                  <div class="border-t border-gray-200 pt-3 mt-4">
                     <div class="flex items-center justify-between">
-                      <span class="font-medium text-gray-900">Total Units:</span>
-                      <span class="font-bold text-emerald-600 text-lg">43</span>
+                      <span class="font-semibold text-gray-900">Total Units:</span>
+                      <span class="text-2xl font-bold text-emerald-600">43</span>
                     </div>
                   </div>
                 </div>
@@ -408,22 +382,20 @@
 
               <!-- Face 2 Clear Cuttings -->
               <div>
-                <h4 class="font-semibold text-gray-900 mb-3">Clear Cuttings (Face 2)</h4>
-                <div class="bg-gray-50 rounded-lg p-4">
-                  <div class="space-y-2">
-                    <div class="flex items-center justify-between text-sm">
-                      <span class="text-gray-600">3' 3 3/4" × 5 3/16"</span>
-                      <span class="bg-emerald-600 text-white px-2 py-1 rounded text-xs font-medium">17.2 units</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                      <span class="text-gray-600">3' 5 3/4" × 4 7/8"</span>
-                      <span class="bg-emerald-600 text-white px-2 py-1 rounded text-xs font-medium">16.83 units</span>
-                    </div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-700">3' 3 3/4" × 5 3/16"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-medium">17.2 units</span>
                   </div>
-                  <div class="mt-4 pt-3 border-t border-gray-200">
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-700">3' 5 3/4" × 4 7/8"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-medium">16.83 units</span>
+                  </div>
+                  <div class="border-t border-gray-200 pt-3 mt-4">
                     <div class="flex items-center justify-between">
-                      <span class="font-medium text-gray-900">Total Units:</span>
-                      <span class="font-bold text-emerald-600 text-lg">34</span>
+                      <span class="font-semibold text-gray-900">Total Units:</span>
+                      <span class="text-2xl font-bold text-emerald-600">34</span>
                     </div>
                   </div>
                 </div>
@@ -431,8 +403,8 @@
             </div>
 
             <!-- Full Inspection Button -->
-            <div class="text-right">
-              <Button asChild>
+            <div class="flex justify-end">
+              <Button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2">
                 <router-link :to="`/inspection/${currentBoard.id}`">
                   Full Inspection
                 </router-link>
@@ -449,7 +421,8 @@
 import { ref, computed } from 'vue'
 import { 
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
-  AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight
+  AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
+  Tag, Percent
 } from 'lucide-vue-next'
 
 const searchQuery = ref('')
