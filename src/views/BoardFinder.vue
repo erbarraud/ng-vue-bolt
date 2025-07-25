@@ -38,9 +38,11 @@
     <!-- Timeline Navigator -->
     <div class="bg-white rounded-lg shadow p-4 mb-6">
       <div class="flex items-center justify-between mb-3">
-        <h3 class="text-lg font-semibold text-gray-900">Timeline Navigator</h3>
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-gray-600">{{ formatTimeRange(selectedTimeSlot) }}</span>
+          <Clock class="w-5 h-5 text-gray-400" />
+          <h3 class="text-lg font-semibold text-gray-900">Timeline Navigator</h3>
+        </div>
+        <div class="flex items-center space-x-2">
           <button @click="showTimeline = !showTimeline" class="p-1 hover:bg-gray-100 rounded">
             <ChevronDown :class="showTimeline ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform" />
           </button>
@@ -48,78 +50,145 @@
       </div>
       
       <div v-if="showTimeline" class="space-y-4">
-        <!-- Date Selector -->
-        <div class="flex items-center space-x-4">
+        <!-- Batch Timeline Header -->
+        <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
-            <Calendar class="w-4 h-4 text-gray-400" />
-            <input 
-              type="date" 
-              v-model="selectedDate"
-              class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            />
+            <Clock class="w-4 h-4 text-gray-400" />
+            <span class="text-sm font-medium text-gray-700">Batch Timeline</span>
           </div>
-          <button 
-            @click="setToday"
-            class="px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            Today
-          </button>
-          <button 
-            @click="clearTimeFilter"
-            class="px-3 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
-          >
-            Clear Filter
-          </button>
-        </div>
-
-        <!-- Timeline Slider -->
-        <div class="space-y-3">
-          <div class="flex items-center justify-between text-sm text-gray-600">
-            <span>6:00 AM</span>
-            <span>6:00 PM</span>
-          </div>
-          
-          <!-- Bar Chart Timeline -->
-          <div class="flex items-end justify-between gap-1 h-24 bg-gray-50 rounded-lg p-3">
-            <button
-              v-for="hour in timeSlots"
-              :key="hour.value"
-              @click="selectTimeSlot(hour.value)"
-              class="flex flex-col items-center group transition-all duration-200 cursor-pointer"
-              :title="`${hour.label} - ${hour.boards} boards`"
+          <div class="flex items-center space-x-3">
+            <button 
+              @click="setTimeRange('today')"
+              :class="[
+                'px-3 py-1.5 text-sm rounded-md transition-colors',
+                selectedTimeRange === 'today' 
+                  ? 'bg-gray-900 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              ]"
             >
-              <!-- Bar -->
-              <div 
-                :class="[
-                  'w-6 rounded-t transition-all duration-200 mb-1',
-                  selectedTimeSlot === hour.value
-                    ? 'bg-emerald-600 shadow-lg'
-                    : 'bg-emerald-300 group-hover:bg-emerald-400'
-                ]"
-                :style="{ height: `${Math.max((hour.boards / 35) * 60, 8)}px` }"
-              ></div>
-              <!-- Time Label -->
-              <div class="text-xs font-medium text-gray-600 group-hover:text-gray-800">
-                {{ hour.short }}
-              </div>
+              Today
+            </button>
+            <button 
+              @click="setTimeRange('yesterday')"
+              :class="[
+                'px-3 py-1.5 text-sm rounded-md transition-colors',
+                selectedTimeRange === 'yesterday' 
+                  ? 'bg-gray-900 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              ]"
+            >
+              Yesterday
+            </button>
+            <button 
+              @click="setTimeRange('week')"
+              :class="[
+                'px-3 py-1.5 text-sm rounded-md transition-colors',
+                selectedTimeRange === 'week' 
+                  ? 'bg-gray-900 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              ]"
+            >
+              This Week
+            </button>
+            <button 
+              @click="showDatePicker = !showDatePicker"
+              class="flex items-center px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+            >
+              <Calendar class="w-4 h-4 mr-1" />
+              Date Range
             </button>
           </div>
+        </div>
+
+        <!-- Description -->
+        <div class="text-sm text-gray-500">
+          Select an hour to view boards
+        </div>
+
+        <!-- Timeline Chart -->
+        <div class="relative">
+          <!-- Navigation Arrows -->
+          <button 
+            @click="scrollTimeline('left')"
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 shadow-sm"
+          >
+            <ChevronLeft class="w-4 h-4 text-gray-600" />
+          </button>
           
-          <!-- Legend -->
-          <div class="flex items-center justify-between text-xs text-gray-500 mt-2">
-            <span>Click a bar to filter boards from that hour</span>
-            <div class="flex items-center space-x-4">
-              <div class="flex items-center space-x-1">
-                <div class="w-3 h-3 bg-emerald-300 rounded"></div>
-                <span>Available</span>
-              </div>
-              <div class="flex items-center space-x-1">
-                <div class="w-3 h-3 bg-emerald-600 rounded"></div>
-                <span>Selected</span>
-              </div>
-              <div class="flex items-center space-x-1">
-                <span class="text-gray-400">Max: 35 boards/hour</span>
-              </div>
+          <button 
+            @click="scrollTimeline('right')"
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 shadow-sm"
+          >
+            <ChevronRight class="w-4 h-4 text-gray-600" />
+          </button>
+
+          <!-- Chart Container -->
+          <div class="mx-10 overflow-hidden">
+            <div class="flex items-end justify-between gap-2 h-32 px-4 py-3">
+              <button
+                v-for="hour in visibleTimeSlots"
+                :key="hour.value"
+                @click="selectTimeSlot(hour.value)"
+                class="flex flex-col items-center group transition-all duration-200 cursor-pointer min-w-0 flex-1"
+                :title="`${hour.label} - ${hour.boards} boards`"
+              >
+                <!-- Bar -->
+                <div 
+                  :class="[
+                    'w-full rounded-t-sm transition-all duration-200 mb-2',
+                    selectedTimeSlot === hour.value
+                      ? 'bg-gray-800'
+                      : 'bg-gray-200 group-hover:bg-gray-300'
+                  ]"
+                  :style="{ height: `${Math.max((hour.boards / 35) * 80, 8)}px` }"
+                ></div>
+                <!-- Time Label -->
+                <div class="text-xs text-gray-600 font-medium">
+                  {{ hour.time }}
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="flex items-center justify-between text-sm text-gray-500 pt-2 border-t border-gray-100">
+          <span>Total: {{ totalBoards }} boards</span>
+          <span>Batch duration: {{ batchDuration }} hours</span>
+        </div>
+
+        <!-- Date Picker Modal (if needed) -->
+        <div v-if="showDatePicker" class="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-20">
+          <div class="flex items-center space-x-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
+              <input 
+                type="date" 
+                v-model="selectedDate"
+                class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
+              <input 
+                type="date" 
+                v-model="selectedDate"
+                class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+              />
+            </div>
+            <div class="flex items-end space-x-2">
+              <button 
+                @click="applyDateRange"
+                class="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors"
+              >
+                Apply
+              </button>
+              <button 
+                @click="showDatePicker = false"
+                class="px-4 py-2 text-gray-600 text-sm hover:text-gray-800 transition-colors"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -380,30 +449,42 @@
 import { ref, computed } from 'vue'
 import { 
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
-  AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye
+  AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight
 } from 'lucide-vue-next'
 
 const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
 const showTimeline = ref(false)
+const showDatePicker = ref(false)
 const selectedDate = ref(new Date().toISOString().split('T')[0])
 const selectedTimeSlot = ref(null)
+const selectedTimeRange = ref('today')
+const currentTimelineStart = ref(0)
 
-// Time slots for the timeline (6 AM to 6 PM)
+// Time slots for the timeline (8 AM to 3 PM as shown in image)
 const timeSlots = ref([
-  { value: 6, label: '6:00 AM', short: '6A', boards: 12 },
-  { value: 7, label: '7:00 AM', short: '7A', boards: 18 },
-  { value: 8, label: '8:00 AM', short: '8A', boards: 24 },
-  { value: 9, label: '9:00 AM', short: '9A', boards: 31 },
-  { value: 10, label: '10:00 AM', short: '10A', boards: 28 },
-  { value: 11, label: '11:00 AM', short: '11A', boards: 22 },
-  { value: 12, label: '12:00 PM', short: '12P', boards: 15 },
-  { value: 13, label: '1:00 PM', short: '1P', boards: 19 },
-  { value: 14, label: '2:00 PM', short: '2P', boards: 26 },
-  { value: 15, label: '3:00 PM', short: '3P', boards: 33 },
-  { value: 16, label: '4:00 PM', short: '4P', boards: 29 },
-  { value: 17, label: '5:00 PM', short: '5P', boards: 21 }
+  { value: 8, label: '8:00 AM', time: '08:00', boards: 45 },
+  { value: 9, label: '9:00 AM', time: '09:00', boards: 52 },
+  { value: 10, label: '10:00 AM', time: '10:00', boards: 38 },
+  { value: 11, label: '11:00 AM', time: '11:00', boards: 41 },
+  { value: 12, label: '12:00 PM', time: '12:00', boards: 35 },
+  { value: 13, label: '1:00 PM', time: '13:00', boards: 48 },
+  { value: 14, label: '2:00 PM', time: '14:00', boards: 55 },
+  { value: 15, label: '3:00 PM', time: '15:00', boards: 42 }
 ])
+
+// Computed properties for timeline
+const visibleTimeSlots = computed(() => {
+  return timeSlots.value.slice(currentTimelineStart.value, currentTimelineStart.value + 8)
+})
+
+const totalBoards = computed(() => {
+  return timeSlots.value.reduce((sum, slot) => sum + slot.boards, 0)
+})
+
+const batchDuration = computed(() => {
+  return timeSlots.value.length
+})
 
 // Defect visibility state
 const defectVisibility = ref({
@@ -496,20 +577,30 @@ const selectTimeSlot = (hour) => {
   selectedTimeSlot.value = selectedTimeSlot.value === hour ? null : hour
 }
 
-const setToday = () => {
-  selectedDate.value = new Date().toISOString().split('T')[0]
-}
-
-const clearTimeFilter = () => {
+const setTimeRange = (range) => {
+  selectedTimeRange.value = range
   selectedTimeSlot.value = null
+  
+  if (range === 'today') {
+    selectedDate.value = new Date().toISOString().split('T')[0]
+  } else if (range === 'yesterday') {
+    const yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() - 1)
+    selectedDate.value = yesterday.toISOString().split('T')[0]
+  }
+  // Add logic for 'week' if needed
 }
 
-const formatTimeRange = (hour) => {
-  if (!hour) return 'All times'
-  const slot = timeSlots.value.find(s => s.value === hour)
-  if (!slot) return 'All times'
-  const nextHour = hour + 1
-  const nextLabel = nextHour > 12 ? `${nextHour - 12}:00 PM` : nextHour === 12 ? '12:00 PM' : `${nextHour}:00 AM`
-  return `${slot.label} - ${nextLabel}`
+const scrollTimeline = (direction) => {
+  if (direction === 'left' && currentTimelineStart.value > 0) {
+    currentTimelineStart.value--
+  } else if (direction === 'right' && currentTimelineStart.value < timeSlots.value.length - 8) {
+    currentTimelineStart.value++
+  }
+}
+
+const applyDateRange = () => {
+  showDatePicker.value = false
+  selectedTimeRange.value = 'custom'
 }
 </script>
