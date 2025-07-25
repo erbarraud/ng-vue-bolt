@@ -102,27 +102,27 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-emerald-600 border-emerald-300 hover:bg-gray-50">
+        <Button variant="outline" size="sm" class="flex items-center text-emerald-600 border-emerald-300 hover:bg-gray-50 bg-white">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-red-600 border-red-300 hover:bg-gray-50">
+        <Button variant="outline" size="sm" class="flex items-center text-red-600 border-red-300 hover:bg-gray-50 bg-white">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
           <FileText class="w-4 h-4 mr-2" />
           See rejected rules
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50 bg-white">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
         </Button>
