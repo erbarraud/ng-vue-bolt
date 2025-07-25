@@ -110,11 +110,11 @@
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-emerald-600 border-emerald-300 hover:bg-emerald-50">
+        <Button variant="outline" size="sm" class="flex items-center text-emerald-600 border-emerald-300 hover:bg-gray-50">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center text-red-600 border-red-300 hover:bg-red-50">
+        <Button variant="outline" size="sm" class="flex items-center text-red-600 border-red-300 hover:bg-gray-50">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
         </Button>
