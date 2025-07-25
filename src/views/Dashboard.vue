@@ -111,8 +111,9 @@
       </div>
     </div>
 
-    <!-- Second Line: Recent Orders Table -->
-    <div class="mb-8">
+    <!-- Second Line: Recent Orders and System Alerts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Recent Orders -->
       <Card>
         <CardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
@@ -278,10 +279,7 @@
         </div>
         </CardContent>
       </Card>
-    </div>
 
-    <!-- Third Line: Shift Status and System Alerts -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- System Alerts -->
       <Card>
         <CardContent class="p-6">
