@@ -122,13 +122,13 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex items-center space-x-2">
-                  <Button variant="outline" size="sm" class="text-blue-600 border-blue-300 hover:bg-blue-50">
+                  <Button variant="outline" size="sm" class="text-blue-600 hover:text-blue-700">
                     <Edit class="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="sm" class="text-gray-600 border-gray-300 hover:bg-gray-50">
+                  <Button variant="outline" size="sm" class="text-gray-600 hover:text-gray-700">
                     <Eye class="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="sm" class="text-gray-600 border-gray-300 hover:bg-gray-50">
+                  <Button variant="outline" size="sm" class="text-gray-600 hover:text-gray-700">
                     <MoreHorizontal class="w-4 h-4" />
                   </Button>
                 </div>
