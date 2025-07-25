@@ -426,7 +426,7 @@ import { ref, computed } from 'vue'
 import { 
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
   AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
-  Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp
+  Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
   ThumbsUp, ThumbsDown, ClipboardList
 } from 'lucide-vue-next'
 
