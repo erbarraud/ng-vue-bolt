@@ -117,90 +117,177 @@
         <div>
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Upcoming Orders (2)</h2>
           
-          <div class="space-y-4">
-            <!-- Soft Maple Order -->
-            <Card>
-              <CardContent class="p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-2">
-                      <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                        <Menu class="w-4 h-4 text-gray-400 mr-3" />
-                        Soft Maple - Special Order
-                      </h3>
-                      <div class="flex items-center space-x-2">
-                        <Badge variant="secondary" class="border">Scheduled</Badge>
-                        <Button variant="ghost" size="sm">
-                          <Edit class="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <Play class="w-4 h-4" />
-                        </Button>
+          <!-- Upcoming Orders Table -->
+          <div class="bg-white shadow rounded-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Order Details</th>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Species & Grade Mix</th>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Schedule</th>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Customer Requirements</th>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Status</th>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <!-- Soft Maple Order -->
+                <tr class="hover:bg-emerald-50 transition-colors duration-150">
+                  <td class="px-6 py-4">
+                    <div class="flex items-start">
+                      <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <TreePine class="w-5 h-5 text-emerald-600" />
+                      </div>
+                      <div>
+                        <div class="text-lg font-bold text-gray-900">Soft Maple - Special Order</div>
+                        <div class="text-sm text-emerald-600 font-medium">ORD-20250701-002</div>
+                        <div class="text-sm text-gray-500 mt-1">Est. Volume: 2,500 bf</div>
                       </div>
                     </div>
-                    <div class="text-sm text-gray-500 mb-3">
-                      ID: ORD-20250701-002 | Customer: Artisan Furniture
-                    </div>
-                    <div class="flex items-center space-x-8 text-sm">
-                      <div class="flex items-center">
-                        <Calendar class="w-4 h-4 text-gray-400 mr-2" />
-                        Jul 1, 1:00 PM
-                      </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-2">
                       <div class="flex items-center">
                         <TreePine class="w-4 h-4 text-gray-400 mr-2" />
-                        Soft Maple
+                        <span class="text-sm font-medium text-gray-900">Soft Maple</span>
                       </div>
                       <div class="flex items-center">
                         <Droplets class="w-4 h-4 text-gray-400 mr-2" />
-                        Green
+                        <span class="text-sm text-gray-600">Green (Air Dried)</span>
+                      </div>
+                      <div class="text-xs text-gray-500">
+                        Target Mix: 40% Prime, 35% Select, 25% #1 Common
                       </div>
                     </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-1">
+                      <div class="flex items-center">
+                        <Calendar class="w-4 h-4 text-gray-400 mr-2" />
+                        <span class="text-sm font-medium text-gray-900">Jul 1, 2025</span>
+                      </div>
+                      <div class="flex items-center">
+                        <Clock class="w-4 h-4 text-gray-400 mr-2" />
+                        <span class="text-sm text-gray-600">1:00 PM - 6:00 PM</span>
+                      </div>
+                      <div class="text-xs text-gray-500">Afternoon Shift</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-1">
+                      <div class="text-sm font-medium text-gray-900">Artisan Furniture</div>
+                      <div class="text-xs text-gray-600">Custom Grade Requirements</div>
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">No Wane</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Min 6" Width</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-2">
+                      <Badge variant="secondary" class="border">Scheduled</Badge>
+                      <div class="text-xs text-gray-500">Ready to Start</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex flex-col space-y-2">
+                      <Button size="sm" class="w-full">
+                        <Play class="w-4 h-4 mr-2" />
+                        Start Order
+                      </Button>
+                      <div class="flex space-x-1">
+                        <Button variant="outline" size="sm" class="flex-1">
+                          <Edit class="w-4 h-4 mr-1" />
+                          Edit
+                        </Button>
+                        <Button variant="outline" size="sm" class="flex-1">
+                          <Eye class="w-4 h-4 mr-1" />
+                          View
+                        </Button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
 
-            <!-- White Oak Order -->
-            <Card>
-              <CardContent class="p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-2">
-                      <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                        <Menu class="w-4 h-4 text-gray-400 mr-3" />
-                        White Oak - Flooring
-                      </h3>
-                      <div class="flex items-center space-x-2">
-                        <Badge variant="secondary" class="border">Scheduled</Badge>
-                        <Button variant="ghost" size="sm">
-                          <Edit class="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <Play class="w-4 h-4" />
-                        </Button>
+                <!-- White Oak Order -->
+                <tr class="hover:bg-emerald-50 transition-colors duration-150">
+                  <td class="px-6 py-4">
+                    <div class="flex items-start">
+                      <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                        <TreePine class="w-5 h-5 text-emerald-600" />
+                      </div>
+                      <div>
+                        <div class="text-lg font-bold text-gray-900">White Oak - Flooring Grade</div>
+                        <div class="text-sm text-emerald-600 font-medium">ORD-20250702-003</div>
+                        <div class="text-sm text-gray-500 mt-1">Est. Volume: 4,200 bf</div>
                       </div>
                     </div>
-                    <div class="text-sm text-gray-500 mb-3">
-                      ID: ORD-20250702-003 | Customer: Flooring Inc.
-                    </div>
-                    <div class="flex items-center space-x-8 text-sm">
-                      <div class="flex items-center">
-                        <Calendar class="w-4 h-4 text-gray-400 mr-2" />
-                        Jul 2, 9:00 AM
-                      </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-2">
                       <div class="flex items-center">
                         <TreePine class="w-4 h-4 text-gray-400 mr-2" />
-                        White Oak
+                        <span class="text-sm font-medium text-gray-900">White Oak</span>
                       </div>
                       <div class="flex items-center">
                         <Droplets class="w-4 h-4 text-gray-400 mr-2" />
-                        KD
+                        <span class="text-sm text-gray-600">Kiln Dried (KD)</span>
+                      </div>
+                      <div class="text-xs text-gray-500">
+                        Target Mix: 60% Select, 30% #1 Common, 10% #2 Common
                       </div>
                     </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-1">
+                      <div class="flex items-center">
+                        <Calendar class="w-4 h-4 text-gray-400 mr-2" />
+                        <span class="text-sm font-medium text-gray-900">Jul 2, 2025</span>
+                      </div>
+                      <div class="flex items-center">
+                        <Clock class="w-4 h-4 text-gray-400 mr-2" />
+                        <span class="text-sm text-gray-600">9:00 AM - 5:00 PM</span>
+                      </div>
+                      <div class="text-xs text-gray-500">Morning + Afternoon Shift</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-1">
+                      <div class="text-sm font-medium text-gray-900">Flooring Inc.</div>
+                      <div class="text-xs text-gray-600">NHLA Standard + Custom</div>
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded">Max 8% MC</span>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Uniform Color</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="space-y-2">
+                      <Badge variant="secondary" class="border">Scheduled</Badge>
+                      <div class="text-xs text-orange-600 font-medium">Pending Setup</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex flex-col space-y-2">
+                      <Button size="sm" variant="outline" class="w-full" disabled>
+                        <Clock class="w-4 h-4 mr-2" />
+                        Setup Required
+                      </Button>
+                      <div class="flex space-x-1">
+                        <Button variant="outline" size="sm" class="flex-1">
+                          <Edit class="w-4 h-4 mr-1" />
+                          Edit
+                        </Button>
+                        <Button variant="outline" size="sm" class="flex-1">
+                          <Eye class="w-4 h-4 mr-1" />
+                          View
+                        </Button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </TabsContent>
