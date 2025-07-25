@@ -232,139 +232,139 @@
 
       <!-- Main Content Area -->
       <div class="lg:col-span-3">
-        <div class="bg-white rounded-lg border-2 border-emerald-500 p-6" v-if="currentBoard">
+        <div class="bg-white rounded-lg border-2 border-emerald-500 p-8" v-if="currentBoard">
           <div>
             <!-- Board Header -->
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center justify-between mb-4">
               <div class="flex items-center space-x-4">
-                <h2 class="text-xl font-bold text-gray-900">Board {{ currentBoard.id }}</h2>
-                <span class="px-2 py-1 bg-gray-800 text-white text-sm font-medium rounded">{{ currentBoard.grade }}</span>
+                <h2 class="text-2xl font-bold text-gray-900">Board {{ currentBoard.id }}</h2>
+                <span class="px-3 py-1 bg-gray-800 text-white text-sm font-medium rounded">{{ currentBoard.grade }}</span>
               </div>
             </div>
 
             <!-- Divider -->
-            <div class="border-b border-gray-200 mb-6"></div>
+            <div class="border-b border-gray-200 mb-8"></div>
 
             <!-- Board Specifications -->
-            <div class="grid grid-cols-7 gap-6 mb-6">
+            <div class="grid grid-cols-7 gap-8 mb-8">
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Tag class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <Tag class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Length</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">{{ currentBoard.length }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.length }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Tag class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <Tag class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Width</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">{{ currentBoard.width }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.width }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Layers class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <Layers class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Thickness</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">{{ currentBoard.thickness }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.thickness }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Package class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <Package class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Volume</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">{{ currentBoard.volume }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.volume }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <DollarSign class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <DollarSign class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Value</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">{{ currentBoard.value }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.value }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <AlertCircle class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <AlertCircle class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Total Defects</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">{{ currentBoard.totalDefects }}</div>
+                <div class="text-lg font-bold text-gray-900">{{ currentBoard.totalDefects }}</div>
               </div>
               <div class="text-center">
-                <div class="flex items-center justify-center mb-1">
-                  <Percent class="w-4 h-4 text-gray-400 mr-1" />
+                <div class="flex items-center justify-center mb-2">
+                  <Percent class="w-4 h-4 text-gray-500 mr-1" />
                   <span class="text-sm text-gray-600">Yield</span>
                 </div>
-                <div class="text-base font-bold text-gray-900">N/A</div>
+                <div class="text-lg font-bold text-gray-900">N/A</div>
               </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center space-x-3 mb-6">
-              <Button variant="outline" size="sm" class="text-gray-600 border-gray-300 hover:bg-gray-50">
+            <div class="flex items-center space-x-4 mb-8">
+              <Button variant="outline" size="sm" class="text-gray-700 border-gray-300 hover:bg-gray-50">
                 <EyeOff class="w-4 h-4 mr-2" />
                 Hide filtered defects
               </Button>
-              <Button variant="outline" size="sm" class="text-emerald-700 border-emerald-300 hover:bg-emerald-50">
+              <Button variant="outline" size="sm" class="text-emerald-600 border-emerald-300 hover:bg-emerald-50">
                 <CheckCircle class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="text-red-700 border-red-300 hover:bg-red-50">
+              <Button variant="outline" size="sm" class="text-red-600 border-red-300 hover:bg-red-50">
                 <XCircle class="w-4 h-4 mr-2" />
                 Disagree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="text-gray-600 border-gray-300 hover:bg-gray-50">
+              <Button variant="outline" size="sm" class="text-gray-700 border-gray-300 hover:bg-gray-50">
                 <FileText class="w-4 h-4 mr-2" />
                 See Rejected Grades
               </Button>
             </div>
 
             <!-- Board Images -->
-            <div class="space-y-6 mb-6">
+            <div class="space-y-8 mb-8">
               <!-- Face 1 -->
               <div>
-                <h4 class="text-base font-semibold text-gray-900 mb-3">Face 1</h4>
-                <div class="h-48 rounded-lg border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative">
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">Face 1</h4>
+                <div class="h-48 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-100 relative">
                   <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-cover" />
                   
                   <!-- Defect Overlay Areas -->
                   <div v-if="isDefectVisible('face1', 'Wane')" class="absolute bottom-4 left-4 w-16 h-6 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform -skew-x-12"></div>
                 </div>
                 
-                <div class="text-sm text-gray-900">Wane</div>
+                <div class="text-sm font-medium text-gray-900">Wane</div>
               </div>
 
               <!-- Face 2 -->
               <div>
-                <h4 class="text-base font-semibold text-gray-900 mb-3">Face 2</h4>
-                <div class="h-48 rounded-lg border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative">
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">Face 2</h4>
+                <div class="h-48 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-100 relative">
                   <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-cover" />
                   
                   <!-- Defect Overlay Areas -->
                   <div v-if="isDefectVisible('face2', 'Wane')" class="absolute bottom-3 right-4 w-10 h-8 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform skew-y-12"></div>
                 </div>
                 
-                <div class="text-sm text-gray-900">Wane</div>
+                <div class="text-sm font-medium text-gray-900">Wane</div>
               </div>
             </div>
 
             <!-- Clear Cuttings -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <!-- Face 1 Clear Cuttings -->
               <div>
-                <h4 class="text-base font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
-                <div class="space-y-3">
+                <h4 class="text-lg font-semibold text-gray-900 mb-6">Clear Cuttings (Face 1)</h4>
+                <div class="space-y-4">
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-700">6' 2 3/4" × 5 3/8"</span>
-                    <span class="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">33.28 units</span>
+                    <span class="text-gray-900">6' 2 3/4" × 5 3/8"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">33.28 units</span>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-700">2' × 4 13/16"</span>
-                    <span class="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">9.64 units</span>
+                    <span class="text-gray-900">2' × 4 13/16"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">9.64 units</span>
                   </div>
-                  <div class="border-t border-gray-200 pt-3">
+                  <div class="border-t border-gray-200 pt-4 mt-6">
                     <div class="flex items-center justify-between">
                       <span class="font-semibold text-gray-900">Total Units:</span>
-                      <span class="text-xl font-bold text-emerald-600">43</span>
+                      <span class="text-2xl font-bold text-emerald-600">43</span>
                     </div>
                   </div>
                 </div>
@@ -372,20 +372,20 @@
 
               <!-- Face 2 Clear Cuttings -->
               <div>
-                <h4 class="text-base font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
-                <div class="space-y-3">
+                <h4 class="text-lg font-semibold text-gray-900 mb-6">Clear Cuttings (Face 2)</h4>
+                <div class="space-y-4">
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-700">3' 3 3/4" × 5 3/16"</span>
-                    <span class="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">17.2 units</span>
+                    <span class="text-gray-900">3' 3 3/4" × 5 3/16"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">17.2 units</span>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-700">3' 5 3/4" × 4 7/8"</span>
-                    <span class="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">16.83 units</span>
+                    <span class="text-gray-900">3' 5 3/4" × 4 7/8"</span>
+                    <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">16.83 units</span>
                   </div>
-                  <div class="border-t border-gray-200 pt-3">
+                  <div class="border-t border-gray-200 pt-4 mt-6">
                     <div class="flex items-center justify-between">
                       <span class="font-semibold text-gray-900">Total Units:</span>
-                      <span class="text-xl font-bold text-emerald-600">34</span>
+                      <span class="text-2xl font-bold text-emerald-600">34</span>
                     </div>
                   </div>
                 </div>
@@ -394,7 +394,7 @@
 
             <!-- Full Inspection Button -->
             <div class="flex justify-end">
-              <Button class="bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2">
                 <router-link :to="`/inspection/${currentBoard.id}`">
                   Full Inspection
                 </router-link>
