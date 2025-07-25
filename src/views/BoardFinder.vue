@@ -323,7 +323,7 @@
               <!-- Face 1 -->
               <div>
                 <h4 class="text-lg font-semibold text-gray-900 mb-2">Face 1</h4>
-                <div class="h-48 rounded-lg border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative">
+                <div class="h-32 rounded-lg border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative flex items-center">
                   <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-contain" />
                   
                   <!-- Defect Overlay Areas -->
@@ -336,7 +336,7 @@
               <!-- Face 2 -->
               <div>
                 <h4 class="text-lg font-semibold text-gray-900 mb-2">Face 2</h4>
-                <div class="h-48 rounded-lg border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative">
+                <div class="h-32 rounded-lg border border-gray-300 mb-2 overflow-hidden bg-gray-100 relative flex items-center">
                   <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-contain" />
                   
                   <!-- Defect Overlay Areas -->
