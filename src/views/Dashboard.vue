@@ -1,7 +1,7 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-8">
     <!-- First Line: KPIs and Chart -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
       <!-- KPI Cards - Left Side -->
       <div class="lg:col-span-1">
         <div class="space-y-4">
@@ -77,7 +77,7 @@
       </div>
 
       <!-- Boards Processed Chart -->
-      <div class="lg:col-span-4">
+      <div class="lg:col-span-2">
         <Card>
           <CardContent class="p-6">
           <div class="flex items-center justify-between mb-6">
