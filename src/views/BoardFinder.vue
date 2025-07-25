@@ -315,11 +315,23 @@
             <!-- Action Buttons -->
             <!-- Action Buttons -->
             <div class="flex items-center gap-3 mb-8">
-              <Button variant="secondary" size="sm" class="bg-gray-200 text-gray-700 hover:bg-gray-300">
+              <Button variant="secondary" size="sm" class="bg-gray-100 text-gray-800 hover:bg-gray-200 border-gray-200">
                 <Filter class="w-4 h-4 mr-2" />
                 Hide filtered defects
               </Button>
-              <Button variant="outline" size="sm" class="border-emerald-300 text-emerald-700 hover:bg-emerald-50 bg-emerald-200">
+              <Button variant="outline" size="sm" class="bg-green-100 text-green-800 hover:bg-green-200 border-green-200">
+                <CheckCircle class="w-4 h-4 mr-2" />
+                Agree with NG AI
+              </Button>
+              <Button variant="outline" size="sm" class="bg-red-100 text-red-800 hover:bg-red-200 border-red-200">
+                <XCircle class="w-4 h-4 mr-2" />
+                Disagree with NG AI
+              </Button>
+              <Button variant="outline" size="sm" class="bg-orange-100 text-orange-800 hover:bg-orange-200 border-orange-200">
+                <FileText class="w-4 h-4 mr-2" />
+                See Rejected Grades
+              </Button>
+            </div>
                 <ThumbsUp class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
@@ -426,7 +438,7 @@
 import { ref, computed } from 'vue'
 import { 
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
-  AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
+  AlertCircle, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
   Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
   ThumbsUp, ThumbsDown, ClipboardList
 } from 'lucide-vue-next'
