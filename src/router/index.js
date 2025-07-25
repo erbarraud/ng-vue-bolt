@@ -10,6 +10,7 @@ import LiveScanning from '../views/LiveScanning.vue'
 import BoardInspector from '../views/BoardInspector.vue'
 import BoardFinder from '../views/BoardFinder.vue'
 import FullInspection from '../views/FullInspection.vue'
+import AllOrders from '../views/AllOrders.vue'
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/orders/create',
     name: 'CreateProductionOrder',
     component: CreateProductionOrder
+  },
+  {
+    path: '/orders/all',
+    name: 'AllOrders',
+    component: AllOrders
   },
   {
     path: '/users',

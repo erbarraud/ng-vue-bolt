@@ -115,7 +115,14 @@
 
         <!-- Upcoming Orders -->
         <div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">Upcoming Orders (2)</h2>
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Upcoming Orders (2)</h2>
+            <Button variant="outline" asChild>
+              <router-link to="/orders/all">
+                Show All
+              </router-link>
+            </Button>
+          </div>
           
           <!-- Upcoming Orders Table -->
           <div class="bg-white shadow rounded-lg overflow-hidden">
