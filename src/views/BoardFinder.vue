@@ -315,19 +315,19 @@
             <!-- Action Buttons -->
             <!-- Action Buttons -->
             <div class="flex items-center gap-3 mb-8">
-              <Button variant="secondary" size="sm">
+              <Button variant="secondary" size="sm" class="bg-gray-200 text-gray-700 hover:bg-gray-300">
                 <Filter class="w-4 h-4 mr-2" />
                 Hide filtered defects
               </Button>
-              <Button variant="default" size="sm" class="bg-emerald-600 hover:bg-emerald-700">
+              <Button variant="outline" size="sm" class="border-emerald-300 text-emerald-700 hover:bg-emerald-50 bg-emerald-200">
                 <ThumbsUp class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
-              <Button variant="destructive" size="sm">
+              <Button variant="outline" size="sm" class="border-red-300 text-red-700 hover:bg-red-50 bg-red-200">
                 <ThumbsDown class="w-4 h-4 mr-2" />
                 Disagree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="border-amber-300 text-amber-700 hover:bg-amber-50">
+              <Button variant="outline" size="sm" class="border-amber-300 text-amber-700 hover:bg-amber-50 bg-yellow-200">
                 <ClipboardList class="w-4 h-4 mr-2" />
                 See Rejected Grades
               </Button>
