@@ -104,7 +104,27 @@
             </Button>
           </div>
           <div class="h-80">
-            <canvas ref="chartCanvas"></canvas>
+            <ChartContainer>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data="chartData" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <XAxis 
+                    dataKey="time" 
+                    tick={{ fill: '#6b7280', fontSize: 12 }}
+                    axisLine={{ stroke: '#e2e8f0' }}
+                  />
+                  <YAxis 
+                    tick={{ fill: '#6b7280', fontSize: 12 }}
+                    axisLine={{ stroke: '#e2e8f0' }}
+                  />
+                  <Tooltip content={ChartTooltip} />
+                  <Legend content={ChartLegend} />
+                  <Bar dataKey="Grade A" stackId="a" fill="#059669" radius={[0, 0, 0, 0]} />
+                  <Bar dataKey="Grade B" stackId="a" fill="#10b981" radius={[0, 0, 0, 0]} />
+                  <Bar dataKey="Grade C" stackId="a" fill="#34d399" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
           </div>
           </CardContent>
         </Card>
@@ -321,104 +341,30 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { Chart, registerables } from 'chart.js'
+import { ref } from 'vue'
 import {
   Calendar, Clock, DollarSign, Package, MessageSquare, TrendingUp, TrendingDown,
   MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText
 } from 'lucide-vue-next'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend, Tooltip } from 'recharts'
 import Button from '@/components/ui/button.vue'
 import Card from '@/components/ui/card.vue'
 import CardContent from '@/components/ui/card-content.vue'
 import Badge from '@/components/ui/badge.vue'
+import ChartContainer from '@/components/ui/chart-container.vue'
+import ChartTooltip from '@/components/ui/chart-tooltip.vue'
+import ChartLegend from '@/components/ui/chart-legend.vue'
 
-Chart.register(...registerables)
-
-const chartCanvas = ref(null)
-
-onMounted(() => {
-  // Initialize the chart
-  const ctx = chartCanvas.value.getContext('2d')
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM'],
-      datasets: [
-        {
-          label: 'Grade A',
-          data: [95, 145, 98, 45, 185, 95, 125, 165, 175],
-          backgroundColor: '#059669',
-          stack: 'stack1'
-        },
-        {
-          label: 'Grade B',
-          data: [35, 45, 42, 25, 55, 35, 45, 55, 65],
-          backgroundColor: '#10b981',
-          stack: 'stack1'
-        },
-        {
-          label: 'Grade C',
-          data: [25, 35, 28, 15, 35, 25, 35, 45, 35],
-          backgroundColor: '#34d399',
-          stack: 'stack1'
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: {
-        mode: 'index',
-        intersect: false,
-      },
-      plugins: {
-        tooltip: {
-          backgroundColor: 'white',
-          titleColor: '#374151',
-          bodyColor: '#6b7280',
-          borderColor: '#e5e7eb',
-          borderWidth: 1,
-          cornerRadius: 8,
-          displayColors: true,
-          callbacks: {
-            title: function(context) {
-              return `Time: ${context[0].label}`
-            },
-            label: function(context) {
-              return `${context.dataset.label}: ${context.parsed.y}`
-            }
-          }
-        },
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 20,
-            color: '#6b7280'
-          }
-        }
-      },
-      scales: {
-        x: {
-          stacked: true,
-          grid: {
-            display: false
-          },
-          ticks: {
-            color: '#6b7280'
-          }
-        },
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          max: 300,
-          ticks: {
-            stepSize: 70,
-            color: '#6b7280'
-          }
-        }
-      }
-    }
-  })
-})
+// Chart data
+const chartData = ref([
+  { time: '9AM', 'Grade A': 95, 'Grade B': 35, 'Grade C': 25 },
+  { time: '10AM', 'Grade A': 145, 'Grade B': 45, 'Grade C': 35 },
+  { time: '11AM', 'Grade A': 98, 'Grade B': 42, 'Grade C': 28 },
+  { time: '12PM', 'Grade A': 45, 'Grade B': 25, 'Grade C': 15 },
+  { time: '1PM', 'Grade A': 185, 'Grade B': 55, 'Grade C': 35 },
+  { time: '2PM', 'Grade A': 95, 'Grade B': 35, 'Grade C': 25 },
+  { time: '3PM', 'Grade A': 125, 'Grade B': 45, 'Grade C': 35 },
+  { time: '4PM', 'Grade A': 165, 'Grade B': 55, 'Grade C': 45 },
+  { time: '5PM', 'Grade A': 175, 'Grade B': 65, 'Grade C': 35 }
+])
 </script>
