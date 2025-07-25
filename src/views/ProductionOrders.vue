@@ -177,18 +177,16 @@
                   </td>
                   <td class="px-4 py-3">
                     <div class="flex flex-col space-y-1">
-                      <Button size="sm" class="w-full text-xs px-1 py-0.5 h-6" :disabled="!order.canStart" :variant="order.canStart ? 'default' : 'outline'">
-                        <Play class="w-3 h-3 mr-0.5" />
-                        {{ order.canStart ? 'Start Order' : 'Setup Required' }}
+                      <Button size="sm" class="w-full text-xs px-1 py-0.5 h-6" :disabled="!order.canStart" :variant="order.canStart ? 'default' : 'outline'" :title="order.canStart ? 'Start Order' : 'Setup Required'">
+                        <Play v-if="order.canStart" class="w-3 h-3" />
+                        <Settings v-else class="w-3 h-3" />
                       </Button>
                       <div class="flex space-x-0.5">
-                        <Button variant="outline" size="sm" class="flex-1 text-xs px-1 py-0.5 h-5">
-                          <Edit class="w-3 h-3 mr-0.5" />
-                          Edit
+                        <Button variant="outline" size="sm" class="flex-1 text-xs px-1 py-0.5 h-5" title="Edit Order">
+                          <Edit class="w-3 h-3" />
                         </Button>
-                        <Button variant="outline" size="sm" class="flex-1 text-xs px-1 py-0.5 h-5">
-                          <Eye class="w-3 h-3 mr-0.5" />
-                          View
+                        <Button variant="outline" size="sm" class="flex-1 text-xs px-1 py-0.5 h-5" title="View Details">
+                          <Eye class="w-3 h-3" />
                         </Button>
                       </div>
                     </div>
@@ -250,7 +248,7 @@ import { ref } from 'vue'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
-  Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package
+  Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package, Settings
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 import Card from '@/components/ui/card.vue'
