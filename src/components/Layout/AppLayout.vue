@@ -141,14 +141,54 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-4">
       <div class="w-full px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between text-sm text-slate-500">
-          <div>
+        <div class="flex items-center justify-between">
+          <div class="text-sm text-slate-500">
             © 2024 Neural Grader. Built for precision lumber grading.
           </div>
+          
+          <!-- Lumberjack Animation -->
           <div class="flex items-center space-x-4">
-            <a href="#" class="hover:text-slate-700 transition-colors duration-150">Terms</a>
-            <a href="#" class="hover:text-slate-700 transition-colors duration-150">Privacy</a>
-            <span>v1.0.0</span>
+            <div class="flex items-center space-x-4 text-sm text-slate-500">
+              <a href="#" class="hover:text-slate-700 transition-colors duration-150">Terms</a>
+              <a href="#" class="hover:text-slate-700 transition-colors duration-150">Privacy</a>
+              <span>v1.0.0</span>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+              <span class="text-sm text-slate-500">Powered by</span>
+              <div class="lumberjack-animation">
+                <svg width="40" height="40" viewBox="0 0 100 100">
+                  <!-- Tree -->
+                  <rect x="70" y="30" width="15" height="40" fill="#8B4513" />
+                  <circle cx="77" cy="25" r="15" fill="#228B22" />
+                  
+                  <!-- Lumberjack -->
+                  <g class="lumberjack">
+                    <!-- Body -->
+                    <rect x="20" y="40" width="20" height="25" fill="#FF0000" rx="2" />
+                    <!-- Head -->
+                    <circle cx="30" cy="30" r="8" fill="#FDBCB4" />
+                    <!-- Beard -->
+                    <path d="M 22 32 Q 30 40 38 32" fill="#8B4513" />
+                    <!-- Hat -->
+                    <rect x="22" y="22" width="16" height="8" fill="#000" rx="1" />
+                    <!-- Arms holding axe -->
+                    <rect x="35" y="45" width="15" height="4" fill="#FDBCB4" 
+                          class="arm-swing" />
+                    <!-- Axe -->
+                    <g class="axe-swing">
+                      <rect x="48" y="43" width="20" height="3" fill="#8B4513" />
+                      <path d="M 65 40 L 65 50 L 72 45 Z" fill="#C0C0C0" />
+                    </g>
+                  </g>
+                  
+                  <!-- Wood chips -->
+                  <circle cx="65" cy="50" r="2" fill="#DEB887" class="chip-1" />
+                  <circle cx="60" cy="55" r="1.5" fill="#DEB887" class="chip-2" />
+                  <circle cx="68" cy="58" r="1" fill="#DEB887" class="chip-3" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -165,3 +205,71 @@ import {
 
 const showToolsMenu = ref(false)
 </script>
+
+<style scoped>
+/* Lumberjack animation */
+@keyframes chop {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+@keyframes swing-arm {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-20deg); }
+}
+
+@keyframes chip-fly-1 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-20px, 10px); }
+}
+
+@keyframes chip-fly-2 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-15px, -8px); }
+}
+
+@keyframes chip-fly-3 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-25px, 5px); }
+}
+
+.axe-swing {
+  transform-origin: 48px 45px;
+  animation: chop 1.5s ease-in-out infinite;
+}
+
+.arm-swing {
+  transform-origin: 35px 47px;
+  animation: swing-arm 1.5s ease-in-out infinite;
+}
+
+.chip-1 {
+  animation: chip-fly-1 1.5s ease-out infinite;
+}
+
+.chip-2 {
+  animation: chip-fly-2 1.5s ease-out infinite 0.2s;
+}
+
+.chip-3 {
+  animation: chip-fly-3 1.5s ease-out infinite 0.4s;
+}
+
+/* Add a hover effect for fun */
+.lumberjack-animation:hover .axe-swing {
+  animation-duration: 0.5s;
+}
+
+.lumberjack-animation:hover .arm-swing {
+  animation-duration: 0.5s;
+}
+
+.lumberjack-animation:hover .chip-1,
+.lumberjack-animation:hover .chip-2,
+.lumberjack-animation:hover .chip-3 {
+  animation-duration: 0.5s;
+}
+</style>
