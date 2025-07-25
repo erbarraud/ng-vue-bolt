@@ -6,6 +6,7 @@ import UserManagement from '../views/UserManagement.vue'
 import ShiftScheduler from '../views/ShiftScheduler.vue'
 import ClaimsManagement from '../views/ClaimsManagement.vue'
 import LineCheck from '../views/LineCheck.vue'
+import LiveScanning from '../views/LiveScanning.vue'
 import BoardFinder from '../views/BoardFinder.vue'
 import BoardInspector from '../views/BoardInspector.vue'
 import AllOrders from '../views/AllOrders.vue'
@@ -50,6 +51,11 @@ const routes = [
     path: '/line',
     name: 'LineCheck',
     component: LineCheck
+  },
+  {
+    path: '/scanning',
+    name: 'LiveScanning',
+    component: LiveScanning
   },
   {
     path: '/inspector',
