@@ -324,7 +324,7 @@
               <div>
                 <h4 class="text-lg font-semibold text-gray-900 mb-4">Face 1</h4>
                 <div class="h-48 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-100 relative">
-                  <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-cover" />
+                  <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-contain" />
                   
                   <!-- Defect Overlay Areas -->
                   <div v-if="isDefectVisible('face1', 'Wane')" class="absolute bottom-4 left-4 w-16 h-6 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform -skew-x-12"></div>
@@ -337,7 +337,7 @@
               <div>
                 <h4 class="text-lg font-semibold text-gray-900 mb-4">Face 2</h4>
                 <div class="h-48 rounded-lg border border-gray-300 mb-3 overflow-hidden bg-gray-100 relative">
-                  <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-cover" />
+                  <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-contain" />
                   
                   <!-- Defect Overlay Areas -->
                   <div v-if="isDefectVisible('face2', 'Wane')" class="absolute bottom-3 right-4 w-10 h-8 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform skew-y-12"></div>
