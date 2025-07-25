@@ -188,7 +188,7 @@
                         size="sm" 
                         class="w-16 h-6" 
                         :disabled="!order.canStart" 
-                        :variant="order.canStart ? 'default' : 'outline'" 
+                        :variant="order.canStart ? 'secondary' : 'outline'" 
                         :title="order.canStart ? 'Start Order' : 'Setup Required'"
                       >
                         <Play v-if="order.canStart" class="w-3 h-3" />
@@ -198,7 +198,7 @@
                         <Button 
                           variant="outline" 
                           size="icon" 
-                          class="w-8 h-5" 
+                          class="w-8 h-5 text-blue-600 border-blue-300 hover:bg-blue-50" 
                           title="Edit Order"
                         >
                           <Edit class="w-3 h-3" />
@@ -206,7 +206,7 @@
                         <Button 
                           variant="outline" 
                           size="icon" 
-                          class="w-8 h-5" 
+                          class="w-8 h-5 text-gray-600 border-gray-300 hover:bg-gray-50" 
                           title="View Details"
                         >
                           <Eye class="w-3 h-3" />

@@ -293,10 +293,10 @@
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button class="text-gray-400 hover:text-gray-600 mr-2">
+                <button class="text-blue-600 hover:text-blue-800 mr-2 p-1 rounded hover:bg-blue-50" title="Reprocess">
                   <RotateCcw class="w-4 h-4" />
                 </button>
-                <button class="text-emerald-600 hover:text-emerald-900">View</button>
+                <button class="text-gray-600 hover:text-gray-800 px-2 py-1 rounded hover:bg-gray-100">View</button>
               </td>
             </tr>
           </tbody>

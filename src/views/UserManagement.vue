@@ -124,7 +124,7 @@
                 {{ user.lastLogin }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button class="text-gray-400 hover:text-gray-600">
+                <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100">
                   <MoreHorizontal class="h-4 w-4" />
                 </button>
               </td>
