@@ -323,6 +323,7 @@
                 <CheckCircle class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
+              <Button variant="outline" size="sm" class="border-green-300 text-green-700 hover:bg-green-50 bg-green-200">
               <Button variant="outline" size="sm" class="bg-red-100 text-red-800 hover:bg-red-200 border-red-200">
                 <XCircle class="w-4 h-4 mr-2" />
                 Disagree with NG AI
