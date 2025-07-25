@@ -39,7 +39,82 @@
     <div class="bg-white rounded-lg shadow p-4 mb-6">
       <div class="flex items-center justify-between mb-3">
         <h3 class="text-lg font-semibold text-gray-900">Timeline Navigator</h3>
-        <ChevronDown class="w-4 h-4 text-gray-400" />
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-gray-600">{{ formatTimeRange(selectedTimeSlot) }}</span>
+          <button @click="showTimeline = !showTimeline" class="p-1 hover:bg-gray-100 rounded">
+            <ChevronDown :class="showTimeline ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform" />
+          </button>
+        </div>
+      </div>
+      
+      <div v-if="showTimeline" class="space-y-4">
+        <!-- Date Selector -->
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-2">
+            <Calendar class="w-4 h-4 text-gray-400" />
+            <input 
+              type="date" 
+              v-model="selectedDate"
+              class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+          </div>
+          <button 
+            @click="setToday"
+            class="px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+          >
+            Today
+          </button>
+          <button 
+            @click="clearTimeFilter"
+            class="px-3 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+          >
+            Clear Filter
+          </button>
+        </div>
+
+        <!-- Timeline Slider -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-sm text-gray-600">
+            <span>6:00 AM</span>
+            <span>6:00 PM</span>
+          </div>
+          
+          <!-- Time Slots Grid -->
+          <div class="grid grid-cols-12 gap-1">
+            <button
+              v-for="hour in timeSlots"
+              :key="hour.value"
+              @click="selectTimeSlot(hour.value)"
+              :class="[
+                'h-8 rounded text-xs font-medium transition-all duration-200',
+                selectedTimeSlot === hour.value
+                  ? 'bg-emerald-600 text-white shadow-md'
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+              ]"
+              :title="`${hour.label} - ${hour.boards} boards`"
+            >
+              <div class="flex flex-col items-center">
+                <span class="text-xs">{{ hour.short }}</span>
+                <span class="text-xs opacity-75">{{ hour.boards }}</span>
+              </div>
+            </button>
+          </div>
+          
+          <!-- Legend -->
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>Click a time slot to filter boards from that hour</span>
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-1">
+                <div class="w-3 h-3 bg-gray-100 rounded"></div>
+                <span>Available</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <div class="w-3 h-3 bg-emerald-600 rounded"></div>
+                <span>Selected</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -296,12 +371,31 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { 
-  Search, Filter, ChevronDown, Ruler, Layers, Package, DollarSign, 
+  Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
   AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye
 } from 'lucide-vue-next'
 
 const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
+const showTimeline = ref(false)
+const selectedDate = ref(new Date().toISOString().split('T')[0])
+const selectedTimeSlot = ref(null)
+
+// Time slots for the timeline (6 AM to 6 PM)
+const timeSlots = ref([
+  { value: 6, label: '6:00 AM', short: '6A', boards: 12 },
+  { value: 7, label: '7:00 AM', short: '7A', boards: 18 },
+  { value: 8, label: '8:00 AM', short: '8A', boards: 24 },
+  { value: 9, label: '9:00 AM', short: '9A', boards: 31 },
+  { value: 10, label: '10:00 AM', short: '10A', boards: 28 },
+  { value: 11, label: '11:00 AM', short: '11A', boards: 22 },
+  { value: 12, label: '12:00 PM', short: '12P', boards: 15 },
+  { value: 13, label: '1:00 PM', short: '1P', boards: 19 },
+  { value: 14, label: '2:00 PM', short: '2P', boards: 26 },
+  { value: 15, label: '3:00 PM', short: '3P', boards: 33 },
+  { value: 16, label: '4:00 PM', short: '4P', boards: 29 },
+  { value: 17, label: '5:00 PM', short: '5P', boards: 21 }
+])
 
 // Defect visibility state
 const defectVisibility = ref({
@@ -388,4 +482,26 @@ const boards = ref([
 const currentBoard = computed(() => {
   return boards.value.find(board => board.id === selectedBoard.value)
 })
+
+// Timeline methods
+const selectTimeSlot = (hour) => {
+  selectedTimeSlot.value = selectedTimeSlot.value === hour ? null : hour
+}
+
+const setToday = () => {
+  selectedDate.value = new Date().toISOString().split('T')[0]
+}
+
+const clearTimeFilter = () => {
+  selectedTimeSlot.value = null
+}
+
+const formatTimeRange = (hour) => {
+  if (!hour) return 'All times'
+  const slot = timeSlots.value.find(s => s.value === hour)
+  if (!slot) return 'All times'
+  const nextHour = hour + 1
+  const nextLabel = nextHour > 12 ? `${nextHour - 12}:00 PM` : nextHour === 12 ? '12:00 PM' : `${nextHour}:00 AM`
+  return `${slot.label} - ${nextLabel}`
+}
 </script>
