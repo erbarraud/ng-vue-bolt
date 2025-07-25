@@ -5,6 +5,22 @@
       <!-- KPI Cards - Left Side -->
       <div class="lg:col-span-3">
         <div class="space-y-4">
+          <!-- Compact Shift Status -->
+          <Card class="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
+            <CardContent class="p-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <Calendar class="w-4 h-4 text-emerald-600 mr-2" />
+                  <span class="text-sm font-bold text-emerald-800">Shift Status</span>
+                </div>
+                <Badge variant="secondary" class="text-xs">No Active Shift</Badge>
+              </div>
+              <div class="mt-2 text-xs text-slate-600">
+                Next: <span class="font-medium text-emerald-700">Morning Shift</span> - Friday, 7:00 AM
+              </div>
+            </CardContent>
+          </Card>
+
           <!-- Value Processed -->
           <Card class="border-l-4 border-primary">
             <CardContent class="p-4">
