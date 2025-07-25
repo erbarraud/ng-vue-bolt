@@ -6,7 +6,8 @@
       <div class="lg:col-span-1">
         <div class="space-y-4">
           <!-- Value Processed -->
-          <div class="bg-white border-l-4 border-emerald-500 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <Card class="border-l-4 border-emerald-500">
+            <CardContent class="p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
                 <div class="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center mr-3">
@@ -24,10 +25,12 @@
                 </div>
               </div>
             </div>
-          </div>
+            </CardContent>
+          </Card>
 
           <!-- Volume Processed -->
-          <div class="bg-white border-l-4 border-emerald-500 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <Card class="border-l-4 border-emerald-500">
+            <CardContent class="p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
                 <div class="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center mr-3">
@@ -45,10 +48,12 @@
                 </div>
               </div>
             </div>
-          </div>
+            </CardContent>
+          </Card>
 
           <!-- Feedback Submitted -->
-          <div class="bg-white border-l-4 border-emerald-500 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <Card class="border-l-4 border-emerald-500">
+            <CardContent class="p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
                 <div class="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center mr-3">
@@ -66,36 +71,40 @@
                 </div>
               </div>
             </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
       <!-- Boards Processed Chart -->
       <div class="lg:col-span-4">
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
+        <Card>
+          <CardContent class="p-6">
           <div class="flex items-center justify-between mb-6">
             <h3 class="text-xl font-bold text-slate-900">Boards Processed per Hour</h3>
-            <button class="flex items-center px-3 py-2 text-sm text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-50 transition-all duration-200 hover:shadow-md">
+            <Button variant="outline" size="sm" class="text-emerald-600 border-emerald-200 hover:bg-emerald-50">
               <Download class="w-4 h-4 mr-2" />
               Export
-            </button>
+            </Button>
           </div>
           <div class="h-80">
             <canvas ref="chartCanvas"></canvas>
           </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
 
     <!-- Second Line: Recent Orders Table -->
     <div class="mb-8">
-      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
+      <Card>
+        <CardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-slate-900">Recent Orders</h3>
-          <button class="text-sm text-emerald-600 hover:text-emerald-700 flex items-center font-semibold transition-colors duration-150">
+          <Button variant="link" class="text-emerald-600 hover:text-emerald-700 p-0">
             View All
             <ChevronRight class="w-4 h-4 ml-1" />
-          </button>
+          </Button>
         </div>
         <div class="text-sm text-slate-600 mb-4">Latest wood grading operations</div>
         
@@ -109,7 +118,7 @@
                 <div class="text-xs text-slate-500">Order B-4873 • Started 09:15 AM</div>
               </div>
               <div class="text-sm text-slate-600">Johnson Lumber Co.</div>
-              <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs rounded-full font-semibold">Active</span>
+              <Badge variant="default" class="bg-emerald-100 text-emerald-800">Active</Badge>
             </div>
             <div class="flex items-center space-x-4">
               <div class="text-right">
@@ -120,9 +129,9 @@
                 <div class="text-sm font-semibold text-emerald-600">$2,847</div>
                 <div class="text-xs text-slate-500">92.1% acc</div>
               </div>
-              <button class="text-slate-400 hover:text-slate-600 transition-colors duration-150">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -134,7 +143,7 @@
                 <div class="text-xs text-slate-500">Order B-4872 • 08:30 AM - 11:45 AM</div>
               </div>
               <div class="text-sm text-slate-600">Artisan Furniture</div>
-              <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-semibold">Completed</span>
+              <Badge variant="secondary">Completed</Badge>
             </div>
             <div class="flex items-center space-x-4">
               <div class="text-right">
@@ -145,9 +154,9 @@
                 <div class="text-sm font-semibold text-emerald-600">$4,125</div>
                 <div class="text-xs text-slate-500">91.8% acc</div>
               </div>
-              <button class="text-slate-400 hover:text-slate-600 transition-colors duration-150">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -251,43 +260,47 @@
             </div>
           </div>
         </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
 
     <!-- Third Line: Shift Status and System Alerts -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Shift Status -->
-      <div class="bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
+      <Card class="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
+        <CardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center">
             <Calendar class="w-5 h-5 text-emerald-600 mr-2" />
             <span class="text-lg font-bold text-emerald-800">Shift Status</span>
           </div>
-          <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5">
+          <Button class="bg-emerald-600 hover:bg-emerald-700">
             <Clock class="w-4 h-4 mr-2" />
             Extend (+1h)
-          </button>
+          </Button>
         </div>
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-sm font-semibold text-slate-700">Current:</span>
-            <span class="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full">No Active Shift</span>
+            <Badge variant="secondary">No Active Shift</Badge>
           </div>
           <div class="flex items-center justify-between">
             <span class="text-sm font-semibold text-slate-700">Next:</span>
             <div class="flex items-center">
-              <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-sm rounded-full font-semibold">Morning Shift</span>
+              <Badge variant="default" class="bg-emerald-100 text-emerald-700">Morning Shift</Badge>
               <span class="ml-2 text-sm text-slate-600">Friday, 7:00 AM - 3:00 PM</span>
             </div>
           </div>
         </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <!-- System Alerts -->
-      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
+      <Card>
+        <CardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-slate-900">System Alerts</h3>
-          <button class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold transition-colors duration-150">View All Alerts</button>
+          <Button variant="link" class="text-emerald-600 hover:text-emerald-700 p-0">View All Alerts</Button>
         </div>
         <div class="text-sm text-slate-600 mb-4">Recent notifications and warnings</div>
         
@@ -316,7 +329,8 @@
             </div>
           </div>
         </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>
@@ -328,6 +342,9 @@ import {
   Calendar, Clock, DollarSign, Package, MessageSquare, TrendingUp, TrendingDown,
   MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText
 } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 Chart.register(...registerables)
 
