@@ -310,42 +310,6 @@ const upcomingOrders = ref([
     statusDetail: 'Pending Setup',
     targetMix: '60% Select, 30% #1 Common, 10% #2 Common',
     canStart: false
-  }
-])
-
-// Drag and drop functionality
-const tableBodyRef = ref()
-
-useSortable(tableBodyRef, upcomingOrders, {
-  handle: '.drag-handle',
-  animation: 150,
-  ghostClass: 'sortable-ghost',
-  chosenClass: 'sortable-chosen',
-  dragClass: 'sortable-drag',
-  onEnd: (evt) => {
-    // Update priority numbers based on new order
-    upcomingOrders.value.forEach((order, index) => {
-      order.priority = index + 1
-    })
-    console.log('Orders reordered:', upcomingOrders.value.map(o => ({ id: o.id, priority: o.priority })))
-  }
-})
-</script>
-
-<style scoped>
-.drag-handle {
-  cursor: grab;
-}
-
-.drag-handle:active {
-  cursor: grabbing;
-}
-
-.sortable-ghost {
-  opacity: 0.5;
-  background: #f0fdf4;
-}
-
 .sortable-chosen {
   background: #ecfdf5;
 }
