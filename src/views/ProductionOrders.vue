@@ -44,87 +44,188 @@
     <div v-if="activeTab === 'current'">
       <!-- Running Order -->
       <div class="mb-8">
-        <h2 class="text-2xl font-bold text-emerald-600 mb-4 flex items-center">
-          <Zap class="w-5 h-5 mr-2" />
+        <h2 class="text-2xl font-bold text-emerald-600 mb-6">
           Running Order
         </h2>
         
-        <div class="bg-white border-2 border-emerald-200 rounded-lg p-6 shadow-emerald">
+        <div class="bg-white border-2 border-emerald-300 rounded-xl p-8 shadow-lg">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h3 class="text-2xl font-extrabold text-gray-900 flex items-center">
+              <h3 class="text-2xl font-bold text-gray-900 flex items-center mb-2">
                 <Zap class="w-5 h-5 text-emerald-600 mr-2" />
                 Red Oak - Prime Run
               </h3>
-              <div class="text-sm text-gray-600 mt-1">
+              <div class="text-sm text-gray-500">
                 ID: ORD-20250701-001 | Customer: Johnson Lumber Co.
               </div>
             </div>
-            <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800">
-              <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
+            <div class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 border">
               Running
             </div>
           </div>
 
-          <div class="grid grid-cols-4 gap-6 mb-4">
-            <div class="text-center">
-              <div class="flex items-center justify-center mb-2">
-                <Package class="w-5 h-5 text-gray-600 mr-2" />
-                <span class="text-sm font-medium text-gray-600">Species</span>
+          <div class="grid grid-cols-3 gap-8 mb-8">
+            <div>
+              <div class="flex items-center mb-2">
+                <TreePine class="w-4 h-4 text-gray-400 mr-2" />
+                <span class="text-sm text-gray-600">Species</span>
               </div>
-              <div class="text-lg font-semibold text-gray-900">Red Oak (KD)</div>
+              <div class="text-base font-medium text-gray-900">Red Oak (KD)</div>
             </div>
-            <div class="text-center">
-              <div class="flex items-center justify-center mb-2">
-                <Clock class="w-5 h-5 text-gray-600 mr-2" />
-                <span class="text-sm font-medium text-gray-600">Scheduled Start</span>
+            <div>
+              <div class="flex items-center mb-2">
+                <Clock class="w-4 h-4 text-gray-400 mr-2" />
+                <span class="text-sm text-gray-600">Scheduled Start</span>
               </div>
-              <div class="text-lg font-semibold text-gray-900">Jul 1, 8:00 AM</div>
+              <div class="text-base font-medium text-gray-900">Jul 1, 8:00 AM</div>
             </div>
-            <div class="text-center">
-              <div class="flex items-center justify-center mb-2">
-                <User class="w-5 h-5 text-gray-600 mr-2" />
-                <span class="text-sm font-medium text-gray-600">Operator</span>
+            <div>
+              <div class="flex items-center mb-2">
+                <User class="w-4 h-4 text-gray-400 mr-2" />
+                <span class="text-sm text-gray-600">Operator</span>
               </div>
-              <div class="text-lg font-semibold text-gray-900">John Doe</div>
-            </div>
-            <div class="text-center">
-              <button class="flex items-center justify-center w-full px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 font-medium transition-colors">
-                <Power class="w-4 h-4 mr-2" />
-                Stop & Complete
-              </button>
+              <div class="text-base font-medium text-gray-900">John Doe</div>
             </div>
           </div>
 
-          <div class="text-sm font-medium text-gray-600 mb-3">Key Performance Indicators:</div>
+          <div class="text-sm text-gray-600 mb-4">Key Performance Indicators:</div>
           <div class="grid grid-cols-4 gap-6">
-            <div class="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
-              <div class="flex items-center justify-center mb-2">
-                <BarChart3 class="w-5 h-5 text-emerald-600 mr-2" />
-                <span class="text-sm font-medium text-emerald-600">Boards Scanned</span>
+            <div class="flex items-center">
+              <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-3">
+                <BarChart3 class="w-5 h-5 text-emerald-600" />
               </div>
-              <div class="text-2xl font-bold text-emerald-900">125</div>
+              <div>
+                <div class="text-sm text-gray-600">Boards Scanned</div>
+                <div class="text-xl font-bold text-gray-900">125</div>
+              </div>
             </div>
-            <div class="text-center p-4 bg-emerald-50 rounded-lg border border-emerald-100">
-              <div class="flex items-center justify-center mb-2">
-                <Package class="w-5 h-5 text-emerald-600 mr-2" />
-                <span class="text-sm font-medium text-emerald-600">Bundles Created</span>
+            <div class="flex items-center">
+              <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-3">
+                <Package class="w-5 h-5 text-emerald-600" />
               </div>
-              <div class="text-2xl font-bold text-emerald-900">4</div>
+              <div>
+                <div class="text-sm text-gray-600">Bundles Created</div>
+                <div class="text-xl font-bold text-gray-900">4</div>
+              </div>
             </div>
-            <div class="text-center p-4 bg-orange-50 rounded-lg border border-orange-100">
-              <div class="flex items-center justify-center mb-2">
-                <Clock class="w-5 h-5 text-orange-600 mr-2" />
-                <span class="text-sm font-medium text-orange-600">Time Elapsed</span>
+            <div class="flex items-center">
+              <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                <Clock class="w-5 h-5 text-gray-600" />
               </div>
-              <div class="text-2xl font-bold text-orange-900">1h 02m</div>
+              <div>
+                <div class="text-sm text-gray-600">Time Elapsed</div>
+                <div class="text-xl font-bold text-gray-900">1h 02m</div>
+              </div>
             </div>
-            <div class="text-center p-4 bg-purple-50 rounded-lg border border-purple-100">
-              <div class="flex items-center justify-center mb-2">
-                <Timer class="w-5 h-5 text-purple-600 mr-2" />
-                <span class="text-sm font-medium text-purple-600">Time Remaining (Est.)</span>
+            <div class="flex items-center">
+              <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                <Timer class="w-5 h-5 text-gray-600" />
               </div>
-              <div class="text-2xl font-bold text-purple-900">1h 58m</div>
+              <div>
+                <div class="text-sm text-gray-600">Time Remaining (Est.)</div>
+                <div class="text-xl font-bold text-gray-900">1h 58m</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stop & Complete Button -->
+          <div class="flex justify-end mt-8">
+            <button class="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 font-medium transition-colors border">
+              <Power class="w-4 h-4 mr-2" />
+              Stop & Complete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Orders -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Upcoming Orders (2)</h2>
+        
+        <div class="space-y-4">
+          <!-- Soft Maple Order -->
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                    <Menu class="w-4 h-4 text-gray-400 mr-3" />
+                    Soft Maple - Special Order
+                  </h3>
+                  <div class="flex items-center space-x-2">
+                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg font-medium border">Scheduled</span>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <Edit class="w-4 h-4" />
+                    </button>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <Edit class="w-4 h-4" />
+                    </button>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <Play class="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <div class="text-sm text-gray-500 mb-3">
+                  ID: ORD-20250701-002 | Customer: Artisan Furniture
+                </div>
+                <div class="flex items-center space-x-8 text-sm">
+                  <div class="flex items-center">
+                    <Calendar class="w-4 h-4 text-gray-400 mr-2" />
+                    Jul 1, 1:00 PM
+                  </div>
+                  <div class="flex items-center">
+                    <TreePine class="w-4 h-4 text-gray-400 mr-2" />
+                    Soft Maple
+                  </div>
+                  <div class="flex items-center">
+                    <Droplets class="w-4 h-4 text-gray-400 mr-2" />
+                    Green
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- White Oak Order -->
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                    <Menu class="w-4 h-4 text-gray-400 mr-3" />
+                    White Oak - Flooring
+                  </h3>
+                  <div class="flex items-center space-x-2">
+                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg font-medium border">Scheduled</span>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <Edit class="w-4 h-4" />
+                    </button>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <Edit class="w-4 h-4" />
+                    </button>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <Play class="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <div class="text-sm text-gray-500 mb-3">
+                  ID: ORD-20250702-003 | Customer: Flooring Inc.
+                </div>
+                <div class="flex items-center space-x-8 text-sm">
+                  <div class="flex items-center">
+                    <Calendar class="w-4 h-4 text-gray-400 mr-2" />
+                    Jul 2, 9:00 AM
+                  </div>
+                  <div class="flex items-center">
+                    <TreePine class="w-4 h-4 text-gray-400 mr-2" />
+                    White Oak
+                  </div>
+                  <div class="flex items-center">
+                    <Droplets class="w-4 h-4 text-gray-400 mr-2" />
+                    KD
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -344,8 +445,8 @@
 <script setup>
 import { ref } from 'vue'
 import {
-  Plus, Zap, Package, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
-  Calendar, Palette, Search, Eye, RotateCcw, Hash, AlertCircle
+  Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
+  Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle
 } from 'lucide-vue-next'
 
 const activeTab = ref('current')
