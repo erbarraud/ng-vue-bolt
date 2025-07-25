@@ -171,7 +171,7 @@
                 <div class="text-sm font-semibold text-emerald-600">$4,125</div>
                 <div class="text-xs text-slate-500">91.8% acc</div>
               </div>
-              <Button variant="ghost" size="sm" class="text-white bg-emerald-600 hover:bg-emerald-700">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
               </Button>
             </div>
@@ -196,9 +196,9 @@
                 <div class="text-sm font-semibold text-emerald-600">$3,672</div>
                 <div class="text-xs text-slate-500">92.5% acc</div>
               </div>
-              <button class="text-slate-400 hover:text-slate-600 transition-colors duration-150">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -221,9 +221,9 @@
                 <div class="text-sm font-semibold text-emerald-600">$5,890</div>
                 <div class="text-xs text-slate-500">89.3% acc</div>
               </div>
-              <button class="text-slate-400 hover:text-slate-600 transition-colors duration-150">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -246,9 +246,9 @@
                 <div class="text-sm font-semibold text-emerald-600">$7,234</div>
                 <div class="text-xs text-slate-500">94.1% acc</div>
               </div>
-              <button class="text-slate-400 hover:text-slate-600 transition-colors duration-150">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -271,9 +271,9 @@
                 <div class="text-sm font-semibold text-emerald-600">$8,945</div>
                 <div class="text-xs text-slate-500">90.7% acc</div>
               </div>
-              <button class="text-slate-400 hover:text-slate-600 transition-colors duration-150">
+              <Button variant="ghost" size="sm" class="text-slate-400 hover:text-slate-600">
                 <MoreHorizontal class="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
         </div>
