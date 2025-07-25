@@ -3,7 +3,7 @@
     <!-- Page Header -->
     <div class="flex items-center justify-between mb-6">
       <div>
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">greant</h1>
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Green</h1>
         <p class="text-gray-600">Find and analyze boards in the system</p>
       </div>
       <div class="flex items-center space-x-4">
