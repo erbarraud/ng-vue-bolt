@@ -133,76 +133,76 @@
               <tbody ref="tableBodyRef" class="bg-white divide-y divide-gray-200">
                 <tr v-for="order in upcomingOrders" :key="order.id" class="hover:bg-emerald-50 transition-colors duration-150 cursor-move">
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="drag-handle flex items-center justify-center w-8 h-8 text-gray-400 hover:text-gray-600 mr-2">
+                    <div class="flex items-center space-x-2">
+                      <div class="drag-handle flex items-center justify-center w-6 h-6 text-gray-400 hover:text-gray-600">
                         <Menu class="w-4 h-4" />
                       </div>
-                      <div class="flex items-center justify-center w-8 h-8 bg-emerald-100 text-emerald-800 rounded-full text-sm font-bold">
+                      <div class="flex items-center justify-center w-6 h-6 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">
                         {{ order.priority }}
                       </div>
                     </div>
                   </td>
-                  <td class="px-6 py-4">
+                  <td class="px-4 py-3">
                     <div class="flex items-start">
-                      <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <TreePine class="w-5 h-5 text-emerald-600" />
+                      <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <TreePine class="w-4 h-4 text-emerald-600" />
                       </div>
                       <div>
-                        <div class="text-lg font-bold text-gray-900">{{ order.name }}</div>
-                        <div class="text-sm text-emerald-600 font-medium">{{ order.id }}</div>
-                        <div class="text-sm text-gray-500 mt-1">Est. Volume: {{ order.volume }}</div>
+                        <div class="text-sm font-bold text-gray-900">{{ order.name }}</div>
+                        <div class="text-xs text-emerald-600 font-medium">{{ order.id }}</div>
+                        <div class="text-xs text-gray-500">{{ order.volume }}</div>
                       </div>
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-2">
+                  <td class="px-4 py-3">
+                    <div class="space-y-1">
                       <div class="flex items-center">
                         <TreePine class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm font-medium text-gray-900">{{ order.species }}</span>
+                        <span class="text-xs font-medium text-gray-900">{{ order.species }}</span>
                       </div>
                       <div class="flex items-center">
                         <Droplets class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm text-gray-600">{{ order.dryStatus }}</span>
+                        <span class="text-xs text-gray-600">{{ order.dryStatus }}</span>
                       </div>
-                      <div class="text-xs text-gray-500">
-                        Target Mix: {{ order.targetMix }}
+                      <div class="text-xs text-gray-500 truncate max-w-32" :title="order.targetMix">
+                        {{ order.targetMix }}
                       </div>
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-1">
+                  <td class="px-4 py-3">
+                    <div class="space-y-0.5">
                       <div class="flex items-center">
                         <Calendar class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm font-medium text-gray-900">{{ order.date }}</span>
+                        <span class="text-xs font-medium text-gray-900">{{ order.date }}</span>
                       </div>
                       <div class="flex items-center">
                         <Clock class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm text-gray-600">{{ order.time }}</span>
+                        <span class="text-xs text-gray-600">{{ order.time }}</span>
                       </div>
-                      <div class="text-xs text-gray-500">{{ order.shift }}</div>
+                      <div class="text-xs text-gray-500 truncate">{{ order.shift }}</div>
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-2">
-                      <Badge variant="secondary" class="border">{{ order.status }}</Badge>
-                      <div :class="order.canStart ? 'text-xs text-gray-500' : 'text-xs text-orange-600 font-medium'">
+                  <td class="px-4 py-3">
+                    <div class="space-y-1">
+                      <Badge variant="secondary" class="border text-xs px-2 py-0.5">{{ order.status }}</Badge>
+                      <div :class="order.canStart ? 'text-xs text-gray-500' : 'text-xs text-orange-600 font-medium'" class="truncate">
                         {{ order.statusDetail }}
                       </div>
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="flex flex-col space-y-2">
-                      <Button size="sm" class="w-full" :disabled="!order.canStart" :variant="order.canStart ? 'default' : 'outline'">
-                        <Play class="w-4 h-4 mr-2" />
+                  <td class="px-4 py-3">
+                    <div class="flex flex-col space-y-1">
+                      <Button size="sm" class="w-full text-xs px-2 py-1 h-7" :disabled="!order.canStart" :variant="order.canStart ? 'default' : 'outline'">
+                        <Play class="w-3 h-3 mr-1" />
                         {{ order.canStart ? 'Start Order' : 'Setup Required' }}
                       </Button>
-                      <div class="flex space-x-1">
-                        <Button variant="outline" size="sm" class="flex-1">
-                          <Edit class="w-4 h-4 mr-1" />
+                      <div class="flex space-x-0.5">
+                        <Button variant="outline" size="sm" class="flex-1 text-xs px-1 py-1 h-6">
+                          <Edit class="w-3 h-3 mr-0.5" />
                           Edit
                         </Button>
-                        <Button variant="outline" size="sm" class="flex-1">
-                          <Eye class="w-4 h-4 mr-1" />
+                        <Button variant="outline" size="sm" class="flex-1 text-xs px-1 py-1 h-6">
+                          <Eye class="w-3 h-3 mr-0.5" />
                           View
                         </Button>
                       </div>
