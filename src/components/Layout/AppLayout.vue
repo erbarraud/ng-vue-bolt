@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-slate-50">
     <!-- Navigation Header -->
-    <nav class="bg-emerald-900 border-b border-emerald-800 shadow-xl">
+    <nav class="shadow-xl" style="background-color: #213C33; border-bottom: 2px solid #4ED586;">
       <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo and Brand -->
