@@ -117,11 +117,11 @@
                     :tick="{ fill: '#6b7280', fontSize: 12 }"
                     :axisLine="{ stroke: '#e2e8f0' }"
                   />
-                  <Tooltip content={ChartTooltip} />
-                  <Legend content={ChartLegend} />
-                  <Bar dataKey="Grade A" stackId="a" fill="#059669" radius={[0, 0, 0, 0]} />
-                  <Bar dataKey="Grade B" stackId="a" fill="#10b981" radius={[0, 0, 0, 0]} />
-                  <Bar dataKey="Grade C" stackId="a" fill="#34d399" radius={[4, 4, 0, 0]} />
+                  <Tooltip :content="ChartTooltip" />
+                  <Legend :content="ChartLegend" />
+                  <Bar dataKey="Grade A" stackId="a" fill="#059669" :radius="[0, 0, 0, 0]" />
+                  <Bar dataKey="Grade B" stackId="a" fill="#10b981" :radius="[0, 0, 0, 0]" />
+                  <Bar dataKey="Grade C" stackId="a" fill="#34d399" :radius="[4, 4, 0, 0]" />
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
