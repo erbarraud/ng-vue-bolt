@@ -342,9 +342,10 @@ import {
   Calendar, Clock, DollarSign, Package, MessageSquare, TrendingUp, TrendingDown,
   MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText
 } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import Button from '@/components/ui/button.vue'
+import Card from '@/components/ui/card.vue'
+import CardContent from '@/components/ui/card-content.vue'
+import Badge from '@/components/ui/badge.vue'
 
 Chart.register(...registerables)
 
