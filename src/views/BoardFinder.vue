@@ -79,38 +79,46 @@
             <span>6:00 PM</span>
           </div>
           
-          <!-- Time Slots Grid -->
-          <div class="grid grid-cols-12 gap-1">
+          <!-- Bar Chart Timeline -->
+          <div class="flex items-end justify-between gap-1 h-24 bg-gray-50 rounded-lg p-3">
             <button
               v-for="hour in timeSlots"
               :key="hour.value"
               @click="selectTimeSlot(hour.value)"
-              :class="[
-                'h-8 rounded text-xs font-medium transition-all duration-200',
-                selectedTimeSlot === hour.value
-                  ? 'bg-emerald-600 text-white shadow-md'
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-              ]"
+              class="flex flex-col items-center group transition-all duration-200 cursor-pointer"
               :title="`${hour.label} - ${hour.boards} boards`"
             >
-              <div class="flex flex-col items-center">
-                <span class="text-xs">{{ hour.short }}</span>
-                <span class="text-xs opacity-75">{{ hour.boards }}</span>
+              <!-- Bar -->
+              <div 
+                :class="[
+                  'w-6 rounded-t transition-all duration-200 mb-1',
+                  selectedTimeSlot === hour.value
+                    ? 'bg-emerald-600 shadow-lg'
+                    : 'bg-emerald-300 group-hover:bg-emerald-400'
+                ]"
+                :style="{ height: `${Math.max((hour.boards / 35) * 60, 8)}px` }"
+              ></div>
+              <!-- Time Label -->
+              <div class="text-xs font-medium text-gray-600 group-hover:text-gray-800">
+                {{ hour.short }}
               </div>
             </button>
           </div>
           
           <!-- Legend -->
-          <div class="flex items-center justify-between text-xs text-gray-500">
-            <span>Click a time slot to filter boards from that hour</span>
+          <div class="flex items-center justify-between text-xs text-gray-500 mt-2">
+            <span>Click a bar to filter boards from that hour</span>
             <div class="flex items-center space-x-4">
               <div class="flex items-center space-x-1">
-                <div class="w-3 h-3 bg-gray-100 rounded"></div>
+                <div class="w-3 h-3 bg-emerald-300 rounded"></div>
                 <span>Available</span>
               </div>
               <div class="flex items-center space-x-1">
                 <div class="w-3 h-3 bg-emerald-600 rounded"></div>
                 <span>Selected</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <span class="text-gray-400">Max: 35 boards/hour</span>
               </div>
             </div>
           </div>
