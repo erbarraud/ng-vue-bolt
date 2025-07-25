@@ -314,20 +314,20 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center space-x-4 mb-8">
-              <Button variant="outline" size="sm" class="text-gray-700 border-gray-300 hover:bg-gray-50">
-                <EyeOff class="w-4 h-4 mr-2" />
+              <Button variant="outline" size="sm" class="bg-slate-50 text-gray-700 border-slate-300 hover:bg-slate-100 shadow-sm">
+                <Filter class="w-4 h-4 mr-2" />
                 Hide filtered defects
               </Button>
-              <Button variant="outline" size="sm" class="text-emerald-600 border-emerald-300 hover:bg-emerald-50">
-                <CheckCircle class="w-4 h-4 mr-2" />
+              <Button variant="outline" size="sm" class="bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100 shadow-sm">
+                <ThumbsUp class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="text-red-600 border-red-300 hover:bg-red-50">
-                <XCircle class="w-4 h-4 mr-2" />
+              <Button variant="outline" size="sm" class="bg-red-50 text-red-700 border-red-300 hover:bg-red-100 shadow-sm">
+                <ThumbsDown class="w-4 h-4 mr-2" />
                 Disagree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="text-gray-700 border-gray-300 hover:bg-gray-50">
-                <FileText class="w-4 h-4 mr-2" />
+              <Button variant="outline" size="sm" class="bg-amber-50 text-amber-700 border-amber-300 hover:bg-amber-100 shadow-sm">
+                <ClipboardList class="w-4 h-4 mr-2" />
                 See Rejected Grades
               </Button>
             </div>
@@ -427,6 +427,7 @@ import {
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
   AlertCircle, EyeOff, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
   Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp
+  ThumbsUp, ThumbsDown, ClipboardList
 } from 'lucide-vue-next'
 
 const searchQuery = ref('')
