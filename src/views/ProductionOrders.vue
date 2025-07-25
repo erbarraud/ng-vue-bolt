@@ -216,44 +216,6 @@
 
       <!-- Past Orders Tab -->
       <TabsContent value="past">
-        <!-- Search and Filters -->
-        <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center space-x-4">
-            <div class="relative">
-              <Search class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-              <Input
-                type="text"
-                placeholder="Search by ID, Name, Customer..."
-                class="pl-10 w-64"
-              />
-            </div>
-            <Select>
-              <SelectTrigger class="w-40">
-                <SelectValue placeholder="All Statuses" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Statuses</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger class="w-40">
-                <SelectValue placeholder="All Species" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Species</SelectItem>
-                <SelectItem value="red-oak">Red Oak</SelectItem>
-                <SelectItem value="white-oak">White Oak</SelectItem>
-                <SelectItem value="cherry">Cherry</SelectItem>
-                <SelectItem value="hard-maple">Hard Maple</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <Button variant="link" class="text-emerald-600">Clear Filters</Button>
-        </div>
-
-
       </TabsContent>
     </Tabs>
   </div>
