@@ -156,39 +156,59 @@
             
             <div class="flex items-center space-x-2">
               <span class="text-sm text-slate-500">Powered by</span>
-              <div class="lumberjack-animation">
-                <svg width="50" height="40" viewBox="0 0 120 100" class="la-linea-svg">
-                  <!-- Tree (simple line) -->
-                  <g class="tree-shake">
-                    <line x1="90" y1="70" x2="90" y2="40" stroke="black" stroke-width="3" stroke-linecap="round" />
-                    <circle cx="90" cy="35" r="8" fill="none" stroke="black" stroke-width="2" class="tree-top" />
+              <div class="la-linea-container">
+                <svg width="120" height="60" viewBox="0 0 120 60" class="la-linea-svg">
+                  <!-- Ground line -->
+                  <line x1="0" y1="50" x2="120" y2="50" stroke="white" stroke-width="2" stroke-linecap="round" />
+                  
+                  <!-- Tree (simple lines) -->
+                  <g class="tree">
+                    <line x1="90" y1="50" x2="90" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" />
+                    <line x1="85" y1="25" x2="90" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" />
+                    <line x1="95" y1="25" x2="90" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" />
+                    <line x1="85" y1="35" x2="90" y2="40" stroke="white" stroke-width="2" stroke-linecap="round" />
+                    <line x1="95" y1="35" x2="90" y2="40" stroke="white" stroke-width="2" stroke-linecap="round" />
                   </g>
                   
-                  <!-- Lumberjack (La Linea style) -->
-                  <g class="linea-man">
+                  <!-- Lumberjack (La Línea style) -->
+                  <g class="lumberjack-linea">
                     <!-- Head -->
-                    <circle cx="25" cy="25" r="6" fill="none" stroke="black" stroke-width="2" />
+                    <circle cx="25" cy="25" r="6" fill="none" stroke="white" stroke-width="2" />
                     <!-- Body -->
-                    <line x1="25" y1="31" x2="25" y2="55" stroke="black" stroke-width="2" stroke-linecap="round" />
-                    <!-- Legs -->
-                    <line x1="25" y1="55" x2="20" y2="70" stroke="black" stroke-width="2" stroke-linecap="round" />
-                    <line x1="25" y1="55" x2="30" y2="70" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <line x1="25" y1="31" x2="25" y2="40" stroke="white" stroke-width="2" stroke-linecap="round" />
+                    
+                    <!-- Legs walking -->
+                    <line x1="25" y1="40" x2="20" y2="50" stroke="white" stroke-width="2" stroke-linecap="round" class="leg-left" />
+                    <line x1="25" y1="40" x2="30" y2="50" stroke="white" stroke-width="2" stroke-linecap="round" class="leg-right" />
+                    
                     <!-- Left arm (static) -->
-                    <line x1="25" y1="40" x2="15" y2="45" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <line x1="25" y1="35" x2="15" y2="40" stroke="white" stroke-width="2" stroke-linecap="round" />
+                    
                     <!-- Right arm with axe (animated) -->
-                    <g class="axe-arm">
-                      <line x1="25" y1="40" x2="40" y2="35" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <g class="arms-axe">
+                      <line x1="25" y1="35" x2="40" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" />
                       <!-- Axe handle -->
-                      <line x1="40" y1="35" x2="55" y2="30" stroke="black" stroke-width="2" stroke-linecap="round" />
+                      <line x1="40" y1="30" x2="55" y2="25" stroke="white" stroke-width="2" stroke-linecap="round" />
                       <!-- Axe head -->
-                      <path d="M 55 25 L 65 30 L 55 35 Z" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round" />
+                      <path d="M 55 22 L 65 25 L 55 28 Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round" />
                     </g>
+                    
+                    <!-- Simple face -->
+                    <circle cx="23" cy="24" r="0.5" fill="white" />
+                    <circle cx="27" cy="24" r="0.5" fill="white" />
+                    <path d="M 23 27 Q 25 28 27 27" fill="none" stroke="white" stroke-width="1" />
                   </g>
                   
-                  <!-- Wood chips (simple dots) -->
-                  <circle cx="75" cy="45" r="1" fill="black" class="chip-1" />
-                  <circle cx="70" cy="50" r="1" fill="black" class="chip-2" />
-                  <circle cx="80" cy="52" r="1" fill="black" class="chip-3" />
+                  <!-- Motion lines -->
+                  <g class="motion-lines">
+                    <line x1="70" y1="30" x2="75" y2="30" stroke="white" stroke-width="1" opacity="0.6" />
+                    <line x1="72" y1="33" x2="77" y2="33" stroke="white" stroke-width="1" opacity="0.6" />
+                  </g>
+                  
+                  <!-- Wood chips -->
+                  <circle cx="75" cy="35" r="1" fill="white" class="chip-1" />
+                  <circle cx="70" cy="40" r="1" fill="white" class="chip-2" />
+                  <circle cx="80" cy="42" r="1" fill="white" class="chip-3" />
                 </svg>
               </div>
             </div>
@@ -210,64 +230,122 @@ const showToolsMenu = ref(false)
 </script>
 
 <style scoped>
-/* Lumberjack animation */
-@keyframes la-linea-chop {
+/* La Línea container with colored background */
+.la-linea-container {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Walking animation */
+@keyframes walk-left {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-45deg); }
+  50% { transform: rotate(15deg); }
 }
 
-@keyframes tree-wobble {
+@keyframes walk-right {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+/* Chopping animation */
+@keyframes chop-motion {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+/* Tree shake */
+@keyframes tree-shake {
   0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-1px) rotate(-2deg); }
-  75% { transform: translateX(1px) rotate(2deg); }
+  40%, 60% { transform: translateX(1px) rotate(1deg); }
 }
 
-@keyframes linea-chip-1 {
-  0% { opacity: 0; transform: translate(0, 0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-15px, 8px); }
+/* Chips flying */
+@keyframes chip-fly-1 {
+  0% { 
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  50% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 0;
+    transform: translate(-15px, -8px);
+  }
 }
 
-@keyframes linea-chip-2 {
-  0% { opacity: 0; transform: translate(0, 0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-10px, -5px); }
+@keyframes chip-fly-2 {
+  0% { 
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  50% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 0;
+    transform: translate(-12px, 5px);
+  }
 }
 
-@keyframes linea-chip-3 {
-  0% { opacity: 0; transform: translate(0, 0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-18px, 3px); }
+@keyframes chip-fly-3 {
+  0% { 
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  50% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 0;
+    transform: translate(-20px, 8px);
+  }
 }
 
-@keyframes linea-walk {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-1px); }
+/* Motion lines fade */
+@keyframes pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.8; }
 }
 
-.axe-arm {
+/* Apply animations */
+.leg-left {
   transform-origin: 25px 40px;
-  animation: la-linea-chop 2s ease-in-out infinite;
+  animation: walk-left 1.2s ease-in-out infinite;
 }
 
-.tree-shake {
-  animation: tree-wobble 2s ease-in-out infinite;
+.leg-right {
+  transform-origin: 25px 40px;
+  animation: walk-right 1.2s ease-in-out infinite 0.6s;
 }
 
-.linea-man {
-  animation: linea-walk 2s ease-in-out infinite;
+.arms-axe {
+  transform-origin: 25px 35px;
+  animation: chop-motion 1.5s ease-in-out infinite;
+}
+
+.tree {
+  animation: tree-shake 1.5s ease-in-out infinite;
 }
 
 .chip-1 {
-  animation: linea-chip-1 2s ease-out infinite;
+  animation: chip-fly-1 1.5s ease-out infinite;
 }
 
 .chip-2 {
-  animation: linea-chip-2 2s ease-out infinite 0.3s;
+  animation: chip-fly-2 1.5s ease-out infinite 0.3s;
 }
 
 .chip-3 {
-  animation: linea-chip-3 2s ease-out infinite 0.6s;
+  animation: chip-fly-3 1.5s ease-out infinite 0.6s;
+}
+
+.motion-lines line {
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 .la-linea-svg {
@@ -275,21 +353,22 @@ const showToolsMenu = ref(false)
 }
 
 /* Add a hover effect for fun */
-.lumberjack-animation:hover .axe-arm {
-  animation-duration: 1s;
+.la-linea-container:hover .arms-axe {
+  animation-duration: 0.8s;
 }
 
-.lumberjack-animation:hover .tree-shake {
-  animation-duration: 1s;
+.la-linea-container:hover .tree {
+  animation-duration: 0.8s;
 }
 
-.lumberjack-animation:hover .linea-man {
-  animation-duration: 1s;
+.la-linea-container:hover .leg-left,
+.la-linea-container:hover .leg-right {
+  animation-duration: 0.6s;
 }
 
-.lumberjack-animation:hover .chip-1,
-.lumberjack-animation:hover .chip-2,
-.lumberjack-animation:hover .chip-3 {
-  animation-duration: 1s;
+.la-linea-container:hover .chip-1,
+.la-linea-container:hover .chip-2,
+.la-linea-container:hover .chip-3 {
+  animation-duration: 0.8s;
 }
 </style>
