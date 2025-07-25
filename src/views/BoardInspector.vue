@@ -148,28 +148,27 @@
 
     <!-- Inspector Tools -->
     <div class="bg-white rounded-lg shadow p-6 mb-8">
-      <h3 class="text-xl font-bold text-gray-900 mb-4">Inspector Tools</h3>
-      <div class="flex flex-wrap gap-4">
-        <button class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors">
+      <div class="flex items-center gap-3 mb-8">
+        <Button variant="secondary" size="sm" class="bg-gray-100 text-gray-800 hover:bg-gray-200 border-gray-200">
           <ZoomIn class="w-4 h-4 mr-2" />
-          Magnifier
-        </button>
-        <button class="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors">
+          Enable Magnifier
+        </Button>
+        <Button variant="secondary" size="sm" class="bg-gray-100 text-gray-800 hover:bg-gray-200 border-gray-200">
           <EyeOff class="w-4 h-4 mr-2" />
-          Hide Minor Defects
-        </button>
-        <button class="flex items-center px-4 py-2 bg-emerald-200 text-emerald-700 rounded-lg hover:bg-emerald-300 font-medium transition-colors">
+          Hide filtered defects
+        </Button>
+        <Button variant="outline" size="sm" class="border-green-300 text-green-700 hover:bg-green-50 bg-green-200">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
-        </button>
-        <button class="flex items-center px-4 py-2 bg-red-200 text-red-700 rounded-lg hover:bg-red-300 font-medium transition-colors">
+        </Button>
+        <Button variant="outline" size="sm" class="border-red-300 text-red-700 hover:bg-red-50 bg-red-200">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
-        </button>
-        <button class="flex items-center px-4 py-2 bg-yellow-200 text-yellow-700 rounded-lg hover:bg-yellow-300 font-medium transition-colors">
-          <AlertTriangle class="w-4 h-4 mr-2" />
+        </Button>
+        <Button variant="outline" size="sm" class="border-orange-300 text-orange-700 hover:bg-orange-50 bg-orange-200">
+          <FileText class="w-4 h-4 mr-2" />
           See Rejected Grades
-        </button>
+        </Button>
       </div>
     </div>
 
@@ -189,6 +188,7 @@
 <script setup>
 import {
   ChevronLeft, ChevronRight, ZoomIn, EyeOff, CheckCircle, XCircle,
-  AlertTriangle, BookOpen
+  FileText, BookOpen
 } from 'lucide-vue-next'
+import Button from '@/components/ui/button.vue'
 </script>
