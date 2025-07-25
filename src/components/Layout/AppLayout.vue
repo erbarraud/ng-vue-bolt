@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-slate-50">
-    <!-- Header matching Neural Grader's green styling -->
+    <!-- Header matching Neural Grader's green styling with green underline -->
     <header class="bg-secondary border-b-2 border-green-700">
       <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
@@ -11,7 +11,7 @@
             </h1>
           </div>
 
-          <!-- Right side - Navigation Links -->
+          <!-- Right side - Navigation -->
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-1">
               <router-link
