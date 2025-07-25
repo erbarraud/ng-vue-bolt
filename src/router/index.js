@@ -8,7 +8,7 @@ import ClaimsManagement from '../views/ClaimsManagement.vue'
 import LineCheck from '../views/LineCheck.vue'
 import LiveScanning from '../views/LiveScanning.vue'
 import BoardFinder from '../views/BoardFinder.vue'
-import BoardInspection from '../views/BoardInspection.vue'
+import BoardInspector from '../views/BoardInspector.vue'
 import AllOrders from '../views/AllOrders.vue'
 
 const routes = [
@@ -59,8 +59,8 @@ const routes = [
   },
   {
     path: '/inspector',
-    name: 'BoardInspection',
-    component: BoardInspection
+    name: 'BoardInspector',
+    component: BoardInspector
   },
   {
     path: '/finder',

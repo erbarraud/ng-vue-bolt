@@ -102,11 +102,11 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
         </Button>
@@ -118,11 +118,11 @@
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
           <FileText class="w-4 h-4 mr-2" />
-          See Rejected Rules
+          See rejected rules
         </Button>
-        <Button variant="outline" size="sm" class="flex items-center border-gray-300 hover:bg-gray-50 text-gray-600">
+        <Button variant="outline" size="sm" class="flex items-center text-gray-600 border-gray-300 hover:bg-gray-50">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
         </Button>
@@ -139,12 +139,12 @@
       </div>
       <!-- Defect Tags -->
       <div class="flex flex-wrap gap-2 mt-3">
-        <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">Knot</span>
-        <span class="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">Split</span>
-        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">Wane</span>
-        <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">Stain</span>
-        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Pitch Pocket</span>
-        <span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">Shake</span>
+        <span class="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Knot</span>
+        <span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">Split</span>
+        <span class="px-3 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">Wane</span>
+        <span class="px-3 py-1 bg-purple-500 text-white text-sm font-medium rounded-full">Stain</span>
+        <span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Pitch Pocket</span>
+        <span class="px-3 py-1 bg-gray-500 text-white text-sm font-medium rounded-full">Shake</span>
       </div>
     </div>
 
@@ -158,11 +158,11 @@
       </div>
       <!-- Defect Tags -->
       <div class="flex flex-wrap gap-2 mt-3">
-        <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">Knot</span>
-        <span class="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">Check</span>
-        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">Warp</span>
-        <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">Decay</span>
-        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Hole</span>
+        <span class="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Knot</span>
+        <span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">Check</span>
+        <span class="px-3 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">Warp</span>
+        <span class="px-3 py-1 bg-green-500 text-white text-sm font-medium rounded-full">Decay</span>
+        <span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Hole</span>
       </div>
     </div>
 
