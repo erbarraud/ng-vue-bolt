@@ -313,20 +313,21 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-wrap gap-4 mb-8">
-              <Button variant="outline" size="sm" class="bg-slate-50 text-gray-700 border-slate-300 hover:bg-slate-100">
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3 mb-8">
+              <Button variant="secondary" size="sm">
                 <Filter class="w-4 h-4 mr-2" />
                 Hide filtered defects
               </Button>
-              <Button variant="outline" size="sm" class="bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100">
+              <Button variant="default" size="sm" class="bg-emerald-600 hover:bg-emerald-700">
                 <ThumbsUp class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="bg-red-50 text-red-700 border-red-300 hover:bg-red-100">
+              <Button variant="destructive" size="sm">
                 <ThumbsDown class="w-4 h-4 mr-2" />
                 Disagree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="bg-amber-50 text-amber-700 border-amber-300 hover:bg-amber-100">
+              <Button variant="outline" size="sm" class="border-amber-300 text-amber-700 hover:bg-amber-50">
                 <ClipboardList class="w-4 h-4 mr-2" />
                 See Rejected Grades
               </Button>
