@@ -122,15 +122,15 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex items-center space-x-2">
-                  <Button variant="outline" size="sm" class="text-blue-600 hover:text-blue-700">
+                  <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                     <Edit class="w-4 h-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" class="text-gray-600 hover:text-gray-700">
+                  </button>
+                  <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                     <Eye class="w-4 h-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" class="text-gray-600 hover:text-gray-700">
+                  </button>
+                  <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                     <MoreHorizontal class="w-4 h-4" />
-                  </Button>
+                  </button>
                 </div>
               </td>
             </tr>
