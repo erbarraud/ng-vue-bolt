@@ -16,10 +16,11 @@
                 to="/"
                 :class="[
                   $route.name === 'Dashboard'
-                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
-                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
+                    ? 'text-white shadow-lg ring-2 ring-primary/50'
+                    : 'text-white hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
+                :style="$route.name === 'Dashboard' ? 'background-color: #204739' : ''"
               >
                 <BarChart3 class="w-4 h-4 mr-2 flex-shrink-0" />
                 Overview
@@ -28,10 +29,11 @@
                 to="/orders"
                 :class="[
                   $route.name === 'ProductionOrders' || $route.name === 'CreateProductionOrder'
-                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
-                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
+                    ? 'text-white shadow-lg ring-2 ring-primary/50'
+                    : 'text-white hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
+                :style="($route.name === 'ProductionOrders' || $route.name === 'CreateProductionOrder') ? 'background-color: #204739' : ''"
               >
                 <Package class="w-4 h-4 mr-2 flex-shrink-0" />
                 Orders
@@ -40,10 +42,11 @@
                 to="/finder"
                 :class="[
                   $route.name === 'BoardFinder'
-                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
-                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
+                    ? 'text-white shadow-lg ring-2 ring-primary/50'
+                    : 'text-white hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
+                :style="$route.name === 'BoardFinder' ? 'background-color: #204739' : ''"
               >
                 <Search class="w-4 h-4 mr-2 flex-shrink-0" />
                 Board Finder
@@ -52,10 +55,11 @@
                 to="/line"
                 :class="[
                   $route.name === 'LineCheck'
-                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
-                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
+                    ? 'text-white shadow-lg ring-2 ring-primary/50'
+                    : 'text-white hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
+                :style="$route.name === 'LineCheck' ? 'background-color: #204739' : ''"
               >
                 <Activity class="w-4 h-4 mr-2 flex-shrink-0" />
                 Line
@@ -65,10 +69,11 @@
                   @click="showToolsMenu = !showToolsMenu"
                   :class="[
                     ['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning'].includes($route.name)
-                      ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
-                      : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
+                      ? 'text-white shadow-lg ring-2 ring-primary/50'
+                      : 'text-white hover:bg-primary/80 hover:text-white',
                     'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                   ]"
+                  :style="['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning'].includes($route.name) ? 'background-color: #204739' : ''"
                 >
                   Tools
                   <ChevronDown class="w-4 h-4 ml-1" />
@@ -107,7 +112,7 @@
                   </router-link>
                 </div>
               </div>
-              <button class="text-emerald-100 hover:bg-emerald-800 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md">
+              <button class="text-white hover:bg-primary/80 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md">
                 Support
                 <ChevronDown class="w-4 h-4 ml-1" />
               </button>
