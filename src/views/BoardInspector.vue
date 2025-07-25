@@ -3,13 +3,18 @@
     <div class="mb-8">
       <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Board Inspector</h1>
 
-    <!-- Board Navigation -->
+      <!-- Board Navigation -->
+      <div class="flex items-center justify-between mb-6">
         <div class="flex items-center space-x-4">
           <button class="p-2 text-gray-400 hover:text-gray-600">
+            <ChevronLeft class="w-5 h-5" />
+          </button>
           <div>
             <h2 class="text-2xl font-extrabold text-gray-900">BRD-4625</h2>
+          </div>
           <button class="p-2 text-gray-400 hover:text-gray-600">
             <ChevronRight class="w-5 h-5" />
+          </button>
         </div>
         <div class="flex items-center space-x-2">
           <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm font-medium rounded-full">1COMMON</span>
