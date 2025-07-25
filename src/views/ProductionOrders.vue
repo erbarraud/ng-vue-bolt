@@ -310,6 +310,9 @@ const upcomingOrders = ref([
     statusDetail: 'Pending Setup',
     targetMix: '60% Select, 30% #1 Common, 10% #2 Common',
     canStart: false
+  }
+]
+)
 .sortable-chosen {
   background: #ecfdf5;
 }
