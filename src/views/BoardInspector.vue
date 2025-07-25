@@ -209,23 +209,23 @@
     </div>
 
     <!-- Clear Cuttings Analysis -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
       <!-- Face 1 Clear Cuttings -->
       <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-6">Clear Cuttings (Face 1)</h4>
+        <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-gray-900">6' 2 3/4" × 5 3/8"</span>
-            <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">33.28 units</span>
+            <span class="font-semibold text-gray-900">33.28 units</span>
           </div>
           <div class="flex items-center justify-between">
             <span class="text-gray-900">2' × 4 13/16"</span>
-            <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">9.64 units</span>
+            <span class="font-semibold text-gray-900">9.64 units</span>
           </div>
-          <div class="border-t border-gray-200 pt-4 mt-6">
+          <div class="border-t border-gray-200 pt-3">
             <div class="flex items-center justify-between">
               <span class="font-semibold text-gray-900">Total Units:</span>
-              <span class="text-2xl font-bold text-emerald-600">43</span>
+              <span class="text-2xl font-bold text-gray-900">43</span>
             </div>
           </div>
         </div>
@@ -233,32 +233,26 @@
 
       <!-- Face 2 Clear Cuttings -->
       <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-6">Clear Cuttings (Face 2)</h4>
+        <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-gray-900">3' 3 3/4" × 5 3/16"</span>
-            <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">17.2 units</span>
+            <span class="font-semibold text-gray-900">17.2 units</span>
           </div>
           <div class="flex items-center justify-between">
             <span class="text-gray-900">3' 5 3/4" × 4 7/8"</span>
-            <span class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-medium">16.83 units</span>
+            <span class="font-semibold text-gray-900">16.83 units</span>
           </div>
-          <div class="border-t border-gray-200 pt-4 mt-6">
+          <div class="border-t border-gray-200 pt-3">
             <div class="flex items-center justify-between">
               <span class="font-semibold text-gray-900">Total Units:</span>
-              <span class="text-2xl font-bold text-emerald-600">34</span>
+              <span class="text-2xl font-bold text-gray-900">34</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Full Inspection Button -->
-    <div class="flex justify-end">
-      <Button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2">
-        Complete Full Inspection
-      </Button>
-    </div>
   </div>
 </template>
 
