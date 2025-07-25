@@ -21,7 +21,7 @@
               id="orderId"
               type="text"
               v-model="orderForm.orderId"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              class="w-full px-4 py-3 border border-input rounded-lg bg-muted focus:ring-2 focus:ring-ring focus:border-ring"
               readonly
             />
           </div>
@@ -33,7 +33,7 @@
               type="text"
               v-model="orderForm.orderName"
               placeholder="e.g., Soft Maple - Monday Shift"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              class="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring"
             />
           </div>
           

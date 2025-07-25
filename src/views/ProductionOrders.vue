@@ -3,7 +3,7 @@
     <!-- Page Header -->
     <div class="flex items-center justify-between mb-8">
       <h1 class="text-4xl font-extrabold text-gray-900">Production Orders</h1>
-      <Button asChild>
+      <Button>
         <router-link to="/orders/create" class="flex items-center">
           <Plus class="w-4 h-4 mr-2" />
           Schedule New Order

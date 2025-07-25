@@ -6,12 +6,12 @@
       <div class="lg:col-span-1">
         <div class="space-y-4">
           <!-- Value Processed -->
-          <Card class="border-l-4 border-emerald-500">
+          <Card class="border-l-4 border-primary">
             <CardContent class="p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center mr-3">
-                  <DollarSign class="w-4 h-4 text-emerald-600" />
+                <div class="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center mr-3">
+                  <DollarSign class="w-4 h-4 text-primary" />
                 </div>
                 <div>
                   <div class="text-sm font-medium text-slate-700">Value Processed</div>
@@ -20,8 +20,8 @@
               </div>
               <div class="text-right">
                 <div class="flex items-center">
-                  <TrendingUp class="h-3 w-3 text-emerald-500 mr-1" />
-                  <span class="text-xs text-emerald-600 font-semibold">+8.2%</span>
+                  <TrendingUp class="h-3 w-3 text-primary mr-1" />
+                  <span class="text-xs text-primary font-semibold">+8.2%</span>
                 </div>
               </div>
             </div>
@@ -29,12 +29,12 @@
           </Card>
 
           <!-- Volume Processed -->
-          <Card class="border-l-4 border-emerald-500">
+          <Card class="border-l-4 border-primary">
             <CardContent class="p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center mr-3">
-                  <Package class="w-4 h-4 text-emerald-600" />
+                <div class="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center mr-3">
+                  <Package class="w-4 h-4 text-primary" />
                 </div>
                 <div>
                   <div class="text-sm font-medium text-slate-700">Volume Processed</div>
@@ -43,8 +43,8 @@
               </div>
               <div class="text-right">
                 <div class="flex items-center">
-                  <TrendingUp class="h-3 w-3 text-emerald-500 mr-1" />
-                  <span class="text-xs text-emerald-600 font-semibold">+12.1%</span>
+                  <TrendingUp class="h-3 w-3 text-primary mr-1" />
+                  <span class="text-xs text-primary font-semibold">+12.1%</span>
                 </div>
               </div>
             </div>
@@ -52,12 +52,12 @@
           </Card>
 
           <!-- Feedback Submitted -->
-          <Card class="border-l-4 border-emerald-500">
+          <Card class="border-l-4 border-primary">
             <CardContent class="p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center mr-3">
-                  <MessageSquare class="w-4 h-4 text-emerald-600" />
+                <div class="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center mr-3">
+                  <MessageSquare class="w-4 h-4 text-primary" />
                 </div>
                 <div>
                   <div class="text-sm font-medium text-slate-700">Feedback Submitted</div>

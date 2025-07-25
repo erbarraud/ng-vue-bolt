@@ -16,7 +16,7 @@
               type="text"
               placeholder="Search boards by ID, batch, or grade..."
               v-model="searchQuery"
-              class="pl-10 pr-3 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              class="pl-10 pr-3 py-2 w-full border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring"
             />
           </div>
           <button class="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
@@ -26,7 +26,7 @@
         </div>
         <div class="flex items-center space-x-2">
           <span class="text-sm text-gray-600">Show</span>
-          <select class="border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+          <select class="border border-input rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-ring focus:border-ring">
             <option>3</option>
             <option>5</option>
             <option>10</option>
