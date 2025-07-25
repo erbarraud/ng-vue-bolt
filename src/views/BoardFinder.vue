@@ -19,9 +19,12 @@
               class="pl-10 pr-3 py-2 w-full border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring"
             />
           </div>
-          <Button variant="outline">
+          <Button variant="outline" @click="toggleFilters" :class="hasActiveFilters ? 'border-emerald-500 text-emerald-700' : ''">
             <Filter class="w-4 h-4 mr-2" />
             Filters
+            <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs">
+              Active
+            </span>
           </Button>
         </div>
         <div class="flex items-center space-x-2">
@@ -31,6 +34,176 @@
             <option>5</option>
             <option>10</option>
           </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters Panel -->
+    <div v-if="showFilters" class="bg-white rounded-lg shadow p-6 mb-6 border border-gray-200">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">Filter Boards</h3>
+        <div class="flex items-center space-x-2">
+          <Button variant="outline" size="sm" @click="clearAllFilters" v-if="hasActiveFilters">
+            <X class="w-4 h-4 mr-1" />
+            Clear All
+          </Button>
+          <Button variant="ghost" size="sm" @click="showFilters = false">
+            <X class="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Species Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Species</label>
+          <select v-model="filters.species" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+            <option value="">All Species</option>
+            <option v-for="species in filterOptions.species" :key="species" :value="species">{{ species }}</option>
+          </select>
+        </div>
+
+        <!-- Grade Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Grade</label>
+          <select v-model="filters.grade" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+            <option value="">All Grades</option>
+            <option v-for="grade in filterOptions.grades" :key="grade" :value="grade">{{ grade }}</option>
+          </select>
+        </div>
+
+        <!-- Batch Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Batch</label>
+          <select v-model="filters.batch" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+            <option value="">All Batches</option>
+            <option v-for="batch in filterOptions.batches" :key="batch" :value="batch">{{ batch }}</option>
+          </select>
+        </div>
+
+        <!-- Value Range Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Value Range ($)</label>
+          <div class="flex space-x-2">
+            <input
+              v-model="filters.valueRange.min"
+              type="number"
+              placeholder="Min"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+            <input
+              v-model="filters.valueRange.max"
+              type="number"
+              placeholder="Max"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+          </div>
+        </div>
+
+        <!-- Defect Count Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Defect Count</label>
+          <div class="flex space-x-2">
+            <input
+              v-model="filters.defectCount.min"
+              type="number"
+              placeholder="Min"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+            <input
+              v-model="filters.defectCount.max"
+              type="number"
+              placeholder="Max"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+          </div>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+          <div class="flex space-x-2">
+            <input
+              v-model="filters.dateRange.start"
+              type="date"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+            <input
+              v-model="filters.dateRange.end"
+              type="date"
+              class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Dimensions Section -->
+      <div class="mt-6">
+        <h4 class="text-md font-semibold text-gray-900 mb-3">Dimensions</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Length -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Length (ft)</label>
+            <div class="flex space-x-2">
+              <input
+                v-model="filters.dimensions.lengthMin"
+                type="number"
+                placeholder="Min"
+                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+              <input
+                v-model="filters.dimensions.lengthMax"
+                type="number"
+                placeholder="Max"
+                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+            </div>
+          </div>
+
+          <!-- Width -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Width (in)</label>
+            <div class="flex space-x-2">
+              <input
+                v-model="filters.dimensions.widthMin"
+                type="number"
+                placeholder="Min"
+                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+              <input
+                v-model="filters.dimensions.widthMax"
+                type="number"
+                placeholder="Max"
+                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+            </div>
+          </div>
+
+          <!-- Thickness -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Thickness (in)</label>
+            <div class="flex space-x-2">
+              <input
+                v-model="filters.dimensions.thicknessMin"
+                type="number"
+                placeholder="Min"
+                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+              <input
+                v-model="filters.dimensions.thicknessMax"
+                type="number"
+                placeholder="Max"
+                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Summary -->
+      <div v-if="hasActiveFilters" class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+        <div class="text-sm text-emerald-700">
+          <strong>{{ filteredBoards.length }}</strong> board(s) match your current filters
         </div>
       </div>
     </div>
@@ -197,7 +370,7 @@
 
     <!-- Results Section -->
     <div class="flex items-center justify-between mb-4">
-      <div class="text-sm text-gray-600">Showing 1-3 of 3 boards</div>
+      <div class="text-sm text-gray-600">Showing 1-{{ filteredBoards.length }} of {{ filteredBoards.length }} boards</div>
       <div class="flex items-center space-x-2">
         <button class="px-3 py-1 text-sm text-gray-500 hover:text-gray-700">Previous</button>
         <span class="text-sm text-gray-600">Page 1 of 1</span>
@@ -211,7 +384,7 @@
       <div class="lg:col-span-1">
         <div class="bg-white rounded-lg shadow">
           <div class="space-y-1 p-2">
-            <div v-for="board in boards" :key="board.id"
+            <div v-for="board in filteredBoards" :key="board.id"
                  :class="[
                    'p-3 rounded-lg cursor-pointer border-2 transition-all',
                    selectedBoard === board.id
@@ -428,7 +601,7 @@ import {
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
   AlertCircle, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
   Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
-  ThumbsUp, ThumbsDown, ClipboardList
+  ThumbsUp, ThumbsDown, ClipboardList, X
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 
@@ -436,10 +609,38 @@ const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
 const showTimeline = ref(false)
 const showDatePicker = ref(false)
+const showFilters = ref(false)
 const selectedDate = ref(new Date().toISOString().split('T')[0])
 const selectedTimeSlot = ref(null)
 const selectedTimeRange = ref('today')
 const currentTimelineStart = ref(0)
+
+// Filter states
+const filters = ref({
+  species: '',
+  grade: '',
+  dryStatus: '',
+  batch: '',
+  valueRange: { min: '', max: '' },
+  defectCount: { min: '', max: '' },
+  dimensions: {
+    lengthMin: '',
+    lengthMax: '',
+    widthMin: '',
+    widthMax: '',
+    thicknessMin: '',
+    thicknessMax: ''
+  },
+  dateRange: { start: '', end: '' }
+})
+
+// Filter options based on business logic
+const filterOptions = ref({
+  species: ['Red Oak', 'White Oak', 'Soft Maple', 'Hard Maple', 'Cherry', 'Walnut', 'Douglas Fir'],
+  grades: ['FAS', 'Select', '1COMMON', '2COMMON', '3COMMON'],
+  dryStatus: ['Kiln Dried (KD)', 'Air Dried (AD)', 'Green'],
+  batches: ['B-4873', 'B-4872', 'B-4871', 'B-4870', 'B-4869']
+})
 
 // Time slots for the timeline (8 AM to 3 PM as shown in image)
 const timeSlots = ref([
@@ -548,8 +749,62 @@ const boards = ref([
   }
 ])
 
+// Apply filters to boards
+const filteredBoards = computed(() => {
+  return boards.value.filter(board => {
+    // Search query filter
+    if (searchQuery.value) {
+      const query = searchQuery.value.toLowerCase()
+      const matchesSearch = 
+        board.id.toLowerCase().includes(query) ||
+        board.grade.toLowerCase().includes(query) ||
+        board.batch.toLowerCase().includes(query)
+      if (!matchesSearch) return false
+    }
+
+    // Species filter
+    if (filters.value.species && !board.species?.includes(filters.value.species)) {
+      return false
+    }
+
+    // Grade filter
+    if (filters.value.grade && board.grade !== filters.value.grade) {
+      return false
+    }
+
+    // Batch filter
+    if (filters.value.batch && board.batch !== filters.value.batch) {
+      return false
+    }
+
+    // Value range filter
+    if (filters.value.valueRange.min || filters.value.valueRange.max) {
+      const boardValue = parseFloat(board.value.replace('$', ''))
+      if (filters.value.valueRange.min && boardValue < parseFloat(filters.value.valueRange.min)) {
+        return false
+      }
+      if (filters.value.valueRange.max && boardValue > parseFloat(filters.value.valueRange.max)) {
+        return false
+      }
+    }
+
+    // Defect count filter
+    if (filters.value.defectCount.min || filters.value.defectCount.max) {
+      const defectCount = parseInt(board.totalDefects)
+      if (filters.value.defectCount.min && defectCount < parseInt(filters.value.defectCount.min)) {
+        return false
+      }
+      if (filters.value.defectCount.max && defectCount > parseInt(filters.value.defectCount.max)) {
+        return false
+      }
+    }
+
+    return true
+  })
+})
+
 const currentBoard = computed(() => {
-  return boards.value.find(board => board.id === selectedBoard.value)
+  return filteredBoards.value.find(board => board.id === selectedBoard.value) || filteredBoards.value[0]
 })
 
 // Timeline methods
@@ -583,4 +838,50 @@ const applyDateRange = () => {
   showDatePicker.value = false
   selectedTimeRange.value = 'custom'
 }
+
+// Filter methods
+const toggleFilters = () => {
+  showFilters.value = !showFilters.value
+}
+
+const clearAllFilters = () => {
+  filters.value = {
+    species: '',
+    grade: '',
+    dryStatus: '',
+    batch: '',
+    valueRange: { min: '', max: '' },
+    defectCount: { min: '', max: '' },
+    dimensions: {
+      lengthMin: '',
+      lengthMax: '',
+      widthMin: '',
+      widthMax: '',
+      thicknessMin: '',
+      thicknessMax: ''
+    },
+    dateRange: { start: '', end: '' }
+  }
+  searchQuery.value = ''
+}
+
+const hasActiveFilters = computed(() => {
+  return searchQuery.value ||
+    filters.value.species ||
+    filters.value.grade ||
+    filters.value.dryStatus ||
+    filters.value.batch ||
+    filters.value.valueRange.min ||
+    filters.value.valueRange.max ||
+    filters.value.defectCount.min ||
+    filters.value.defectCount.max ||
+    filters.value.dimensions.lengthMin ||
+    filters.value.dimensions.lengthMax ||
+    filters.value.dimensions.widthMin ||
+    filters.value.dimensions.widthMax ||
+    filters.value.dimensions.thicknessMin ||
+    filters.value.dimensions.thicknessMax ||
+    filters.value.dateRange.start ||
+    filters.value.dateRange.end
+})
 </script>
