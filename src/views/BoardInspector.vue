@@ -18,7 +18,7 @@
     </div>
 
     <!-- Board Navigation and Info -->
-    <div class="bg-white rounded-lg shadow p-6 mb-6">
+    <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6 mb-6">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-4">
           <button class="p-2 text-gray-400 hover:text-gray-600">
@@ -26,7 +26,7 @@
           </button>
           <div class="flex items-center space-x-3">
             <h2 class="text-2xl font-extrabold text-gray-900">BRD-4625</h2>
-            <span class="px-3 py-1 bg-gray-800 text-white text-sm font-medium rounded">1COMMON</span>
+            <span class="px-3 py-1 bg-emerald-600 text-white text-sm font-medium rounded">1COMMON</span>
             <div class="flex items-center space-x-2 text-sm text-gray-600">
               <TreePine class="w-4 h-4" />
               <span>Red Oak</span>
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Inspector Tools -->
-    <div class="bg-white rounded-lg shadow p-6 mb-6">
+    <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6 mb-6">
       <div class="flex items-center gap-3 mb-8">
         <Button variant="secondary" size="sm" class="bg-gray-100 text-gray-800 hover:bg-gray-200 border-gray-200">
           <Filter class="w-4 h-4 mr-2" />
@@ -143,7 +143,7 @@
     <!-- Board Images and Analysis -->
     <div class="space-y-6 mb-6">
       <!-- Face 1 -->
-      <div class="bg-white rounded-lg shadow border border-gray-200 p-6">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
         <h3 class="text-xl font-bold text-gray-900 mb-4">Face 1</h3>
         <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
           <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-contain" />
@@ -176,7 +176,7 @@
       </div>
 
       <!-- Face 2 -->
-      <div class="bg-white rounded-lg shadow border border-gray-200 p-6">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
         <h3 class="text-xl font-bold text-gray-900 mb-4">Face 2</h3>
         <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
           <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-contain" />
@@ -211,7 +211,7 @@
     <!-- Clear Cuttings Analysis -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
       <!-- Face 1 Clear Cuttings -->
-      <div>
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
         <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
@@ -232,7 +232,7 @@
       </div>
 
       <!-- Face 2 Clear Cuttings -->
-      <div>
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
         <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
         <div class="space-y-4">
           <div class="flex items-center justify-between">
