@@ -1,115 +1,110 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-8">
     <!-- First Line: KPIs and Chart -->
-    <div class="grid grid-cols-1 lg:grid-cols-10 gap-8 mb-8">
-      <!-- KPI Cards - Left Side -->
-      <div class="lg:col-span-3">
-        <div class="space-y-4">
-          <!-- Compact Shift Status -->
-          <Card class="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
-            <CardContent class="p-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                  <Calendar class="w-4 h-4 text-emerald-600 mr-2" />
-                  <span class="text-sm font-bold text-emerald-800">Shift Status</span>
+    <!-- Combined KPIs and Chart Container -->
+    <Card class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
+      <CardContent class="p-6">
+        <!-- Header with Shift Status -->
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-6">
+            <div class="flex items-center space-x-2">
+              <Calendar class="w-5 h-5 text-emerald-600" />
+              <span class="text-lg font-semibold text-slate-900">Production Overview</span>
+            </div>
+            <Badge variant="secondary" class="bg-emerald-50 text-emerald-700 border-emerald-200">
+              No Active Shift
+            </Badge>
+          </div>
+          <Button variant="outline" size="sm" class="bg-white/80">
+            <Download class="w-4 h-4 mr-2" />
+            Export
+          </Button>
+        </div>
+
+        <!-- KPIs Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <!-- Shift Status -->
+          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-lg p-4 border border-emerald-100">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-3">
+                  <Calendar class="w-4 h-4 text-emerald-600" />
                 </div>
-                <Badge variant="secondary" class="text-xs">No Active Shift</Badge>
+                <div>
+                  <div class="text-xs font-medium text-emerald-700">Next Shift</div>
+                  <div class="text-sm font-bold text-emerald-900">Morning - 7:00 AM</div>
+                </div>
               </div>
-              <div class="mt-2 text-xs text-slate-600">
-                Next: <span class="font-medium text-emerald-700">Morning Shift</span> - Friday, 7:00 AM
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           <!-- Value Processed -->
-          <Card class="border-l-4 border-primary">
-            <CardContent class="p-4">
+          <div class="bg-white/60 rounded-lg p-4 border border-slate-100">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center mr-3">
-                  <DollarSign class="w-4 h-4 text-primary" />
+                <div class="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-3">
+                  <DollarSign class="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <div class="text-sm font-medium text-slate-700">Value Processed</div>
-                  <div class="text-xl font-bold text-slate-900">$24,680</div>
+                  <div class="text-xs font-medium text-slate-600">Value Processed</div>
+                  <div class="text-lg font-bold text-slate-900">$24,680</div>
                 </div>
               </div>
-              <div class="text-right">
-                <div class="flex items-center">
-                  <TrendingUp class="h-3 w-3 text-primary mr-1" />
-                  <span class="text-xs text-primary font-semibold">+8.2%</span>
-                </div>
+              <div class="flex items-center text-emerald-600">
+                <TrendingUp class="h-3 w-3 mr-1" />
+                <span class="text-xs font-semibold">+8.2%</span>
               </div>
             </div>
-            </CardContent>
-          </Card>
+          </div>
 
           <!-- Volume Processed -->
-          <Card class="border-l-4 border-primary">
-            <CardContent class="p-4">
+          <div class="bg-white/60 rounded-lg p-4 border border-slate-100">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center mr-3">
-                  <Package class="w-4 h-4 text-primary" />
+                <div class="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-3">
+                  <Package class="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <div class="text-sm font-medium text-slate-700">Volume Processed</div>
-                  <div class="text-xl font-bold text-slate-900">38.4 m³</div>
+                  <div class="text-xs font-medium text-slate-600">Volume Processed</div>
+                  <div class="text-lg font-bold text-slate-900">38.4 m³</div>
                 </div>
               </div>
-              <div class="text-right">
-                <div class="flex items-center">
-                  <TrendingUp class="h-3 w-3 text-primary mr-1" />
-                  <span class="text-xs text-primary font-semibold">+12.1%</span>
-                </div>
+              <div class="flex items-center text-emerald-600">
+                <TrendingUp class="h-3 w-3 mr-1" />
+                <span class="text-xs font-semibold">+12.1%</span>
               </div>
             </div>
-            </CardContent>
-          </Card>
+          </div>
 
           <!-- Feedback Submitted -->
-          <Card class="border-l-4 border-primary">
-            <CardContent class="p-4">
+          <div class="bg-white/60 rounded-lg p-4 border border-slate-100">
             <div class="flex items-center justify-between">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center mr-3">
-                  <MessageSquare class="w-4 h-4 text-primary" />
+                <div class="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-3">
+                  <MessageSquare class="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <div class="text-sm font-medium text-slate-700">Feedback Submitted</div>
-                  <div class="text-xl font-bold text-slate-900">34</div>
+                  <div class="text-xs font-medium text-slate-600">Feedback Submitted</div>
+                  <div class="text-lg font-bold text-slate-900">34</div>
                 </div>
               </div>
-              <div class="text-right">
-                <div class="flex items-center">
-                  <TrendingDown class="h-3 w-3 text-red-500 mr-1" />
-                  <span class="text-xs text-red-600 font-semibold">-2.3%</span>
-                </div>
+              <div class="flex items-center text-red-500">
+                <TrendingDown class="h-3 w-3 mr-1" />
+                <span class="text-xs font-semibold">-2.3%</span>
               </div>
             </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      <!-- Boards Processed Chart -->
-      <div class="lg:col-span-7">
-        <Card>
-          <CardContent class="p-6">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-slate-900">Boards Processed per Hour</h3>
-            <Button variant="outline" size="sm">
-              <Download class="w-4 h-4 mr-2" />
-              Export
-            </Button>
           </div>
-          <div class="h-80">
+        </div>
+
+        <!-- Chart Section -->
+        <div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">Boards Processed per Hour</h3>
+          <div class="h-64 bg-white/40 rounded-lg p-4 border border-slate-100">
             <Bar :data="chartData" :options="chartOptions" />
           </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+        </div>
+      </CardContent>
+    </Card>
 
     <!-- Second Line: Recent Orders and System Alerts -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
