@@ -430,6 +430,7 @@ import {
   Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
   ThumbsUp, ThumbsDown, ClipboardList
 } from 'lucide-vue-next'
+import Button from '@/components/ui/button.vue'
 
 const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
