@@ -756,16 +756,3 @@ const expandCamera = (cameraId) => {
   expandedCamera.value = cameraId
 }
 </script>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import { 
-  Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info
-} from 'lucide-vue-next'
-
-const activeTab = ref('live')
-</script>
