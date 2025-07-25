@@ -64,7 +64,7 @@
                 <button
                   @click="showToolsMenu = !showToolsMenu"
                   :class="[
-                    ['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning', 'BoardInspector'].includes($route.name)
+                    ['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning', 'BoardInspection'].includes($route.name)
                       ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
                       : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
                     'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
@@ -110,7 +110,7 @@
                     class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
                     @click="showToolsMenu = false"
                   >
-                    Board Inspector
+                    Board Inspection
                   </router-link>
                 </div>
               </div>

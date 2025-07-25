@@ -68,6 +68,8 @@ const routes = [
     component: BoardFinder
   },
   {
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(),
