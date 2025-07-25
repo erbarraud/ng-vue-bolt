@@ -1,25 +1,15 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-6">
-          <Button>
     <div class="mb-8">
       <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Board Inspector</h1>
-          </Button>
-          <Button variant="secondary">
 
     <!-- Board Navigation -->
-          </Button>
-          <Button variant="outline" class="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
         <div class="flex items-center space-x-4">
           <button class="p-2 text-gray-400 hover:text-gray-600">
-          </Button>
-          <Button variant="outline" class="border-red-300 text-red-700 hover:bg-red-50">
           <div>
             <h2 class="text-2xl font-extrabold text-gray-900">BRD-4625</h2>
-          </Button>
-          <Button variant="outline" class="border-yellow-300 text-yellow-700 hover:bg-yellow-50">
           <button class="p-2 text-gray-400 hover:text-gray-600">
             <ChevronRight class="w-5 h-5" />
-          </Button>
         </div>
         <div class="flex items-center space-x-2">
           <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm font-medium rounded-full">1COMMON</span>
