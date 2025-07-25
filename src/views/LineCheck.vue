@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="w-full px-4 sm:px-6 lg:px-8 py-6">
       <!-- Page Header -->
       <div class="mb-8">
         <h1 class="text-4xl font-extrabold text-white mb-2">Line Check</h1>

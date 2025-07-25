@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="w-full px-4 sm:px-6 lg:px-8 py-8">
     <!-- First Line: KPIs and Chart -->
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-8">
       <!-- KPI Cards - Left Side -->

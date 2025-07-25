@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-slate-50">
     <!-- Navigation Header -->
     <nav class="bg-emerald-900 border-b border-emerald-800 shadow-xl">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo and Brand -->
           <div class="flex items-center">
@@ -142,7 +142,7 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-4">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between text-sm text-slate-500">
           <div>
             © 2024 Neural Grader. Built for precision lumber grading.
