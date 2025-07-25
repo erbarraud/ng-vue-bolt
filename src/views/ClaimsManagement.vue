@@ -41,6 +41,7 @@
             <div class="text-2xl font-bold text-gray-900">3.2</div>
             <div class="text-sm font-medium text-gray-600">Average Resolution Time (days)</div>
           </div>
+    </div>
         </div>
       </div>
     <div class="flex items-center justify-between mb-6">
