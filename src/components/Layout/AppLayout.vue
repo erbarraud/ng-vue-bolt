@@ -157,35 +157,38 @@
             <div class="flex items-center space-x-2">
               <span class="text-sm text-slate-500">Powered by</span>
               <div class="lumberjack-animation">
-                <svg width="40" height="40" viewBox="0 0 100 100">
-                  <!-- Tree -->
-                  <rect x="70" y="30" width="15" height="40" fill="#8B4513" />
-                  <circle cx="77" cy="25" r="15" fill="#228B22" />
+                <svg width="50" height="40" viewBox="0 0 120 100" class="la-linea-svg">
+                  <!-- Tree (simple line) -->
+                  <g class="tree-shake">
+                    <line x1="90" y1="70" x2="90" y2="40" stroke="black" stroke-width="3" stroke-linecap="round" />
+                    <circle cx="90" cy="35" r="8" fill="none" stroke="black" stroke-width="2" class="tree-top" />
+                  </g>
                   
-                  <!-- Lumberjack -->
-                  <g class="lumberjack">
-                    <!-- Body -->
-                    <rect x="20" y="40" width="20" height="25" fill="#FF0000" rx="2" />
+                  <!-- Lumberjack (La Linea style) -->
+                  <g class="linea-man">
                     <!-- Head -->
-                    <circle cx="30" cy="30" r="8" fill="#FDBCB4" />
-                    <!-- Beard -->
-                    <path d="M 22 32 Q 30 40 38 32" fill="#8B4513" />
-                    <!-- Hat -->
-                    <rect x="22" y="22" width="16" height="8" fill="#000" rx="1" />
-                    <!-- Arms holding axe -->
-                    <rect x="35" y="45" width="15" height="4" fill="#FDBCB4" 
-                          class="arm-swing" />
-                    <!-- Axe -->
-                    <g class="axe-swing">
-                      <rect x="48" y="43" width="20" height="3" fill="#8B4513" />
-                      <path d="M 65 40 L 65 50 L 72 45 Z" fill="#C0C0C0" />
+                    <circle cx="25" cy="25" r="6" fill="none" stroke="black" stroke-width="2" />
+                    <!-- Body -->
+                    <line x1="25" y1="31" x2="25" y2="55" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <!-- Legs -->
+                    <line x1="25" y1="55" x2="20" y2="70" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <line x1="25" y1="55" x2="30" y2="70" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <!-- Left arm (static) -->
+                    <line x1="25" y1="40" x2="15" y2="45" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <!-- Right arm with axe (animated) -->
+                    <g class="axe-arm">
+                      <line x1="25" y1="40" x2="40" y2="35" stroke="black" stroke-width="2" stroke-linecap="round" />
+                      <!-- Axe handle -->
+                      <line x1="40" y1="35" x2="55" y2="30" stroke="black" stroke-width="2" stroke-linecap="round" />
+                      <!-- Axe head -->
+                      <path d="M 55 25 L 65 30 L 55 35 Z" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round" />
                     </g>
                   </g>
                   
-                  <!-- Wood chips -->
-                  <circle cx="65" cy="50" r="2" fill="#DEB887" class="chip-1" />
-                  <circle cx="60" cy="55" r="1.5" fill="#DEB887" class="chip-2" />
-                  <circle cx="68" cy="58" r="1" fill="#DEB887" class="chip-3" />
+                  <!-- Wood chips (simple dots) -->
+                  <circle cx="75" cy="45" r="1" fill="black" class="chip-1" />
+                  <circle cx="70" cy="50" r="1" fill="black" class="chip-2" />
+                  <circle cx="80" cy="52" r="1" fill="black" class="chip-3" />
                 </svg>
               </div>
             </div>
@@ -208,68 +211,85 @@ const showToolsMenu = ref(false)
 
 <style scoped>
 /* Lumberjack animation */
-@keyframes chop {
+@keyframes la-linea-chop {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-30deg); }
+  50% { transform: rotate(-45deg); }
 }
 
-@keyframes swing-arm {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-20deg); }
+@keyframes tree-wobble {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-1px) rotate(-2deg); }
+  75% { transform: translateX(1px) rotate(2deg); }
 }
 
-@keyframes chip-fly-1 {
+@keyframes linea-chip-1 {
   0% { opacity: 0; transform: translate(0, 0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-20px, 10px); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-15px, 8px); }
 }
 
-@keyframes chip-fly-2 {
+@keyframes linea-chip-2 {
   0% { opacity: 0; transform: translate(0, 0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-15px, -8px); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-10px, -5px); }
 }
 
-@keyframes chip-fly-3 {
+@keyframes linea-chip-3 {
   0% { opacity: 0; transform: translate(0, 0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-25px, 5px); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-18px, 3px); }
 }
 
-.axe-swing {
-  transform-origin: 48px 45px;
-  animation: chop 1.5s ease-in-out infinite;
+@keyframes linea-walk {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
 }
 
-.arm-swing {
-  transform-origin: 35px 47px;
-  animation: swing-arm 1.5s ease-in-out infinite;
+.axe-arm {
+  transform-origin: 25px 40px;
+  animation: la-linea-chop 2s ease-in-out infinite;
+}
+
+.tree-shake {
+  animation: tree-wobble 2s ease-in-out infinite;
+}
+
+.linea-man {
+  animation: linea-walk 2s ease-in-out infinite;
 }
 
 .chip-1 {
-  animation: chip-fly-1 1.5s ease-out infinite;
+  animation: linea-chip-1 2s ease-out infinite;
 }
 
 .chip-2 {
-  animation: chip-fly-2 1.5s ease-out infinite 0.2s;
+  animation: linea-chip-2 2s ease-out infinite 0.3s;
 }
 
 .chip-3 {
-  animation: chip-fly-3 1.5s ease-out infinite 0.4s;
+  animation: linea-chip-3 2s ease-out infinite 0.6s;
+}
+
+.la-linea-svg {
+  transition: all 0.3s ease;
 }
 
 /* Add a hover effect for fun */
-.lumberjack-animation:hover .axe-swing {
-  animation-duration: 0.5s;
+.lumberjack-animation:hover .axe-arm {
+  animation-duration: 1s;
 }
 
-.lumberjack-animation:hover .arm-swing {
-  animation-duration: 0.5s;
+.lumberjack-animation:hover .tree-shake {
+  animation-duration: 1s;
+}
+
+.lumberjack-animation:hover .linea-man {
+  animation-duration: 1s;
 }
 
 .lumberjack-animation:hover .chip-1,
 .lumberjack-animation:hover .chip-2,
 .lumberjack-animation:hover .chip-3 {
-  animation-duration: 0.5s;
+  animation-duration: 1s;
 }
 </style>
