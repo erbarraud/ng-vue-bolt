@@ -117,6 +117,7 @@
               class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             />
       </div>
+        </div>
 
       <!-- Filter Summary -->
       <div v-if="hasActiveFilters" class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
