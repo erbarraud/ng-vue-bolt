@@ -122,6 +122,7 @@
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
+                  <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500 w-16">Priority</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Order Details</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Species & Grade Mix</th>
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Schedule</th>
@@ -129,18 +130,27 @@
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">Actions</th>
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
-                <!-- Soft Maple Order -->
-                <tr class="hover:bg-emerald-50 transition-colors duration-150">
+              <tbody ref="tableBodyRef" class="bg-white divide-y divide-gray-200">
+                <tr v-for="order in upcomingOrders" :key="order.id" class="hover:bg-emerald-50 transition-colors duration-150 cursor-move">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="drag-handle flex items-center justify-center w-8 h-8 text-gray-400 hover:text-gray-600 mr-2">
+                        <Menu class="w-4 h-4" />
+                      </div>
+                      <div class="flex items-center justify-center w-8 h-8 bg-emerald-100 text-emerald-800 rounded-full text-sm font-bold">
+                        {{ order.priority }}
+                      </div>
+                    </div>
+                  </td>
                   <td class="px-6 py-4">
                     <div class="flex items-start">
                       <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                         <TreePine class="w-5 h-5 text-emerald-600" />
                       </div>
                       <div>
-                        <div class="text-lg font-bold text-gray-900">Soft Maple - Special Order</div>
-                        <div class="text-sm text-emerald-600 font-medium">ORD-20250701-002</div>
-                        <div class="text-sm text-gray-500 mt-1">Est. Volume: 2,500 bf</div>
+                        <div class="text-lg font-bold text-gray-900">{{ order.name }}</div>
+                        <div class="text-sm text-emerald-600 font-medium">{{ order.id }}</div>
+                        <div class="text-sm text-gray-500 mt-1">Est. Volume: {{ order.volume }}</div>
                       </div>
                     </div>
                   </td>
@@ -148,14 +158,14 @@
                     <div class="space-y-2">
                       <div class="flex items-center">
                         <TreePine class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm font-medium text-gray-900">Soft Maple</span>
+                        <span class="text-sm font-medium text-gray-900">{{ order.species }}</span>
                       </div>
                       <div class="flex items-center">
                         <Droplets class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm text-gray-600">Green (Air Dried)</span>
+                        <span class="text-sm text-gray-600">{{ order.dryStatus }}</span>
                       </div>
                       <div class="text-xs text-gray-500">
-                        Target Mix: 40% Prime, 35% Select, 25% #1 Common
+                        Target Mix: {{ order.targetMix }}
                       </div>
                     </div>
                   </td>
@@ -163,94 +173,28 @@
                     <div class="space-y-1">
                       <div class="flex items-center">
                         <Calendar class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm font-medium text-gray-900">Jul 1, 2025</span>
+                        <span class="text-sm font-medium text-gray-900">{{ order.date }}</span>
                       </div>
                       <div class="flex items-center">
                         <Clock class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm text-gray-600">1:00 PM - 6:00 PM</span>
+                        <span class="text-sm text-gray-600">{{ order.time }}</span>
                       </div>
-                      <div class="text-xs text-gray-500">Afternoon Shift</div>
+                      <div class="text-xs text-gray-500">{{ order.shift }}</div>
                     </div>
                   </td>
                   <td class="px-6 py-4">
                     <div class="space-y-2">
-                      <Badge variant="secondary" class="border">Scheduled</Badge>
-                      <div class="text-xs text-gray-500">Ready to Start</div>
+                      <Badge variant="secondary" class="border">{{ order.status }}</Badge>
+                      <div :class="order.canStart ? 'text-xs text-gray-500' : 'text-xs text-orange-600 font-medium'">
+                        {{ order.statusDetail }}
+                      </div>
                     </div>
                   </td>
                   <td class="px-6 py-4">
                     <div class="flex flex-col space-y-2">
-                      <Button size="sm" class="w-full">
+                      <Button size="sm" class="w-full" :disabled="!order.canStart" :variant="order.canStart ? 'default' : 'outline'">
                         <Play class="w-4 h-4 mr-2" />
-                        Start Order
-                      </Button>
-                      <div class="flex space-x-1">
-                        <Button variant="outline" size="sm" class="flex-1">
-                          <Edit class="w-4 h-4 mr-1" />
-                          Edit
-                        </Button>
-                        <Button variant="outline" size="sm" class="flex-1">
-                          <Eye class="w-4 h-4 mr-1" />
-                          View
-                        </Button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- White Oak Order -->
-                <tr class="hover:bg-emerald-50 transition-colors duration-150">
-                  <td class="px-6 py-4">
-                    <div class="flex items-start">
-                      <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <TreePine class="w-5 h-5 text-emerald-600" />
-                      </div>
-                      <div>
-                        <div class="text-lg font-bold text-gray-900">White Oak - Flooring Grade</div>
-                        <div class="text-sm text-emerald-600 font-medium">ORD-20250702-003</div>
-                        <div class="text-sm text-gray-500 mt-1">Est. Volume: 4,200 bf</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-2">
-                      <div class="flex items-center">
-                        <TreePine class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm font-medium text-gray-900">White Oak</span>
-                      </div>
-                      <div class="flex items-center">
-                        <Droplets class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm text-gray-600">Kiln Dried (KD)</span>
-                      </div>
-                      <div class="text-xs text-gray-500">
-                        Target Mix: 60% Select, 30% #1 Common, 10% #2 Common
-                      </div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-1">
-                      <div class="flex items-center">
-                        <Calendar class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm font-medium text-gray-900">Jul 2, 2025</span>
-                      </div>
-                      <div class="flex items-center">
-                        <Clock class="w-4 h-4 text-gray-400 mr-2" />
-                        <span class="text-sm text-gray-600">9:00 AM - 5:00 PM</span>
-                      </div>
-                      <div class="text-xs text-gray-500">Morning + Afternoon Shift</div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="space-y-2">
-                      <Badge variant="secondary" class="border">Scheduled</Badge>
-                      <div class="text-xs text-orange-600 font-medium">Pending Setup</div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="flex flex-col space-y-2">
-                      <Button size="sm" variant="outline" class="w-full" disabled>
-                        <Clock class="w-4 h-4 mr-2" />
-                        Setup Required
+                        {{ order.canStart ? 'Start Order' : 'Setup Required' }}
                       </Button>
                       <div class="flex space-x-1">
                         <Button variant="outline" size="sm" class="flex-1">
@@ -318,6 +262,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useSortable } from '@vueuse/integrations/useSortable'
 import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
   Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package
@@ -334,4 +279,85 @@ import TabsList from '@/components/ui/tabs-list.vue'
 import TabsTrigger from '@/components/ui/tabs-trigger.vue'
 
 const activeTab = ref('current')
+
+// Orders data with priority field
+const upcomingOrders = ref([
+  {
+    id: 'ORD-20250701-002',
+    priority: 1,
+    name: 'Soft Maple - Special Order',
+    species: 'Soft Maple',
+    dryStatus: 'Green (Air Dried)',
+    volume: '2,500 bf',
+    date: 'Jul 1, 2025',
+    time: '1:00 PM - 6:00 PM',
+    shift: 'Afternoon Shift',
+    status: 'Scheduled',
+    statusDetail: 'Ready to Start',
+    targetMix: '40% Prime, 35% Select, 25% #1 Common',
+    canStart: true
+  },
+  {
+    id: 'ORD-20250702-003',
+    priority: 2,
+    name: 'White Oak - Flooring Grade',
+    species: 'White Oak',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '4,200 bf',
+    date: 'Jul 2, 2025',
+    time: '9:00 AM - 5:00 PM',
+    shift: 'Morning + Afternoon Shift',
+    status: 'Scheduled',
+    statusDetail: 'Pending Setup',
+    targetMix: '60% Select, 30% #1 Common, 10% #2 Common',
+    canStart: false
+  }
+])
+
+// Drag and drop functionality
+const tableBodyRef = ref()
+
+useSortable(tableBodyRef, upcomingOrders, {
+  handle: '.drag-handle',
+  animation: 150,
+  ghostClass: 'sortable-ghost',
+  chosenClass: 'sortable-chosen',
+  dragClass: 'sortable-drag',
+  onEnd: (evt) => {
+    // Update priority numbers based on new order
+    upcomingOrders.value.forEach((order, index) => {
+      order.priority = index + 1
+    })
+    console.log('Orders reordered:', upcomingOrders.value.map(o => ({ id: o.id, priority: o.priority })))
+  }
+})
 </script>
+
+<style scoped>
+.drag-handle {
+  cursor: grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.sortable-ghost {
+  opacity: 0.5;
+  background: #f0fdf4;
+}
+
+.sortable-chosen {
+  background: #ecfdf5;
+}
+
+.sortable-drag {
+  background: #ffffff;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+  transform: rotate(2deg);
+}
+
+.sortable-ghost td {
+  background: transparent;
+}
+</style>
