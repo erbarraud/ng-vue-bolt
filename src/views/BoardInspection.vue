@@ -1,226 +1,176 @@
 <template>
-  <div class="w-full px-4 sm:px-6 lg:px-8 py-6">
+  <div class="w-full px-4 sm:px-6 lg:px-8 py-6 bg-gray-50 min-h-screen">
     <!-- Page Header -->
     <div class="flex items-center justify-between mb-6">
       <div>
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Board Inspection</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-1">Board Inspector</h1>
         <p class="text-gray-600">Find and analyze boards in the system</p>
       </div>
       <div class="flex items-center space-x-4">
         <div class="text-right">
           <div class="text-sm text-gray-600">Order: B-4873 - Red Oak 4/4 Premium</div>
         </div>
-        <Button variant="outline">
+        <Button variant="outline" class="flex items-center">
           <List class="w-4 h-4 mr-2" />
           View All Boards in This Order
         </Button>
       </div>
     </div>
 
-    <!-- Board Navigation and Info -->
-    <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6 mb-6">
+    <!-- Board Navigation Card -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-4">
-          <button class="p-2 text-gray-400 hover:text-gray-600">
+          <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
             <ChevronLeft class="w-5 h-5" />
           </button>
           <div class="flex items-center space-x-3">
-            <h2 class="text-2xl font-extrabold text-gray-900">BRD-4625</h2>
-            <span class="px-3 py-1 bg-emerald-600 text-white text-sm font-medium rounded">1COMMON</span>
-            <div class="flex items-center space-x-2 text-sm text-gray-600">
-              <TreePine class="w-4 h-4" />
+            <h2 class="text-2xl font-bold text-gray-900">BRD-4625</h2>
+            <span class="px-3 py-1 bg-emerald-600 text-white text-sm font-medium rounded-full">1COMMON</span>
+            <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+              <ChevronRight class="w-5 h-5" />
+            </button>
+          </div>
+          <div class="flex items-center space-x-4 text-sm text-gray-600">
+            <div class="flex items-center">
+              <TreePine class="w-4 h-4 mr-1" />
               <span>Red Oak</span>
-              <Droplets class="w-4 h-4 ml-2" />
+            </div>
+            <div class="flex items-center">
+              <Droplets class="w-4 h-4 mr-1" />
               <span>Kiln Dried</span>
             </div>
           </div>
-          <button class="p-2 text-gray-400 hover:text-gray-600">
-            <ChevronRight class="w-5 h-5" />
-          </button>
         </div>
         <div class="text-right">
-          <div class="text-2xl font-bold text-gray-900">Value</div>
-          <div class="text-2xl font-bold text-emerald-600">$4.90</div>
+          <div class="text-sm text-gray-600">Value</div>
+          <div class="text-2xl font-bold text-gray-900">$4.90</div>
         </div>
       </div>
 
       <!-- Timestamp -->
-      <div class="flex items-center text-sm text-gray-500 mb-4">
+      <div class="flex items-center text-sm text-gray-500 mb-6">
         <Clock class="w-4 h-4 mr-1" />
         03/18/2025 3:58 PM
       </div>
 
       <!-- Board Specifications -->
-      <div class="grid grid-cols-7 gap-6 mb-8">
+      <div class="grid grid-cols-6 gap-6 mb-6">
         <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <Ruler class="w-5 h-5 text-amber-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Length</span>
-            </div>
-            <div class="text-lg font-bold text-gray-900">8' 3 3/4"</div>
+          <div class="flex items-center justify-center mb-2">
+            <Ruler class="w-4 h-4 text-gray-500 mr-1" />
+            <span class="text-sm text-gray-600">Length</span>
           </div>
+          <div class="text-lg font-semibold text-gray-900">8' 3 3/4"</div>
         </div>
         <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <ArrowLeftRight class="w-5 h-5 text-blue-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Width</span>
-            </div>
-            <div class="text-lg font-bold text-gray-900">5 1/2"</div>
+          <div class="flex items-center justify-center mb-2">
+            <ArrowLeftRight class="w-4 h-4 text-gray-500 mr-1" />
+            <span class="text-sm text-gray-600">Width</span>
           </div>
+          <div class="text-lg font-semibold text-gray-900">5 1/2"</div>
         </div>
         <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <Layers class="w-5 h-5 text-purple-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Thickness</span>
-            </div>
-            <div class="text-lg font-bold text-gray-900">15/16"</div>
+          <div class="flex items-center justify-center mb-2">
+            <Layers class="w-4 h-4 text-gray-500 mr-1" />
+            <span class="text-sm text-gray-600">Thickness</span>
           </div>
+          <div class="text-lg font-semibold text-gray-900">15/16"</div>
         </div>
         <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <Box class="w-5 h-5 text-green-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Volume</span>
-            </div>
-            <div class="text-lg font-bold text-gray-900">4 bf</div>
+          <div class="flex items-center justify-center mb-2">
+            <Box class="w-4 h-4 text-gray-500 mr-1" />
+            <span class="text-sm text-gray-600">Volume</span>
           </div>
+          <div class="text-lg font-semibold text-gray-900">4 bf</div>
         </div>
         <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <DollarSign class="w-5 h-5 text-emerald-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Value</span>
-            </div>
-            <div class="text-lg font-bold text-emerald-600">$4.90</div>
+          <div class="flex items-center justify-center mb-2">
+            <AlertTriangle class="w-4 h-4 text-gray-500 mr-1" />
+            <span class="text-sm text-gray-600">Total Defects</span>
           </div>
+          <div class="text-lg font-semibold text-gray-900">2</div>
         </div>
         <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <AlertTriangle class="w-5 h-5 text-red-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Total Defects</span>
-            </div>
-            <div class="text-lg font-bold text-red-600">2</div>
+          <div class="flex items-center justify-center mb-2">
+            <TrendingUp class="w-4 h-4 text-gray-500 mr-1" />
+            <span class="text-sm text-gray-600">Yield</span>
           </div>
-        </div>
-        <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
-              <TrendingUp class="w-5 h-5 text-indigo-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Yield</span>
-            </div>
-            <div class="text-lg font-bold text-gray-900">85%</div>
-          </div>
+          <div class="text-lg font-semibold text-gray-900">85%</div>
         </div>
       </div>
-    </div>
 
-    <!-- Inspector Tools -->
-    <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6 mb-6">
-      <div class="flex flex-wrap gap-4">
-        <Button variant="secondary">
+      <!-- Inspector Tools -->
+      <div class="flex flex-wrap gap-3 mb-6">
+        <Button variant="outline" size="sm" class="flex items-center">
           <ZoomIn class="w-4 h-4 mr-2" />
           Enable Magnifier
         </Button>
-        <Button variant="secondary">
+        <Button variant="outline" size="sm" class="flex items-center">
           <EyeOff class="w-4 h-4 mr-2" />
           Hide Minor Defects
         </Button>
-        <Button variant="outline" class="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
+        <Button variant="outline" size="sm" class="flex items-center text-emerald-700 border-emerald-300 hover:bg-emerald-50">
           <CheckCircle class="w-4 h-4 mr-2" />
           Agree with NG AI
         </Button>
-        <Button variant="outline" class="border-red-300 text-red-700 hover:bg-red-50">
+        <Button variant="outline" size="sm" class="flex items-center text-red-700 border-red-300 hover:bg-red-50">
           <XCircle class="w-4 h-4 mr-2" />
           Disagree with NG AI
         </Button>
-        <Button variant="secondary">
+        <Button variant="outline" size="sm" class="flex items-center">
           <FileText class="w-4 h-4 mr-2" />
           See rejected rules
         </Button>
-        <Button variant="outline" class="border-purple-300 text-purple-700 hover:bg-purple-50">
+        <Button variant="outline" size="sm" class="flex items-center">
           <BookOpen class="w-4 h-4 mr-2" />
           Add to Reference Bundle
         </Button>
       </div>
     </div>
 
-    <!-- Board Images and Analysis -->
-    <div class="space-y-6 mb-6">
-      <!-- Face 1 -->
-      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Face 1</h3>
-        <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
-          <img src="/image.png" alt="Board Face 1 - Lumber scan showing defects" class="w-full h-full object-cover" />
-          
-          <!-- Defect Overlay Areas -->
-          <div v-if="isDefectVisible('face1', 'Knot')" class="absolute top-4 left-8 w-8 h-8 bg-red-500 bg-opacity-70 rounded-full border-2 border-red-600"></div>
-          <div v-if="isDefectVisible('face1', 'Split')" class="absolute top-8 right-12 w-12 h-3 bg-orange-500 bg-opacity-70 border border-orange-600"></div>
-          <div v-if="isDefectVisible('face1', 'Wane')" class="absolute bottom-4 left-4 w-16 h-6 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform -skew-x-12"></div>
-          <div v-if="isDefectVisible('face1', 'Stain')" class="absolute top-12 left-20 w-14 h-10 bg-purple-500 bg-opacity-60 rounded-lg border border-purple-600"></div>
-          <div v-if="isDefectVisible('face1', 'Pitch Pocket')" class="absolute bottom-8 right-8 w-6 h-8 bg-blue-500 bg-opacity-70 rounded border border-blue-600"></div>
-          <div v-if="isDefectVisible('face1', 'Shake')" class="absolute top-16 right-6 w-2 h-12 bg-gray-600 bg-opacity-80 border border-gray-700"></div>
-        </div>
-        
-        <!-- Defect Tags -->
-        <div class="flex flex-wrap gap-2 text-xs mb-4">
-          <button
-            v-for="defect in defectTypes"
-            :key="defect.name"
-            @click="toggleDefect('face1', defect.name)"
-            :class="[
-              'px-3 py-1 rounded-full font-medium transition-all duration-200',
-              isDefectVisible('face1', defect.name) 
-                ? defect.activeClass 
-                : 'bg-gray-200 text-gray-500'
-            ]"
-          >
-            {{ defect.name }}
-          </button>
+    <!-- Face 1 -->
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 1</h3>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div class="h-32 bg-gray-100 flex items-center justify-center relative">
+          <img src="/image.png" alt="Board Face 1" class="w-full h-full object-cover" />
         </div>
       </div>
-
-      <!-- Face 2 -->
-      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Face 2</h3>
-        <div class="h-48 rounded-lg border border-gray-300 mb-4 overflow-hidden bg-gray-50 relative">
-          <img src="/image.png" alt="Board Face 2 - Lumber scan showing defects" class="w-full h-full object-cover" />
-          
-          <!-- Defect Overlay Areas -->
-          <div v-if="isDefectVisible('face2', 'Knot')" class="absolute top-6 right-10 w-7 h-7 bg-red-500 bg-opacity-70 rounded-full border-2 border-red-600"></div>
-          <div v-if="isDefectVisible('face2', 'Check')" class="absolute bottom-6 left-8 w-14 h-2 bg-orange-500 bg-opacity-70 border border-orange-600"></div>
-          <div v-if="isDefectVisible('face2', 'Warp')" class="absolute bottom-3 right-4 w-10 h-8 bg-yellow-500 bg-opacity-70 border border-yellow-600 transform skew-y-12"></div>
-          <div v-if="isDefectVisible('face2', 'Decay')" class="absolute top-8 left-12 w-16 h-8 bg-purple-500 bg-opacity-60 rounded border border-purple-600"></div>
-          <div v-if="isDefectVisible('face2', 'Hole')" class="absolute top-12 right-16 w-4 h-6 bg-blue-500 bg-opacity-70 rounded border border-blue-600"></div>
-        </div>
-        
-        <!-- Defect Tags -->
-        <div class="flex flex-wrap gap-2 text-xs mb-4">
-          <button
-            v-for="defect in face2DefectTypes"
-            :key="defect.name"
-            @click="toggleDefect('face2', defect.name)"
-            :class="[
-              'px-3 py-1 rounded-full font-medium transition-all duration-200',
-              isDefectVisible('face2', defect.name) 
-                ? defect.activeClass 
-                : 'bg-gray-200 text-gray-500'
-            ]"
-          >
-            {{ defect.name }}
-          </button>
-        </div>
+      <!-- Defect Tags -->
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">Knot</span>
+        <span class="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">Split</span>
+        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">Wane</span>
+        <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">Stain</span>
+        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Pitch Pocket</span>
+        <span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">Shake</span>
       </div>
     </div>
 
-    <!-- Clear Cuttings Analysis -->
+    <!-- Face 2 -->
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 2</h3>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div class="h-32 bg-gray-100 flex items-center justify-center relative">
+          <img src="/image.png" alt="Board Face 2" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <!-- Defect Tags -->
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">Knot</span>
+        <span class="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">Check</span>
+        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">Warp</span>
+        <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">Decay</span>
+        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Hole</span>
+      </div>
+    </div>
+
+    <!-- Clear Cuttings -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <!-- Face 1 Clear Cuttings -->
-      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-        <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-gray-700">6' 2 3/4" × 5 3/8"</span>
@@ -233,15 +183,15 @@
           <div class="border-t border-gray-200 pt-3">
             <div class="flex items-center justify-between">
               <span class="font-semibold text-gray-900">Total Units:</span>
-              <span class="text-2xl font-bold text-emerald-600">43</span>
+              <span class="text-xl font-bold text-gray-900">43</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Face 2 Clear Cuttings -->
-      <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-        <h4 class="font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-gray-700">3' 3 3/4" × 5 3/16"</span>
@@ -254,7 +204,7 @@
           <div class="border-t border-gray-200 pt-3">
             <div class="flex items-center justify-between">
               <span class="font-semibold text-gray-900">Total Units:</span>
-              <span class="text-2xl font-bold text-emerald-600">34</span>
+              <span class="text-xl font-bold text-gray-900">34</span>
             </div>
           </div>
         </div>
@@ -262,19 +212,23 @@
     </div>
 
     <!-- Previously Scanned Boards -->
-    <div class="bg-emerald-50 border border-emerald-200 rounded-lg shadow p-6">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-xl font-bold text-gray-900">Previously Scanned Boards</h3>
-        <div class="relative">
-          <Search class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder="Search boards..."
-            class="pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-          />
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Previously Scanned Boards</h3>
+            <p class="text-sm text-gray-600 mt-1">All boards from the current sorting order</p>
+          </div>
+          <div class="relative">
+            <Search class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search boards..."
+              class="pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 w-64"
+            />
+          </div>
         </div>
       </div>
-      <div class="text-sm text-gray-600 mb-4">All boards from the current sorting order</div>
       
       <!-- Table -->
       <div class="overflow-x-auto">
@@ -289,35 +243,135 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="board in previousBoards" :key="board.id" class="hover:bg-gray-50">
+            <tr class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">{{ board.id }}</div>
+                <div class="text-sm font-medium text-emerald-600">BRD-58918</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ board.scanTime }}</div>
+                <div class="text-sm text-gray-900">03/18/2025 3:40 PM</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
-                  {{ board.grade }}
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">-</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58917</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:40 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center space-x-2">
-                  <span v-for="defect in board.defects" :key="defect.type" 
-                        :class="getDefectBadgeClass(defect.type)"
-                        class="px-2 py-1 text-xs rounded">
-                    {{ defect.type }}
-                  </span>
-                  <span v-if="board.defectCount > 1" class="text-xs text-gray-500">
-                    +{{ board.defectCount - 1 }}
-                  </span>
+                  <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Knot</span>
+                  <span class="text-xs text-gray-500">+1</span>
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button class="text-blue-600 hover:text-blue-800 mr-2 p-1 rounded hover:bg-blue-50" title="Reprocess">
-                  <RotateCcw class="w-4 h-4" />
-                </button>
-                <button class="text-gray-600 hover:text-gray-800 px-2 py-1 rounded hover:bg-gray-100">View</button>
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58916</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:39 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Knot</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58915</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:39 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-orange-100 text-orange-800">Split</span>
+                  <span class="text-xs text-gray-500">+1</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58914</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:38 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                  2COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Knot</span>
+                  <span class="text-xs text-gray-500">+2</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -328,115 +382,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { 
   ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
-  Search, RotateCcw, ArrowLeftRight, Box, DollarSign, AlertTriangle, TrendingUp
+  Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
-
-// Defect visibility state
-const defectVisibility = ref({
-  face1: {
-    'Knot': true,
-    'Split': true,
-    'Wane': true,
-    'Stain': true,
-    'Pitch Pocket': true,
-    'Shake': true
-  },
-  face2: {
-    'Knot': true,
-    'Check': true,
-    'Warp': true,
-    'Decay': true,
-    'Hole': true
-  }
-})
-
-// Defect types for Face 1
-const defectTypes = ref([
-  { name: 'Knot', activeClass: 'bg-red-100 text-red-800' },
-  { name: 'Split', activeClass: 'bg-orange-100 text-orange-800' },
-  { name: 'Wane', activeClass: 'bg-yellow-100 text-yellow-800' },
-  { name: 'Stain', activeClass: 'bg-purple-100 text-purple-800' },
-  { name: 'Pitch Pocket', activeClass: 'bg-blue-100 text-blue-800' },
-  { name: 'Shake', activeClass: 'bg-gray-100 text-gray-800' }
-])
-
-// Defect types for Face 2
-const face2DefectTypes = ref([
-  { name: 'Knot', activeClass: 'bg-red-100 text-red-800' },
-  { name: 'Check', activeClass: 'bg-orange-100 text-orange-800' },
-  { name: 'Warp', activeClass: 'bg-yellow-100 text-yellow-800' },
-  { name: 'Decay', activeClass: 'bg-purple-100 text-purple-800' },
-  { name: 'Hole', activeClass: 'bg-blue-100 text-blue-800' }
-])
-
-// Previously scanned boards data
-const previousBoards = ref([
-  {
-    id: 'BRD-58918',
-    scanTime: '03/18/2025 3:40 PM',
-    grade: '1COMMON',
-    defects: [],
-    defectCount: 0
-  },
-  {
-    id: 'BRD-58917',
-    scanTime: '03/18/2025 3:40 PM',
-    grade: '1COMMON',
-    defects: [{ type: 'Knot' }],
-    defectCount: 1
-  },
-  {
-    id: 'BRD-58916',
-    scanTime: '03/18/2025 3:39 PM',
-    grade: '1COMMON',
-    defects: [{ type: 'Knot' }],
-    defectCount: 1
-  },
-  {
-    id: 'BRD-58915',
-    scanTime: '03/18/2025 3:39 PM',
-    grade: '1COMMON',
-    defects: [{ type: 'Split' }],
-    defectCount: 1
-  },
-  {
-    id: 'BRD-58914',
-    scanTime: '03/18/2025 3:38 PM',
-    grade: '2COMMON',
-    defects: [{ type: 'Knot' }],
-    defectCount: 2
-  }
-])
-
-// Toggle defect visibility
-const toggleDefect = (face, defectName) => {
-  defectVisibility.value[face][defectName] = !defectVisibility.value[face][defectName]
-}
-
-// Check if defect is visible
-const isDefectVisible = (face, defectName) => {
-  return defectVisibility.value[face][defectName]
-}
-
-// Get defect badge class
-const getDefectBadgeClass = (defectType) => {
-  const classes = {
-    'Knot': 'bg-red-100 text-red-800',
-    'Split': 'bg-orange-100 text-orange-800',
-    'Wane': 'bg-yellow-100 text-yellow-800',
-    'Stain': 'bg-purple-100 text-purple-800',
-    'Pitch Pocket': 'bg-blue-100 text-blue-800',
-    'Shake': 'bg-gray-100 text-gray-800',
-    'Check': 'bg-orange-100 text-orange-800',
-    'Warp': 'bg-yellow-100 text-yellow-800',
-    'Decay': 'bg-purple-100 text-purple-800',
-    'Hole': 'bg-blue-100 text-blue-800'
-  }
-  return classes[defectType] || 'bg-gray-100 text-gray-800'
-}
 </script>
