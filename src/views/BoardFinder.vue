@@ -323,25 +323,12 @@
                 <CheckCircle class="w-4 h-4 mr-2" />
                 Agree with NG AI
               </Button>
-              <Button variant="outline" size="sm" class="border-green-300 text-green-700 hover:bg-green-50 bg-green-200">
               <Button variant="outline" size="sm" class="bg-red-100 text-red-800 hover:bg-red-200 border-red-200">
                 <XCircle class="w-4 h-4 mr-2" />
                 Disagree with NG AI
               </Button>
               <Button variant="outline" size="sm" class="bg-orange-100 text-orange-800 hover:bg-orange-200 border-orange-200">
                 <FileText class="w-4 h-4 mr-2" />
-                See Rejected Grades
-              </Button>
-            </div>
-                <ThumbsUp class="w-4 h-4 mr-2" />
-                Agree with NG AI
-              </Button>
-              <Button variant="outline" size="sm" class="border-red-300 text-red-700 hover:bg-red-50 bg-red-200">
-                <ThumbsDown class="w-4 h-4 mr-2" />
-                Disagree with NG AI
-              </Button>
-              <Button variant="outline" size="sm" class="border-amber-300 text-amber-700 hover:bg-amber-50 bg-yellow-200">
-                <ClipboardList class="w-4 h-4 mr-2" />
                 See Rejected Grades
               </Button>
             </div>
