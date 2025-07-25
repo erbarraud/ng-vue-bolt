@@ -16,8 +16,8 @@
                 to="/"
                 :class="[
                   $route.name === 'Dashboard'
-                    ? 'bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/50'
-                    : 'text-emerald-100 hover:bg-emerald-800 hover:text-white',
+                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
+                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
               >
@@ -28,8 +28,8 @@
                 to="/orders"
                 :class="[
                   $route.name === 'ProductionOrders' || $route.name === 'CreateProductionOrder'
-                    ? 'bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/50'
-                    : 'text-emerald-100 hover:bg-emerald-800 hover:text-white',
+                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
+                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
               >
@@ -40,8 +40,8 @@
                 to="/finder"
                 :class="[
                   $route.name === 'BoardFinder'
-                    ? 'bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/50'
-                    : 'text-emerald-100 hover:bg-emerald-800 hover:text-white',
+                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
+                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
               >
@@ -52,8 +52,8 @@
                 to="/line"
                 :class="[
                   $route.name === 'LineCheck'
-                    ? 'bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/50'
-                    : 'text-emerald-100 hover:bg-emerald-800 hover:text-white',
+                    ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
+                    : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
                   'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
               >
@@ -65,8 +65,8 @@
                   @click="showToolsMenu = !showToolsMenu"
                   :class="[
                     ['UserManagement', 'ShiftScheduler', 'ClaimsManagement', 'LiveScanning', 'BoardInspector'].includes($route.name)
-                      ? 'bg-emerald-700 text-white shadow-lg ring-2 ring-emerald-500/50'
-                      : 'text-emerald-100 hover:bg-emerald-800 hover:text-white',
+                      ? 'bg-primary/90 text-primary-foreground shadow-lg ring-2 ring-primary/50'
+                      : 'text-emerald-100 hover:bg-primary/80 hover:text-white',
                     'px-3 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                   ]"
                 >
@@ -79,35 +79,35 @@
                 >
                   <router-link
                     to="/users"
-                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors duration-150"
+                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
                     @click="showToolsMenu = false"
                   >
                     User Management
                   </router-link>
                   <router-link
                     to="/scheduler"
-                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors duration-150"
+                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
                     @click="showToolsMenu = false"
                   >
                     Shift Scheduler
                   </router-link>
                   <router-link
                     to="/claims"
-                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors duration-150"
+                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
                     @click="showToolsMenu = false"
                   >
                     Claims Management
                   </router-link>
                   <router-link
                     to="/scanning"
-                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors duration-150"
+                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
                     @click="showToolsMenu = false"
                   >
                     Live Scanning
                   </router-link>
                   <router-link
                     to="/inspector"
-                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors duration-150"
+                    class="block px-4 py-2 text-sm text-slate-700 hover:bg-primary/10 hover:text-primary transition-colors duration-150"
                     @click="showToolsMenu = false"
                   >
                     Board Inspector
@@ -127,8 +127,8 @@
               <Bell class="h-5 w-5" />
               <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center shadow-lg">3</span>
             </button>
-            <div class="h-8 w-8 bg-white rounded-full flex items-center justify-center shadow-md ring-2 ring-emerald-500/20">
-              <User class="h-5 w-5 text-emerald-800" />
+            <div class="h-8 w-8 bg-white rounded-full flex items-center justify-center shadow-md ring-2 ring-primary/20">
+              <User class="h-5 w-5 text-primary" />
             </div>
           </div>
         </div>
