@@ -343,12 +343,16 @@ import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
   Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package
 } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import Button from '@/components/ui/button.vue'
+import Card from '@/components/ui/card.vue'
+import CardContent from '@/components/ui/card-content.vue'
+import Input from '@/components/ui/input.vue'
+import Select from '@/components/ui/select.vue'
+import Badge from '@/components/ui/badge.vue'
+import Tabs from '@/components/ui/tabs.vue'
+import TabsContent from '@/components/ui/tabs-content.vue'
+import TabsList from '@/components/ui/tabs-list.vue'
+import TabsTrigger from '@/components/ui/tabs-trigger.vue'
 
 const activeTab = ref('current')
 </script>
