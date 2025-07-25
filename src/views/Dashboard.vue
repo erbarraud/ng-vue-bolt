@@ -361,20 +361,20 @@ onMounted(() => {
       datasets: [
         {
           label: 'Grade A',
-          data: [45, 52, 48, 31, 67, 43, 51, 29, 37],
-          backgroundColor: '#10b981',
+          data: [95, 145, 98, 45, 185, 95, 125, 165, 175],
+          backgroundColor: '#059669',
           stack: 'stack1'
         },
         {
           label: 'Grade B',
-          data: [23, 31, 28, 19, 41, 27, 35, 18, 22],
-          backgroundColor: '#34d399',
+          data: [35, 45, 42, 25, 55, 35, 45, 55, 65],
+          backgroundColor: '#10b981',
           stack: 'stack1'
         },
         {
           label: 'Grade C',
-          data: [12, 18, 15, 10, 22, 14, 18, 9, 13],
-          backgroundColor: '#6ee7b7',
+          data: [25, 35, 28, 15, 35, 25, 35, 45, 35],
+          backgroundColor: '#34d399',
           stack: 'stack1'
         }
       ]
@@ -382,12 +382,34 @@ onMounted(() => {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
       plugins: {
+        tooltip: {
+          backgroundColor: 'white',
+          titleColor: '#374151',
+          bodyColor: '#6b7280',
+          borderColor: '#e5e7eb',
+          borderWidth: 1,
+          cornerRadius: 8,
+          displayColors: true,
+          callbacks: {
+            title: function(context) {
+              return `Time: ${context[0].label}`
+            },
+            label: function(context) {
+              return `${context.dataset.label}: ${context.parsed.y}`
+            }
+          }
+        },
         legend: {
           position: 'bottom',
           labels: {
             usePointStyle: true,
-            padding: 20
+            padding: 20,
+            color: '#6b7280'
           }
         }
       },
@@ -396,14 +418,18 @@ onMounted(() => {
           stacked: true,
           grid: {
             display: false
+          },
+          ticks: {
+            color: '#6b7280'
           }
         },
         y: {
           stacked: true,
           beginAtZero: true,
-          max: 280,
+          max: 300,
           ticks: {
-            stepSize: 70
+            stepSize: 70,
+            color: '#6b7280'
           }
         }
       }
