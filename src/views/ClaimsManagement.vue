@@ -43,24 +43,21 @@
           </div>
         </div>
       </div>
-          <Button variant="outline">
-
-    <!-- Action Buttons -->
-          </Button>
-          <Button variant="outline">
-        <button class="flex items-center px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center space-x-4">
+        <Button variant="outline">
           <RefreshCw class="w-4 h-4 mr-2" />
-          </Button>
-        </button>
-        <Button>
+          Refresh
+        </Button>
+        <Button variant="outline">
           <Share class="w-4 h-4 mr-2" />
           Share Claim Link
         </Button>
       </div>
-      <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5 flex items-center">
+      <Button>
         <Plus class="w-4 h-4 mr-2" />
         New Claim
-      </button>
+      </Button>
     </div>
 
     <!-- Search and Filters -->
