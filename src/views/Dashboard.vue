@@ -110,12 +110,12 @@
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                   <XAxis 
                     dataKey="time" 
-                    tick={{ fill: '#6b7280', fontSize: 12 }}
-                    axisLine={{ stroke: '#e2e8f0' }}
+                    :tick="{ fill: '#6b7280', fontSize: 12 }"
+                    :axisLine="{ stroke: '#e2e8f0' }"
                   />
                   <YAxis 
-                    tick={{ fill: '#6b7280', fontSize: 12 }}
-                    axisLine={{ stroke: '#e2e8f0' }}
+                    :tick="{ fill: '#6b7280', fontSize: 12 }"
+                    :axisLine="{ stroke: '#e2e8f0' }"
                   />
                   <Tooltip content={ChartTooltip} />
                   <Legend content={ChartLegend} />
