@@ -215,6 +215,122 @@
 
       <!-- Past Orders Tab -->
       <TabsContent value="past">
+        <!-- Search and Filters -->
+        <div class="flex items-center space-x-4 mb-6">
+          <div class="relative flex-1 max-w-md">
+            <Search class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+            <input
+              v-model="pastOrdersSearchQuery"
+              type="text"
+              placeholder="Search past orders..."
+              class="pl-10 pr-3 py-2 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+          </div>
+          <select
+            v-model="pastOrdersStatusFilter"
+            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          >
+            <option value="">All Statuses</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <select
+            v-model="pastOrdersSpeciesFilter"
+            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          >
+            <option value="">All Species</option>
+            <option value="Red Oak">Red Oak</option>
+            <option value="White Oak">White Oak</option>
+            <option value="Soft Maple">Soft Maple</option>
+            <option value="Hard Maple">Hard Maple</option>
+            <option value="Cherry">Cherry</option>
+            <option value="Walnut">Walnut</option>
+          </select>
+          <Button variant="outline" @click="clearPastOrdersFilters">
+            <X class="w-4 h-4 mr-2" />
+            Clear Filters
+          </Button>
+        </div>
+
+        <!-- Results Summary -->
+        <div class="flex items-center justify-between mb-4">
+          <div class="text-sm text-gray-600">
+            Showing {{ filteredPastOrders.length }} of {{ pastOrders.length }} past orders
+          </div>
+        </div>
+
+        <!-- Past Orders Table -->
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Order ID
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Order Name
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Customer
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Species
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Volume
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Completed Date
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Status
+                </th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider border-b-2 border-emerald-500">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr v-for="order in filteredPastOrders" :key="order.id" class="hover:bg-emerald-50 transition-colors duration-150">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-emerald-600">{{ order.id }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-gray-900">{{ order.name }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ order.customer }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ order.species }}</div>
+                  <div class="text-xs text-gray-500">{{ order.dryStatus }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ order.volume }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ order.completedDate }}</div>
+                  <div class="text-xs text-gray-500">{{ order.completedTime }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <Badge :variant="getPastOrderStatusVariant(order.status)" class="text-xs">
+                    {{ order.status }}
+                  </Badge>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div class="flex items-center space-x-2">
+                    <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                      <Eye class="w-4 h-4" />
+                    </button>
+                    <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                      <MoreHorizontal class="w-4 h-4" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </TabsContent>
     </Tabs>
   </div>
@@ -225,7 +341,8 @@ import { ref } from 'vue'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
-  Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package, Settings
+  Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package, Settings,
+  MoreHorizontal, X
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 import Card from '@/components/ui/card.vue'
@@ -239,6 +356,11 @@ import TabsList from '@/components/ui/tabs-list.vue'
 import TabsTrigger from '@/components/ui/tabs-trigger.vue'
 
 const activeTab = ref('current')
+
+// Past orders search and filter states
+const pastOrdersSearchQuery = ref('')
+const pastOrdersStatusFilter = ref('')
+const pastOrdersSpeciesFilter = ref('')
 
 // Orders data with priority field
 const upcomingOrders = ref([
@@ -318,6 +440,109 @@ const upcomingOrders = ref([
     canStart: false
   }
 ])
+
+// Past orders data
+const pastOrders = ref([
+  {
+    id: 'ORD-20250630-004',
+    name: 'Cherry - Cabinet Grade',
+    customer: 'Cabinet Masters',
+    species: 'Cherry',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '1,800 bf',
+    completedDate: 'Jun 30, 2025',
+    completedTime: '2:00 PM',
+    status: 'Completed'
+  },
+  {
+    id: 'ORD-20250629-005',
+    name: 'Hard Maple - Premium',
+    customer: 'Premium Hardwoods',
+    species: 'Hard Maple',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '3,600 bf',
+    completedDate: 'Jun 29, 2025',
+    completedTime: '4:00 PM',
+    status: 'Completed'
+  },
+  {
+    id: 'ORD-20250628-006',
+    name: 'Walnut - Select Grade',
+    customer: 'Luxury Millwork',
+    species: 'Walnut',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '1,200 bf',
+    completedDate: 'Jun 28, 2025',
+    completedTime: '3:00 PM',
+    status: 'Completed'
+  },
+  {
+    id: 'ORD-20250627-007',
+    name: 'Red Oak - Construction Grade',
+    customer: 'BuildCorp',
+    species: 'Red Oak',
+    dryStatus: 'Green (Air Dried)',
+    volume: '5,000 bf',
+    completedDate: 'Jun 27, 2025',
+    completedTime: '6:00 PM',
+    status: 'Completed'
+  },
+  {
+    id: 'ORD-20250626-008',
+    name: 'Soft Maple - Furniture Grade',
+    customer: 'Modern Furniture Co.',
+    species: 'Soft Maple',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '2,800 bf',
+    completedDate: 'Jun 26, 2025',
+    completedTime: '4:00 PM',
+    status: 'Cancelled'
+  },
+  {
+    id: 'ORD-20250625-009',
+    name: 'White Oak - Flooring Premium',
+    customer: 'Premium Flooring Inc.',
+    species: 'White Oak',
+    dryStatus: 'Kiln Dried (KD)',
+    volume: '4,500 bf',
+    completedDate: 'Jun 25, 2025',
+    completedTime: '5:30 PM',
+    status: 'Completed'
+  }
+])
+
+// Computed property for filtered past orders
+const filteredPastOrders = computed(() => {
+  return pastOrders.value.filter(order => {
+    const matchesSearch = !pastOrdersSearchQuery.value || 
+      order.name.toLowerCase().includes(pastOrdersSearchQuery.value.toLowerCase()) ||
+      order.id.toLowerCase().includes(pastOrdersSearchQuery.value.toLowerCase()) ||
+      order.customer.toLowerCase().includes(pastOrdersSearchQuery.value.toLowerCase())
+    
+    const matchesStatus = !pastOrdersStatusFilter.value || order.status === pastOrdersStatusFilter.value
+    const matchesSpecies = !pastOrdersSpeciesFilter.value || order.species === pastOrdersSpeciesFilter.value
+    
+    return matchesSearch && matchesStatus && matchesSpecies
+  })
+})
+
+// Methods for past orders
+const clearPastOrdersFilters = () => {
+  pastOrdersSearchQuery.value = ''
+  pastOrdersStatusFilter.value = ''
+  pastOrdersSpeciesFilter.value = ''
+}
+
+const getPastOrderStatusVariant = (status) => {
+  switch (status) {
+    case 'Completed':
+      return 'outline'
+    case 'Cancelled':
+      return 'destructive'
+    default:
+      return 'secondary'
+  }
+}
 </script>
 
 <style scoped>
