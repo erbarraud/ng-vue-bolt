@@ -72,6 +72,12 @@ const routes = [
     path: '/finder',
     name: 'BoardFinder',
     component: BoardFinder
+  },
+  {
+    path: '/orders/:orderId',
+    name: 'OrderDetails',
+    component: () => import('../views/OrderDetails.vue'),
+    props: true
   }
 ]
 

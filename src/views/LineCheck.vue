@@ -98,7 +98,9 @@
                       <div class="text-white font-bold text-lg"># LV-1001</div>
                       <div class="flex items-center text-gray-200 text-sm">
                         <Hash class="w-3 h-3 mr-1" />
-                        B-789
+                        <router-link to="/orders/ORD-20250701-001" class="text-emerald-400 hover:text-emerald-300 hover:underline">
+                          B-789
+                        </router-link>
                       </div>
                     </div>
                     <div class="flex items-center space-x-3">
@@ -129,7 +131,9 @@
                       <div class="text-white font-bold text-lg"># LV-1002</div>
                       <div class="flex items-center text-gray-200 text-sm">
                         <Hash class="w-3 h-3 mr-1" />
-                        B-790
+                        <router-link to="/orders/ORD-20250701-002" class="text-emerald-400 hover:text-emerald-300 hover:underline">
+                          B-790
+                        </router-link>
                       </div>
                     </div>
                     <div class="flex items-center space-x-3">
@@ -186,7 +190,11 @@
           <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
               <div class="text-gray-600 text-sm">Batch ID</div>
-              <div class="text-xl font-semibold text-gray-900">B-4873</div>
+              <div class="text-xl font-semibold text-gray-900">
+                <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline">
+                  B-4873
+                </router-link>
+              </div>
             </div>
             <div>
               <div class="text-gray-600 text-sm">Species</div>

@@ -127,7 +127,12 @@
               <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
               <div>
                 <div class="font-semibold text-slate-900">Red Oak - Premium Run</div>
-                <div class="text-xs text-slate-500">Order B-4873 • Started 09:15 AM</div>
+                <div class="text-xs text-slate-500">
+                  <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                    Order B-4873
+                  </router-link>
+                  • Started 09:15 AM
+                </div>
               </div>
               <div class="text-sm text-slate-600">Johnson Lumber Co.</div>
               <Badge variant="default" class="bg-emerald-100 text-emerald-800">Active</Badge>
@@ -152,7 +157,12 @@
               <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
               <div>
                 <div class="font-semibold text-slate-900">Soft Maple - Special Order</div>
-                <div class="text-xs text-slate-500">Order B-4872 • 08:30 AM - 11:45 AM</div>
+                <div class="text-xs text-slate-500">
+                  <router-link to="/orders/ORD-20250701-002" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                    Order B-4872
+                  </router-link>
+                  • 08:30 AM - 11:45 AM
+                </div>
               </div>
               <div class="text-sm text-slate-600">Artisan Furniture</div>
               <Badge variant="secondary">Completed</Badge>
@@ -177,7 +187,12 @@
               <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
               <div>
                 <div class="font-semibold text-slate-900">White Oak - Flooring</div>
-                <div class="text-xs text-slate-500">Order B-4871 • 07:15 AM - 10:30 AM</div>
+                <div class="text-xs text-slate-500">
+                  <router-link to="/orders/ORD-20250702-003" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                    Order B-4871
+                  </router-link>
+                  • 07:15 AM - 10:30 AM
+                </div>
               </div>
               <div class="text-sm text-slate-600">Flooring Inc.</div>
               <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-semibold">Completed</span>
@@ -202,7 +217,12 @@
               <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
               <div>
                 <div class="font-semibold text-slate-900">Cherry - Cabinet Grade</div>
-                <div class="text-xs text-slate-500">Order B-4870 • 14:20 PM - 17:45 PM</div>
+                <div class="text-xs text-slate-500">
+                  <router-link to="/orders/ORD-20250630-004" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                    Order B-4870
+                  </router-link>
+                  • 14:20 PM - 17:45 PM
+                </div>
               </div>
               <div class="text-sm text-slate-600">Cabinet Masters</div>
               <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-semibold">Completed</span>
@@ -227,7 +247,12 @@
               <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
               <div>
                 <div class="font-semibold text-slate-900">Hard Maple - Premium</div>
-                <div class="text-xs text-slate-500">Order B-4869 • 09:00 AM - 13:30 PM</div>
+                <div class="text-xs text-slate-500">
+                  <router-link to="/orders/ORD-20250629-005" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                    Order B-4869
+                  </router-link>
+                  • 09:00 AM - 13:30 PM
+                </div>
               </div>
               <div class="text-sm text-slate-600">Premium Hardwoods</div>
               <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-semibold">Completed</span>
@@ -252,7 +277,12 @@
               <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
               <div>
                 <div class="font-semibold text-slate-900">Walnut - Select Grade</div>
-                <div class="text-xs text-slate-500">Order B-4868 • 11:15 AM - 15:20 PM</div>
+                <div class="text-xs text-slate-500">
+                  <router-link to="/orders/ORD-20250628-006" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">
+                    Order B-4868
+                  </router-link>
+                  • 11:15 AM - 15:20 PM
+                </div>
               </div>
               <div class="text-sm text-slate-600">Luxury Millwork</div>
               <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-semibold">Completed</span>

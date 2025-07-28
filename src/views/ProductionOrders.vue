@@ -31,7 +31,7 @@
                 Red Oak - Prime Run
               </h3>
               <div class="text-sm text-gray-500">
-                ID: ORD-20250701-001 | Customer: Johnson Lumber Co.
+                ID: <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">ORD-20250701-001</router-link> | Customer: Johnson Lumber Co.
               </div>
             </div>
             <Badge variant="secondary" class="border">Running</Badge>
@@ -151,7 +151,11 @@
                 <div class="flex items-start">
                   <div>
                     <div class="text-sm font-bold text-gray-900">{{ order.name }}</div>
-                    <div class="text-xs text-emerald-600 font-medium">{{ order.id }}</div>
+                    <div class="text-xs text-emerald-600 font-medium">
+                      <router-link :to="`/orders/${order.id}`" class="hover:text-emerald-800 hover:underline">
+                        {{ order.id }}
+                      </router-link>
+                    </div>
                     <div class="text-xs text-gray-500">{{ order.volume }}</div>
                   </div>
                 </div>

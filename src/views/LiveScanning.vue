@@ -80,11 +80,15 @@
             <div class="space-y-4">
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <button class="text-emerald-600 hover:text-emerald-700 font-medium">LV-1001</button>
+                  <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                    LV-1001
+                  </router-link>
                   <span class="text-emerald-400 font-semibold">$12.50</span>
                 </div>
                 <div class="text-sm text-gray-600">
-                  <div>Batch: B-789</div>
+                  <div>
+                    Batch: <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-789</router-link>
+                  </div>
                   <div>Grade: FAS</div>
                   <div>Scanned: 05:05:23 PM</div>
                 </div>
@@ -92,11 +96,15 @@
 
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <button class="text-emerald-600 hover:text-emerald-700 font-medium">LV-1002</button>
+                  <router-link to="/orders/ORD-20250701-002" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                    LV-1002
+                  </router-link>
                   <span class="text-emerald-400 font-semibold">$18.75</span>
                 </div>
                 <div class="text-sm text-gray-600">
-                  <div>Batch: B-790</div>
+                  <div>
+                    Batch: <router-link to="/orders/ORD-20250701-002" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-790</router-link>
+                  </div>
                   <div>Grade: 1 Common</div>
                   <div>Scanned: 05:06:01 PM</div>
                 </div>
@@ -104,11 +112,15 @@
 
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <button class="text-emerald-600 hover:text-emerald-700 font-medium">LV-1003</button>
+                  <router-link to="/orders/ORD-20250628-006" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                    LV-1003
+                  </router-link>
                   <span class="text-emerald-400 font-semibold">$9.25</span>
                 </div>
                 <div class="text-sm text-gray-600">
-                  <div>Batch: B-791</div>
+                  <div>
+                    Batch: <router-link to="/orders/ORD-20250628-006" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-791</router-link>
+                  </div>
                   <div>Grade: 2 Common</div>
                   <div>Scanned: 05:06:45 PM</div>
                 </div>
@@ -116,11 +128,15 @@
 
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <button class="text-emerald-600 hover:text-emerald-700 font-medium">LV-1004</button>
+                  <router-link to="/orders/ORD-20250629-005" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                    LV-1004
+                  </router-link>
                   <span class="text-emerald-400 font-semibold">$22.00</span>
                 </div>
                 <div class="text-sm text-gray-600">
-                  <div>Batch: B-792</div>
+                  <div>
+                    Batch: <router-link to="/orders/ORD-20250629-005" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-792</router-link>
+                  </div>
                   <div>Grade: FAS</div>
                   <div>Scanned: 05:06:50 PM</div>
                 </div>

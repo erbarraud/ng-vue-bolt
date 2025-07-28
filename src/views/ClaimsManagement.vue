@@ -103,13 +103,21 @@
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="claim in filteredClaims" :key="claim.id" class="hover:bg-emerald-50 transition-colors duration-150">
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm font-medium text-emerald-600">{{ claim.id }}</div>
+              <div class="text-sm font-medium">
+                <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline">
+                  {{ claim.id }}
+                </router-link>
+              </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ claim.customer }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ claim.batch }}</div>
+              <div class="text-sm text-gray-900">
+                <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline">
+                  {{ claim.batch }}
+                </router-link>
+              </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ claim.issueType }}</div>

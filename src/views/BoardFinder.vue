@@ -317,7 +317,11 @@
                 <div class="font-semibold text-gray-900">{{ board.id }}</div>
                 <div class="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded">{{ board.grade }}</div>
               </div>
-              <div class="text-xs text-gray-500 mt-1">{{ board.batch }}</div>
+              <div class="text-xs text-gray-500 mt-1">
+                <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline">
+                  {{ board.batch }}
+                </router-link>
+              </div>
             </div>
           </div>
         </div>

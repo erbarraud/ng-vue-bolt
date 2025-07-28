@@ -22,7 +22,9 @@
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-4">
           <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-            <ChevronLeft class="w-5 h-5" />
+            <div class="text-sm text-gray-600">
+              Order: <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium">B-4873</router-link> - Red Oak 4/4 Premium
+            </div>
           </button>
           <div class="flex items-center space-x-3">
             <h2 class="text-2xl font-bold text-gray-900">BRD-4625</h2>
