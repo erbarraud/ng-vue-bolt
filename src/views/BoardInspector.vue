@@ -198,6 +198,22 @@
           {{ defect.name }}
         </button>
       </div>
+      <!-- Defect Tags -->
+      <div class="flex flex-wrap gap-2 mt-3">
+        <button 
+          v-for="defect in face1DefectTypes" 
+          :key="defect.name"
+          @click="toggleDefect('face1', defect.name)"
+          :class="[
+            'px-3 py-1 text-sm font-medium rounded-full transition-all duration-200 border-2',
+            isDefectVisible('face1', defect.name)
+              ? `${defect.activeClass} ${defect.activeBorder} shadow-md`
+              : `${defect.inactiveClass} ${defect.inactiveBorder} opacity-50 hover:opacity-75`
+          ]"
+        >
+          {{ defect.name }}
+        </button>
+      </div>
     </div>
 
     <!-- Face 2 -->
@@ -232,6 +248,22 @@
             ></div>
           </div>
         </div>
+      </div>
+      <!-- Defect Tags -->
+      <div class="flex flex-wrap gap-2 mt-3">
+        <button 
+          v-for="defect in face2DefectTypes" 
+          :key="defect.name"
+          @click="toggleDefect('face2', defect.name)"
+          :class="[
+            'px-3 py-1 text-sm font-medium rounded-full transition-all duration-200 border-2',
+            isDefectVisible('face2', defect.name)
+              ? `${defect.activeClass} ${defect.activeBorder} shadow-md`
+              : `${defect.inactiveClass} ${defect.inactiveBorder} opacity-50 hover:opacity-75`
+          ]"
+        >
+          {{ defect.name }}
+        </button>
       </div>
       <!-- Defect Tags -->
       <div class="flex flex-wrap gap-2 mt-3">
