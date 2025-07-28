@@ -162,8 +162,8 @@
         <div 
           class="bg-gray-100 flex items-center justify-center relative"
           @mousemove="handleMouseMove"
-          @mouseenter="showMagnifier = magnifierEnabled"
-          @mouseleave="showMagnifier = false"
+          @mouseenter="handleMouseEnter"
+          @mouseleave="handleMouseLeave"
           ref="face1Container"
         >
           <img 
@@ -184,7 +184,7 @@
               height: '150px',
               backgroundImage: `url(/image.png)`,
               backgroundSize: `${magnifierZoom * 100}%`,
-              backgroundPosition: `-${(magnifierPosition.mouseX - magnifierPosition.containerX) * magnifierZoom - 75}px -${(magnifierPosition.mouseY - magnifierPosition.containerY) * magnifierZoom - 75}px`,
+              backgroundPosition: `-${magnifierPosition.mouseX * magnifierZoom - 75}px -${magnifierPosition.mouseY * magnifierZoom - 75}px`,
               backgroundRepeat: 'no-repeat'
             }"
           >
@@ -209,8 +209,8 @@
         <div 
           class="bg-gray-100 flex items-center justify-center relative"
           @mousemove="handleMouseMove"
-          @mouseenter="showMagnifier = magnifierEnabled"
-          @mouseleave="showMagnifier = false"
+          @mouseenter="handleMouseEnter"
+          @mouseleave="handleMouseLeave"
           ref="face2Container"
         >
           <img 
@@ -231,7 +231,7 @@
               height: '150px',
               backgroundImage: `url(/image.png)`,
               backgroundSize: `${magnifierZoom * 100}%`,
-              backgroundPosition: `-${(magnifierPosition.mouseX - magnifierPosition.containerX) * magnifierZoom - 75}px -${(magnifierPosition.mouseY - magnifierPosition.containerY) * magnifierZoom - 75}px`,
+              backgroundPosition: `-${magnifierPosition.mouseX * magnifierZoom - 75}px -${magnifierPosition.mouseY * magnifierZoom - 75}px`,
               backgroundRepeat: 'no-repeat'
             }"
           >
@@ -511,23 +511,34 @@ const handleMouseMove = (event) => {
   const mouseY = event.clientY - rect.top
   
   // Position magnifier above and to the right of cursor
-  const magnifierX = mouseX + 20
+  let magnifierX = mouseX + 20
+  let magnifierY = mouseY - 170
   
   // Keep magnifier within container bounds
   if (magnifierX + 150 > rect.width) {
-    magnifierX = mouseX - containerX - 170
+    magnifierX = mouseX - 170
   }
   if (magnifierY < 0) {
-    magnifierY = mouseY - containerY + 20
+    magnifierY = mouseY + 20
   }
   
   magnifierPosition.value = {
     x: magnifierX,
     y: magnifierY,
-    mouseX,
-    mouseY,
-    containerX,
-    containerY
+    mouseX: mouseX,
+    mouseY: mouseY
   }
+}
+
+// Handle mouse enter
+const handleMouseEnter = () => {
+  if (magnifierEnabled.value) {
+    showMagnifier.value = true
+  }
+}
+
+// Handle mouse leave
+const handleMouseLeave = () => {
+  showMagnifier.value = false
 }
 </script>
