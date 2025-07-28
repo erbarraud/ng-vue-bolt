@@ -24,6 +24,133 @@
           <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
             <ChevronLeft class="w-5 h-5" />
           </button>
+        </div>
+
+        <!-- Board Image with Magnifier -->
+        <div class="relative bg-gray-100 rounded-lg overflow-hidden">
+          <img 
+            ref="boardImage"
+            src="https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Board BRD-4625"
+            class="w-full h-96 object-cover"
+            :class="{ 'cursor-crosshair': magnifierEnabled }"
+            @mousemove="updateMagnifier"
+            @mouseleave="hideMagnifier"
+          />
+          
+          <!-- Magnifier Window -->
+          <div
+            v-if="magnifierEnabled && magnifierVisible"
+            class="absolute pointer-events-none z-50 border-2 border-white shadow-lg rounded-lg overflow-hidden"
+            :style="magnifierStyle"
+          >
+            <!-- Crosshair overlay -->
+            <div class="absolute inset-0 pointer-events-none">
+              <div class="absolute top-1/2 left-0 right-0 h-px bg-emerald-500 opacity-50 transform -translate-y-px"></div>
+              <div class="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-500 opacity-50 transform -translate-x-px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  TreePine, 
+  Droplets, 
+  Clock, 
+  Ruler, 
+  ArrowLeftRight, 
+  Layers, 
+  Box, 
+  AlertTriangle, 
+  TrendingUp, 
+  ZoomIn, 
+  EyeOff,
+  List
+} from 'lucide-vue-next'
+import Button from '@/components/ui/button.vue'
+
+// Magnifier state
+const magnifierEnabled = ref(false)
+const magnifierVisible = ref(false)
+const magnifierX = ref(0)
+const magnifierY = ref(0)
+const boardImage = ref(null)
+
+// Magnifier configuration
+const magnifierSize = 180
+const magnifierZoom = 4
+const magnifierOffset = 20
+
+// Toggle magnifier
+const toggleMagnifier = () => {
+  magnifierEnabled.value = !magnifierEnabled.value
+  if (!magnifierEnabled.value) {
+    magnifierVisible.value = false
+  }
+}
+
+// Update magnifier position and visibility
+const updateMagnifier = (event) => {
+  if (!magnifierEnabled.value || !boardImage.value) return
+  
+  const rect = boardImage.value.getBoundingClientRect()
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+  
+  // Show magnifier when hovering over image
+  magnifierVisible.value = true
+  
+  // Calculate magnifier position (above cursor by default)
+  let magnifierTop = event.clientY - magnifierSize - magnifierOffset
+  let magnifierLeft = event.clientX - magnifierSize / 2
+  
+  // If magnifier would go above viewport, position it below cursor
+  if (magnifierTop < 0) {
+    magnifierTop = event.clientY + magnifierOffset
+  }
+  
+  // Keep magnifier within viewport bounds
+  magnifierLeft = Math.max(0, Math.min(magnifierLeft, window.innerWidth - magnifierSize))
+  
+  magnifierX.value = magnifierLeft
+  magnifierY.value = magnifierTop
+}
+
+// Hide magnifier
+const hideMagnifier = () => {
+  magnifierVisible.value = false
+}
+
+// Computed magnifier styles
+const magnifierStyle = computed(() => {
+  if (!boardImage.value) return {}
+  
+  const rect = boardImage.value.getBoundingClientRect()
+  const imageX = event?.clientX - rect.left || 0
+  const imageY = event?.clientY - rect.top || 0
+  
+  return {
+    width: `${magnifierSize}px`,
+    height: `${magnifierSize}px`,
+    left: `${magnifierX.value}px`,
+    top: `${magnifierY.value}px`,
+    position: 'fixed',
+    backgroundImage: `url(${boardImage.value?.src})`,
+    backgroundSize: `${magnifierZoom * 100}% ${magnifierZoom * 100}%`,
+    backgroundPosition: `-${imageX * magnifierZoom - magnifierSize / 2}px -${imageY * magnifierZoom - magnifierSize / 2}px`,
+    backgroundRepeat: 'no-repeat',
+    border: '3px solid #10b981',
+    borderRadius: '8px'
+  }
+})
+</script>
           <div class="flex items-center space-x-3">
             <h2 class="text-2xl font-bold text-gray-900">BRD-4625</h2>
             <span class="px-3 py-1 bg-emerald-600 text-white text-sm font-medium rounded-full">1COMMON</span>
