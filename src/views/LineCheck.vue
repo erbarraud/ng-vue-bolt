@@ -692,6 +692,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { 
   Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info, Settings, Expand, X, Download, Play
+} from 'lucide-vue-next'
 
 const row1ViewMode = ref('grid')
 const row2ViewMode = ref('grid')
