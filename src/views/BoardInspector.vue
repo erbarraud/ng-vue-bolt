@@ -128,3 +128,5 @@
         </button>
         <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <EyeOff class="w-4 h-4 mr-2" />
+          Hide Defects
+        </button>
