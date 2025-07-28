@@ -214,14 +214,14 @@ const totalBoardsScanned = computed(() => recentBoards.value.length + 1247)
 
 // Generate a random board
 const generateRandomBoard = () => {
-  const boardNumber = Math.floor(Math.random() * 9999) + 1000
+  const boardNumber = Math.floor(Math.random() * 9999) + 2000
   const grade = sampleGrades[Math.floor(Math.random() * sampleGrades.length)]
   const batch = sampleBatches[Math.floor(Math.random() * sampleBatches.length)]
   const orderId = sampleOrders[Math.floor(Math.random() * sampleOrders.length)]
   const value = (Math.random() * 30 + 5).toFixed(2)
   
   return {
-    id: `LV-${boardNumber}`,
+    id: `BRD-${boardNumber}`,
     grade,
     batch,
     orderId,
@@ -258,6 +258,9 @@ const startScanning = () => {
   
   // Reset countdown
   countdown.value = Math.floor(scanInterval.value / 1000)
+  
+  // Add a board immediately when starting
+  addNewBoard()
   
   // Start countdown timer
   countdownTimer = setInterval(() => {
@@ -314,7 +317,7 @@ const updateTime = () => {
 const initializeSampleBoards = () => {
   const initialBoards = [
     {
-      id: 'LV-1004',
+      id: 'BRD-1004',
       grade: 'FAS',
       batch: 'B-792',
       orderId: 'ORD-20250629-005',
@@ -323,7 +326,7 @@ const initializeSampleBoards = () => {
       isNew: false
     },
     {
-      id: 'LV-1003',
+      id: 'BRD-1003',
       grade: '2 Common',
       batch: 'B-791',
       orderId: 'ORD-20250628-006',
@@ -332,7 +335,7 @@ const initializeSampleBoards = () => {
       isNew: false
     },
     {
-      id: 'LV-1002',
+      id: 'BRD-1002',
       grade: '1 Common',
       batch: 'B-790',
       orderId: 'ORD-20250701-002',
@@ -341,7 +344,7 @@ const initializeSampleBoards = () => {
       isNew: false
     },
     {
-      id: 'LV-1001',
+      id: 'BRD-1001',
       grade: 'FAS',
       batch: 'B-789',
       orderId: 'ORD-20250701-001',
