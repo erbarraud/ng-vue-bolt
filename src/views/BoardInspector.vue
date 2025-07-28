@@ -114,21 +114,14 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           @click="toggleMagnifier"
           :class="[
             'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
             magnifierEnabled 
               ? 'text-emerald-600 bg-emerald-50 border-2 border-emerald-300' 
               : 'text-gray-600 bg-white border-2 border-gray-300 hover:bg-gray-50'
-          ]">
-          @click="toggleMagnifier"
-          :class="[
-            'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
-            magnifierEnabled 
-              ? 'text-emerald-600 bg-emerald-50 border-2 border-emerald-300' 
-              : 'text-gray-600 bg-white border-2 border-gray-300 hover:bg-gray-50'
-          ]">
+          ]"
+        >
           <ZoomIn class="w-4 h-4 mr-2" />
           {{ magnifierEnabled ? 'Disable Magnifier' : 'Enable Magnifier' }}
         </button>
