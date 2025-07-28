@@ -489,6 +489,90 @@ const face2Container = ref(null)
 const face1Image = ref(null)
 const face2Image = ref(null)
 
+// Defect types with styling
+const face1DefectTypes = ref([
+  { 
+    name: 'Knot', 
+    activeClass: 'bg-red-500 text-white', 
+    activeBorder: 'border-red-600',
+    inactiveClass: 'bg-red-100 text-red-600',
+    inactiveBorder: 'border-red-300'
+  },
+  { 
+    name: 'Split', 
+    activeClass: 'bg-orange-500 text-white', 
+    activeBorder: 'border-orange-600',
+    inactiveClass: 'bg-orange-100 text-orange-600',
+    inactiveBorder: 'border-orange-300'
+  },
+  { 
+    name: 'Wane', 
+    activeClass: 'bg-yellow-500 text-white', 
+    activeBorder: 'border-yellow-600',
+    inactiveClass: 'bg-yellow-100 text-yellow-600',
+    inactiveBorder: 'border-yellow-300'
+  },
+  { 
+    name: 'Stain', 
+    activeClass: 'bg-purple-500 text-white', 
+    activeBorder: 'border-purple-600',
+    inactiveClass: 'bg-purple-100 text-purple-600',
+    inactiveBorder: 'border-purple-300'
+  },
+  { 
+    name: 'Pitch Pocket', 
+    activeClass: 'bg-blue-500 text-white', 
+    activeBorder: 'border-blue-600',
+    inactiveClass: 'bg-blue-100 text-blue-600',
+    inactiveBorder: 'border-blue-300'
+  },
+  { 
+    name: 'Shake', 
+    activeClass: 'bg-gray-500 text-white', 
+    activeBorder: 'border-gray-600',
+    inactiveClass: 'bg-gray-100 text-gray-600',
+    inactiveBorder: 'border-gray-300'
+  }
+])
+
+const face2DefectTypes = ref([
+  { 
+    name: 'Knot', 
+    activeClass: 'bg-red-500 text-white', 
+    activeBorder: 'border-red-600',
+    inactiveClass: 'bg-red-100 text-red-600',
+    inactiveBorder: 'border-red-300'
+  },
+  { 
+    name: 'Check', 
+    activeClass: 'bg-orange-500 text-white', 
+    activeBorder: 'border-orange-600',
+    inactiveClass: 'bg-orange-100 text-orange-600',
+    inactiveBorder: 'border-orange-300'
+  },
+  { 
+    name: 'Warp', 
+    activeClass: 'bg-yellow-500 text-white', 
+    activeBorder: 'border-yellow-600',
+    inactiveClass: 'bg-yellow-100 text-yellow-600',
+    inactiveBorder: 'border-yellow-300'
+  },
+  { 
+    name: 'Decay', 
+    activeClass: 'bg-green-500 text-white', 
+    activeBorder: 'border-green-600',
+    inactiveClass: 'bg-green-100 text-green-600',
+    inactiveBorder: 'border-green-300'
+  },
+  { 
+    name: 'Hole', 
+    activeClass: 'bg-blue-500 text-white', 
+    activeBorder: 'border-blue-600',
+    inactiveClass: 'bg-blue-100 text-blue-600',
+    inactiveBorder: 'border-blue-300'
+  }
+])
+
 // Toggle magnifier
 const toggleMagnifier = () => {
   magnifierEnabled.value = !magnifierEnabled.value
