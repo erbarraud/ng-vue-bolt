@@ -622,6 +622,26 @@ const onImageLoad = () => {
   // Image loaded, magnifier ready
 }
 
+// Defect visibility state
+const visibleDefects = ref({
+  face1: new Set(['Knot', 'Split', 'Wane', 'Stain', 'Pitch Pocket', 'Shake']),
+  face2: new Set(['Knot', 'Split', 'Wane', 'Stain', 'Pitch Pocket', 'Shake'])
+})
+
+// Toggle defect visibility
+function toggleDefect(face, defectName) {
+  if (visibleDefects.value[face].has(defectName)) {
+    visibleDefects.value[face].delete(defectName)
+  } else {
+    visibleDefects.value[face].add(defectName)
+  }
+}
+
+// Check if defect is visible
+function isDefectVisible(face, defectName) {
+  return visibleDefects.value[face].has(defectName)
+}
+
 // Computed styles for magnifier
 const magnifierStyle = computed(() => {
   const { x, y } = mousePosition.value
