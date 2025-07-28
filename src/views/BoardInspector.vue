@@ -155,9 +155,9 @@
       <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
         <div 
           class="bg-gray-100 flex items-center justify-center relative"
-          @mousemove="handleMouseMove"
-          @mouseenter="showMagnifier = magnifierEnabled"
-          @mouseleave="showMagnifier = false"
+          @mousemove="(event) => handleMouseMove(event, 'face1')"
+          @mouseenter="() => handleMouseEnter('face1')"
+          @mouseleave="handleMouseLeave"
           ref="face1Container"
         >
           <img 
@@ -170,7 +170,7 @@
           
           <!-- Magnifier Window -->
           <div
-            v-if="showMagnifier && magnifierEnabled"
+            v-if="showMagnifier && magnifierEnabled && activeMagnifierBoard === 'face1'"
             :style="magnifierStyle"
             class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
           >
@@ -198,9 +198,9 @@
       <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
         <div 
           class="bg-gray-100 flex items-center justify-center relative"
-          @mousemove="handleMouseMove"
-          @mouseenter="showMagnifier = magnifierEnabled"
-          @mouseleave="showMagnifier = false"
+          @mousemove="(event) => handleMouseMove(event, 'face2')"
+          @mouseenter="() => handleMouseEnter('face2')"
+          @mouseleave="handleMouseLeave"
           ref="face2Container"
         >
           <img 
@@ -213,7 +213,7 @@
           
           <!-- Magnifier Window -->
           <div
-            v-if="showMagnifier && magnifierEnabled"
+            v-if="showMagnifier && magnifierEnabled && activeMagnifierBoard === 'face2'"
             :style="magnifierStyle"
             class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
           >
