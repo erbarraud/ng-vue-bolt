@@ -119,4 +119,7 @@
           :class="[
             'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
             magnifierEnabled 
-              ? 'text-emerald-600 bg-
+              ? 'text-emerald-600 bg-emerald-100 border-emerald-300' 
+              : 'text-gray-600 bg-white border-2 border-gray-300'
+          ]"
+        >
