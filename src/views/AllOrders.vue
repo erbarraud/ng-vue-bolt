@@ -1,7 +1,18 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Loading State -->
+    <div v-if="isLoading" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <LoadingSkeleton variant="text" :rows="2" container-class="w-64" />
+        <LoadingSkeleton variant="text" :rows="1" container-class="w-32" />
+      </div>
+      <div class="bg-white rounded-lg shadow p-6">
+        <LoadingSkeleton variant="table" :rows="8" />
+      </div>
+    </div>
+
     <!-- Page Header -->
-    <div class="flex items-center justify-between mb-8">
+    <div v-else class="flex items-center justify-between mb-8">
       <div>
         <h1 class="text-4xl font-extrabold text-gray-900">All Orders</h1>
         <p class="text-gray-600 mt-1">View and manage all production orders</p>
@@ -189,6 +200,8 @@ import { ref, computed } from 'vue'
 import { Search, Plus, X, Edit, Eye, MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 import Badge from '@/components/ui/badge.vue'
+import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
+import { useAsyncState } from '@/composables/useAsyncState.js'
 
 // Filters
 const searchQuery = ref('')
@@ -348,4 +361,18 @@ const getStatusVariant = (status) => {
       return 'secondary'
   }
 }
+
+// Simulate loading state
+const loadOrders = async () => {
+  await new Promise(resolve => setTimeout(resolve, 800))
+  return allOrders.value
+}
+
+const { isLoading } = useAsyncState(
+  loadOrders,
+  null,
+  {
+    immediate: true
+  }
+)
 </script>

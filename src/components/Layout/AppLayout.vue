@@ -1,4 +1,5 @@
 <template>
+  <ErrorBoundary>
   <div class="min-h-screen bg-slate-50">
     <!-- Navigation Header -->
     <nav class="shadow-xl" style="background-color: #213C33; border-bottom: 2px solid #4ED586;">
@@ -157,6 +158,7 @@
       </div>
     </footer>
   </div>
+  </ErrorBoundary>
 </template>
 
 <script setup>
@@ -165,6 +167,7 @@ import {
   BarChart3, Package, Search, Activity, ChevronDown,
   Bell, User
 } from 'lucide-vue-next'
+import ErrorBoundary from '@/components/error/error-boundary.vue'
 
 const showToolsMenu = ref(false)
 </script>

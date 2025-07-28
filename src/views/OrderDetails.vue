@@ -1,10 +1,27 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-6 bg-gray-50 min-h-screen">
     <!-- Loading State -->
-    <div v-if="loading" class="flex items-center justify-center min-h-64">
-      <div class="text-center">
-        <div class="w-16 h-16 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <div class="text-gray-600">Loading order details...</div>
+    <div v-if="loading" class="space-y-8">
+      <div class="flex items-center justify-between">
+        <LoadingSkeleton variant="text" :rows="2" container-class="w-64" />
+        <LoadingSkeleton variant="text" :rows="1" container-class="w-32" />
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <LoadingSkeleton variant="card" v-for="i in 4" :key="i" />
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-8">
+          <LoadingSkeleton variant="card" />
+          <LoadingSkeleton variant="card" />
+          <LoadingSkeleton variant="list" :rows="4" />
+        </div>
+        <div class="space-y-8">
+          <LoadingSkeleton variant="card" />
+          <LoadingSkeleton variant="card" />
+          <LoadingSkeleton variant="card" />
+        </div>
       </div>
     </div>
 
@@ -288,6 +305,7 @@ import Button from '@/components/ui/button.vue'
 import Card from '@/components/ui/card.vue'
 import CardContent from '@/components/ui/card-content.vue'
 import Badge from '@/components/ui/badge.vue'
+import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
 
 const route = useRoute()
 const router = useRouter()

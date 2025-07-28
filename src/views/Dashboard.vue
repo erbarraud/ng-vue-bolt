@@ -1,8 +1,29 @@
 <template>
   <div class="w-full px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Loading State -->
+    <div v-if="isLoading" class="space-y-8">
+      <LoadingSkeleton variant="card" />
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <LoadingSkeleton variant="list" :rows="6" />
+        <LoadingSkeleton variant="card" />
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div v-else-if="error" class="flex items-center justify-center min-h-64">
+      <div class="text-center space-y-4">
+        <AlertCircle class="w-16 h-16 text-destructive mx-auto" />
+        <h2 class="text-xl font-semibold text-foreground">Failed to load dashboard</h2>
+        <p class="text-muted-foreground">{{ error.message }}</p>
+        <Button @click="retryLoad" variant="outline">
+          <RefreshCw class="w-4 h-4 mr-2" />
+          Try Again
+        </Button>
+      </div>
+    </div>
+
     <!-- First Line: KPIs and Chart -->
-    <!-- Combined KPIs and Chart Container -->
-    <Card class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
+    <Card v-else class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
       <CardContent class="p-6">
         <!-- Header with Shift Status -->
         <div class="flex items-center justify-between mb-6">
@@ -346,10 +367,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import {
   Calendar, Clock, DollarSign, Package, MessageSquare, TrendingUp, TrendingDown,
-  MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText
+  MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText, RefreshCw
 } from 'lucide-vue-next'
 import { Bar } from 'vue-chartjs'
 import {
@@ -365,6 +386,8 @@ import Button from '@/components/ui/button.vue'
 import Card from '@/components/ui/card.vue'
 import CardContent from '@/components/ui/card-content.vue'
 import Badge from '@/components/ui/badge.vue'
+import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
+import { useAsyncState } from '@/composables/useAsyncState.js'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -444,4 +467,27 @@ const chartOptions = ref({
     }
   }
 })
+
+// Simulate async data loading
+const loadDashboardData = async () => {
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  
+  // Simulate potential error (uncomment to test error state)
+  // if (Math.random() > 0.8) {
+  //   throw new Error('Failed to fetch dashboard data')
+  // }
+  
+  return { success: true }
+}
+
+const { isLoading, error, execute: retryLoad } = useAsyncState(
+  loadDashboardData,
+  null,
+  {
+    immediate: false
+  }
+)
+
+onMounted(() => retryLoad())</script>
 </script>
