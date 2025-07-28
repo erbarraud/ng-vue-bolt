@@ -115,8 +115,14 @@
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
         <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
-          <ZoomIn class="w-4 h-4 mr-2" />
-          Enable Magnifier
+          @click="toggleMagnifier"
+          :class="[
+            'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
+            magnifierEnabled 
+              ? 'text-emerald-600 bg-emerald-50 border-2 border-emerald-300' 
+              : 'text-gray-600 bg-white border-2 border-gray-300 hover:bg-gray-50'
+          ]">
+          {{ magnifierEnabled ? 'Disable Magnifier' : 'Enable Magnifier' }}
         </button>
         <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <EyeOff class="w-4 h-4 mr-2" />
@@ -145,8 +151,36 @@
     <div class="mb-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 1</h3>
       <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
-        <div class="bg-gray-100 flex items-center justify-center relative">
-          <img src="/image.png" alt="Board Face 1" class="w-full h-auto object-contain" />
+        <div 
+          class="bg-gray-100 flex items-center justify-center relative"
+          @mousemove="handleMouseMove"
+          @mouseenter="showMagnifier = magnifierEnabled"
+          @mouseleave="showMagnifier = false"
+          ref="face1Container"
+        >
+          <img 
+            src="/image.png" 
+            alt="Board Face 1" 
+            class="w-full h-auto object-contain"
+            ref="face1Image"
+          />
+          
+          <!-- Magnifier -->
+          <div
+            v-if="showMagnifier && magnifierEnabled"
+            class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-10"
+            :style="{
+              left: magnifierPosition.x + 'px',
+              top: magnifierPosition.y + 'px',
+              width: '150px',
+              height: '150px',
+              backgroundImage: `url(/image.png)`,
+              backgroundSize: `${magnifierZoom * 100}%`,
+              backgroundPosition: `-${(magnifierPosition.mouseX - magnifierPosition.containerX) * magnifierZoom - 75}px -${(magnifierPosition.mouseY - magnifierPosition.containerY) * magnifierZoom - 75}px`,
+              backgroundRepeat: 'no-repeat'
+            }"
+          >
+          </div>
         </div>
       </div>
       <!-- Defect Tags -->
@@ -164,8 +198,36 @@
     <div class="mb-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 2</h3>
       <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
-        <div class="bg-gray-100 flex items-center justify-center relative">
-          <img src="/image.png" alt="Board Face 2" class="w-full h-auto object-contain" />
+        <div 
+          class="bg-gray-100 flex items-center justify-center relative"
+          @mousemove="handleMouseMove"
+          @mouseenter="showMagnifier = magnifierEnabled"
+          @mouseleave="showMagnifier = false"
+          ref="face2Container"
+        >
+          <img 
+            src="/image.png" 
+            alt="Board Face 2" 
+            class="w-full h-auto object-contain"
+            ref="face2Image"
+          />
+          
+          <!-- Magnifier -->
+          <div
+            v-if="showMagnifier && magnifierEnabled"
+            class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-10"
+            :style="{
+              left: magnifierPosition.x + 'px',
+              top: magnifierPosition.y + 'px',
+              width: '150px',
+              height: '150px',
+              backgroundImage: `url(/image.png)`,
+              backgroundSize: `${magnifierZoom * 100}%`,
+              backgroundPosition: `-${(magnifierPosition.mouseX - magnifierPosition.containerX) * magnifierZoom - 75}px -${(magnifierPosition.mouseY - magnifierPosition.containerY) * magnifierZoom - 75}px`,
+              backgroundRepeat: 'no-repeat'
+            }"
+          >
+          </div>
         </div>
       </div>
       <!-- Defect Tags -->
