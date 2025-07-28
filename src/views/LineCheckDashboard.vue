@@ -63,11 +63,11 @@
               <!-- Board Image -->
               <div class="relative">
                 <div class="text-sm text-gray-600 uppercase tracking-wide mb-2">Board Image</div>
-                <div class="w-80 h-48 bg-gray-100 rounded-lg border-2 border-gray-300 overflow-hidden">
+                <div class="w-96 bg-gray-100 rounded-lg border-2 border-gray-300 overflow-hidden">
                   <img 
                     src="/image.png" 
                     alt="Current board being scanned" 
-                    class="w-full h-full object-cover"
+                    class="w-full h-auto object-contain"
                   />
                   <!-- Scanning overlay -->
                   <div class="absolute inset-0 bg-emerald-500 bg-opacity-20 border-2 border-emerald-500 rounded-lg animate-pulse"></div>
@@ -114,40 +114,75 @@
         </div>
       </div>
 
-      <!-- Recent Boards Grid -->
-      <div class="grid grid-cols-6 gap-6">
-        <TransitionGroup name="board-grid" tag="div" class="contents">
+      <!-- Recent Boards List -->
+      <div class="space-y-4">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Recent Boards</h2>
+        <TransitionGroup name="board-list" tag="div" class="space-y-4">
           <div
             v-for="board in recentBoards"
             :key="board.id"
             :class="[
-              'bg-white rounded-xl p-6 border-2 transition-all duration-500 shadow-lg',
+              'bg-white rounded-xl p-6 border-l-8 transition-all duration-500 shadow-lg flex items-center space-x-8',
               board.isNew ? 'border-emerald-500 bg-emerald-50 shadow-xl shadow-emerald-200' : 'border-gray-200',
               getGradeColorClass(board.grade)
             ]"
           >
-            <!-- Board Image Thumbnail -->
-            <div class="mb-4">
-              <div class="w-full h-32 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden">
+            <!-- Board Image Full Size -->
+            <div class="flex-shrink-0">
+              <div class="w-80 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden">
                 <img 
                   src="/image.png" 
                   alt="Board scan image" 
-                  class="w-full h-full object-cover"
+                  class="w-full h-auto object-contain"
                 />
               </div>
             </div>
 
-            <!-- Board ID -->
-            <div class="text-center mb-4">
-              <div class="text-2xl font-bold text-gray-900">{{ board.id }}</div>
-              <div class="text-sm text-gray-500">{{ board.scannedTime }}</div>
-            </div>
+            <!-- Board Information -->
+            <div class="flex-1 grid grid-cols-6 gap-8 items-center">
+              <!-- Board ID -->
+              <div class="text-center">
+                <div class="text-3xl font-bold text-gray-900">{{ board.id }}</div>
+                <div class="text-sm text-gray-500 mt-1">{{ board.scannedTime }}</div>
+              </div>
 
-            <!-- Grade Badge -->
-            <div class="text-center mb-4">
-              <div :class="getGradeBadgeClass(board.grade)" 
-                   class="inline-block px-4 py-2 rounded-full text-lg font-bold">
-                {{ board.grade }}
+              <!-- Grade -->
+              <div class="text-center">
+                <div :class="getGradeBadgeClass(board.grade)" 
+                     class="inline-block px-4 py-2 rounded-full text-xl font-bold mb-2">
+                  {{ board.grade }}
+                </div>
+                <div class="text-sm text-gray-500 uppercase">Grade</div>
+              </div>
+
+              <!-- Species -->
+              <div class="text-center">
+                <div class="text-xl font-bold text-gray-900">{{ board.species }}</div>
+                <div class="text-sm text-gray-500 uppercase">Species</div>
+              </div>
+
+              <!-- Dimensions -->
+              <div class="text-center">
+                <div class="text-xl font-bold text-gray-900">{{ board.dimensions }}</div>
+                <div class="text-sm text-gray-500 uppercase">Size</div>
+              </div>
+
+              <!-- Value -->
+              <div class="text-center">
+                <div class="text-2xl font-bold text-emerald-600">${{ board.value }}</div>
+                <div class="text-sm text-gray-500 uppercase">Value</div>
+              </div>
+
+              <!-- Status & Defects -->
+              <div class="text-center">
+                <div class="flex items-center justify-center space-x-4 mb-2">
+                  <div :class="board.status === 'passed' ? 'bg-emerald-500' : 'bg-yellow-500'" 
+                       class="w-4 h-4 rounded-full"></div>
+                  <span class="text-lg font-medium text-gray-900 capitalize">{{ board.status }}</span>
+                </div>
+                <div class="text-sm text-gray-500">
+                  {{ board.defectCount || 0 }} defects
+                </div>
               </div>
             </div>
 
@@ -175,36 +210,6 @@
             </div>
 
             <!-- Status Indicator -->
-            <div class="mt-4 text-center">
-              <div :class="board.status === 'passed' ? 'bg-emerald-500' : 'bg-yellow-500'" 
-                   class="w-full h-2 rounded-full"></div>
-              <div class="text-xs text-gray-500 mt-1 uppercase">{{ board.status }}</div>
-            </div>
-          </div>
-        </TransitionGroup>
-      </div>
-
-      <!-- Empty State -->
-      <div v-if="recentBoards.length === 0" class="text-center py-20">
-        <div class="text-6xl text-gray-400 mb-4">📋</div>
-        <div class="text-2xl text-gray-600 mb-2">Waiting for boards...</div>
-        <div class="text-lg text-gray-500">Boards will appear here as they are scanned</div>
-      </div>
-    </div>
-
-    <!-- Footer Status Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 px-8 py-4 shadow-lg">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-8">
-          <div class="text-sm text-gray-500">
-            Last Update: <span class="text-gray-900">{{ lastUpdateTime }}</span>
-          </div>
-          <div class="text-sm text-gray-500">
-            Batch: <span class="text-emerald-600 font-medium">{{ currentBatch }}</span>
-          </div>
-          <div class="text-sm text-gray-500">
-            Order: <span class="text-blue-600 font-medium">{{ currentOrder }}</span>
-          </div>
         </div>
         
         <div class="flex items-center space-x-4">
