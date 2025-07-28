@@ -484,7 +484,7 @@ const toggleMagnifier = () => {
 const handleMouseMove = (event, boardId) => {
   if (!magnifierEnabled.value) return
   
-  // Set the active board for magnifier
+  // Only set active board if we're hovering over this specific board
   activeMagnifierBoard.value = boardId
   
   const rect = event.currentTarget.getBoundingClientRect()
@@ -497,12 +497,14 @@ const handleMouseMove = (event, boardId) => {
 // Handle mouse enter for magnifier
 const handleMouseEnter = (boardId) => {
   if (!magnifierEnabled.value) return
+  // Only show magnifier on the board being hovered
   showMagnifier.value = true
   activeMagnifierBoard.value = boardId
 }
 
 // Handle mouse leave for magnifier
 const handleMouseLeave = () => {
+  // Hide magnifier when leaving any board
   showMagnifier.value = false
   activeMagnifierBoard.value = null
 }
@@ -516,15 +518,16 @@ const onImageLoad = () => {
 const magnifierStyle = computed(() => {
   const { x, y } = mousePosition.value
   
-  // Position magnifier above the cursor
+  // Position magnifier above the cursor, centered horizontally
   let left = x - (magnifierSize / 2)
   let top = y - magnifierSize - 20
   
-  // Handle edge cases - keep magnifier within bounds
+  // Get the correct container width based on active board
   const containerWidth = activeMagnifierBoard.value === 'face1' 
     ? (face1Container.value?.offsetWidth || 0)
     : (face2Container.value?.offsetWidth || 0)
     
+  // Handle edge cases - keep magnifier within bounds
   if (left + magnifierSize > containerWidth) {
     left = containerWidth - magnifierSize - 10
   }
@@ -548,11 +551,12 @@ const magnifierStyle = computed(() => {
 const magnifiedImageStyle = computed(() => {
   const { x, y } = mousePosition.value
   
-  // Calculate the background position to show the magnified area
+  // Calculate background position for the magnified area
   const backgroundX = -((x * magnificationLevel) - (magnifierSize / 2))
   const backgroundY = -((y * magnificationLevel) - (magnifierSize / 2))
   
   return {
+    // Use the same image for both boards
     backgroundImage: 'url(/image.png)',
     backgroundSize: `${magnificationLevel * 100}%`,
     backgroundPosition: `${backgroundX}px ${backgroundY}px`
