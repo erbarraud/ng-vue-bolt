@@ -370,7 +370,7 @@
 import { ref, onMounted } from 'vue'
 import {
   Calendar, Clock, DollarSign, Package, MessageSquare, TrendingUp, TrendingDown,
-  MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText, RefreshCw
+  MoreHorizontal, Download, ChevronRight, AlertTriangle, FileText, RefreshCw, AlertCircle
 } from 'lucide-vue-next'
 import { Bar } from 'vue-chartjs'
 import {
@@ -389,7 +389,15 @@ import Badge from '@/components/ui/badge.vue'
 import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
 import { useAsyncState } from '@/composables/useAsyncState.js'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale, 
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
 // Chart data
 const chartData = ref({

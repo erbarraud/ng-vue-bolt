@@ -212,7 +212,10 @@ const sampleOrders = ['ORD-20250701-001', 'ORD-20250701-002', 'ORD-20250628-006'
 // Computed properties
 const totalBoardsScanned = computed(() => recentBoards.value.length + 1247)
 
-// Generate a random board
+/**
+ * Generates a random board with realistic lumber data
+ * @returns {Object} Board object with id, grade, batch, etc.
+ */
 const generateRandomBoard = () => {
   const boardNumber = Math.floor(Math.random() * 9999) + 2000
   const grade = sampleGrades[Math.floor(Math.random() * sampleGrades.length)]
@@ -231,7 +234,10 @@ const generateRandomBoard = () => {
   }
 }
 
-// Add a new board to the top of the list
+/**
+ * Adds a new randomly generated board to the scanning results
+ * Manages the board list size and new board highlighting
+ */
 const addNewBoard = () => {
   if (!isScanning.value) return
   
@@ -251,7 +257,9 @@ const addNewBoard = () => {
   }
 }
 
-// Start scanning timer
+/**
+ * Starts the scanning process with countdown and board generation
+ */
 const startScanning = () => {
   if (scanTimer) clearInterval(scanTimer)
   if (countdownTimer) clearInterval(countdownTimer)
@@ -277,7 +285,9 @@ const startScanning = () => {
   }, scanInterval.value)
 }
 
-// Stop scanning
+/**
+ * Stops all scanning timers and processes
+ */
 const stopScanning = () => {
   if (scanTimer) {
     clearInterval(scanTimer)
@@ -289,7 +299,9 @@ const stopScanning = () => {
   }
 }
 
-// Toggle scanning state
+/**
+ * Toggles between scanning and paused states
+ */
 const toggleScanning = () => {
   isScanning.value = !isScanning.value
   
@@ -300,7 +312,9 @@ const toggleScanning = () => {
   }
 }
 
-// Update scan interval
+/**
+ * Updates the scanning interval and restarts if currently scanning
+ */
 const updateScanInterval = () => {
   if (isScanning.value) {
     stopScanning()
@@ -308,12 +322,16 @@ const updateScanInterval = () => {
   }
 }
 
-// Update current time
+/**
+ * Updates the current time display
+ */
 const updateTime = () => {
   currentTime.value = new Date().toLocaleTimeString()
 }
 
-// Initialize with some sample boards
+/**
+ * Initializes the component with sample board data
+ */
 const initializeSampleBoards = () => {
   const initialBoards = [
     {
@@ -357,7 +375,6 @@ const initializeSampleBoards = () => {
   recentBoards.value = initialBoards
 }
 
-// Lifecycle hooks
 onMounted(() => {
   initializeSampleBoards()
   updateTime()

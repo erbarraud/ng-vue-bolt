@@ -292,6 +292,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Button from '@/components/ui/button.vue'
 
 const router = useRouter()
 

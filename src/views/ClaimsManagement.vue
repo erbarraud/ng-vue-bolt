@@ -152,6 +152,7 @@ import { ref, computed } from 'vue'
 import { 
   AlertCircle, CheckCircle, Clock, RefreshCw, Share, Plus, Search, MoreHorizontal
 } from 'lucide-vue-next'
+import Button from '@/components/ui/button.vue'
 
 const searchQuery = ref('')
 const selectedStatus = ref('')

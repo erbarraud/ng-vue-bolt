@@ -218,17 +218,13 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useSortable } from '@vueuse/integrations/useSortable'
 import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
-  Calendar, Droplets, Search, Eye, RotateCcw, Hash, AlertCircle, Package, Settings,
-  MoreHorizontal, X
+  Eye, Package, Settings
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 import Card from '@/components/ui/card.vue'
 import CardContent from '@/components/ui/card-content.vue'
-import Input from '@/components/ui/input.vue'
-import Select from '@/components/ui/select.vue'
 import Badge from '@/components/ui/badge.vue'
 
 // Orders data with priority field

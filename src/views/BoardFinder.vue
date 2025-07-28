@@ -540,10 +540,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { 
-  Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
-  AlertCircle, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
-  Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
-  ThumbsUp, ThumbsDown, ClipboardList, X, EyeOff, BookOpen
+  Search, Filter, ChevronDown, Calendar, Ruler, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
+  Clock, ChevronLeft, ChevronRight, X, EyeOff, BookOpen, CheckCircle, XCircle, FileText,
+  Layers, DollarSign
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 

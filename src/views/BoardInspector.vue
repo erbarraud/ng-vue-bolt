@@ -497,7 +497,7 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { 
-  ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
+  Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
   Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'

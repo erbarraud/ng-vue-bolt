@@ -172,7 +172,6 @@
         </div>
         <!-- Info Note -->
         <div class="flex items-center text-gray-600 text-sm">
-          <Info class="w-4 h-4 mr-2" />
           Live feed with board images (original aspect ratio). KPIs are overlaid. Click Board ID for details.
         </div>
       </div>
@@ -691,7 +690,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { 
-  Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info, Settings, Expand, X, Download, Play
+  Activity, Camera, Clock, Pause, RefreshCw, Maximize, Settings, Expand, X, Download, Play
 } from 'lucide-vue-next'
 
 const row1ViewMode = ref('grid')
