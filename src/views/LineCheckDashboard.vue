@@ -23,12 +23,6 @@
         </div>
       </div>
 
-      <!-- Live Scanning View Section -->
-      <div class="mb-6">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Live Scanning View</h2>
-        <p class="text-gray-600">Real-time feed from scanner</p>
-      </div>
-
       <!-- Control Bar -->
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center space-x-4">
