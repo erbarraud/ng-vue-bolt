@@ -534,9 +534,8 @@ const magnifierStyle = computed(() => {
   if (left < 0) {
     left = 10
   }
-  if (top < 0) {
-    top = y + 20
-  }
+  // Always keep magnifier above cursor, even if it goes off-screen at top
+  // This ensures it's always above as requested
   
   return {
     left: `${left}px`,
