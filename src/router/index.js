@@ -72,8 +72,6 @@ const routes = [
     path: '/finder',
     name: 'BoardFinder',
     component: BoardFinder
-  },
-  {
   }
 ]
 
