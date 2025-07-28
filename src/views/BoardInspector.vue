@@ -385,7 +385,7 @@
 import { 
   ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
-  Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
+  Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp, DollarSign
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 </script>
