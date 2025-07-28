@@ -114,9 +114,17 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+        <button 
+          @click="toggleMagnifier"
+          :class="[
+            'flex items-center px-3 py-1.5 text-sm font-medium bg-white border-2 rounded-md hover:bg-gray-50 transition-colors',
+            magnifierEnabled 
+              ? 'text-emerald-600 border-emerald-300' 
+              : 'text-gray-600 border-gray-300'
+          ]"
+        >
           <ZoomIn class="w-4 h-4 mr-2" />
-          Enable Magnifier
+          {{ magnifierEnabled ? 'Disable Magnifier' : 'Enable Magnifier' }}
         </button>
         <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <EyeOff class="w-4 h-4 mr-2" />
@@ -145,8 +153,32 @@
     <div class="mb-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 1</h3>
       <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
-        <div class="bg-gray-100 flex items-center justify-center relative">
-          <img src="/image.png" alt="Board Face 1" class="w-full h-auto object-contain" />
+        <div 
+          class="bg-gray-100 flex items-center justify-center relative"
+          @mousemove="handleMouseMove"
+          @mouseenter="showMagnifier = magnifierEnabled"
+          @mouseleave="showMagnifier = false"
+          ref="face1Container"
+        >
+          <img 
+            src="/image.png" 
+            alt="Board Face 1" 
+            class="w-full h-auto object-contain"
+            ref="face1Image"
+            @load="onImageLoad"
+          />
+          
+          <!-- Magnifier Window -->
+          <div
+            v-if="showMagnifier && magnifierEnabled"
+            :style="magnifierStyle"
+            class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
+          >
+            <div
+              :style="magnifiedImageStyle"
+              class="w-full h-full bg-no-repeat"
+            ></div>
+          </div>
         </div>
       </div>
       <!-- Defect Tags -->
@@ -164,8 +196,32 @@
     <div class="mb-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 2</h3>
       <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
-        <div class="bg-gray-100 flex items-center justify-center relative">
-          <img src="/image.png" alt="Board Face 2" class="w-full h-auto object-contain" />
+        <div 
+          class="bg-gray-100 flex items-center justify-center relative"
+          @mousemove="handleMouseMove"
+          @mouseenter="showMagnifier = magnifierEnabled"
+          @mouseleave="showMagnifier = false"
+          ref="face2Container"
+        >
+          <img 
+            src="/image.png" 
+            alt="Board Face 2" 
+            class="w-full h-auto object-contain"
+            ref="face2Image"
+            @load="onImageLoad"
+          />
+          
+          <!-- Magnifier Window -->
+          <div
+            v-if="showMagnifier && magnifierEnabled"
+            :style="magnifierStyle"
+            class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
+          >
+            <div
+              :style="magnifiedImageStyle"
+              class="w-full h-full bg-no-repeat"
+            ></div>
+          </div>
         </div>
       </div>
       <!-- Defect Tags -->
@@ -394,10 +450,88 @@
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
 import { 
   ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
   Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
+
+// Magnifier state
+const magnifierEnabled = ref(false)
+const showMagnifier = ref(false)
+const mousePosition = ref({ x: 0, y: 0 })
+const magnifierSize = 150
+const magnificationLevel = 2.5
+
+// Template refs
+const face1Container = ref(null)
+const face2Container = ref(null)
+const face1Image = ref(null)
+const face2Image = ref(null)
+
+// Toggle magnifier
+const toggleMagnifier = () => {
+  magnifierEnabled.value = !magnifierEnabled.value
+  if (!magnifierEnabled.value) {
+    showMagnifier.value = false
+  }
+}
+
+// Handle mouse movement
+const handleMouseMove = (event) => {
+  if (!magnifierEnabled.value) return
+  
+  const rect = event.currentTarget.getBoundingClientRect()
+  mousePosition.value = {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  }
+}
+
+// Image load handler
+const onImageLoad = () => {
+  // Image loaded, magnifier ready
+}
+
+// Computed styles for magnifier
+const magnifierStyle = computed(() => {
+  const { x, y } = mousePosition.value
+  
+  // Position magnifier above and to the right of cursor to avoid obstruction
+  let left = x + 20
+  let top = y - magnifierSize - 20
+  
+  // Handle edge cases - keep magnifier within bounds
+  if (left + magnifierSize > (face1Container.value?.offsetWidth || 0)) {
+    left = x - magnifierSize - 20
+  }
+  if (top < 0) {
+    top = y + 20
+  }
+  
+  return {
+    left: `${left}px`,
+    top: `${top}px`,
+    width: `${magnifierSize}px`,
+    height: `${magnifierSize}px`,
+    backgroundColor: '#ffffff'
+  }
+})
+
+// Computed styles for magnified image
+const magnifiedImageStyle = computed(() => {
+  const { x, y } = mousePosition.value
+  
+  // Calculate the background position to show the magnified area
+  const backgroundX = -((x * magnificationLevel) - (magnifierSize / 2))
+  const backgroundY = -((y * magnificationLevel) - (magnifierSize / 2))
+  
+  return {
+    backgroundImage: 'url(/image.png)',
+    backgroundSize: `${magnificationLevel * 100}%`,
+    backgroundPosition: `${backgroundX}px ${backgroundY}px`
+  }
+})
 </script>
