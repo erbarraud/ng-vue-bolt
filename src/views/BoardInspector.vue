@@ -55,7 +55,7 @@
       </div>
 
       <!-- Board Specifications -->
-      <div class="grid grid-cols-7 gap-6 mb-6">
+      <div class="grid grid-cols-6 gap-6 mb-8">
         <div class="text-center">
           <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
             <div class="flex items-center justify-center mb-2">
@@ -95,19 +95,10 @@
         <div class="text-center">
           <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
             <div class="flex items-center justify-center mb-2">
-              <DollarSign class="w-5 h-5 text-emerald-600 mr-1" />
-              <span class="text-sm font-medium text-gray-700">Value</span>
-            </div>
-            <div class="text-lg font-bold text-emerald-600">$4.90</div>
-          </div>
-        </div>
-        <div class="text-center">
-          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-            <div class="flex items-center justify-center mb-2">
               <AlertTriangle class="w-5 h-5 text-red-600 mr-1" />
               <span class="text-sm font-medium text-gray-700">Total Defects</span>
             </div>
-            <div class="text-lg font-bold text-red-600">2</div>
+            <div class="text-lg font-bold text-gray-900">2</div>
           </div>
         </div>
         <div class="text-center">
@@ -406,7 +397,7 @@
 import { 
   ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
-  Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp, DollarSign
+  Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 </script>
