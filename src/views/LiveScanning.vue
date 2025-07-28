@@ -12,8 +12,9 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-4">
             <Button variant="secondary">
-              <Pause class="w-4 h-4 mr-2" />
-              Pause
+              <Pause v-if="isScanning" class="w-4 h-4 mr-2" />
+              <Play v-else class="w-4 h-4 mr-2" />
+              {{ isScanning ? 'Pause' : 'Resume' }}
             </Button>
             <Button>
               <RefreshCw class="w-4 h-4 mr-2" />
@@ -21,17 +22,28 @@
             </Button>
             <div class="flex items-center space-x-2">
               <span class="text-gray-600 text-sm">Refresh Rate:</span>
-              <select class="bg-white text-gray-900 px-3 py-1 rounded text-sm border border-gray-300">
-                <option>5/min</option>
-                <option>10/min</option>
-                <option>30/min</option>
+              <select 
+                v-model="scanInterval" 
+                @change="updateScanInterval"
+                class="bg-white text-gray-900 px-3 py-1 rounded text-sm border border-gray-300"
+              >
+                <option value="10000">3/min</option>
+                <option value="5000">12/min</option>
+                <option value="2000">30/min</option>
               </select>
             </div>
           </div>
           <div class="flex items-center space-x-4">
             <div class="text-right">
               <div class="text-sm text-gray-600">Current Time</div>
-              <div class="text-lg font-semibold text-gray-900">05:06:55 PM</div>
+              <div class="text-lg font-semibold text-gray-900">{{ currentTime }}</div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-600">Scanning Status</div>
+              <div class="flex items-center">
+                <div :class="isScanning ? 'bg-emerald-400' : 'bg-gray-400'" class="w-2 h-2 rounded-full mr-2"></div>
+                <span class="text-sm font-semibold text-gray-900">{{ isScanning ? 'Active' : 'Paused' }}</span>
+              </div>
             </div>
             <Button>
               <Maximize class="w-4 h-4 mr-2" />
@@ -47,17 +59,29 @@
         <div class="lg:col-span-2">
           <div class="bg-white rounded-lg p-6 shadow border">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Live Feed</h2>
-            <div class="aspect-video bg-gray-900 rounded-lg flex items-center justify-center mb-4">
-              <div class="text-center">
+            <div class="aspect-video bg-gray-900 rounded-lg flex items-center justify-center mb-4 relative">
+              <div v-if="isScanning" class="text-center">
                 <div class="text-gray-300 text-lg mb-2">Board Scanning in Progress</div>
                 <div class="w-16 h-16 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <div class="text-emerald-400 text-sm mt-2">Next scan in {{ countdown }}s</div>
+              </div>
+              <div v-else class="text-center">
+                <div class="text-gray-300 text-lg mb-2">Scanning Paused</div>
+                <div class="text-gray-500 text-sm">Click Resume to continue scanning</div>
+              </div>
+              
+              <!-- Latest Board Preview -->
+              <div v-if="recentBoards.length > 0 && isScanning" class="absolute top-4 right-4 bg-black bg-opacity-75 rounded-lg p-3">
+                <div class="text-white text-sm">Latest Scan:</div>
+                <div class="text-emerald-400 font-bold">{{ recentBoards[0].id }}</div>
+                <div class="text-gray-300 text-xs">{{ recentBoards[0].grade }}</div>
               </div>
             </div>
             
             <!-- Scanning Stats Overlay -->
             <div class="grid grid-cols-3 gap-4 text-center">
               <div class="bg-gray-100 rounded-lg p-3">
-                <div class="text-2xl font-bold text-emerald-400">1,247</div>
+                <div class="text-2xl font-bold text-emerald-400">{{ totalBoardsScanned }}</div>
                 <div class="text-sm text-gray-600">Boards Scanned</div>
               </div>
               <div class="bg-gray-100 rounded-lg p-3">
@@ -75,71 +99,46 @@
         <!-- Recent Boards -->
         <div>
           <div class="bg-white rounded-lg p-6 shadow border">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Recent Boards</h2>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-2xl font-bold text-gray-900">Recent Boards</h2>
+              <div class="text-sm text-gray-500">{{ recentBoards.length }} boards</div>
+            </div>
             
-            <div class="space-y-4">
-              <div class="bg-gray-100 rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <router-link to="/inspector/LV-1001" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
-                    LV-1001
-                  </router-link>
-                  <span class="text-emerald-400 font-semibold">$12.50</span>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <div>
-                    Batch: <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-789</router-link>
-                  </div>
-                  <div>Grade: FAS</div>
-                  <div>Scanned: 05:05:23 PM</div>
-                </div>
-              </div>
 
-              <div class="bg-gray-100 rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <router-link to="/inspector/LV-1002" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
-                    LV-1002
-                  </router-link>
-                  <span class="text-emerald-400 font-semibold">$18.75</span>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <div>
-                    Batch: <router-link to="/orders/ORD-20250701-002" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-790</router-link>
-                  </div>
-                  <div>Grade: 1 Common</div>
-                  <div>Scanned: 05:06:01 PM</div>
-                </div>
-              </div>
 
-              <div class="bg-gray-100 rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <router-link to="/inspector/LV-1003" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
-                    LV-1003
-                  </router-link>
-                  <span class="text-emerald-400 font-semibold">$9.25</span>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <div>
-                    Batch: <router-link to="/orders/ORD-20250628-006" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-791</router-link>
-                  </div>
-                  <div>Grade: 2 Common</div>
-                  <div>Scanned: 05:06:45 PM</div>
-                </div>
-              </div>
 
-              <div class="bg-gray-100 rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <router-link to="/inspector/LV-1004" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
-                    LV-1004
-                  </router-link>
-                  <span class="text-emerald-400 font-semibold">$22.00</span>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <div>
-                    Batch: <router-link to="/orders/ORD-20250629-005" class="text-emerald-600 hover:text-emerald-800 hover:underline">B-792</router-link>
+            <div class="space-y-3 max-h-96 overflow-y-auto">
+              <TransitionGroup name="board" tag="div">
+                <div 
+                  v-for="board in recentBoards" 
+                  :key="board.id"
+                  :class="[
+                    'bg-gray-100 rounded-lg p-4 transition-all duration-300',
+                    board.isNew ? 'ring-2 ring-emerald-400 bg-emerald-50' : ''
+                  ]"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <router-link 
+                      :to="`/inspector/${board.id}`" 
+                      class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
+                    >
+                      {{ board.id }}
+                    </router-link>
+                    <span class="text-emerald-400 font-semibold">${{ board.value }}</span>
                   </div>
-                  <div>Grade: FAS</div>
-                  <div>Scanned: 05:06:50 PM</div>
+                  <div class="text-sm text-gray-600">
+                    <div>
+                      Batch: <router-link :to="`/orders/${board.orderId}`" class="text-emerald-600 hover:text-emerald-800 hover:underline">{{ board.batch }}</router-link>
+                    </div>
+                    <div>Grade: {{ board.grade }}</div>
+                    <div>Scanned: {{ board.scannedTime }}</div>
+                  </div>
                 </div>
+              </TransitionGroup>
+              
+              <div v-if="recentBoards.length === 0" class="text-center py-8 text-gray-500">
+                <div class="text-lg mb-2">No boards scanned yet</div>
+                <div class="text-sm">Boards will appear here as they are scanned</div>
               </div>
             </div>
 
@@ -156,10 +155,10 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div class="text-center">
             <div class="flex items-center justify-center mb-2">
-              <div class="w-3 h-3 bg-emerald-400 rounded-full mr-2"></div>
+              <div :class="isScanning ? 'bg-emerald-400' : 'bg-gray-400'" class="w-3 h-3 rounded-full mr-2"></div>
               <span class="text-gray-900 font-medium">Scanner Online</span>
             </div>
-            <div class="text-sm text-gray-600">All systems operational</div>
+            <div class="text-sm text-gray-600">{{ isScanning ? 'All systems operational' : 'Scanning paused' }}</div>
           </div>
           <div class="text-center">
             <div class="flex items-center justify-center mb-2">
@@ -189,5 +188,216 @@
 </template>
 
 <script setup>
-import { Pause, RefreshCw, Maximize } from 'lucide-vue-next'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { Pause, Play, RefreshCw, Maximize } from 'lucide-vue-next'
+import Button from '@/components/ui/button.vue'
+
+// Reactive state
+const isScanning = ref(true)
+const scanInterval = ref(5000) // 5 seconds default
+const countdown = ref(5)
+const currentTime = ref('')
+const recentBoards = ref([])
+
+// Timers
+let scanTimer = null
+let countdownTimer = null
+let clockTimer = null
+
+// Sample data for generating boards
+const sampleGrades = ['FAS', 'Select', '1 Common', '2 Common', '3 Common']
+const sampleBatches = ['B-789', 'B-790', 'B-791', 'B-792', 'B-793', 'B-794']
+const sampleOrders = ['ORD-20250701-001', 'ORD-20250701-002', 'ORD-20250628-006', 'ORD-20250629-005']
+
+// Computed properties
+const totalBoardsScanned = computed(() => recentBoards.value.length + 1247)
+
+// Generate a random board
+const generateRandomBoard = () => {
+  const boardNumber = Math.floor(Math.random() * 9999) + 1000
+  const grade = sampleGrades[Math.floor(Math.random() * sampleGrades.length)]
+  const batch = sampleBatches[Math.floor(Math.random() * sampleBatches.length)]
+  const orderId = sampleOrders[Math.floor(Math.random() * sampleOrders.length)]
+  const value = (Math.random() * 30 + 5).toFixed(2)
+  
+  return {
+    id: `LV-${boardNumber}`,
+    grade,
+    batch,
+    orderId,
+    value,
+    scannedTime: new Date().toLocaleTimeString(),
+    isNew: true
+  }
+}
+
+// Add a new board to the top of the list
+const addNewBoard = () => {
+  if (!isScanning.value) return
+  
+  const newBoard = generateRandomBoard()
+  
+  // Add to the beginning of the array
+  recentBoards.value.unshift(newBoard)
+  
+  // Remove the "new" highlight after 3 seconds
+  setTimeout(() => {
+    newBoard.isNew = false
+  }, 3000)
+  
+  // Keep only the last 20 boards
+  if (recentBoards.value.length > 20) {
+    recentBoards.value = recentBoards.value.slice(0, 20)
+  }
+}
+
+// Start scanning timer
+const startScanning = () => {
+  if (scanTimer) clearInterval(scanTimer)
+  if (countdownTimer) clearInterval(countdownTimer)
+  
+  // Reset countdown
+  countdown.value = Math.floor(scanInterval.value / 1000)
+  
+  // Start countdown timer
+  countdownTimer = setInterval(() => {
+    countdown.value--
+    if (countdown.value <= 0) {
+      countdown.value = Math.floor(scanInterval.value / 1000)
+    }
+  }, 1000)
+  
+  // Start scanning timer
+  scanTimer = setInterval(() => {
+    addNewBoard()
+    countdown.value = Math.floor(scanInterval.value / 1000)
+  }, scanInterval.value)
+}
+
+// Stop scanning
+const stopScanning = () => {
+  if (scanTimer) {
+    clearInterval(scanTimer)
+    scanTimer = null
+  }
+  if (countdownTimer) {
+    clearInterval(countdownTimer)
+    countdownTimer = null
+  }
+}
+
+// Toggle scanning state
+const toggleScanning = () => {
+  isScanning.value = !isScanning.value
+  
+  if (isScanning.value) {
+    startScanning()
+  } else {
+    stopScanning()
+  }
+}
+
+// Update scan interval
+const updateScanInterval = () => {
+  if (isScanning.value) {
+    stopScanning()
+    startScanning()
+  }
+}
+
+// Update current time
+const updateTime = () => {
+  currentTime.value = new Date().toLocaleTimeString()
+}
+
+// Initialize with some sample boards
+const initializeSampleBoards = () => {
+  const initialBoards = [
+    {
+      id: 'LV-1004',
+      grade: 'FAS',
+      batch: 'B-792',
+      orderId: 'ORD-20250629-005',
+      value: '22.00',
+      scannedTime: '05:06:50 PM',
+      isNew: false
+    },
+    {
+      id: 'LV-1003',
+      grade: '2 Common',
+      batch: 'B-791',
+      orderId: 'ORD-20250628-006',
+      value: '9.25',
+      scannedTime: '05:06:45 PM',
+      isNew: false
+    },
+    {
+      id: 'LV-1002',
+      grade: '1 Common',
+      batch: 'B-790',
+      orderId: 'ORD-20250701-002',
+      value: '18.75',
+      scannedTime: '05:06:01 PM',
+      isNew: false
+    },
+    {
+      id: 'LV-1001',
+      grade: 'FAS',
+      batch: 'B-789',
+      orderId: 'ORD-20250701-001',
+      value: '12.50',
+      scannedTime: '05:05:23 PM',
+      isNew: false
+    }
+  ]
+  
+  recentBoards.value = initialBoards
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  initializeSampleBoards()
+  updateTime()
+  
+  // Start clock timer
+  clockTimer = setInterval(updateTime, 1000)
+  
+  // Start scanning
+  if (isScanning.value) {
+    startScanning()
+  }
+})
+
+onUnmounted(() => {
+  stopScanning()
+  if (clockTimer) {
+    clearInterval(clockTimer)
+  }
+})
 </script>
+
+<style scoped>
+/* Transition animations for new boards */
+.board-enter-active {
+  transition: all 0.5s ease;
+}
+
+.board-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.board-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.board-leave-active {
+  transition: all 0.3s ease;
+}
+
+.board-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+</style>
