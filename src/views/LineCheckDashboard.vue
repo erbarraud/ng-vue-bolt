@@ -67,33 +67,30 @@
           <div
             v-for="board in recentBoards"
             :key="board.id"
-            :class="[
-              'relative flex items-center bg-gray-800 border-b border-gray-700 last:border-b-0 transition-all duration-300',
-              board.isNew ? 'bg-gray-700' : ''
-            ]"
+            class="relative border-b border-gray-700 last:border-b-0 transition-all duration-300"
           >
             <!-- New Badge -->
             <div v-if="board.isNew" class="absolute top-2 right-2 z-10">
               <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">New</span>
             </div>
 
-            <!-- Board Image -->
-            <div class="flex-1 relative">
+            <!-- Board Image with Overlay -->
+            <div class="relative">
               <img 
                 src="/image.png" 
                 alt="Board scan image" 
-                class="w-full h-24 object-cover"
+                class="w-full h-32 object-cover"
               />
               
               <!-- Board Info Overlay -->
-              <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-between px-4">
+              <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-between px-6">
                 <!-- Left side info -->
                 <div class="flex items-center space-x-4">
                   <div class="text-white">
-                    <div class="text-lg font-bold"># {{ board.id }}</div>
+                    <div class="text-xl font-bold"># {{ board.id }}</div>
                     <div class="text-sm flex items-center">
-                      <div class="w-4 h-4 bg-white rounded-full mr-2 flex items-center justify-center">
-                        <div class="w-2 h-2 bg-gray-800 rounded-full"></div>
+                      <div class="w-5 h-5 bg-white rounded-full mr-2 flex items-center justify-center">
+                        <div class="w-2.5 h-2.5 bg-gray-800 rounded-full"></div>
                       </div>
                       {{ board.batch }}
                     </div>
@@ -107,7 +104,7 @@
                       {{ board.grade }}
                     </span>
                   </div>
-                  <div class="text-lg font-bold">${{ board.value }}</div>
+                  <div class="text-xl font-bold">${{ board.value }}</div>
                 </div>
               </div>
             </div>
