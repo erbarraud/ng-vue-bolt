@@ -550,16 +550,37 @@ const magnifierStyle = computed(() => {
 const magnifiedImageStyle = computed(() => {
   const { x, y } = mousePosition.value
   
-  // Calculate background position for the magnified area
-  // We want to center the area under the cursor in the magnifier window
-  // So we need to offset by half the magnifier size, then scale by magnification
-  const backgroundX = -(x * magnificationLevel) + (magnifierSize / 2)
-  const backgroundY = -(y * magnificationLevel) + (magnifierSize / 2)
+  // Get the active container and image to calculate proper scaling
+  const activeContainer = activeMagnifierBoard.value === 'face1' ? face1Container.value : face2Container.value
+  const activeImage = activeMagnifierBoard.value === 'face1' ? face1Image.value : face2Image.value
+  
+  if (!activeContainer || !activeImage) return {}
+  
+  // Get the actual image dimensions and container dimensions
+  const containerRect = activeContainer.getBoundingClientRect()
+  const imageRect = activeImage.getBoundingClientRect()
+  
+  // Calculate the scale factor between the container and the actual image
+  const scaleX = activeImage.naturalWidth / imageRect.width
+  const scaleY = activeImage.naturalHeight / imageRect.height
+  
+  // Convert cursor position to image coordinates
+  const imageX = x * scaleX
+  const imageY = y * scaleY
+  
+  // Calculate background position to center the cursor area in the magnifier
+  // We want to show the area around the cursor, centered in the magnifier window
+  const backgroundX = -(imageX * magnificationLevel) + (magnifierSize / 2)
+  const backgroundY = -(imageY * magnificationLevel) + (magnifierSize / 2)
+  
+  // Calculate the background size based on the original image dimensions
+  const backgroundWidth = activeImage.naturalWidth * magnificationLevel
+  const backgroundHeight = activeImage.naturalHeight * magnificationLevel
   
   return {
     // Use the same image for both boards
     backgroundImage: 'url(/image.png)',
-    backgroundSize: `${magnificationLevel * 100}%`,
+    backgroundSize: `${backgroundWidth}px ${backgroundHeight}px`,
     backgroundPosition: `${backgroundX}px ${backgroundY}px`
   }
 })
