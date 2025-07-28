@@ -50,18 +50,26 @@
           <div class="flex items-center space-x-4">
             <div class="flex items-center text-gray-600">
               <Clock class="w-4 h-4 mr-2" />
-              <span class="text-gray-900 font-medium">05:06:55 PM</span>
+              <span class="text-gray-900 font-medium">{{ currentTime }}</span>
             </div>
-            <select class="bg-white text-gray-900 px-3 py-1 rounded text-sm border border-gray-300">
-              <option>5/min</option>
-              <option>10/min</option>
-              <option>30/min</option>
+            <select 
+              v-model="scanInterval" 
+              @change="updateScanInterval"
+              class="bg-white text-gray-900 px-3 py-1 rounded text-sm border border-gray-300"
+            >
+              <option value="10000">3/min</option>
+              <option value="5000">12/min</option>
+              <option value="2000">30/min</option>
             </select>
           </div>
           <div class="flex items-center space-x-3">
-            <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-              <Pause class="w-4 h-4 mr-2" />
-              Pause
+            <button 
+              @click="toggleScanning"
+              class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              <Pause v-if="isScanning" class="w-4 h-4 mr-2" />
+              <Play v-else class="w-4 h-4 mr-2" />
+              {{ isScanning ? 'Pause' : 'Resume' }}
             </button>
             <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
               <RefreshCw class="w-4 h-4 mr-2" />
@@ -74,93 +82,94 @@
           </div>
         </div>
 
-        <!-- Recent Boards Section -->
-        <div class="mb-6">
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Boards</h3>
-          
-          <div class="space-y-4">
-            <!-- Board 1 -->
-            <div class="bg-white rounded-lg overflow-hidden shadow border">
-              <div class="relative">
-                <!-- Board Image with overlays -->
-                <div class="bg-gray-100 h-32 flex items-center justify-center relative">
-                  <img src="/image.png" alt="Board scan" class="w-full h-full object-cover" />
-                  
-                  <!-- Defect overlays -->
-                  <div class="absolute top-4 left-8 w-12 h-6 border-2 border-red-500 bg-red-500 bg-opacity-30"></div>
-                  <div class="absolute bottom-6 right-12 w-8 h-8 border-2 border-blue-500 bg-blue-500 bg-opacity-30 rounded-full"></div>
+        <!-- Live Feed and Recent Boards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Live Feed -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg p-6 shadow border">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">Live Feed</h2>
+              <div class="aspect-video bg-gray-900 rounded-lg flex items-center justify-center mb-4 relative">
+                <div v-if="isScanning" class="text-center">
+                  <div class="text-gray-300 text-lg mb-2">Board Scanning in Progress</div>
+                  <div class="w-16 h-16 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                  <div class="text-emerald-400 text-sm mt-2">Next scan in {{ countdown }}s</div>
+                </div>
+                <div v-else class="text-center">
+                  <div class="text-gray-300 text-lg mb-2">Scanning Paused</div>
+                  <div class="text-gray-500 text-sm">Click Resume to continue scanning</div>
                 </div>
                 
-                <!-- Board Info Overlay -->
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                      <div class="text-white font-bold text-lg">
-                        # <router-link 
-                            :to="`/inspector/LV-1001`"
-                            class="text-emerald-400 hover:text-emerald-300 hover:underline"
-                          >
-                            LV-1001
-                          </router-link>
-                      </div>
-                      <div class="flex items-center text-gray-200 text-sm">
-                        <Hash class="w-3 h-3 mr-1" />
-                        <router-link to="/orders/ORD-20250701-001" class="text-emerald-400 hover:text-emerald-300 hover:underline">
-                          B-789
-                        </router-link>
-                      </div>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                      <span class="px-2 py-1 bg-gray-600 text-white text-sm rounded">Select</span>
-                      <div class="text-emerald-400 font-bold">$12.50</div>
-                    </div>
-                  </div>
+                <!-- Latest Board Preview -->
+                <div v-if="recentBoards.length > 0 && isScanning" class="absolute top-4 right-4 bg-black bg-opacity-75 rounded-lg p-3">
+                  <div class="text-white text-sm">Latest Scan:</div>
+                  <div class="text-emerald-400 font-bold">{{ recentBoards[0].id }}</div>
+                  <div class="text-gray-300 text-xs">{{ recentBoards[0].grade }}</div>
+                </div>
+              </div>
+              
+              <!-- Scanning Stats Overlay -->
+              <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="text-2xl font-bold text-emerald-400">{{ totalBoardsScanned }}</div>
+                  <div class="text-sm text-gray-600">Boards Scanned</div>
+                </div>
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="text-2xl font-bold text-emerald-400">23</div>
+                  <div class="text-sm text-gray-600">Batches Today</div>
+                </div>
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="text-2xl font-bold text-emerald-400">98.7%</div>
+                  <div class="text-sm text-gray-600">Accuracy Rate</div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Board 2 -->
-            <div class="bg-white rounded-lg overflow-hidden shadow border">
-              <div class="relative">
-                <!-- Board Image with overlays -->
-                <div class="bg-gray-100 h-32 flex items-center justify-center relative">
-                  <img src="/image.png" alt="Board scan" class="w-full h-full object-cover" />
-                  
-                  <!-- Defect overlays -->
-                  <div class="absolute top-6 left-12 w-10 h-4 border-2 border-red-500 bg-red-500 bg-opacity-30"></div>
-                  <div class="absolute bottom-4 right-8 w-6 h-10 border-2 border-blue-500 bg-blue-500 bg-opacity-30"></div>
-                </div>
-                
-                <!-- Board Info Overlay -->
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                      <div class="text-white font-bold text-lg">
-                        # <router-link 
-                            :to="`/inspector/LV-1002`"
-                            class="text-emerald-400 hover:text-emerald-300 hover:underline"
-                          >
-                            LV-1002
-                          </router-link>
-                      </div>
-                      <div class="flex items-center text-gray-200 text-sm">
-                        <Hash class="w-3 h-3 mr-1" />
-                        <router-link to="/orders/ORD-20250701-002" class="text-emerald-400 hover:text-emerald-300 hover:underline">
-                          B-790
-                        </router-link>
-                      </div>
+          <!-- Recent Boards -->
+          <div>
+            <div class="bg-white rounded-lg p-6 shadow border">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Recent Boards</h2>
+                <div class="text-sm text-gray-500">{{ recentBoards.length }} boards</div>
+              </div>
+              
+              <div class="space-y-3 max-h-96 overflow-y-auto">
+                <TransitionGroup name="board" tag="div">
+                  <div 
+                    v-for="board in recentBoards" 
+                    :key="board.id"
+                    :class="[
+                      'bg-gray-100 rounded-lg p-4 transition-all duration-300',
+                      board.isNew ? 'ring-2 ring-emerald-400 bg-emerald-50' : ''
+                    ]"
+                  >
+                    <div class="flex items-center justify-between mb-2">
+                      <router-link 
+                        :to="`/inspector/${board.id}`" 
+                        class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline"
+                      >
+                        {{ board.id }}
+                      </router-link>
+                      <span class="text-emerald-400 font-semibold">${{ board.value }}</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                      <span class="px-2 py-1 bg-yellow-600 text-white text-sm rounded">Common</span>
-                      <div class="text-emerald-400 font-bold">$18.75</div>
+                    <div class="text-sm text-gray-600">
+                      <div>
+                        Batch: <router-link :to="`/orders/${board.orderId}`" class="text-emerald-600 hover:text-emerald-800 hover:underline">{{ board.batch }}</router-link>
+                      </div>
+                      <div>Grade: {{ board.grade }}</div>
+                      <div>Scanned: {{ board.scannedTime }}</div>
                     </div>
                   </div>
+                </TransitionGroup>
+                
+                <div v-if="recentBoards.length === 0" class="text-center py-8 text-gray-500">
+                  <div class="text-lg mb-2">No boards scanned yet</div>
+                  <div class="text-sm">Boards will appear here as they are scanned</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <!-- Info Note -->
         <div class="flex items-center text-gray-600 text-sm">
           <Info class="w-4 h-4 mr-2" />
@@ -682,7 +691,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { 
-  Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info, Settings, Expand, X, Download
+  Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info, Settings, Expand, X, Download, Play
 } from 'lucide-vue-next'
 
 const activeTab = ref('live')
