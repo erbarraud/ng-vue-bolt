@@ -114,6 +114,7 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
+        <button
           @click="toggleMagnifier"
           :class="[
             'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
