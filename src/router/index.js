@@ -15,6 +15,7 @@ import BoardFinder from '../views/BoardFinder.vue'
 import BoardInspector from '../views/BoardInspector.vue'
 import AllOrders from '../views/AllOrders.vue'
 import PastOrders from '../views/PastOrders.vue'
+import LineCheckDashboard from '../views/LineCheckDashboard.vue'
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/line',
     name: 'LineCheck',
     component: LineCheck
+  },
+  {
+    path: '/line/dashboard',
+    name: 'LineCheckDashboard',
+    component: LineCheckDashboard
   },
   {
     path: '/scanning',

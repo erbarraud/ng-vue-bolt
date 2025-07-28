@@ -10,6 +10,12 @@
         
         <!-- Tab Navigation -->
         <div class="flex items-center space-x-2">
+          <Button variant="outline" asChild>
+            <router-link to="/line/dashboard" class="flex items-center">
+              <Monitor class="w-4 h-4 mr-2" />
+              Dashboard View
+            </router-link>
+          </Button>
           <button
             @click="activeTab = 'live'"
             :class="[
@@ -692,6 +698,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { 
   Activity, Camera, Clock, Pause, RefreshCw, Maximize, Settings, Expand, X, Download, Play
 } from 'lucide-vue-next'
+import { Monitor } from 'lucide-vue-next'
 
 const row1ViewMode = ref('grid')
 const row2ViewMode = ref('grid')
