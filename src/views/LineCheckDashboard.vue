@@ -211,6 +211,7 @@
 
             <!-- Status Indicator -->
         </div>
+        </TransitionGroup>
         
         <div class="flex items-center space-x-4">
           <button 
