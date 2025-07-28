@@ -1,13 +1,13 @@
 <template>
-  <div class="min-h-screen bg-gray-900 text-white overflow-hidden">
+  <div class="min-h-screen bg-gray-50 text-gray-900 overflow-hidden">
     <!-- Header Bar -->
-    <div class="bg-gray-800 border-b-4 border-emerald-500 px-8 py-6">
+    <div class="bg-white border-b-4 border-emerald-500 px-8 py-6 shadow-lg">
       <div class="flex items-center justify-between">
         <!-- Title and Status -->
         <div class="flex items-center space-x-8">
           <div>
-            <h1 class="text-4xl font-bold text-white">Line Check Dashboard</h1>
-            <p class="text-xl text-gray-300 mt-1">Real-time Board Scanning Monitor</p>
+            <h1 class="text-4xl font-bold text-gray-900">Line Check Dashboard</h1>
+            <p class="text-xl text-gray-600 mt-1">Real-time Board Scanning Monitor</p>
           </div>
           
           <!-- Connection Status -->
@@ -15,7 +15,7 @@
             <div class="flex items-center space-x-2">
               <div :class="connectionStatus === 'connected' ? 'bg-emerald-400' : 'bg-red-400'" 
                    class="w-4 h-4 rounded-full animate-pulse"></div>
-              <span class="text-lg font-medium">
+              <span class="text-lg font-medium text-gray-900">
                 {{ connectionStatus === 'connected' ? 'Connected' : 'Disconnected' }}
               </span>
             </div>
@@ -24,7 +24,7 @@
             <div class="flex items-center space-x-2">
               <div :class="isScanning ? 'bg-emerald-400' : 'bg-yellow-400'" 
                    class="w-4 h-4 rounded-full"></div>
-              <span class="text-lg font-medium">
+              <span class="text-lg font-medium text-gray-900">
                 {{ isScanning ? 'Scanning Active' : 'Scanning Paused' }}
               </span>
             </div>
@@ -35,17 +35,17 @@
         <div class="flex items-center space-x-12">
           <div class="text-center">
             <div class="text-3xl font-bold text-emerald-400">{{ totalScanned }}</div>
-            <div class="text-sm text-gray-400 uppercase tracking-wide">Total Scanned</div>
+            <div class="text-sm text-gray-500 uppercase tracking-wide">Total Scanned</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-blue-400">{{ scanRate }}/min</div>
-            <div class="text-sm text-gray-400 uppercase tracking-wide">Scan Rate</div>
+            <div class="text-3xl font-bold text-blue-600">{{ scanRate }}/min</div>
+            <div class="text-sm text-gray-500 uppercase tracking-wide">Scan Rate</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-purple-400">{{ averageGrade }}</div>
-            <div class="text-sm text-gray-400 uppercase tracking-wide">Avg Grade</div>
+            <div class="text-3xl font-bold text-purple-600">{{ averageGrade }}</div>
+            <div class="text-sm text-gray-500 uppercase tracking-wide">Avg Grade</div>
           </div>
-          <div class="text-lg text-gray-300">
+          <div class="text-lg text-gray-700">
             {{ currentTime }}
           </div>
         </div>
@@ -56,40 +56,59 @@
     <div class="p-8">
       <!-- Current Scanning Board (Large Display) -->
       <div v-if="currentBoard" class="mb-8">
-        <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-2xl p-8 shadow-2xl border-4 border-emerald-400">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl border-4 border-emerald-500">
           <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-8">
-              <div class="text-center">
-                <div class="text-sm text-emerald-100 uppercase tracking-wide mb-2">Currently Scanning</div>
-                <div class="text-6xl font-bold text-white">{{ currentBoard.id }}</div>
+            <!-- Board Image and Info -->
+            <div class="flex items-center space-x-12">
+              <!-- Board Image -->
+              <div class="relative">
+                <div class="text-sm text-gray-600 uppercase tracking-wide mb-2">Board Image</div>
+                <div class="w-80 h-48 bg-gray-100 rounded-lg border-2 border-gray-300 overflow-hidden">
+                  <img 
+                    src="/image.png" 
+                    alt="Current board being scanned" 
+                    class="w-full h-full object-cover"
+                  />
+                  <!-- Scanning overlay -->
+                  <div class="absolute inset-0 bg-emerald-500 bg-opacity-20 border-2 border-emerald-500 rounded-lg animate-pulse"></div>
+                </div>
+                <div class="text-center mt-2">
+                  <div class="text-emerald-600 text-sm font-medium">Currently Scanning</div>
+                </div>
               </div>
               
-              <div class="h-20 w-px bg-emerald-300"></div>
+              <!-- Board Details -->
+              <div class="text-center">
+                <div class="text-sm text-gray-600 uppercase tracking-wide mb-2">Board ID</div>
+                <div class="text-6xl font-bold text-gray-900">{{ currentBoard.id }}</div>
+              </div>
+              
+              <div class="h-20 w-px bg-gray-300"></div>
               
               <div class="grid grid-cols-4 gap-8">
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-white">{{ currentBoard.grade }}</div>
-                  <div class="text-sm text-emerald-100 uppercase">Grade</div>
+                  <div class="text-2xl font-bold text-gray-900">{{ currentBoard.grade }}</div>
+                  <div class="text-sm text-gray-600 uppercase">Grade</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-white">{{ currentBoard.species }}</div>
-                  <div class="text-sm text-emerald-100 uppercase">Species</div>
+                  <div class="text-2xl font-bold text-gray-900">{{ currentBoard.species }}</div>
+                  <div class="text-sm text-gray-600 uppercase">Species</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-white">{{ currentBoard.dimensions }}</div>
-                  <div class="text-sm text-emerald-100 uppercase">Dimensions</div>
+                  <div class="text-2xl font-bold text-gray-900">{{ currentBoard.dimensions }}</div>
+                  <div class="text-sm text-gray-600 uppercase">Dimensions</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-white">${{ currentBoard.value }}</div>
-                  <div class="text-sm text-emerald-100 uppercase">Value</div>
+                  <div class="text-2xl font-bold text-emerald-600">${{ currentBoard.value }}</div>
+                  <div class="text-sm text-gray-600 uppercase">Value</div>
                 </div>
               </div>
             </div>
             
             <!-- Scanning Animation -->
             <div class="text-center">
-              <div class="w-24 h-24 border-8 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
-              <div class="text-white text-lg font-medium">Scanning...</div>
+              <div class="w-24 h-24 border-8 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div class="text-gray-900 text-lg font-medium">Scanning...</div>
             </div>
           </div>
         </div>
@@ -102,15 +121,26 @@
             v-for="board in recentBoards"
             :key="board.id"
             :class="[
-              'bg-gray-800 rounded-xl p-6 border-2 transition-all duration-500',
-              board.isNew ? 'border-emerald-400 bg-emerald-900/30 shadow-lg shadow-emerald-500/20' : 'border-gray-600',
+              'bg-white rounded-xl p-6 border-2 transition-all duration-500 shadow-lg',
+              board.isNew ? 'border-emerald-500 bg-emerald-50 shadow-xl shadow-emerald-200' : 'border-gray-200',
               getGradeColorClass(board.grade)
             ]"
           >
+            <!-- Board Image Thumbnail -->
+            <div class="mb-4">
+              <div class="w-full h-32 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden">
+                <img 
+                  src="/image.png" 
+                  alt="Board scan image" 
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
             <!-- Board ID -->
             <div class="text-center mb-4">
-              <div class="text-2xl font-bold text-white">{{ board.id }}</div>
-              <div class="text-sm text-gray-400">{{ board.scannedTime }}</div>
+              <div class="text-2xl font-bold text-gray-900">{{ board.id }}</div>
+              <div class="text-sm text-gray-500">{{ board.scannedTime }}</div>
             </div>
 
             <!-- Grade Badge -->
@@ -124,20 +154,20 @@
             <!-- Key Info -->
             <div class="space-y-3">
               <div class="flex justify-between items-center">
-                <span class="text-gray-400 text-sm">Species:</span>
-                <span class="text-white font-medium">{{ board.species }}</span>
+                <span class="text-gray-500 text-sm">Species:</span>
+                <span class="text-gray-900 font-medium">{{ board.species }}</span>
               </div>
               <div class="flex justify-between items-center">
-                <span class="text-gray-400 text-sm">Size:</span>
-                <span class="text-white font-medium">{{ board.dimensions }}</span>
+                <span class="text-gray-500 text-sm">Size:</span>
+                <span class="text-gray-900 font-medium">{{ board.dimensions }}</span>
               </div>
               <div class="flex justify-between items-center">
-                <span class="text-gray-400 text-sm">Value:</span>
-                <span class="text-emerald-400 font-bold text-lg">${{ board.value }}</span>
+                <span class="text-gray-500 text-sm">Value:</span>
+                <span class="text-emerald-600 font-bold text-lg">${{ board.value }}</span>
               </div>
               <div class="flex justify-between items-center">
-                <span class="text-gray-400 text-sm">Defects:</span>
-                <span :class="board.defectCount > 0 ? 'text-red-400' : 'text-emerald-400'" 
+                <span class="text-gray-500 text-sm">Defects:</span>
+                <span :class="board.defectCount > 0 ? 'text-red-600' : 'text-emerald-600'" 
                       class="font-medium">
                   {{ board.defectCount || 0 }}
                 </span>
@@ -148,7 +178,7 @@
             <div class="mt-4 text-center">
               <div :class="board.status === 'passed' ? 'bg-emerald-500' : 'bg-yellow-500'" 
                    class="w-full h-2 rounded-full"></div>
-              <div class="text-xs text-gray-400 mt-1 uppercase">{{ board.status }}</div>
+              <div class="text-xs text-gray-500 mt-1 uppercase">{{ board.status }}</div>
             </div>
           </div>
         </TransitionGroup>
@@ -156,24 +186,24 @@
 
       <!-- Empty State -->
       <div v-if="recentBoards.length === 0" class="text-center py-20">
-        <div class="text-6xl text-gray-600 mb-4">📋</div>
-        <div class="text-2xl text-gray-400 mb-2">Waiting for boards...</div>
+        <div class="text-6xl text-gray-400 mb-4">📋</div>
+        <div class="text-2xl text-gray-600 mb-2">Waiting for boards...</div>
         <div class="text-lg text-gray-500">Boards will appear here as they are scanned</div>
       </div>
     </div>
 
     <!-- Footer Status Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 border-t-2 border-gray-700 px-8 py-4">
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 px-8 py-4 shadow-lg">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-8">
-          <div class="text-sm text-gray-400">
-            Last Update: <span class="text-white">{{ lastUpdateTime }}</span>
+          <div class="text-sm text-gray-500">
+            Last Update: <span class="text-gray-900">{{ lastUpdateTime }}</span>
           </div>
-          <div class="text-sm text-gray-400">
-            Batch: <span class="text-emerald-400 font-medium">{{ currentBatch }}</span>
+          <div class="text-sm text-gray-500">
+            Batch: <span class="text-emerald-600 font-medium">{{ currentBatch }}</span>
           </div>
-          <div class="text-sm text-gray-400">
-            Order: <span class="text-blue-400 font-medium">{{ currentOrder }}</span>
+          <div class="text-sm text-gray-500">
+            Order: <span class="text-blue-600 font-medium">{{ currentOrder }}</span>
           </div>
         </div>
         
@@ -181,13 +211,13 @@
           <button 
             @click="toggleScanning"
             :class="isScanning ? 'bg-red-600 hover:bg-red-700' : 'bg-emerald-600 hover:bg-emerald-700'"
-            class="px-6 py-2 rounded-lg font-medium transition-colors"
+            class="px-6 py-2 rounded-lg font-medium transition-colors text-white"
           >
             {{ isScanning ? 'Pause Scanning' : 'Resume Scanning' }}
           </button>
           <button 
             @click="refreshData"
-            class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors"
+            class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors text-white"
           >
             Refresh
           </button>
@@ -341,13 +371,13 @@ const refreshData = () => {
  */
 const getGradeColorClass = (grade) => {
   const colorMap = {
-    'FAS': 'border-l-4 border-l-emerald-500',
-    'Select': 'border-l-4 border-l-blue-500',
-    '1 Common': 'border-l-4 border-l-yellow-500',
-    '2 Common': 'border-l-4 border-l-orange-500',
-    '3 Common': 'border-l-4 border-l-red-500'
+    'FAS': 'border-l-4 border-l-emerald-600',
+    'Select': 'border-l-4 border-l-blue-600',
+    '1 Common': 'border-l-4 border-l-yellow-600',
+    '2 Common': 'border-l-4 border-l-orange-600',
+    '3 Common': 'border-l-4 border-l-red-600'
   }
-  return colorMap[grade] || 'border-l-4 border-l-gray-500'
+  return colorMap[grade] || 'border-l-4 border-l-gray-600'
 }
 
 /**
@@ -357,13 +387,13 @@ const getGradeColorClass = (grade) => {
  */
 const getGradeBadgeClass = (grade) => {
   const badgeMap = {
-    'FAS': 'bg-emerald-500 text-white',
-    'Select': 'bg-blue-500 text-white',
-    '1 Common': 'bg-yellow-500 text-black',
-    '2 Common': 'bg-orange-500 text-white',
-    '3 Common': 'bg-red-500 text-white'
+    'FAS': 'bg-emerald-600 text-white',
+    'Select': 'bg-blue-600 text-white',
+    '1 Common': 'bg-yellow-600 text-white',
+    '2 Common': 'bg-orange-600 text-white',
+    '3 Common': 'bg-red-600 text-white'
   }
-  return badgeMap[grade] || 'bg-gray-500 text-white'
+  return badgeMap[grade] || 'bg-gray-600 text-white'
 }
 
 /**
