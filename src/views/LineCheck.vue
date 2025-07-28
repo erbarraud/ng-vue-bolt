@@ -95,7 +95,14 @@
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                   <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                      <div class="text-white font-bold text-lg"># LV-1001</div>
+                      <div class="text-white font-bold text-lg">
+                        # <router-link 
+                            :to="`/inspector/LV-1001`"
+                            class="text-emerald-400 hover:text-emerald-300 hover:underline"
+                          >
+                            LV-1001
+                          </router-link>
+                      </div>
                       <div class="flex items-center text-gray-200 text-sm">
                         <Hash class="w-3 h-3 mr-1" />
                         <router-link to="/orders/ORD-20250701-001" class="text-emerald-400 hover:text-emerald-300 hover:underline">
@@ -128,7 +135,14 @@
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                   <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                      <div class="text-white font-bold text-lg"># LV-1002</div>
+                      <div class="text-white font-bold text-lg">
+                        # <router-link 
+                            :to="`/inspector/LV-1002`"
+                            class="text-emerald-400 hover:text-emerald-300 hover:underline"
+                          >
+                            LV-1002
+                          </router-link>
+                      </div>
                       <div class="flex items-center text-gray-200 text-sm">
                         <Hash class="w-3 h-3 mr-1" />
                         <router-link to="/orders/ORD-20250701-002" class="text-emerald-400 hover:text-emerald-300 hover:underline">

@@ -80,7 +80,7 @@
             <div class="space-y-4">
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <router-link to="/orders/ORD-20250701-001" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                  <router-link to="/inspector/LV-1001" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
                     LV-1001
                   </router-link>
                   <span class="text-emerald-400 font-semibold">$12.50</span>
@@ -96,7 +96,7 @@
 
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <router-link to="/orders/ORD-20250701-002" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                  <router-link to="/inspector/LV-1002" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
                     LV-1002
                   </router-link>
                   <span class="text-emerald-400 font-semibold">$18.75</span>
@@ -112,7 +112,7 @@
 
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <router-link to="/orders/ORD-20250628-006" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                  <router-link to="/inspector/LV-1003" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
                     LV-1003
                   </router-link>
                   <span class="text-emerald-400 font-semibold">$9.25</span>
@@ -128,7 +128,7 @@
 
               <div class="bg-gray-100 rounded-lg p-4">
                 <div class="flex items-center justify-between mb-2">
-                  <router-link to="/orders/ORD-20250629-005" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                  <router-link to="/inspector/LV-1004" class="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
                     LV-1004
                   </router-link>
                   <span class="text-emerald-400 font-semibold">$22.00</span>

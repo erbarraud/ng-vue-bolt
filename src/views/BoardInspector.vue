@@ -27,7 +27,7 @@
             </div>
           </button>
           <div class="flex items-center space-x-3">
-            <h2 class="text-2xl font-bold text-gray-900">BRD-4625</h2>
+            <h2 class="text-2xl font-bold text-gray-900">{{ currentBoardId }}</h2>
             <span class="px-3 py-1 bg-emerald-600 text-white text-sm font-medium rounded-full">1COMMON</span>
             <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
               <ChevronRight class="w-5 h-5" />
@@ -332,7 +332,12 @@
           <tbody class="bg-white divide-y divide-gray-200">
             <tr class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">BRD-58918</div>
+                <router-link 
+                  to="/inspector/BRD-58918"
+                  class="text-sm font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
+                >
+                  BRD-58918
+                </router-link>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">03/18/2025 3:40 PM</div>
@@ -356,7 +361,12 @@
             </tr>
             <tr class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">BRD-58917</div>
+                <router-link 
+                  to="/inspector/BRD-58917"
+                  class="text-sm font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
+                >
+                  BRD-58917
+                </router-link>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">03/18/2025 3:40 PM</div>
@@ -383,7 +393,12 @@
             </tr>
             <tr class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">BRD-58916</div>
+                <router-link 
+                  to="/inspector/BRD-58916"
+                  class="text-sm font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
+                >
+                  BRD-58916
+                </router-link>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">03/18/2025 3:39 PM</div>
@@ -409,7 +424,12 @@
             </tr>
             <tr class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">BRD-58915</div>
+                <router-link 
+                  to="/inspector/BRD-58915"
+                  class="text-sm font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
+                >
+                  BRD-58915
+                </router-link>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">03/18/2025 3:39 PM</div>
@@ -436,7 +456,12 @@
             </tr>
             <tr class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">BRD-58914</div>
+                <router-link 
+                  to="/inspector/BRD-58914"
+                  class="text-sm font-medium text-emerald-600 hover:text-emerald-800 hover:underline"
+                >
+                  BRD-58914
+                </router-link>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">03/18/2025 3:38 PM</div>
@@ -470,12 +495,18 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { 
   ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
   Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
+
+const route = useRoute()
+
+// Get board ID from route params or default
+const currentBoardId = computed(() => route.params.boardId || 'BRD-4625')
 
 // Magnifier state
 const magnifierEnabled = ref(false)

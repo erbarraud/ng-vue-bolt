@@ -315,6 +315,12 @@
             >
               <div class="flex items-center justify-between">
                 <div class="font-semibold text-gray-900">{{ board.id }}</div>
+                <router-link 
+                  :to="`/inspector/${board.id}`"
+                  class="font-semibold text-emerald-600 hover:text-emerald-800 hover:underline"
+                >
+                  {{ board.id }}
+                </router-link>
                 <div class="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded">{{ board.grade }}</div>
               </div>
               <div class="text-xs text-gray-500 mt-1">
@@ -334,7 +340,15 @@
             <!-- Board Header -->
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center space-x-4">
-                <h2 class="text-2xl font-bold text-gray-900">Board {{ currentBoard.id }}</h2>
+                <h2 class="text-2xl font-bold text-gray-900">
+                  Board 
+                  <router-link 
+                    :to="`/inspector/${currentBoard.id}`"
+                    class="text-emerald-600 hover:text-emerald-800 hover:underline ml-2"
+                  >
+                    {{ currentBoard.id }}
+                  </router-link>
+                </h2>
                 <span class="px-3 py-1 bg-gray-800 text-white text-sm font-medium rounded">{{ currentBoard.grade }}</span>
               </div>
             </div>

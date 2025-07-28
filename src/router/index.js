@@ -78,6 +78,12 @@ const routes = [
     name: 'OrderDetails',
     component: () => import('../views/OrderDetails.vue'),
     props: true
+  },
+  {
+    path: '/inspector/:boardId',
+    name: 'BoardInspectorWithId',
+    component: () => import('../views/BoardInspector.vue'),
+    props: true
   }
 ]
 
