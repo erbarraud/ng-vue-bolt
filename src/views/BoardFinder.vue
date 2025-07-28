@@ -408,22 +408,26 @@
             <!-- Action Buttons -->
             <!-- Action Buttons -->
             <div class="flex items-center gap-3 mb-8">
-              <Button variant="secondary" size="sm" class="bg-gray-100 text-gray-800 hover:bg-gray-200 border-gray-200">
-                <Filter class="w-4 h-4 mr-2" />
-                Hide filtered defects
-              </Button>
-              <Button variant="outline" size="sm" class="bg-green-100 text-green-800 hover:bg-green-200 border-green-200">
+              <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <EyeOff class="w-4 h-4 mr-2" />
+                Hide Minor Defects
+              </button>
+              <button class="flex items-center px-3 py-1.5 text-sm font-medium text-emerald-600 bg-white border-2 border-emerald-300 rounded-md hover:bg-gray-50 transition-colors">
                 <CheckCircle class="w-4 h-4 mr-2" />
                 Agree with NG AI
-              </Button>
-              <Button variant="outline" size="sm" class="bg-red-100 text-red-800 hover:bg-red-200 border-red-200">
+              </button>
+              <button class="flex items-center px-3 py-1.5 text-sm font-medium text-red-600 bg-white border-2 border-red-300 rounded-md hover:bg-gray-50 transition-colors">
                 <XCircle class="w-4 h-4 mr-2" />
                 Disagree with NG AI
-              </Button>
-              <Button variant="outline" size="sm" class="bg-orange-100 text-orange-800 hover:bg-orange-200 border-orange-200">
+              </button>
+              <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                 <FileText class="w-4 h-4 mr-2" />
-                See Rejected Grades
-              </Button>
+                See rejected rules
+              </button>
+              <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <BookOpen class="w-4 h-4 mr-2" />
+                Add to Reference Bundle
+              </button>
             </div>
 
             <!-- Board Images -->
@@ -521,7 +525,7 @@ import {
   Search, Filter, ChevronDown, Calendar, Ruler, Layers, Package, DollarSign, 
   AlertCircle, CheckCircle, XCircle, FileText, Eye, Clock, ChevronLeft, ChevronRight,
   Tag, Percent, ArrowLeftRight, Box, AlertTriangle, TrendingUp,
-  ThumbsUp, ThumbsDown, ClipboardList, X
+  ThumbsUp, ThumbsDown, ClipboardList, X, EyeOff, BookOpen
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
 
