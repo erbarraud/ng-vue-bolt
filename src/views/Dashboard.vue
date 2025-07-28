@@ -490,4 +490,3 @@ const { isLoading, error, execute: retryLoad } = useAsyncState(
 )
 
 onMounted(() => retryLoad())</script>
-</script>
