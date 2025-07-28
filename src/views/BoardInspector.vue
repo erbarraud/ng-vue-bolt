@@ -462,6 +462,7 @@ import Button from '@/components/ui/button.vue'
 const magnifierEnabled = ref(false)
 const showMagnifier = ref(false)
 const mousePosition = ref({ x: 0, y: 0 })
+const activeMagnifierBoard = ref(null) // Track which board has active magnifier
 const magnifierSize = 150
 const magnificationLevel = 2.5
 
@@ -480,14 +481,30 @@ const toggleMagnifier = () => {
 }
 
 // Handle mouse movement
-const handleMouseMove = (event) => {
+const handleMouseMove = (event, boardId) => {
   if (!magnifierEnabled.value) return
+  
+  // Set the active board for magnifier
+  activeMagnifierBoard.value = boardId
   
   const rect = event.currentTarget.getBoundingClientRect()
   mousePosition.value = {
     x: event.clientX - rect.left,
     y: event.clientY - rect.top
   }
+}
+
+// Handle mouse enter for magnifier
+const handleMouseEnter = (boardId) => {
+  if (!magnifierEnabled.value) return
+  showMagnifier.value = true
+  activeMagnifierBoard.value = boardId
+}
+
+// Handle mouse leave for magnifier
+const handleMouseLeave = () => {
+  showMagnifier.value = false
+  activeMagnifierBoard.value = null
 }
 
 // Image load handler
@@ -499,13 +516,20 @@ const onImageLoad = () => {
 const magnifierStyle = computed(() => {
   const { x, y } = mousePosition.value
   
-  // Position magnifier above and to the right of cursor to avoid obstruction
-  let left = x + 20
+  // Position magnifier above the cursor
+  let left = x - (magnifierSize / 2)
   let top = y - magnifierSize - 20
   
   // Handle edge cases - keep magnifier within bounds
-  if (left + magnifierSize > (face1Container.value?.offsetWidth || 0)) {
-    left = x - magnifierSize - 20
+  const containerWidth = activeMagnifierBoard.value === 'face1' 
+    ? (face1Container.value?.offsetWidth || 0)
+    : (face2Container.value?.offsetWidth || 0)
+    
+  if (left + magnifierSize > containerWidth) {
+    left = containerWidth - magnifierSize - 10
+  }
+  if (left < 0) {
+    left = 10
   }
   if (top < 0) {
     top = y + 20
