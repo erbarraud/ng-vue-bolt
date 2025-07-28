@@ -1,233 +1,132 @@
 <template>
-  <div class="min-h-screen bg-gray-50 text-gray-900 overflow-hidden">
-    <!-- Header Bar -->
-    <div class="bg-white border-b-4 border-emerald-500 px-8 py-6 shadow-lg">
-      <div class="flex items-center justify-between">
-        <!-- Title and Status -->
-        <div class="flex items-center space-x-8">
-          <div>
-            <h1 class="text-4xl font-bold text-gray-900">Line Check Dashboard</h1>
-            <p class="text-xl text-gray-600 mt-1">Real-time Board Scanning Monitor</p>
-          </div>
-          
-          <!-- Connection Status -->
-          <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-2">
-              <div :class="connectionStatus === 'connected' ? 'bg-emerald-400' : 'bg-red-400'" 
-                   class="w-4 h-4 rounded-full animate-pulse"></div>
-              <span class="text-lg font-medium text-gray-900">
-                {{ connectionStatus === 'connected' ? 'Connected' : 'Disconnected' }}
-              </span>
-            </div>
-            
-            <!-- Scanning Status -->
-            <div class="flex items-center space-x-2">
-              <div :class="isScanning ? 'bg-emerald-400' : 'bg-yellow-400'" 
-                   class="w-4 h-4 rounded-full"></div>
-              <span class="text-lg font-medium text-gray-900">
-                {{ isScanning ? 'Scanning Active' : 'Scanning Paused' }}
-              </span>
-            </div>
-          </div>
+  <div class="min-h-screen bg-gray-50">
+    <div class="w-full px-4 sm:px-6 lg:px-8 py-6">
+      <!-- Page Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Line Check</h1>
         </div>
-
-        <!-- Live Stats -->
-        <div class="flex items-center space-x-12">
-          <div class="text-center">
-            <div class="text-3xl font-bold text-emerald-400">{{ totalScanned }}</div>
-            <div class="text-sm text-gray-500 uppercase tracking-wide">Total Scanned</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-blue-600">{{ scanRate }}/min</div>
-            <div class="text-sm text-gray-500 uppercase tracking-wide">Scan Rate</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-purple-600">{{ averageGrade }}</div>
-            <div class="text-sm text-gray-500 uppercase tracking-wide">Avg Grade</div>
-          </div>
-          <div class="text-lg text-gray-700">
-            {{ currentTime }}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Content Area -->
-    <div class="p-8">
-      <!-- Current Scanning Board (Large Display) -->
-      <div v-if="currentBoard" class="mb-8">
-        <div class="bg-white rounded-2xl p-8 shadow-2xl border-4 border-emerald-500">
-          <div class="flex items-center justify-between">
-            <!-- Board Image and Info -->
-            <div class="flex items-center space-x-12">
-              <!-- Board Image -->
-              <div class="relative">
-                <div class="text-sm text-gray-600 uppercase tracking-wide mb-2">Board Image</div>
-                <div class="w-96 bg-gray-100 rounded-lg border-2 border-gray-300 overflow-hidden">
-                  <img 
-                    src="/image.png" 
-                    alt="Current board being scanned" 
-                    class="w-full h-auto object-contain"
-                  />
-                  <!-- Scanning overlay -->
-                  <div class="absolute inset-0 bg-emerald-500 bg-opacity-20 border-2 border-emerald-500 rounded-lg animate-pulse"></div>
-                </div>
-                <div class="text-center mt-2">
-                  <div class="text-emerald-600 text-sm font-medium">Currently Scanning</div>
-                </div>
-              </div>
-              
-              <!-- Board Details -->
-              <div class="text-center">
-                <div class="text-sm text-gray-600 uppercase tracking-wide mb-2">Board ID</div>
-                <div class="text-6xl font-bold text-gray-900">{{ currentBoard.id }}</div>
-              </div>
-              
-              <div class="h-20 w-px bg-gray-300"></div>
-              
-              <div class="grid grid-cols-4 gap-8">
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-gray-900">{{ currentBoard.grade }}</div>
-                  <div class="text-sm text-gray-600 uppercase">Grade</div>
-                </div>
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-gray-900">{{ currentBoard.species }}</div>
-                  <div class="text-sm text-gray-600 uppercase">Species</div>
-                </div>
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-gray-900">{{ currentBoard.dimensions }}</div>
-                  <div class="text-sm text-gray-600 uppercase">Dimensions</div>
-                </div>
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-emerald-600">${{ currentBoard.value }}</div>
-                  <div class="text-sm text-gray-600 uppercase">Value</div>
-                </div>
-              </div>
+        
+        <!-- Tab Navigation -->
+        <div class="flex items-center space-x-2">
+          <button class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 flex items-center">
+            <div class="w-4 h-4 mr-2 flex items-center justify-center">
+              <div class="w-2 h-2 bg-gray-600 rounded-sm"></div>
+              <div class="w-2 h-2 bg-gray-600 rounded-sm ml-0.5"></div>
             </div>
-            
-            <!-- Scanning Animation -->
-            <div class="text-center">
-              <div class="w-24 h-24 border-8 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-              <div class="text-gray-900 text-lg font-medium">Scanning...</div>
-            </div>
-          </div>
+            Live View
+          </button>
+          <button class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 flex items-center">
+            <Camera class="w-4 h-4 mr-2" />
+            Scanner
+          </button>
         </div>
       </div>
 
-      <!-- Recent Boards List -->
-      <div class="space-y-4">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Recent Boards</h2>
-        <TransitionGroup name="board-list" tag="div" class="space-y-4">
+      <!-- Live Scanning View Section -->
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Live Scanning View</h2>
+        <p class="text-gray-600">Real-time feed from scanner</p>
+      </div>
+
+      <!-- Control Bar -->
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center text-gray-600">
+            <Clock class="w-4 h-4 mr-2" />
+            <span class="text-gray-900 font-medium">{{ currentTime }}</span>
+          </div>
+          <select 
+            v-model="scanInterval" 
+            @change="updateScanInterval"
+            class="bg-white text-gray-900 px-3 py-1 rounded text-sm border border-gray-300"
+          >
+            <option value="12000">5/min</option>
+            <option value="5000">12/min</option>
+            <option value="2000">30/min</option>
+          </select>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <Square class="w-4 h-4 mr-2" />
+            Pause
+          </button>
+          <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <RefreshCw class="w-4 h-4 mr-2" />
+            Refresh
+          </button>
+          <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <Maximize class="w-4 h-4 mr-2" />
+            Full Screen
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent Boards Section -->
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-gray-900">Recent Boards</h3>
+      </div>
+
+      <!-- Board List Container -->
+      <div class="bg-gray-800 rounded-lg overflow-hidden">
+        <TransitionGroup name="board-list" tag="div">
           <div
             v-for="board in recentBoards"
             :key="board.id"
             :class="[
-              'bg-white rounded-xl p-6 border-l-8 transition-all duration-500 shadow-lg flex items-center space-x-8',
-              board.isNew ? 'border-emerald-500 bg-emerald-50 shadow-xl shadow-emerald-200' : 'border-gray-200',
-              getGradeColorClass(board.grade)
+              'relative flex items-center bg-gray-800 border-b border-gray-700 last:border-b-0 transition-all duration-300',
+              board.isNew ? 'bg-gray-700' : ''
             ]"
           >
-            <!-- Board Image Full Size -->
-            <div class="flex-shrink-0">
-              <div class="w-80 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden">
-                <img 
-                  src="/image.png" 
-                  alt="Board scan image" 
-                  class="w-full h-auto object-contain"
-                />
-              </div>
+            <!-- New Badge -->
+            <div v-if="board.isNew" class="absolute top-2 right-2 z-10">
+              <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">New</span>
             </div>
 
-            <!-- Board Information -->
-            <div class="flex-1 grid grid-cols-6 gap-8 items-center">
-              <!-- Board ID -->
-              <div class="text-center">
-                <div class="text-3xl font-bold text-gray-900">{{ board.id }}</div>
-                <div class="text-sm text-gray-500 mt-1">{{ board.scannedTime }}</div>
-              </div>
-
-              <!-- Grade -->
-              <div class="text-center">
-                <div :class="getGradeBadgeClass(board.grade)" 
-                     class="inline-block px-4 py-2 rounded-full text-xl font-bold mb-2">
-                  {{ board.grade }}
+            <!-- Board Image -->
+            <div class="flex-1 relative">
+              <img 
+                src="/image.png" 
+                alt="Board scan image" 
+                class="w-full h-24 object-cover"
+              />
+              
+              <!-- Board Info Overlay -->
+              <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-between px-4">
+                <!-- Left side info -->
+                <div class="flex items-center space-x-4">
+                  <div class="text-white">
+                    <div class="text-lg font-bold"># {{ board.id }}</div>
+                    <div class="text-sm flex items-center">
+                      <div class="w-4 h-4 bg-white rounded-full mr-2 flex items-center justify-center">
+                        <div class="w-2 h-2 bg-gray-800 rounded-full"></div>
+                      </div>
+                      {{ board.batch }}
+                    </div>
+                  </div>
                 </div>
-                <div class="text-sm text-gray-500 uppercase">Grade</div>
-              </div>
 
-              <!-- Species -->
-              <div class="text-center">
-                <div class="text-xl font-bold text-gray-900">{{ board.species }}</div>
-                <div class="text-sm text-gray-500 uppercase">Species</div>
-              </div>
-
-              <!-- Dimensions -->
-              <div class="text-center">
-                <div class="text-xl font-bold text-gray-900">{{ board.dimensions }}</div>
-                <div class="text-sm text-gray-500 uppercase">Size</div>
-              </div>
-
-              <!-- Value -->
-              <div class="text-center">
-                <div class="text-2xl font-bold text-emerald-600">${{ board.value }}</div>
-                <div class="text-sm text-gray-500 uppercase">Value</div>
-              </div>
-
-              <!-- Status & Defects -->
-              <div class="text-center">
-                <div class="flex items-center justify-center space-x-4 mb-2">
-                  <div :class="board.status === 'passed' ? 'bg-emerald-500' : 'bg-yellow-500'" 
-                       class="w-4 h-4 rounded-full"></div>
-                  <span class="text-lg font-medium text-gray-900 capitalize">{{ board.status }}</span>
-                </div>
-                <div class="text-sm text-gray-500">
-                  {{ board.defectCount || 0 }} defects
+                <!-- Right side info -->
+                <div class="text-right text-white">
+                  <div class="flex items-center justify-end space-x-2 mb-1">
+                    <span :class="getGradeBadgeClass(board.grade)" class="px-2 py-1 rounded text-xs font-medium">
+                      {{ board.grade }}
+                    </span>
+                  </div>
+                  <div class="text-lg font-bold">${{ board.value }}</div>
                 </div>
               </div>
             </div>
-
-            <!-- Key Info -->
-            <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="text-gray-500 text-sm">Species:</span>
-                <span class="text-gray-900 font-medium">{{ board.species }}</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-gray-500 text-sm">Size:</span>
-                <span class="text-gray-900 font-medium">{{ board.dimensions }}</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-gray-500 text-sm">Value:</span>
-                <span class="text-emerald-600 font-bold text-lg">${{ board.value }}</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-gray-500 text-sm">Defects:</span>
-                <span :class="board.defectCount > 0 ? 'text-red-600' : 'text-emerald-600'" 
-                      class="font-medium">
-                  {{ board.defectCount || 0 }}
-                </span>
-              </div>
-            </div>
-
-            <!-- Status Indicator -->
-        </div>
+          </div>
         </TransitionGroup>
-        
-        <div class="flex items-center space-x-4">
-          <button 
-            @click="toggleScanning"
-            :class="isScanning ? 'bg-red-600 hover:bg-red-700' : 'bg-emerald-600 hover:bg-emerald-700'"
-            class="px-6 py-2 rounded-lg font-medium transition-colors text-white"
-          >
-            {{ isScanning ? 'Pause Scanning' : 'Resume Scanning' }}
-          </button>
-          <button 
-            @click="refreshData"
-            class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors text-white"
-          >
-            Refresh
-          </button>
+      </div>
+
+      <!-- Footer Info -->
+      <div class="mt-4 flex items-center text-gray-500 text-sm">
+        <div class="w-4 h-4 rounded-full border border-gray-400 mr-2 flex items-center justify-center">
+          <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
         </div>
+        Live feed with board images (original aspect ratio). KPIs are overlaid. Click Board ID for details.
       </div>
     </div>
   </div>
@@ -235,155 +134,102 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { Clock, Square, RefreshCw, Maximize, Camera } from 'lucide-vue-next'
 
 // Reactive state
-const connectionStatus = ref('connected')
 const isScanning = ref(true)
+const scanInterval = ref(12000) // 5/min default
 const currentTime = ref('')
-const lastUpdateTime = ref('')
-const currentBoard = ref(null)
 const recentBoards = ref([])
-const totalScanned = ref(1247)
-const scanRate = ref(12)
-const currentBatch = ref('B-4873')
-const currentOrder = ref('ORD-20250701-001')
 
-// Timers and intervals
+// Timers
 let clockTimer = null
 let scanTimer = null
-let connectionTimer = null
 
 // Sample data for generating boards
-const sampleSpecies = ['Red Oak', 'White Oak', 'Cherry', 'Maple', 'Walnut', 'Ash']
-const sampleGrades = ['FAS', 'Select', '1 Common', '2 Common', '3 Common']
-const sampleStatuses = ['passed', 'review']
+const sampleGrades = ['2COMMON', 'Select', 'Common']
+const sampleBatches = ['B-934', 'B-789', 'B-790', 'B-791', 'B-792']
+const sampleValues = ['8.41', '12.50', '18.75', '15.25', '22.00']
 
 /**
- * Generates a random board for simulation
- * @returns {Object} Board object with realistic lumber data
+ * Generates a random board with realistic lumber data
+ * @returns {Object} Board object with id, grade, batch, etc.
  */
 const generateRandomBoard = () => {
-  const boardNumber = Math.floor(Math.random() * 9999) + 2000
-  const species = sampleSpecies[Math.floor(Math.random() * sampleSpecies.length)]
+  const boardTypes = ['BRD-10003', 'LV-1001', 'LV-1002']
+  const boardId = boardTypes[Math.floor(Math.random() * boardTypes.length)]
   const grade = sampleGrades[Math.floor(Math.random() * sampleGrades.length)]
-  const length = Math.floor(Math.random() * 8) + 4 // 4-12 feet
-  const width = Math.floor(Math.random() * 8) + 4 // 4-12 inches
-  const thickness = Math.random() > 0.5 ? '4/4' : '5/4'
-  const value = (Math.random() * 50 + 10).toFixed(2)
-  const defectCount = Math.floor(Math.random() * 4) // 0-3 defects
-  const status = defectCount > 2 ? 'review' : 'passed'
+  const batch = sampleBatches[Math.floor(Math.random() * sampleBatches.length)]
+  const value = sampleValues[Math.floor(Math.random() * sampleValues.length)]
   
   return {
-    id: `BRD-${boardNumber}`,
-    species,
+    id: boardId,
     grade,
-    dimensions: `${length}' × ${width}" × ${thickness}`,
+    batch,
     value,
-    defectCount,
-    status,
     scannedTime: new Date().toLocaleTimeString(),
     isNew: true
   }
 }
 
 /**
- * Simulates scanning a new board
+ * Adds a new randomly generated board to the scanning results
  */
-const scanNewBoard = () => {
+const addNewBoard = () => {
   if (!isScanning.value) return
-
-  // Set current board being scanned
-  currentBoard.value = generateRandomBoard()
   
-  // Simulate scanning time (2-4 seconds)
-  const scanDuration = Math.random() * 2000 + 2000
+  const newBoard = generateRandomBoard()
   
+  // Add to the beginning of the array
+  recentBoards.value.unshift(newBoard)
+  
+  // Remove the "new" highlight after 3 seconds
   setTimeout(() => {
-    if (currentBoard.value) {
-      // Add to recent boards
-      recentBoards.value.unshift({ ...currentBoard.value })
-      
-      // Remove new highlight after 5 seconds
-      setTimeout(() => {
-        if (recentBoards.value[0]) {
-          recentBoards.value[0].isNew = false
-        }
-      }, 5000)
-      
-      // Keep only last 18 boards (3 rows of 6)
-      if (recentBoards.value.length > 18) {
-        recentBoards.value = recentBoards.value.slice(0, 18)
-      }
-      
-      // Update stats
-      totalScanned.value++
-      lastUpdateTime.value = new Date().toLocaleTimeString()
-      
-      // Clear current board
-      currentBoard.value = null
-      
-      // Schedule next scan
-      if (isScanning.value) {
-        const nextScanDelay = Math.random() * 3000 + 2000 // 2-5 seconds
-        setTimeout(scanNewBoard, nextScanDelay)
-      }
-    }
-  }, scanDuration)
+    newBoard.isNew = false
+  }, 3000)
+  
+  // Keep only the last 10 boards
+  if (recentBoards.value.length > 10) {
+    recentBoards.value = recentBoards.value.slice(0, 10)
+  }
+}
+
+/**
+ * Starts the scanning process
+ */
+const startScanning = () => {
+  if (scanTimer) clearInterval(scanTimer)
+  
+  // Add a board immediately when starting
+  addNewBoard()
+  
+  // Start scanning timer
+  scanTimer = setInterval(() => {
+    addNewBoard()
+  }, scanInterval.value)
+}
+
+/**
+ * Updates the scanning interval and restarts if currently scanning
+ */
+const updateScanInterval = () => {
+  if (isScanning.value) {
+    if (scanTimer) clearInterval(scanTimer)
+    startScanning()
+  }
 }
 
 /**
  * Updates the current time display
  */
 const updateTime = () => {
-  currentTime.value = new Date().toLocaleTimeString()
-}
-
-/**
- * Simulates connection status changes
- */
-const simulateConnection = () => {
-  // Occasionally simulate connection issues (5% chance)
-  if (Math.random() < 0.05) {
-    connectionStatus.value = 'disconnected'
-    setTimeout(() => {
-      connectionStatus.value = 'connected'
-    }, Math.random() * 3000 + 1000)
-  }
-}
-
-/**
- * Toggles scanning state
- */
-const toggleScanning = () => {
-  isScanning.value = !isScanning.value
-  
-  if (isScanning.value && !currentBoard.value) {
-    scanNewBoard()
-  }
-}
-
-/**
- * Refreshes dashboard data
- */
-const refreshData = () => {
-  lastUpdateTime.value = new Date().toLocaleTimeString()
-  // In a real app, this would fetch fresh data from the API
-}
-
-/**
- * Gets CSS class for grade color coding
- * @param {string} grade - Board grade
- * @returns {string} CSS class
- */
-const getGradeColorClass = (grade) => {
-  const colorMap = {
-    'FAS': 'border-l-4 border-l-emerald-600',
-    'Select': 'border-l-4 border-l-blue-600',
-    '1 Common': 'border-l-4 border-l-yellow-600',
-    '2 Common': 'border-l-4 border-l-orange-600',
-    '3 Common': 'border-l-4 border-l-red-600'
-  }
-  return colorMap[grade] || 'border-l-4 border-l-gray-600'
+  const now = new Date()
+  currentTime.value = now.toLocaleTimeString('en-US', { 
+    hour12: true,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  })
 }
 
 /**
@@ -393,127 +239,88 @@ const getGradeColorClass = (grade) => {
  */
 const getGradeBadgeClass = (grade) => {
   const badgeMap = {
-    'FAS': 'bg-emerald-600 text-white',
+    '2COMMON': 'bg-gray-600 text-white',
     'Select': 'bg-blue-600 text-white',
-    '1 Common': 'bg-yellow-600 text-white',
-    '2 Common': 'bg-orange-600 text-white',
-    '3 Common': 'bg-red-600 text-white'
+    'Common': 'bg-yellow-600 text-white'
   }
   return badgeMap[grade] || 'bg-gray-600 text-white'
 }
 
 /**
- * Calculates average grade for display
+ * Initializes the component with sample board data
  */
-const averageGrade = computed(() => {
-  if (recentBoards.value.length === 0) return 'N/A'
+const initializeSampleBoards = () => {
+  const initialBoards = [
+    {
+      id: 'BRD-10003',
+      grade: '2COMMON',
+      batch: 'B-934',
+      value: '8.41',
+      scannedTime: '06:39:00 PM',
+      isNew: true
+    },
+    {
+      id: 'LV-1001',
+      grade: 'Select',
+      batch: 'B-789',
+      value: '12.50',
+      scannedTime: '06:38:55 PM',
+      isNew: false
+    },
+    {
+      id: 'LV-1002',
+      grade: 'Common',
+      batch: 'B-790',
+      value: '18.75',
+      scannedTime: '06:38:50 PM',
+      isNew: false
+    }
+  ]
   
-  const gradeValues = {
-    'FAS': 5,
-    'Select': 4,
-    '1 Common': 3,
-    '2 Common': 2,
-    '3 Common': 1
-  }
-  
-  const total = recentBoards.value.reduce((sum, board) => {
-    return sum + (gradeValues[board.grade] || 0)
-  }, 0)
-  
-  const average = total / recentBoards.value.length
-  
-  // Convert back to grade name
-  if (average >= 4.5) return 'FAS'
-  if (average >= 3.5) return 'Select'
-  if (average >= 2.5) return '1 Common'
-  if (average >= 1.5) return '2 Common'
-  return '3 Common'
-})
-
-// Lifecycle hooks
-onMounted(() => {
-  // Initialize with some sample boards
-  const initialBoards = Array.from({ length: 6 }, () => ({
-    ...generateRandomBoard(),
-    isNew: false
-  }))
   recentBoards.value = initialBoards
-  
-  // Start timers
+}
+
+onMounted(() => {
+  initializeSampleBoards()
   updateTime()
+  
+  // Start clock timer
   clockTimer = setInterval(updateTime, 1000)
-  connectionTimer = setInterval(simulateConnection, 10000)
   
   // Start scanning
   if (isScanning.value) {
-    setTimeout(scanNewBoard, 2000)
+    startScanning()
   }
-  
-  lastUpdateTime.value = new Date().toLocaleTimeString()
 })
 
 onUnmounted(() => {
-  if (clockTimer) clearInterval(clockTimer)
   if (scanTimer) clearInterval(scanTimer)
-  if (connectionTimer) clearInterval(connectionTimer)
+  if (clockTimer) clearInterval(clockTimer)
 })
 </script>
 
 <style scoped>
-/* Board grid animations */
-.board-grid-enter-active {
-  transition: all 0.6s ease;
+/* Transition animations for new boards */
+.board-list-enter-active {
+  transition: all 0.5s ease;
 }
 
-.board-grid-enter-from {
+.board-list-enter-from {
   opacity: 0;
-  transform: scale(0.8) translateY(-20px);
+  transform: translateY(-20px);
 }
 
-.board-grid-enter-to {
+.board-list-enter-to {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: translateY(0);
 }
 
-.board-grid-leave-active {
-  transition: all 0.4s ease;
+.board-list-leave-active {
+  transition: all 0.3s ease;
 }
 
-.board-grid-leave-to {
+.board-list-leave-to {
   opacity: 0;
-  transform: scale(0.9) translateX(20px);
-}
-
-.board-grid-move {
-  transition: transform 0.5s ease;
-}
-
-/* Custom scrollbar for better visibility */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #374151;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6b7280;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
-/* Ensure text is always readable */
-.text-shadow {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* High contrast focus states for accessibility */
-button:focus {
-  outline: 3px solid #fbbf24;
-  outline-offset: 2px;
+  transform: translateX(20px);
 }
 </style>
