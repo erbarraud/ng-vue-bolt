@@ -489,6 +489,97 @@ const face2Container = ref(null)
 const face1Image = ref(null)
 const face2Image = ref(null)
 
+// Defect types with styling
+const face1DefectTypes = ref([
+  { 
+    name: 'Knot', 
+    activeClass: 'bg-red-600 text-white', 
+    activeBorder: 'border-red-700',
+    inactiveClass: 'bg-red-100 text-red-800', 
+    inactiveBorder: 'border-red-300'
+  },
+  { 
+    name: 'Split', 
+    activeClass: 'bg-orange-600 text-white', 
+    activeBorder: 'border-orange-700',
+    inactiveClass: 'bg-orange-100 text-orange-800', 
+    inactiveBorder: 'border-orange-300'
+  },
+  { 
+    name: 'Wane', 
+    activeClass: 'bg-yellow-600 text-white', 
+    activeBorder: 'border-yellow-700',
+    inactiveClass: 'bg-yellow-100 text-yellow-800', 
+    inactiveBorder: 'border-yellow-300'
+  },
+  { 
+    name: 'Stain', 
+    activeClass: 'bg-purple-600 text-white', 
+    activeBorder: 'border-purple-700',
+    inactiveClass: 'bg-purple-100 text-purple-800', 
+    inactiveBorder: 'border-purple-300'
+  },
+  { 
+    name: 'Pitch Pocket', 
+    activeClass: 'bg-blue-600 text-white', 
+    activeBorder: 'border-blue-700',
+    inactiveClass: 'bg-blue-100 text-blue-800', 
+    inactiveBorder: 'border-blue-300'
+  },
+  { 
+    name: 'Shake', 
+    activeClass: 'bg-gray-600 text-white', 
+    activeBorder: 'border-gray-700',
+    inactiveClass: 'bg-gray-100 text-gray-800', 
+    inactiveBorder: 'border-gray-300'
+  }
+])
+
+const face2DefectTypes = ref([
+  { 
+    name: 'Knot', 
+    activeClass: 'bg-red-600 text-white', 
+    activeBorder: 'border-red-700',
+    inactiveClass: 'bg-red-100 text-red-800', 
+    inactiveBorder: 'border-red-300'
+  },
+  { 
+    name: 'Split', 
+    activeClass: 'bg-orange-600 text-white', 
+    activeBorder: 'border-orange-700',
+    inactiveClass: 'bg-orange-100 text-orange-800', 
+    inactiveBorder: 'border-orange-300'
+  },
+  { 
+    name: 'Wane', 
+    activeClass: 'bg-yellow-600 text-white', 
+    activeBorder: 'border-yellow-700',
+    inactiveClass: 'bg-yellow-100 text-yellow-800', 
+    inactiveBorder: 'border-yellow-300'
+  },
+  { 
+    name: 'Stain', 
+    activeClass: 'bg-purple-600 text-white', 
+    activeBorder: 'border-purple-700',
+    inactiveClass: 'bg-purple-100 text-purple-800', 
+    inactiveBorder: 'border-purple-300'
+  },
+  { 
+    name: 'Pitch Pocket', 
+    activeClass: 'bg-blue-600 text-white', 
+    activeBorder: 'border-blue-700',
+    inactiveClass: 'bg-blue-100 text-blue-800', 
+    inactiveBorder: 'border-blue-300'
+  },
+  { 
+    name: 'Shake', 
+    activeClass: 'bg-gray-600 text-white', 
+    activeBorder: 'border-gray-700',
+    inactiveClass: 'bg-gray-100 text-gray-800', 
+    inactiveBorder: 'border-gray-300'
+  }
+])
+
 // Toggle magnifier
 const toggleMagnifier = () => {
   magnifierEnabled.value = !magnifierEnabled.value
