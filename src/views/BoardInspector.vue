@@ -114,145 +114,290 @@
 
       <!-- Inspector Tools -->
       <div class="flex flex-wrap gap-3 mb-6">
-        <button
-          @click="toggleMagnifier"
-          :class="[
-            'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
-            magnifierEnabled 
-              ? 'text-emerald-600 bg-emerald-100 border-2 border-emerald-300' 
-              : 'text-gray-600 bg-white border-2 border-gray-300'
-          ]"
-        >
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <ZoomIn class="w-4 h-4 mr-2" />
-          {{ magnifierEnabled ? 'Disable Magnifier' : 'Enable Magnifier' }}
+          Enable Magnifier
         </button>
         <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
           <EyeOff class="w-4 h-4 mr-2" />
-          Hide Defects
+          Hide Minor Defects
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-emerald-600 bg-white border-2 border-emerald-300 rounded-md hover:bg-gray-50 transition-colors">
+          <CheckCircle class="w-4 h-4 mr-2" />
+          Agree with NG AI
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-red-600 bg-white border-2 border-red-300 rounded-md hover:bg-gray-50 transition-colors">
+          <XCircle class="w-4 h-4 mr-2" />
+          Disagree with NG AI
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+          <FileText class="w-4 h-4 mr-2" />
+          See rejected rules
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+          <BookOpen class="w-4 h-4 mr-2" />
+          Add to Reference Bundle
         </button>
       </div>
+    </div>
 
-      <!-- Board Image with Magnifier -->
-      <div class="relative bg-gray-100 rounded-lg overflow-hidden mb-6">
-        <img 
-          ref="boardImage"
-          src="https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="Board BRD-4625"
-          class="w-full h-96 object-cover"
-          :class="{ 'cursor-crosshair': magnifierEnabled }"
-          @mousemove="updateMagnifier"
-          @mouseleave="hideMagnifier"
-        />
-        
-        <!-- Magnifier Window -->
-        <div
-          v-if="magnifierEnabled && magnifierVisible"
-          class="absolute pointer-events-none z-50 border-2 border-white shadow-lg rounded-lg overflow-hidden"
-          :style="magnifierStyle"
-        >
-          <!-- Crosshair overlay -->
-          <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-1/2 left-0 right-0 h-px bg-emerald-500 opacity-50 transform -translate-y-px"></div>
-            <div class="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-500 opacity-50 transform -translate-x-px"></div>
+    <!-- Face 1 -->
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 1</h3>
+      <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-gray-100 flex items-center justify-center relative">
+          <img src="/image.png" alt="Board Face 1" class="w-full h-auto object-contain" />
+        </div>
+      </div>
+      <!-- Defect Tags -->
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Knot</span>
+        <span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">Split</span>
+        <span class="px-3 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">Wane</span>
+        <span class="px-3 py-1 bg-purple-500 text-white text-sm font-medium rounded-full">Stain</span>
+        <span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Pitch Pocket</span>
+        <span class="px-3 py-1 bg-gray-500 text-white text-sm font-medium rounded-full">Shake</span>
+      </div>
+    </div>
+
+    <!-- Face 2 -->
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">Face 2</h3>
+      <div class="bg-white shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-gray-100 flex items-center justify-center relative">
+          <img src="/image.png" alt="Board Face 2" class="w-full h-auto object-contain" />
+        </div>
+      </div>
+      <!-- Defect Tags -->
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Knot</span>
+        <span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">Check</span>
+        <span class="px-3 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">Warp</span>
+        <span class="px-3 py-1 bg-green-500 text-white text-sm font-medium rounded-full">Decay</span>
+        <span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Hole</span>
+      </div>
+    </div>
+
+    <!-- Clear Cuttings -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <!-- Face 1 Clear Cuttings -->
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900 mb-4">Clear Cuttings (Face 1)</h4>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700">6' 2 3/4" × 5 3/8"</span>
+            <span class="font-semibold text-gray-900">33.28 units</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700">2' × 4 13/16"</span>
+            <span class="font-semibold text-gray-900">9.64 units</span>
+          </div>
+          <div class="border-t border-gray-200 pt-3">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-gray-900">Total Units:</span>
+              <span class="text-xl font-bold text-gray-900">43</span>
+            </div>
           </div>
         </div>
+      </div>
+
+      <!-- Face 2 Clear Cuttings -->
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900 mb-4">Clear Cuttings (Face 2)</h4>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700">3' 3 3/4" × 5 3/16"</span>
+            <span class="font-semibold text-gray-900">17.2 units</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-700">3' 5 3/4" × 4 7/8"</span>
+            <span class="font-semibold text-gray-900">16.83 units</span>
+          </div>
+          <div class="border-t border-gray-200 pt-3">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-gray-900">Total Units:</span>
+              <span class="text-xl font-bold text-gray-900">34</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Previously Scanned Boards -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Previously Scanned Boards</h3>
+            <p class="text-sm text-gray-600 mt-1">All boards from the current sorting order</p>
+          </div>
+          <div class="relative">
+            <Search class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search boards..."
+              class="pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 w-64"
+            />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Table -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Board ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scan Time</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grade</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Defects</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58918</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:40 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">-</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58917</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:40 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Knot</span>
+                  <span class="text-xs text-gray-500">+1</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58916</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:39 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Knot</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58915</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:39 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                  1COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-orange-100 text-orange-800">Split</span>
+                  <span class="text-xs text-gray-500">+1</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-emerald-600">BRD-58914</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">03/18/2025 3:38 PM</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                  2COMMON
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Knot</span>
+                  <span class="text-xs text-gray-500">+2</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center space-x-2">
+                  <button class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" title="Reprocess">
+                    <RotateCcw class="w-4 h-4" />
+                  </button>
+                  <button class="text-emerald-600 hover:text-emerald-800 text-sm">View</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
 import { 
-  ChevronLeft, 
-  ChevronRight, 
-  TreePine, 
-  Droplets, 
-  Clock, 
-  Ruler, 
-  ArrowLeftRight, 
-  Layers, 
-  Box, 
-  AlertTriangle, 
-  TrendingUp, 
-  ZoomIn, 
-  EyeOff,
-  List
+  ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
+  ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
+  Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
-
-// Magnifier state
-const magnifierEnabled = ref(false)
-const magnifierVisible = ref(false)
-const magnifierX = ref(0)
-const magnifierY = ref(0)
-const boardImage = ref(null)
-
-// Magnifier configuration
-const magnifierSize = 180
-const magnifierZoom = 4
-const magnifierOffset = 20
-
-// Toggle magnifier
-const toggleMagnifier = () => {
-  magnifierEnabled.value = !magnifierEnabled.value
-  if (!magnifierEnabled.value) {
-    magnifierVisible.value = false
-  }
-}
-
-// Update magnifier position and visibility
-const updateMagnifier = (event) => {
-  if (!magnifierEnabled.value || !boardImage.value) return
-  
-  const rect = boardImage.value.getBoundingClientRect()
-  const x = event.clientX - rect.left
-  const y = event.clientY - rect.top
-  
-  // Show magnifier when hovering over image
-  magnifierVisible.value = true
-  
-  // Calculate magnifier position (above cursor by default)
-  let magnifierTop = event.clientY - magnifierSize - magnifierOffset
-  let magnifierLeft = event.clientX - magnifierSize / 2
-  
-  // If magnifier would go above viewport, position it below cursor
-  if (magnifierTop < 0) {
-    magnifierTop = event.clientY + magnifierOffset
-  }
-  
-  // Keep magnifier within viewport bounds
-  magnifierLeft = Math.max(0, Math.min(magnifierLeft, window.innerWidth - magnifierSize))
-  
-  magnifierX.value = magnifierLeft
-  magnifierY.value = magnifierTop
-}
-
-// Hide magnifier
-const hideMagnifier = () => {
-  magnifierVisible.value = false
-}
-
-// Computed magnifier styles
-const magnifierStyle = computed(() => {
-  if (!boardImage.value) return {}
-  
-  const rect = boardImage.value.getBoundingClientRect()
-  const imageX = event?.clientX - rect.left || 0
-  const imageY = event?.clientY - rect.top || 0
-  
-  return {
-    width: `${magnifierSize}px`,
-    height: `${magnifierSize}px`,
-    left: `${magnifierX.value}px`,
-    top: `${magnifierY.value}px`,
-    position: 'fixed',
-    backgroundImage: `url(${boardImage.value?.src})`,
-    backgroundSize: `${magnifierZoom * 100}% ${magnifierZoom * 100}%`,
-    backgroundPosition: `-${imageX * magnifierZoom - magnifierSize / 2}px -${imageY * magnifierZoom - magnifierSize / 2}px`,
-    backgroundRepeat: 'no-repeat',
-    border: '3px solid #10b981',
-    borderRadius: '8px'
-  }
-})
 </script>
