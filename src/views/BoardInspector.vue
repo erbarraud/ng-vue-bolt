@@ -159,6 +159,7 @@
           @mouseenter="() => handleMouseEnter('face1')"
           @mouseleave="handleMouseLeave"
           ref="face1Container"
+          style="overflow: visible;"
         >
           <img 
             src="/image.png" 
@@ -172,7 +173,7 @@
           <div
             v-if="showMagnifier && magnifierEnabled && activeMagnifierBoard === 'face1'"
             :style="magnifierStyle"
-            class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
+            class="fixed pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
           >
             <div
               :style="magnifiedImageStyle"
@@ -202,6 +203,7 @@
           @mouseenter="() => handleMouseEnter('face2')"
           @mouseleave="handleMouseLeave"
           ref="face2Container"
+          style="overflow: visible;"
         >
           <img 
             src="/image.png" 
@@ -215,7 +217,7 @@
           <div
             v-if="showMagnifier && magnifierEnabled && activeMagnifierBoard === 'face2'"
             :style="magnifierStyle"
-            class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
+            class="fixed pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-50"
           >
             <div
               :style="magnifiedImageStyle"
@@ -518,9 +520,19 @@ const onImageLoad = () => {
 const magnifierStyle = computed(() => {
   const { x, y } = mousePosition.value
   
+  // Get the active container to calculate screen position
+  const activeContainer = activeMagnifierBoard.value === 'face1' ? face1Container.value : face2Container.value
+  if (!activeContainer) return {}
+  
+  const containerRect = activeContainer.getBoundingClientRect()
+  
+  // Calculate screen position
+  const screenX = containerRect.left + x
+  const screenY = containerRect.top + y
+  
   // Position magnifier above the cursor, centered horizontally
-  let left = x - (magnifierSize / 2)
-  let top = y - magnifierSize - 20
+  let left = screenX - (magnifierSize / 2)
+  let top = screenY - magnifierSize - 20
   
   // Allow magnifier to overflow the board boundaries
   // No boundary constraints - let it extend beyond the image container
