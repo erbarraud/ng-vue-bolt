@@ -94,7 +94,9 @@
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-for="order in paginatedOrders" :key="order.id" class="hover:bg-emerald-50 transition-colors duration-150">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-emerald-600">{{ order.id }}</div>
+                <router-link :to="`/inspector?order=${order.id}`" class="text-sm font-medium text-emerald-600 hover:text-emerald-800 hover:underline">
+                  {{ order.id }}
+                </router-link>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm font-medium text-gray-900">{{ order.name }}</div>
@@ -120,9 +122,9 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex items-center space-x-2">
-                  <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <router-link :to="`/inspector?order=${order.id}`" class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                     <Eye class="w-4 h-4" />
-                  </button>
+                  </router-link>
                   <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                     <MoreHorizontal class="w-4 h-4" />
                   </button>
