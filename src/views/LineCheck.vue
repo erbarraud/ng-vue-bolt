@@ -680,7 +680,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { 
   Activity, Camera, Clock, Pause, RefreshCw, Maximize, Hash, Info, Settings, Expand, X, Download
