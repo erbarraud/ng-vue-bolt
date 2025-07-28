@@ -522,20 +522,8 @@ const magnifierStyle = computed(() => {
   let left = x - (magnifierSize / 2)
   let top = y - magnifierSize - 20
   
-  // Get the correct container width based on active board
-  const containerWidth = activeMagnifierBoard.value === 'face1' 
-    ? (face1Container.value?.offsetWidth || 0)
-    : (face2Container.value?.offsetWidth || 0)
-    
-  // Handle edge cases - keep magnifier within bounds
-  if (left + magnifierSize > containerWidth) {
-    left = containerWidth - magnifierSize - 10
-  }
-  if (left < 0) {
-    left = 10
-  }
-  // Always keep magnifier above cursor, even if it goes off-screen at top
-  // This ensures it's always above as requested
+  // Allow magnifier to overflow the board boundaries
+  // No boundary constraints - let it extend beyond the image container
   
   return {
     left: `${left}px`,
