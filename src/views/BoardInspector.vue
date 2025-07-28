@@ -184,12 +184,19 @@
       </div>
       <!-- Defect Tags -->
       <div class="flex flex-wrap gap-2 mt-3">
-        <span class="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Knot</span>
-        <span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">Split</span>
-        <span class="px-3 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">Wane</span>
-        <span class="px-3 py-1 bg-purple-500 text-white text-sm font-medium rounded-full">Stain</span>
-        <span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Pitch Pocket</span>
-        <span class="px-3 py-1 bg-gray-500 text-white text-sm font-medium rounded-full">Shake</span>
+        <button 
+          v-for="defect in face1DefectTypes" 
+          :key="defect.name"
+          @click="toggleDefect('face1', defect.name)"
+          :class="[
+            'px-3 py-1 text-sm font-medium rounded-full transition-all duration-200 border-2',
+            isDefectVisible('face1', defect.name)
+              ? `${defect.activeClass} ${defect.activeBorder} shadow-md`
+              : `${defect.inactiveClass} ${defect.inactiveBorder} opacity-50 hover:opacity-75`
+          ]"
+        >
+          {{ defect.name }}
+        </button>
       </div>
     </div>
 
@@ -228,11 +235,19 @@
       </div>
       <!-- Defect Tags -->
       <div class="flex flex-wrap gap-2 mt-3">
-        <span class="px-3 py-1 bg-red-500 text-white text-sm font-medium rounded-full">Knot</span>
-        <span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">Check</span>
-        <span class="px-3 py-1 bg-yellow-500 text-white text-sm font-medium rounded-full">Warp</span>
-        <span class="px-3 py-1 bg-green-500 text-white text-sm font-medium rounded-full">Decay</span>
-        <span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Hole</span>
+        <button 
+          v-for="defect in face2DefectTypes" 
+          :key="defect.name"
+          @click="toggleDefect('face2', defect.name)"
+          :class="[
+            'px-3 py-1 text-sm font-medium rounded-full transition-all duration-200 border-2',
+            isDefectVisible('face2', defect.name)
+              ? `${defect.activeClass} ${defect.activeBorder} shadow-md`
+              : `${defect.inactiveClass} ${defect.inactiveBorder} opacity-50 hover:opacity-75`
+          ]"
+        >
+          {{ defect.name }}
+        </button>
       </div>
     </div>
 
