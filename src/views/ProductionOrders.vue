@@ -337,7 +337,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
