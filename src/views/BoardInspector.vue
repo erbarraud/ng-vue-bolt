@@ -465,7 +465,7 @@ const magnifierEnabled = ref(false)
 const showMagnifier = ref(false)
 const mousePosition = ref({ x: 0, y: 0 })
 const activeMagnifierBoard = ref(null) // Track which board has active magnifier
-const magnifierSize = 150
+const magnifierSize = 200
 const magnificationLevel = 2.5
 
 // Template refs
