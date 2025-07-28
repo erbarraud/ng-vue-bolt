@@ -24,7 +24,7 @@
       </div>
 
       <!-- Control Bar -->
-      <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center justify-between mb-6 bg-white rounded-lg p-4 shadow border">
         <div class="flex items-center space-x-4">
           <div class="flex items-center text-gray-600">
             <Clock class="w-4 h-4 mr-2" />
