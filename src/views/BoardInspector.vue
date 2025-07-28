@@ -493,90 +493,90 @@ const face2Image = ref(null)
 const face1DefectTypes = ref([
   { 
     name: 'Knot', 
-    activeClass: 'bg-red-600 text-white', 
-    activeBorder: 'border-red-700',
-    inactiveClass: 'bg-red-100 text-red-800', 
-    inactiveBorder: 'border-red-300'
+    activeClass: 'bg-red-500 text-white', 
+    activeBorder: 'border-red-600',
+    inactiveClass: 'bg-red-50 text-red-700', 
+    inactiveBorder: 'border-red-200'
   },
   { 
     name: 'Split', 
-    activeClass: 'bg-orange-600 text-white', 
-    activeBorder: 'border-orange-700',
-    inactiveClass: 'bg-orange-100 text-orange-800', 
-    inactiveBorder: 'border-orange-300'
+    activeClass: 'bg-orange-500 text-white', 
+    activeBorder: 'border-orange-600',
+    inactiveClass: 'bg-orange-50 text-orange-700', 
+    inactiveBorder: 'border-orange-200'
   },
   { 
     name: 'Wane', 
-    activeClass: 'bg-yellow-600 text-white', 
-    activeBorder: 'border-yellow-700',
-    inactiveClass: 'bg-yellow-100 text-yellow-800', 
-    inactiveBorder: 'border-yellow-300'
+    activeClass: 'bg-amber-500 text-white', 
+    activeBorder: 'border-amber-600',
+    inactiveClass: 'bg-amber-50 text-amber-700', 
+    inactiveBorder: 'border-amber-200'
   },
   { 
     name: 'Stain', 
-    activeClass: 'bg-purple-600 text-white', 
-    activeBorder: 'border-purple-700',
-    inactiveClass: 'bg-purple-100 text-purple-800', 
-    inactiveBorder: 'border-purple-300'
+    activeClass: 'bg-violet-500 text-white', 
+    activeBorder: 'border-violet-600',
+    inactiveClass: 'bg-violet-50 text-violet-700', 
+    inactiveBorder: 'border-violet-200'
   },
   { 
     name: 'Pitch Pocket', 
-    activeClass: 'bg-blue-600 text-white', 
-    activeBorder: 'border-blue-700',
-    inactiveClass: 'bg-blue-100 text-blue-800', 
-    inactiveBorder: 'border-blue-300'
+    activeClass: 'bg-blue-500 text-white', 
+    activeBorder: 'border-blue-600',
+    inactiveClass: 'bg-blue-50 text-blue-700', 
+    inactiveBorder: 'border-blue-200'
   },
   { 
     name: 'Shake', 
-    activeClass: 'bg-gray-600 text-white', 
-    activeBorder: 'border-gray-700',
-    inactiveClass: 'bg-gray-100 text-gray-800', 
-    inactiveBorder: 'border-gray-300'
+    activeClass: 'bg-slate-500 text-white', 
+    activeBorder: 'border-slate-600',
+    inactiveClass: 'bg-slate-50 text-slate-700', 
+    inactiveBorder: 'border-slate-200'
   }
 ])
 
 const face2DefectTypes = ref([
   { 
     name: 'Knot', 
-    activeClass: 'bg-red-600 text-white', 
-    activeBorder: 'border-red-700',
-    inactiveClass: 'bg-red-100 text-red-800', 
-    inactiveBorder: 'border-red-300'
+    activeClass: 'bg-red-500 text-white', 
+    activeBorder: 'border-red-600',
+    inactiveClass: 'bg-red-50 text-red-700', 
+    inactiveBorder: 'border-red-200'
   },
   { 
     name: 'Split', 
-    activeClass: 'bg-orange-600 text-white', 
-    activeBorder: 'border-orange-700',
-    inactiveClass: 'bg-orange-100 text-orange-800', 
-    inactiveBorder: 'border-orange-300'
+    activeClass: 'bg-orange-500 text-white', 
+    activeBorder: 'border-orange-600',
+    inactiveClass: 'bg-orange-50 text-orange-700', 
+    inactiveBorder: 'border-orange-200'
   },
   { 
     name: 'Wane', 
-    activeClass: 'bg-yellow-600 text-white', 
-    activeBorder: 'border-yellow-700',
-    inactiveClass: 'bg-yellow-100 text-yellow-800', 
-    inactiveBorder: 'border-yellow-300'
+    activeClass: 'bg-amber-500 text-white', 
+    activeBorder: 'border-amber-600',
+    inactiveClass: 'bg-amber-50 text-amber-700', 
+    inactiveBorder: 'border-amber-200'
   },
   { 
     name: 'Stain', 
-    activeClass: 'bg-purple-600 text-white', 
-    activeBorder: 'border-purple-700',
-    inactiveClass: 'bg-purple-100 text-purple-800', 
-    inactiveBorder: 'border-purple-300'
+    activeClass: 'bg-violet-500 text-white', 
+    activeBorder: 'border-violet-600',
+    inactiveClass: 'bg-violet-50 text-violet-700', 
+    inactiveBorder: 'border-violet-200'
   },
   { 
     name: 'Pitch Pocket', 
-    activeClass: 'bg-blue-600 text-white', 
-    activeBorder: 'border-blue-700',
-    inactiveClass: 'bg-blue-100 text-blue-800', 
-    inactiveBorder: 'border-blue-300'
+    activeClass: 'bg-blue-500 text-white', 
+    activeBorder: 'border-blue-600',
+    inactiveClass: 'bg-blue-50 text-blue-700', 
+    inactiveBorder: 'border-blue-200'
   },
   { 
     name: 'Shake', 
-    activeClass: 'bg-gray-600 text-white', 
-    activeBorder: 'border-gray-700',
-    inactiveClass: 'bg-gray-100 text-gray-800', 
-    inactiveBorder: 'border-gray-300'
+    activeClass: 'bg-slate-500 text-white', 
+    activeBorder: 'border-slate-600',
+    inactiveClass: 'bg-slate-50 text-slate-700', 
+    inactiveBorder: 'border-slate-200'
   }
 ])
 
