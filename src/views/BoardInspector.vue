@@ -172,13 +172,13 @@
             v-if="showMagnifier && magnifierEnabled"
             class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-10"
             :style="{
-              left: magnifierPosition.x + 'px',
-              top: magnifierPosition.y + 'px',
+              left: (magnifierPosition.x - 75) + 'px',
+              top: (magnifierPosition.y - 75) + 'px',
               width: '150px',
               height: '150px',
               backgroundImage: `url(/image.png)`,
-              backgroundSize: `${magnifierZoom * 100}%`,
-              backgroundPosition: `-${magnifierPosition.mouseX * magnifierZoom - 75}px -${magnifierPosition.mouseY * magnifierZoom - 75}px`,
+              backgroundSize: `${magnifierZoom * 100}% ${magnifierZoom * 100}%`,
+              backgroundPosition: `-${(magnifierPosition.mouseX * magnifierZoom) - 75}px -${(magnifierPosition.mouseY * magnifierZoom) - 75}px`,
               backgroundRepeat: 'no-repeat'
             }"
           >
@@ -219,13 +219,13 @@
             v-if="showMagnifier && magnifierEnabled"
             class="absolute pointer-events-none border-2 border-white shadow-lg rounded-lg overflow-hidden z-10"
             :style="{
-              left: magnifierPosition.x + 'px',
-              top: magnifierPosition.y + 'px',
+              left: (magnifierPosition.x - 75) + 'px',
+              top: (magnifierPosition.y - 75) + 'px',
               width: '150px',
               height: '150px',
               backgroundImage: `url(/image.png)`,
-              backgroundSize: `${magnifierZoom * 100}%`,
-              backgroundPosition: `-${magnifierPosition.mouseX * magnifierZoom - 75}px -${magnifierPosition.mouseY * magnifierZoom - 75}px`,
+              backgroundSize: `${magnifierZoom * 100}% ${magnifierZoom * 100}%`,
+              backgroundPosition: `-${(magnifierPosition.mouseX * magnifierZoom) - 75}px -${(magnifierPosition.mouseY * magnifierZoom) - 75}px`,
               backgroundRepeat: 'no-repeat'
             }"
           >
@@ -504,21 +504,10 @@ const handleMouseMove = (event) => {
   const mouseX = event.clientX - rect.left
   const mouseY = event.clientY - rect.top
   
-  // Position magnifier above and to the right of cursor
-  let magnifierX = mouseX + 20
-  let magnifierY = mouseY - 170
-  
-  // Keep magnifier within container bounds
-  if (magnifierX + 150 > rect.width) {
-    magnifierX = mouseX - 170
-  }
-  if (magnifierY < 0) {
-    magnifierY = mouseY + 20
-  }
-  
+  // Position magnifier centered on cursor
   magnifierPosition.value = {
-    x: magnifierX,
-    y: magnifierY,
+    x: mouseX,
+    y: mouseY,
     mouseX: mouseX,
     mouseY: mouseY
   }
