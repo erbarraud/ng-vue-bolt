@@ -62,12 +62,12 @@
       </div>
 
       <!-- Board List Container -->
-      <div class="bg-gray-800 rounded-lg overflow-hidden">
+      <div class="bg-white rounded-lg overflow-hidden shadow">
         <TransitionGroup name="board-list" tag="div">
           <div
             v-for="board in recentBoards"
             :key="board.id"
-            class="relative border-b border-gray-700 last:border-b-0 transition-all duration-300"
+            class="relative border-b border-gray-200 last:border-b-0 transition-all duration-300"
           >
             <!-- New Badge -->
             <div v-if="board.isNew" class="absolute top-2 right-2 z-10">
@@ -79,11 +79,11 @@
               <img 
                 src="/image.png" 
                 alt="Board scan image" 
-                class="w-full h-32 object-cover"
+                class="w-full h-40 object-cover"
               />
               
               <!-- Board Info Overlay -->
-              <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-between px-6">
+              <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-between px-6">
                 <!-- Left side info -->
                 <div class="flex items-center space-x-4">
                   <div class="text-white">
