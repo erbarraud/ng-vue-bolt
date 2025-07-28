@@ -551,8 +551,10 @@ const magnifiedImageStyle = computed(() => {
   const { x, y } = mousePosition.value
   
   // Calculate background position for the magnified area
-  const backgroundX = -((x * magnificationLevel) - (magnifierSize / 2))
-  const backgroundY = -((y * magnificationLevel) - (magnifierSize / 2))
+  // We want to center the area under the cursor in the magnifier window
+  // So we need to offset by half the magnifier size, then scale by magnification
+  const backgroundX = -(x * magnificationLevel) + (magnifierSize / 2)
+  const backgroundY = -(y * magnificationLevel) + (magnifierSize / 2)
   
   return {
     // Use the same image for both boards
