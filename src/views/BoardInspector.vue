@@ -122,6 +122,14 @@
               ? 'text-emerald-600 bg-emerald-50 border-2 border-emerald-300' 
               : 'text-gray-600 bg-white border-2 border-gray-300 hover:bg-gray-50'
           ]">
+          @click="toggleMagnifier"
+          :class="[
+            'flex items-center px-3 py-1.5 text-sm font-medium rounded-md transition-colors',
+            magnifierEnabled 
+              ? 'text-emerald-600 bg-emerald-50 border-2 border-emerald-300' 
+              : 'text-gray-600 bg-white border-2 border-gray-300 hover:bg-gray-50'
+          ]">
+          <ZoomIn class="w-4 h-4 mr-2" />
           {{ magnifierEnabled ? 'Disable Magnifier' : 'Enable Magnifier' }}
         </button>
         <button class="flex items-center px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
@@ -456,10 +464,70 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { 
   ChevronLeft, ChevronRight, Clock, Ruler, Layers, TreePine, Droplets,
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
   Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
 import Button from '@/components/ui/button.vue'
+
+// Magnifier state
+const magnifierEnabled = ref(false)
+const showMagnifier = ref(false)
+const magnifierPosition = ref({
+  x: 0,
+  y: 0,
+  mouseX: 0,
+  mouseY: 0,
+  containerX: 0,
+  containerY: 0
+})
+const magnifierZoom = ref(3) // 3x zoom level
+
+// Template refs
+const face1Container = ref(null)
+const face2Container = ref(null)
+const face1Image = ref(null)
+const face2Image = ref(null)
+
+// Toggle magnifier
+const toggleMagnifier = () => {
+  magnifierEnabled.value = !magnifierEnabled.value
+  if (!magnifierEnabled.value) {
+    showMagnifier.value = false
+  }
+}
+
+// Handle mouse movement for magnifier
+const handleMouseMove = (event) => {
+  if (!magnifierEnabled.value) return
+  
+  const container = event.currentTarget
+  const rect = container.getBoundingClientRect()
+  
+  // Calculate mouse position relative to container
+  const mouseX = event.clientX - rect.left
+  const mouseY = event.clientY - rect.top
+  
+  // Position magnifier above and to the right of cursor
+  const magnifierX = mouseX + 20
+  
+  // Keep magnifier within container bounds
+  if (magnifierX + 150 > rect.width) {
+    magnifierX = mouseX - containerX - 170
+  }
+  if (magnifierY < 0) {
+    magnifierY = mouseY - containerY + 20
+  }
+  
+  magnifierPosition.value = {
+    x: magnifierX,
+    y: magnifierY,
+    mouseX,
+    mouseY,
+    containerX,
+    containerY
+  }
+}
 </script>
