@@ -45,9 +45,14 @@
             <Square class="w-4 h-4 mr-2" />
             Pause
           </button>
-          <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-            <Maximize class="w-4 h-4 mr-2" />
-            Full Screen
+          <button 
+            @click="toggleFullScreen"
+            class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            :title="isFullScreen ? 'Exit Full Screen' : 'Enter Full Screen'"
+          >
+            <Minimize v-if="isFullScreen" class="w-4 h-4 mr-2" />
+            <Maximize v-else class="w-4 h-4 mr-2" />
+            {{ isFullScreen ? 'Exit Full Screen' : 'Full Screen' }}
           </button>
         </div>
       </div>
@@ -140,13 +145,14 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { Clock, Square, RefreshCw, Maximize, Camera } from 'lucide-vue-next'
+import { Clock, Square, RefreshCw, Maximize, Minimize, Camera } from 'lucide-vue-next'
 
 // Reactive state
 const isScanning = ref(true)
 const scanInterval = ref(12000) // 5/min default
 const currentTime = ref('')
 const recentBoards = ref([])
+const isFullScreen = ref(false)
 
 // Timers
 let clockTimer = null
@@ -253,6 +259,48 @@ const getGradeBadgeClass = (grade) => {
 }
 
 /**
+ * Toggle full screen mode for office display
+ */
+const toggleFullScreen = async () => {
+  try {
+    if (!document.fullscreenElement) {
+      // Enter full screen
+      await document.documentElement.requestFullscreen()
+      isFullScreen.value = true
+    } else {
+      // Exit full screen
+      await document.exitFullscreen()
+      isFullScreen.value = false
+    }
+  } catch (error) {
+    console.error('Error toggling fullscreen:', error)
+    // Fallback for browsers that don't support fullscreen API
+    alert('Full screen mode is not supported in this browser')
+  }
+}
+
+/**
+ * Handle fullscreen change events
+ */
+const handleFullscreenChange = () => {
+  isFullScreen.value = !!document.fullscreenElement
+}
+
+/**
+ * Handle keyboard shortcuts for fullscreen
+ */
+const handleKeydown = (event) => {
+  // F11 or F key for fullscreen toggle
+  if (event.key === 'F11' || (event.key === 'f' && event.ctrlKey)) {
+    event.preventDefault()
+    toggleFullScreen()
+  }
+  // Escape key to exit fullscreen
+  if (event.key === 'Escape' && isFullScreen.value) {
+    toggleFullScreen()
+  }
+}
+/**
  * Initializes the component with sample board data
  */
 const initializeSampleBoards = () => {
@@ -297,11 +345,22 @@ onMounted(() => {
   if (isScanning.value) {
     startScanning()
   }
+  
+  // Add fullscreen event listeners
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
+  document.addEventListener('keydown', handleKeydown)
+  
+  // Check initial fullscreen state
+  isFullScreen.value = !!document.fullscreenElement
 })
 
 onUnmounted(() => {
   if (scanTimer) clearInterval(scanTimer)
   if (clockTimer) clearInterval(clockTimer)
+  
+  // Remove fullscreen event listeners
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  document.removeEventListener('keydown', handleKeydown)
 })
 </script>
 
