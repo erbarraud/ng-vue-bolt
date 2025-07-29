@@ -160,6 +160,7 @@ let scanTimer = null
 // Sample data for generating boards
 const sampleGrades = ['2COMMON', 'Select', 'Common']
 const sampleBatches = ['B-934', 'B-789', 'B-790', 'B-791', 'B-792']
+const sampleOrderIds = ['ORD-20250701-001', 'ORD-20250701-002', 'ORD-20250628-006', 'ORD-20250630-004', 'ORD-20250629-008']
 const sampleValues = ['8.41', '12.50', '18.75', '15.25', '22.00']
 
 /**
