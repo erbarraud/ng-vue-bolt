@@ -136,10 +136,23 @@
             </tr>
           </thead>
           <tbody ref="tableBodyRef" class="bg-white divide-y divide-gray-200">
-            <tr v-for="order in upcomingOrders" :key="order.id" class="hover:bg-emerald-50 transition-colors duration-150 cursor-move">
+            <tr 
+              v-for="(order, index) in upcomingOrders" 
+              :key="order.id" 
+              :class="[
+                'hover:bg-emerald-50 transition-colors duration-150 cursor-move',
+                dragOverIndex === index ? 'bg-emerald-100 border-t-2 border-emerald-500' : ''
+              ]"
+              draggable="true"
+              @dragstart="handleDragStart($event, order, index)"
+              @dragend="handleDragEnd"
+              @dragover="handleDragOver($event, index)"
+              @dragleave="handleDragLeave"
+              @drop="handleDrop($event, index)"
+            >
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center space-x-2">
-                  <div class="drag-handle flex items-center justify-center w-6 h-6 text-gray-400 hover:text-gray-600">
+                  <div class="drag-handle flex items-center justify-center w-6 h-6 text-gray-400 hover:text-gray-600 cursor-grab active:cursor-grabbing">
                     <Menu class="w-4 h-4" />
                   </div>
                   <div class="flex items-center justify-center w-6 h-6 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">
@@ -227,6 +240,10 @@ import Card from '@/components/ui/card.vue'
 import CardContent from '@/components/ui/card-content.vue'
 import Badge from '@/components/ui/badge.vue'
 
+// Drag and drop state
+const draggedItem = ref(null)
+const dragOverIndex = ref(null)
+
 // Orders data with priority field
 const upcomingOrders = ref([
   {
@@ -305,6 +322,55 @@ const upcomingOrders = ref([
     canStart: false
   }
 ])
+
+// Drag and drop handlers
+const handleDragStart = (event, order, index) => {
+  draggedItem.value = { order, index }
+  event.dataTransfer.effectAllowed = 'move'
+  event.target.style.opacity = '0.5'
+}
+
+const handleDragEnd = (event) => {
+  event.target.style.opacity = '1'
+  draggedItem.value = null
+  dragOverIndex.value = null
+}
+
+const handleDragOver = (event, index) => {
+  event.preventDefault()
+  event.dataTransfer.dropEffect = 'move'
+  dragOverIndex.value = index
+}
+
+const handleDragLeave = () => {
+  dragOverIndex.value = null
+}
+
+const handleDrop = (event, targetIndex) => {
+  event.preventDefault()
+  
+  if (!draggedItem.value || draggedItem.value.index === targetIndex) {
+    return
+  }
+  
+  const orders = [...upcomingOrders.value]
+  const draggedOrder = orders[draggedItem.value.index]
+  
+  // Remove the dragged item
+  orders.splice(draggedItem.value.index, 1)
+  
+  // Insert at new position
+  orders.splice(targetIndex, 0, draggedOrder)
+  
+  // Update priorities
+  orders.forEach((order, index) => {
+    order.priority = index + 1
+  })
+  
+  upcomingOrders.value = orders
+  draggedItem.value = null
+  dragOverIndex.value = null
+}
 </script>
 
 <style scoped>
