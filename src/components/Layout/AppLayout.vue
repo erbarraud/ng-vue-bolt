@@ -135,16 +135,16 @@
     </nav>
 
     <!-- Full Screen Navigation Bar -->
-    <nav v-if="isFullScreen" class="shadow-xl bg-gray-900 border-b-2 border-emerald-500">
+    <nav v-if="isFullScreen" class="shadow-xl" style="background-color: #213C33; border-bottom: 2px solid #4ED586;">
       <div class="w-full px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-12">
+        <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <img src="/Asset 3@4x 1.png" alt="Neural Grader Logo" class="h-8 w-auto mr-3 brightness-110" />
-            <span class="text-white font-semibold text-lg">Line Check Dashboard</span>
+            <img src="/Asset 3@4x 1.png" alt="Neural Grader Logo" class="h-10 w-auto mr-3 brightness-110" />
+            <span class="text-white font-semibold text-xl">Line Check Dashboard</span>
           </div>
           <button 
             @click="exitFullScreen"
-            class="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+            class="text-white hover:bg-primary/80 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md"
           >
             <Minimize class="w-4 h-4 mr-2" />
             Exit Full Screen
