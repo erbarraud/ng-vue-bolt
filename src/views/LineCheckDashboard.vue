@@ -79,28 +79,28 @@
               />
               
               <!-- Board Info Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 flex items-center justify-between px-6">
+              <div class="absolute inset-0 flex items-center justify-between px-6">
                 <!-- Left side info -->
                 <div class="flex items-center space-x-4">
-                  <div class="text-white">
-                    <div class="text-xl font-bold"># {{ board.id }}</div>
+                  <div class="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+                    <div class="text-xl font-bold text-gray-900"># {{ board.id }}</div>
                     <div class="text-sm flex items-center">
-                      <div class="w-5 h-5 bg-white/70 rounded-full mr-2 flex items-center justify-center">
+                      <div class="w-5 h-5 bg-gray-100 rounded-full mr-2 flex items-center justify-center">
                         <div class="w-2.5 h-2.5 bg-emerald-600 rounded-full"></div>
                       </div>
-                      {{ board.batch }}
+                      <span class="text-gray-700">{{ board.batch }}</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Right side info -->
-                <div class="text-right text-white">
+                <div class="text-right bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
                   <div class="flex items-center justify-end space-x-2 mb-1">
                     <span :class="getGradeBadgeClass(board.grade)" class="px-2 py-1 rounded text-xs font-medium">
                       {{ board.grade }}
                     </span>
                   </div>
-                  <div class="text-xl font-bold">${{ board.value }}</div>
+                  <div class="text-xl font-bold text-gray-900">${{ board.value }}</div>
                 </div>
               </div>
             </div>
