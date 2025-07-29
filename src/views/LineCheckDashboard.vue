@@ -82,6 +82,10 @@
                   <span :class="getGradeBadgeClass(board.grade)" class="px-2 py-1 rounded text-xs font-medium">
                     {{ board.grade }}
                   </span>
+                  <div class="flex items-center text-sm text-gray-600">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
+                    Order: <router-link :to="`/orders/${board.orderId}`" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium ml-1">{{ board.orderId }}</router-link>
+                  </div>
                 </div>
                 <div class="text-right">
                   <div class="text-lg font-bold text-gray-900">${{ board.value }}</div>
@@ -118,15 +122,6 @@
             </div>
             
             <!-- Batch Information -->
-            <div class="px-4 py-3 bg-gray-50 flex items-center justify-between">
-              <div class="flex items-center text-sm text-gray-600">
-                <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
-                Order: <router-link :to="`/orders/${board.orderId}`" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium ml-1">{{ board.orderId }}</router-link>
-              </div>
-              <div class="text-xs text-gray-500">
-                Click board ID for detailed inspection
-              </div>
-            </div>
           </div>
         </TransitionGroup>
       </div>
