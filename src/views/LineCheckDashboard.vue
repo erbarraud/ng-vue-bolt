@@ -162,8 +162,8 @@ const sampleValues = ['8.41', '12.50', '18.75', '15.25', '22.00']
  * @returns {Object} Board object with id, grade, batch, etc.
  */
 const generateRandomBoard = () => {
-  const boardTypes = ['BRD-10003', 'LV-1001', 'LV-1002']
-  const boardId = boardTypes[Math.floor(Math.random() * boardTypes.length)]
+  const boardNumber = Math.floor(Math.random() * 9999) + 1000
+  const boardId = `BRD-${boardNumber}`
   const grade = sampleGrades[Math.floor(Math.random() * sampleGrades.length)]
   const batch = sampleBatches[Math.floor(Math.random() * sampleBatches.length)]
   const value = sampleValues[Math.floor(Math.random() * sampleValues.length)]
@@ -258,7 +258,7 @@ const getGradeBadgeClass = (grade) => {
 const initializeSampleBoards = () => {
   const initialBoards = [
     {
-      id: 'BRD-10003',
+      id: 'BRD-4625',
       grade: '2COMMON',
       batch: 'B-934',
       value: '8.41',
@@ -266,7 +266,7 @@ const initializeSampleBoards = () => {
       isNew: true
     },
     {
-      id: 'LV-1001',
+      id: 'BRD-4624',
       grade: 'Select',
       batch: 'B-789',
       value: '12.50',
@@ -274,7 +274,7 @@ const initializeSampleBoards = () => {
       isNew: false
     },
     {
-      id: 'LV-1002',
+      id: 'BRD-4623',
       grade: 'Common',
       batch: 'B-790',
       value: '18.75',
