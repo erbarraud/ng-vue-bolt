@@ -55,12 +55,12 @@
               <router-link
                 to="/line"
                 :class="[
-                  $route.name === 'LineCheck' || $route.name === 'LineCheckDashboard'
+                  $route.name === 'LineCheckDashboard'
                     ? 'text-white shadow-lg ring-2 ring-primary/50'
                     : 'text-white hover:bg-primary/80 hover:text-white',
                   'px-4 py-2 rounded-lg text-sm font-semibold flex items-center transition-all duration-200 hover:shadow-md'
                 ]"
-                :style="($route.name === 'LineCheck' || $route.name === 'LineCheckDashboard') ? 'background-color: #204739' : ''"
+                :style="$route.name === 'LineCheckDashboard' ? 'background-color: #204739' : ''"
               >
                 <Activity class="w-4 h-4 mr-2 flex-shrink-0" />
                 Line

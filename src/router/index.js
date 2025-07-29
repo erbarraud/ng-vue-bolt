@@ -60,11 +60,6 @@ const routes = [
   },
   {
     path: '/line',
-    name: 'LineCheck',
-    component: LineCheck
-  },
-  {
-    path: '/line/dashboard',
     name: 'LineCheckDashboard',
     component: LineCheckDashboard
   },
