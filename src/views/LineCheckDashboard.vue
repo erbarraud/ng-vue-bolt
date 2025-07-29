@@ -46,10 +46,6 @@
             Pause
           </button>
           <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-            <RefreshCw class="w-4 h-4 mr-2" />
-            Refresh
-          </button>
-          <button class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
             <Maximize class="w-4 h-4 mr-2" />
             Full Screen
           </button>
