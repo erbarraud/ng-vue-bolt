@@ -73,7 +73,12 @@
             <div class="px-4 py-2 bg-gray-100 border-b border-gray-200">
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                  <div class="font-bold text-lg text-gray-900">Board # {{ board.id }}</div>
+                  <router-link 
+                    :to="`/inspector/${board.id}`" 
+                    class="font-bold text-lg text-emerald-600 hover:text-emerald-800 hover:underline"
+                  >
+                    {{ board.id }}
+                  </router-link>
                   <span :class="getGradeBadgeClass(board.grade)" class="px-2 py-1 rounded text-xs font-medium">
                     {{ board.grade }}
                   </span>
