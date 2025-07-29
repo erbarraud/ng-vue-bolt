@@ -192,9 +192,6 @@
               <td class="px-4 py-3">
                 <div class="space-y-1">
                   <Badge variant="secondary" class="border text-xs px-2 py-0.5">{{ order.status }}</Badge>
-                  <div :class="order.canStart ? 'text-xs text-gray-500' : 'text-xs text-orange-600 font-medium'" class="truncate">
-                    {{ order.statusDetail }}
-                  </div>
                 </div>
               </td>
               <td class="px-4 py-3">
