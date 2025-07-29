@@ -121,7 +121,7 @@
             <div class="px-4 py-3 bg-gray-50 flex items-center justify-between">
               <div class="flex items-center text-sm text-gray-600">
                 <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
-                Batch: {{ board.batch }}
+                Order: <router-link :to="`/orders/${board.orderId}`" class="text-emerald-600 hover:text-emerald-800 hover:underline font-medium ml-1">{{ board.orderId }}</router-link>
               </div>
               <div class="text-xs text-gray-500">
                 Click board ID for detailed inspection
@@ -170,13 +170,13 @@ const generateRandomBoard = () => {
   const boardNumber = Math.floor(Math.random() * 9999) + 1000
   const boardId = `BRD-${boardNumber}`
   const grade = sampleGrades[Math.floor(Math.random() * sampleGrades.length)]
-  const batch = sampleBatches[Math.floor(Math.random() * sampleBatches.length)]
+  const orderId = sampleOrderIds[Math.floor(Math.random() * sampleOrderIds.length)]
   const value = sampleValues[Math.floor(Math.random() * sampleValues.length)]
   
   return {
     id: boardId,
     grade,
-    batch,
+    orderId,
     value,
     scannedTime: new Date().toLocaleTimeString(),
     isNew: true
@@ -307,7 +307,7 @@ const initializeSampleBoards = () => {
     {
       id: 'BRD-4625',
       grade: '2COMMON',
-      batch: 'B-934',
+      orderId: 'ORD-20250701-001',
       value: '8.41',
       scannedTime: '06:39:00 PM',
       isNew: true
@@ -315,7 +315,7 @@ const initializeSampleBoards = () => {
     {
       id: 'BRD-4624',
       grade: 'Select',
-      batch: 'B-789',
+      orderId: 'ORD-20250701-002',
       value: '12.50',
       scannedTime: '06:38:55 PM',
       isNew: false
@@ -323,7 +323,7 @@ const initializeSampleBoards = () => {
     {
       id: 'BRD-4623',
       grade: 'Common',
-      batch: 'B-790',
+      orderId: 'ORD-20250628-006',
       value: '18.75',
       scannedTime: '06:38:50 PM',
       isNew: false
