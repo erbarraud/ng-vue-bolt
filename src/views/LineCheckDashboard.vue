@@ -70,38 +70,30 @@
               <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">New</span>
             </div>
 
-            <!-- Board Image with Overlay -->
+            <!-- Board Image - Clean with no overlays -->
             <div class="relative">
               <img 
                 src="/image.png" 
                 alt="Board scan image" 
                 class="w-full h-40 object-cover"
               />
-              
-              <!-- Board Info Overlay -->
-              <div class="absolute inset-0 flex items-center justify-between px-6">
-                <!-- Left side info -->
-                <div class="flex items-center space-x-4">
-                  <div class="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-                    <div class="text-xl font-bold text-gray-900"># {{ board.id }}</div>
-                    <div class="text-sm flex items-center">
-                      <div class="w-5 h-5 bg-gray-100 rounded-full mr-2 flex items-center justify-center">
-                        <div class="w-2.5 h-2.5 bg-emerald-600 rounded-full"></div>
-                      </div>
-                      <span class="text-gray-700">{{ board.batch }}</span>
-                    </div>
-                  </div>
+            </div>
+            
+            <!-- Compact Metadata Below Image -->
+            <div class="px-4 py-3 bg-gray-50 flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="font-bold text-lg text-gray-900"># {{ board.id }}</div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
+                  {{ board.batch }}
                 </div>
-
-                <!-- Right side info -->
-                <div class="text-right bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-                  <div class="flex items-center justify-end space-x-2 mb-1">
-                    <span :class="getGradeBadgeClass(board.grade)" class="px-2 py-1 rounded text-xs font-medium">
-                      {{ board.grade }}
-                    </span>
-                  </div>
-                  <div class="text-xl font-bold text-gray-900">${{ board.value }}</div>
-                </div>
+                <span :class="getGradeBadgeClass(board.grade)" class="px-2 py-1 rounded text-xs font-medium">
+                  {{ board.grade }}
+                </span>
+              </div>
+              <div class="text-right">
+                <div class="text-xl font-bold text-gray-900">${{ board.value }}</div>
+                <div class="text-xs text-gray-500">{{ board.scannedTime }}</div>
               </div>
             </div>
           </div>
