@@ -87,7 +87,7 @@
             </div>
 
             <!-- Two Faces Side by Side -->
-            <div class="grid grid-cols-2 gap-0">
+            <div class="space-y-0">
               <!-- Face 1 -->
               <div class="relative">
                 <div class="absolute top-2 left-2 z-10">
@@ -96,19 +96,19 @@
                 <img 
                   src="/image.png" 
                   alt="Board Face 1" 
-                  class="w-full h-40 object-cover"
+                  class="w-full h-48 object-cover"
                 />
               </div>
               
               <!-- Face 2 -->
-              <div class="relative border-l border-gray-200">
+              <div class="relative border-t border-gray-200">
                 <div class="absolute top-2 left-2 z-10">
                   <span class="bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">Face 2</span>
                 </div>
                 <img 
                   src="/image.png" 
                   alt="Board Face 2" 
-                  class="w-full h-40 object-cover"
+                  class="w-full h-48 object-cover"
                 />
               </div>
             </div>
