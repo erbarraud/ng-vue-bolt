@@ -24,7 +24,7 @@
       </div>
 
       <!-- Control Bar -->
-      <div class="flex items-center justify-between mb-6 bg-white rounded-lg p-4 shadow border">
+      <div v-if="!isFullScreen" class="flex items-center justify-between mb-6 bg-white rounded-lg p-4 shadow border">
         <div class="flex items-center space-x-4">
           <div class="flex items-center text-gray-600">
             <Clock class="w-4 h-4 mr-2" />
@@ -48,11 +48,10 @@
           <button 
             @click="toggleFullScreen"
             class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-            :title="isFullScreen ? 'Exit Full Screen' : 'Enter Full Screen'"
+            title="Enter Full Screen"
           >
-            <Minimize v-if="isFullScreen" class="w-4 h-4 mr-2" />
-            <Maximize v-else class="w-4 h-4 mr-2" />
-            {{ isFullScreen ? 'Exit Full Screen' : 'Full Screen' }}
+            <Maximize class="w-4 h-4 mr-2" />
+            Full Screen
           </button>
         </div>
       </div>

@@ -1,8 +1,8 @@
 <template>
   <ErrorBoundary>
-  <div class="min-h-screen bg-slate-50">
+  <div class="min-h-screen bg-slate-50" :class="{ 'fullscreen-mode': isFullScreen }">
     <!-- Navigation Header -->
-    <nav class="shadow-xl" style="background-color: #213C33; border-bottom: 2px solid #4ED586;">
+    <nav v-if="!isFullScreen" class="shadow-xl" style="background-color: #213C33; border-bottom: 2px solid #4ED586;">
       <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo and Brand -->
@@ -134,13 +134,32 @@
       </div>
     </nav>
 
+    <!-- Full Screen Navigation Bar -->
+    <nav v-if="isFullScreen" class="shadow-xl bg-gray-900 border-b-2 border-emerald-500">
+      <div class="w-full px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-12">
+          <div class="flex items-center">
+            <img src="/Asset 3@4x 1.png" alt="Neural Grader Logo" class="h-8 w-auto mr-3 brightness-110" />
+            <span class="text-white font-semibold text-lg">Line Check Dashboard</span>
+          </div>
+          <button 
+            @click="exitFullScreen"
+            class="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+          >
+            <Minimize class="w-4 h-4 mr-2" />
+            Exit Full Screen
+          </button>
+        </div>
+      </div>
+    </nav>
+
     <!-- Main Content -->
     <main>
       <router-view />
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-4">
+    <footer v-if="!isFullScreen" class="bg-white border-t border-slate-200 py-4">
       <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between">
           <div class="text-sm text-slate-500">
@@ -162,12 +181,54 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import {
   BarChart3, Package, Search, Activity, ChevronDown,
-  Bell, User
+  Bell, User, Minimize
 } from 'lucide-vue-next'
 import ErrorBoundary from '@/components/error/error-boundary.vue'
 
 const showToolsMenu = ref(false)
+const isFullScreen = ref(false)
+
+/**
+ * Handle fullscreen change events
+ */
+const handleFullscreenChange = () => {
+  isFullScreen.value = !!document.fullscreenElement
+}
+
+/**
+ * Exit full screen mode
+ */
+const exitFullScreen = async () => {
+  try {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen()
+    }
+  } catch (error) {
+    console.error('Error exiting fullscreen:', error)
+  }
+}
+
+onMounted(() => {
+  // Add fullscreen event listener
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
+  
+  // Check initial fullscreen state
+  isFullScreen.value = !!document.fullscreenElement
+})
+
+onUnmounted(() => {
+  // Remove fullscreen event listener
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
+})
 </script>
+
+<style scoped>
+.fullscreen-mode {
+  /* Ensure full screen mode uses all available space */
+  height: 100vh;
+  overflow: hidden;
+}
+</style>
