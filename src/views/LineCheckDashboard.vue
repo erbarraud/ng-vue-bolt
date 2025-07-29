@@ -69,11 +69,6 @@
             :key="board.id"
             class="relative border-b border-gray-200 last:border-b-0 transition-all duration-300"
           >
-            <!-- New Badge -->
-            <div v-if="board.isNew" class="absolute top-2 right-2 z-10">
-              <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">New</span>
-            </div>
-
             <!-- Board Header -->
             <div class="px-4 py-2 bg-gray-100 border-b border-gray-200">
               <div class="flex items-center justify-between">
