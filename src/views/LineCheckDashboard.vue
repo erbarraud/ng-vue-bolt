@@ -79,14 +79,14 @@
               />
               
               <!-- Board Info Overlay -->
-              <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-between px-6">
+              <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 flex items-center justify-between px-6">
                 <!-- Left side info -->
                 <div class="flex items-center space-x-4">
                   <div class="text-white">
                     <div class="text-xl font-bold"># {{ board.id }}</div>
                     <div class="text-sm flex items-center">
-                      <div class="w-5 h-5 bg-white rounded-full mr-2 flex items-center justify-center">
-                        <div class="w-2.5 h-2.5 bg-gray-800 rounded-full"></div>
+                      <div class="w-5 h-5 bg-white/90 rounded-full mr-2 flex items-center justify-center">
+                        <div class="w-2.5 h-2.5 bg-emerald-600 rounded-full"></div>
                       </div>
                       {{ board.batch }}
                     </div>
