@@ -34,7 +34,7 @@
         <Button @click="$router.push('/orders')">
           <ArrowLeft class="w-4 h-4 mr-2" />
           Back to Orders
-        </Button>
+        </BaseButton>
       </div>
     </div>
 

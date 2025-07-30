@@ -119,7 +119,7 @@
           <router-link to="/orders/all">
             Show All
           </router-link>
-        </Button>
+        </BaseButton>
       </div>
       
       <!-- Upcoming Orders Table -->

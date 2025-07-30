@@ -198,7 +198,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { Search, UserPlus, User, MoreHorizontal } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const activeTab = ref('users')
 const searchQuery = ref('')

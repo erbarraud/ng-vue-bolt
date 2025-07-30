@@ -15,7 +15,7 @@
               <Monitor class="w-4 h-4 mr-2" />
               Dashboard View
             </router-link>
-          </Button>
+          </BaseButton>
           <button
             @click="activeTab = 'live'"
             :class="[
