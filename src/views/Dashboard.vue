@@ -15,16 +15,16 @@
         <AlertCircle class="w-16 h-16 text-destructive mx-auto" />
         <h2 class="text-xl font-semibold text-foreground">Failed to load dashboard</h2>
         <p class="text-muted-foreground">{{ error.message }}</p>
-        <Button @click="retryLoad" variant="outline">
+        <BaseButton @click="retryLoad" variant="outline">
           <RefreshCw class="w-4 h-4 mr-2" />
           Try Again
-        </Button>
+        </BaseButton>
       </div>
     </div>
 
     <!-- First Line: KPIs and Chart -->
-    <Card v-else class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
-      <CardContent class="p-6">
+    <BaseCard v-else class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
+      <BaseCardContent class="p-6">
         <!-- Header with Shift Status -->
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center space-x-6">
@@ -32,14 +32,14 @@
               <Calendar class="w-5 h-5 text-emerald-600" />
               <span class="text-lg font-semibold text-slate-900">Production Overview</span>
             </div>
-            <Badge variant="secondary" class="bg-emerald-50 text-emerald-700 border-emerald-200">
+            <BaseBadge variant="secondary" class="bg-emerald-50 text-emerald-700 border-emerald-200">
               No Active Shift
-            </Badge>
+            </BaseBadge>
           </div>
-          <Button variant="outline" size="sm" class="bg-white/80">
+          <BaseButton variant="outline" size="sm" class="bg-white/80">
             <Download class="w-4 h-4 mr-2" />
             Export
-          </Button>
+          </BaseButton>
         </div>
 
         <!-- KPIs Row -->
@@ -124,20 +124,20 @@
             <Bar :data="chartData" :options="chartOptions" />
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </BaseCardContent>
+    </BaseCard>
 
     <!-- Second Line: Recent Orders and System Alerts -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Recent Orders -->
-      <Card>
-        <CardContent class="p-6">
+      <BaseCard>
+        <BaseCardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-slate-900">Recent Orders</h3>
-          <Button variant="link">
+          <BaseButton variant="link">
             View All
             <ChevronRight class="w-4 h-4 ml-1" />
-          </Button>
+          </BaseButton>
         </div>
         <div class="text-sm text-slate-600 mb-4">Latest wood grading operations</div>
         
@@ -327,11 +327,11 @@
       </Card>
 
       <!-- System Alerts -->
-      <Card>
-        <CardContent class="p-6">
+      <BaseCard>
+        <BaseCardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-slate-900">System Alerts</h3>
-          <Button variant="link" class="text-emerald-600 hover:text-emerald-700 p-0">View All Alerts</Button>
+          <BaseButton variant="link" class="text-emerald-600 hover:text-emerald-700 p-0">View All Alerts</BaseButton>
         </div>
         <div class="text-sm text-slate-600 mb-4">Recent notifications and warnings</div>
         
@@ -360,8 +360,8 @@
             </div>
           </div>
         </div>
-        </CardContent>
-      </Card>
+        </BaseCardContent>
+      </BaseCard>
     </div>
   </div>
 </template>
@@ -382,10 +382,10 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
-import Button from '@/components/ui/button.vue'
-import Card from '@/components/ui/card.vue'
-import CardContent from '@/components/ui/card-content.vue'
-import Badge from '@/components/ui/badge.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import BaseCard from '@/components/ui/BaseCard.vue'
+import BaseCardContent from '@/components/ui/BaseCardContent.vue'
+import BaseBadge from '@/components/ui/BaseBadge.vue'
 import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
 import { useAsyncState } from '@/composables/useAsyncState.js'
 

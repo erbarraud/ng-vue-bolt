@@ -8,10 +8,10 @@
 
     <!-- Override Schedule Button -->
     <div class="mb-6">
-      <Button>
+      <BaseButton>
         <Calendar class="w-4 h-4 mr-2" />
         Override Schedule
-      </Button>
+      </BaseButton>
     </div>
 
     <!-- Holiday Management Section -->
@@ -61,9 +61,9 @@
             <div class="font-medium text-gray-900 mb-4">Monday</div>
             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-32 flex flex-col items-center justify-center">
               <div class="text-gray-500 text-sm mb-3">No shifts scheduled</div>
-              <Button size="sm">
+              <BaseButton size="sm">
                 Add Shift
-              </Button>
+              </BaseButton>
             </div>
           </div>
 
@@ -166,7 +166,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Calendar, ChevronDown, Edit, Plus } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const showHolidays = ref(false)
 

@@ -46,19 +46,19 @@
       </div>
     <div class="flex items-center justify-between mb-6">
       <div class="flex items-center space-x-4">
-        <Button variant="outline">
+        <BaseButton variant="outline">
           <RefreshCw class="w-4 h-4 mr-2" />
           Refresh
-        </Button>
-        <Button variant="outline">
+        </BaseButton>
+        <BaseButton variant="outline">
           <Share class="w-4 h-4 mr-2" />
           Share Claim Link
-        </Button>
+        </BaseButton>
       </div>
-      <Button>
+      <BaseButton>
         <Plus class="w-4 h-4 mr-2" />
         New Claim
-      </Button>
+      </BaseButton>
     </div>
 
     <!-- Search and Filters -->

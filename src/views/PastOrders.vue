@@ -6,12 +6,12 @@
         <h1 class="text-4xl font-extrabold text-gray-900">Past Orders</h1>
         <p class="text-gray-600 mt-1">View and manage completed and cancelled production orders</p>
       </div>
-      <Button>
+      <BaseButton>
         <router-link to="/orders/create" class="flex items-center">
           <Plus class="w-4 h-4 mr-2" />
           Schedule New Order
         </router-link>
-      </Button>
+      </BaseButton>
     </div>
 
     <!-- Data Table -->
@@ -52,7 +52,7 @@
             <Button variant="outline" @click="clearFilters">
               <X class="w-4 h-4 mr-2" />
               Clear Filters
-            </Button>
+            </BaseButton>
           </div>
           <div class="text-sm text-gray-600">
             Showing {{ filteredOrders.length }} of {{ pastOrders.length }} orders
@@ -116,9 +116,9 @@
                 <div class="text-xs text-gray-500">{{ order.completedTime }}</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <Badge :variant="getStatusVariant(order.status)" class="text-xs">
+                <BaseBadge :variant="getStatusVariant(order.status)" class="text-xs">
                   {{ order.status }}
-                </Badge>
+                </BaseBadge>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex items-center space-x-2">
@@ -142,7 +142,7 @@
             Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, filteredOrders.length) }} of {{ filteredOrders.length }} results
           </div>
           <div class="flex items-center space-x-2">
-            <Button
+            <BaseButton
               variant="outline"
               size="sm"
               :disabled="currentPage === 1"
@@ -150,9 +150,9 @@
             >
               <ChevronLeft class="w-4 h-4" />
               Previous
-            </Button>
+            </BaseButton>
             <div class="flex items-center space-x-1">
-              <Button
+              <BaseButton
                 v-for="page in visiblePages"
                 :key="page"
                 :variant="page === currentPage ? 'default' : 'outline'"
@@ -161,9 +161,9 @@
                 @click="currentPage = page"
               >
                 {{ page }}
-              </Button>
+              </BaseButton>
             </div>
-            <Button
+            <BaseButton
               variant="outline"
               size="sm"
               :disabled="currentPage === totalPages"
@@ -171,7 +171,7 @@
             >
               Next
               <ChevronRight class="w-4 h-4" />
-            </Button>
+            </BaseButton>
           </div>
         </div>
       </div>
@@ -182,8 +182,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { Search, Plus, X, Eye, MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
-import Badge from '@/components/ui/badge.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import BaseBadge from '@/components/ui/BaseBadge.vue'
 
 // Filters
 const searchQuery = ref('')

@@ -685,7 +685,7 @@
                 </button>
               </div>
               <div class="text-sm text-gray-500">Full Resolution • Real-time</div>
-            </div>
+            </BaseButton>
           </div>
         </div>
       </div>

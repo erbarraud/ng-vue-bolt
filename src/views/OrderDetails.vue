@@ -209,8 +209,8 @@
         <!-- Right Column - Progress & Actions -->
         <div class="space-y-8">
           <!-- Progress Tracking -->
-          <Card>
-            <CardContent class="p-6">
+          <BaseCard>
+            <BaseCardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Progress</h3>
               <div class="space-y-4">
                 <div>
@@ -241,37 +241,37 @@
                   <div class="text-sm font-medium text-gray-900">{{ order.completedTime }}</div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </BaseCardContent>
+          </BaseCard>
 
           <!-- Quick Actions -->
-          <Card>
-            <CardContent class="p-6">
+          <BaseCard>
+            <BaseCardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h3>
               <div class="space-y-3">
-                <Button class="w-full justify-start" variant="outline">
+                <BaseButton class="w-full justify-start" variant="outline">
                   <Eye class="w-4 h-4 mr-2" />
                   View Boards
-                </Button>
-                <Button class="w-full justify-start" variant="outline">
+                </BaseButton>
+                <BaseButton class="w-full justify-start" variant="outline">
                   <FileText class="w-4 h-4 mr-2" />
                   Generate Report
-                </Button>
-                <Button class="w-full justify-start" variant="outline">
+                </BaseButton>
+                <BaseButton class="w-full justify-start" variant="outline">
                   <Settings class="w-4 h-4 mr-2" />
                   Edit Order
-                </Button>
-                <Button class="w-full justify-start" variant="outline">
+                </BaseButton>
+                <BaseButton class="w-full justify-start" variant="outline">
                   <Copy class="w-4 h-4 mr-2" />
                   Duplicate Order
-                </Button>
+                </BaseButton>
               </div>
-            </CardContent>
-          </Card>
+            </BaseCardContent>
+          </BaseCard>
 
           <!-- Order Notes -->
-          <Card>
-            <CardContent class="p-6">
+          <BaseCard>
+            <BaseCardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Notes</h3>
               <div class="space-y-3">
                 <textarea 
@@ -280,13 +280,13 @@
                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none"
                   rows="4"
                 ></textarea>
-                <Button size="sm" class="w-full">
+                <BaseButton size="sm" class="w-full">
                   <Save class="w-4 h-4 mr-2" />
                   Save Notes
-                </Button>
+                </BaseButton>
               </div>
-            </CardContent>
-          </Card>
+            </BaseCardContent>
+          </BaseCard>
         </div>
       </div>
     </div>

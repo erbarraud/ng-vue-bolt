@@ -13,7 +13,7 @@
         <Button variant="outline" class="flex items-center">
           <List class="w-4 h-4 mr-2" />
           View All Boards in This Order
-        </Button>
+        </BaseButton>
       </div>
     </div>
 

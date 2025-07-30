@@ -144,7 +144,7 @@
 
             <Button class="w-full mt-4">
               View All Recent Boards
-            </Button>
+            </BaseButton>
           </div>
         </div>
       </div>
