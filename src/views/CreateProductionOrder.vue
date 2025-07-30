@@ -389,32 +389,32 @@
             </div>
 
             <!-- 3 Configuration Areas -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div class="space-y-6 mb-6">
               <!-- 1. Board Geometry -->
-              <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
                 <div class="flex items-center mb-4">
                   <Ruler class="w-5 h-5 text-blue-600 mr-2" />
                   <h4 class="font-medium text-blue-900">Board Geometry</h4>
                 </div>
                 
-                <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <!-- Width Range -->
                   <div>
                     <label class="block text-sm font-medium text-blue-800 mb-2">Width Range (inches)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="flex space-x-2">
                       <input 
                         v-model="newSort.geometry.widthMin"
                         type="number" 
                         step="0.25"
                         placeholder="Min"
-                        class="px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
                       <input 
                         v-model="newSort.geometry.widthMax"
                         type="number" 
                         step="0.25"
                         placeholder="Max"
-                        class="px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
                     </div>
                   </div>
@@ -422,20 +422,20 @@
                   <!-- Length Range -->
                   <div>
                     <label class="block text-sm font-medium text-blue-800 mb-2">Length Range (feet)</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="flex space-x-2">
                       <input 
                         v-model="newSort.geometry.lengthMin"
                         type="number" 
                         step="0.5"
                         placeholder="Min"
-                        class="px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
                       <input 
                         v-model="newSort.geometry.lengthMax"
                         type="number" 
                         step="0.5"
                         placeholder="Max"
-                        class="px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
                     </div>
                   </div>
@@ -460,13 +460,13 @@
               </div>
 
               <!-- 2. Board Grades -->
-              <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+              <div class="bg-green-50 rounded-lg p-6 border border-green-200">
                 <div class="flex items-center mb-4">
                   <CheckCircle class="w-5 h-5 text-green-600 mr-2" />
                   <h4 class="font-medium text-green-900">Board Grades</h4>
                 </div>
                 
-                <div class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <label class="flex items-start">
                     <input 
                       type="checkbox" 
@@ -535,7 +535,7 @@
               </div>
 
               <!-- 3. Board Colors -->
-              <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+              <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
                 <div class="flex items-center mb-4">
                   <Palette class="w-5 h-5 text-purple-600 mr-2" />
                   <h4 class="font-medium text-purple-900">Board Colors</h4>
@@ -553,7 +553,7 @@
                   </label>
 
                   <!-- Color Options (only show if enabled) -->
-                  <div v-if="newSort.colorSorting.enabled" class="space-y-3">
+                  <div v-if="newSort.colorSorting.enabled" class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <label class="flex items-center">
                       <input 
                         type="radio" 
