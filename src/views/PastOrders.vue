@@ -49,7 +49,7 @@
               <option value="Cherry">Cherry</option>
               <option value="Walnut">Walnut</option>
             </select>
-            <Button variant="outline" @click="clearFilters">
+            <BaseButton variant="outline" @click="clearFilters">
               <X class="w-4 h-4 mr-2" />
               Clear Filters
             </BaseButton>
