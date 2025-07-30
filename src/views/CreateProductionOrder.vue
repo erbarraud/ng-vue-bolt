@@ -716,11 +716,18 @@ export default {
         volumeUnit: 'm3',
         specialRequirements: '',
         geometry: {
-          widthMin: '',
-          widthMax: '',
+          width: '',
+          widthTolerance: {
+            enabled: false,
+            value: ''
+          },
           lengthMin: '',
           lengthMax: '',
-          thickness: ''
+          thickness: '',
+          thicknessTolerance: {
+            enabled: false,
+            value: ''
+          }
         },
         grades: [],
         colorSorting: {
@@ -799,11 +806,18 @@ export default {
         volumeUnit: 'm3',
         specialRequirements: '',
         geometry: {
-          widthMin: '',
-          widthMax: '',
+          width: '',
+          widthTolerance: {
+            enabled: false,
+            value: ''
+          },
           lengthMin: '',
           lengthMax: '',
-          thickness: ''
+          thickness: '',
+          thicknessTolerance: {
+            enabled: false,
+            value: ''
+          }
         },
         grades: [],
         colorSorting: {
