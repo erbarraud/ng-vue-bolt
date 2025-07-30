@@ -743,14 +743,21 @@ export default {
       },
       newSort: {
         name: '',
-        qualityLevel: 'Standard',
         targetVolume: '',
         volumeUnit: 'm3',
-        defectTolerance: 5,
-        dimensions: '',
-        moistureContent: 12,
-        description: '',
-        specialRequirements: ''
+        specialRequirements: '',
+        geometry: {
+          widthMin: '',
+          widthMax: '',
+          lengthMin: '',
+          lengthMax: '',
+          thickness: ''
+        },
+        grades: [],
+        colorSorting: {
+          enabled: false,
+          type: ''
+        }
       },
 
       // Search and filters
@@ -916,6 +923,13 @@ export default {
              this.orderData.sorts.length > 0
     },
 
+    canAddSort() {
+      return this.newSort.name && 
+             this.newSort.targetVolume && 
+             this.newSort.grades.length > 0 &&
+             (this.newSort.geometry.widthMin || this.newSort.geometry.lengthMin || this.newSort.geometry.thickness)
+    },
+
     filteredExistingSorts() {
       let filtered = this.existingSorts
 
@@ -1012,7 +1026,7 @@ export default {
     },
 
     addNewSort() {
-      if (this.newSort.name && this.newSort.targetVolume) {
+      if (this.canAddSort) {
         this.orderData.sorts.push({
           ...this.newSort,
           id: 'custom_' + Date.now()
@@ -1023,7 +1037,25 @@ export default {
     },
 
     resetNewSort() {
-        this.newSort = {
+      this.newSort = {
+        name: '',
+        targetVolume: '',
+        volumeUnit: 'm3',
+        specialRequirements: '',
+        geometry: {
+          widthMin: '',
+          widthMax: '',
+          lengthMin: '',
+          lengthMax: '',
+          thickness: ''
+        },
+        grades: [],
+        colorSorting: {
+          enabled: false,
+          type: ''
+        }
+      }
+    },
           name: '',
           qualityLevel: 'Standard',
           targetVolume: '',
