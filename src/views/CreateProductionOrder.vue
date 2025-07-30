@@ -1,625 +1,713 @@
 <template>
-  <div class="min-h-screen bg-gray-50 p-6">
-    <div class="max-w-6xl mx-auto">
-      <!-- Progress Indicator -->
-      <div class="mb-8">
-        <div class="flex items-center justify-between mb-4">
-          <h1 class="text-3xl font-bold text-gray-900">Create New Production Order</h1>
-          <div class="text-sm text-gray-500">Step {{ currentStep }} of 3</div>
-        </div>
-        
-        <div class="flex items-center space-x-4">
-          <div v-for="step in steps" :key="step.number" class="flex items-center">
-            <div :class="[
-              'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium',
-              currentStep >= step.number 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-600'
-            ]">
-              {{ step.number }}
-            </div>
-            <span :class="[
-              'ml-2 text-sm font-medium',
-              currentStep >= step.number ? 'text-blue-600' : 'text-gray-500'
-            ]">
-              {{ step.title }}
-            </span>
-            <div v-if="step.number < steps.length" class="w-12 h-0.5 bg-gray-200 ml-4"></div>
-          </div>
-        </div>
+  <div class="min-h-screen bg-gray-50 flex">
+    <!-- Left Sidebar Navigation -->
+    <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+      <!-- Header -->
+      <div class="p-6 border-b border-gray-200">
+        <h1 class="text-2xl font-bold text-gray-900">Create New Order</h1>
+        <p class="text-sm text-gray-600 mt-1">Configure your production order</p>
       </div>
 
-      <!-- Step 1: Order Details -->
-      <div v-if="currentStep === 1" class="bg-white rounded-lg shadow-sm p-6">
-        <h2 class="text-xl font-semibold text-gray-900 mb-6">Order Details</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Basic Information -->
-          <div class="space-y-4">
-            <h3 class="text-lg font-medium text-gray-900">Basic Information</h3>
-            
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Order Name *</label>
-              <input 
-                v-model="orderData.name"
-                type="text" 
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter order name"
-              />
-            </div>
-            
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Custom Order ID</label>
-              <input 
-                v-model="orderData.customId"
-                type="text" 
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Optional custom ID"
-              />
-            </div>
-            
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Client *</label>
-              <select 
-                v-model="orderData.clientId"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select client...</option>
-                <option v-for="client in clients" :key="client.id" :value="client.id">
-                  {{ client.name }}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Client Information -->
-          <div class="space-y-4">
-            <h3 class="text-lg font-medium text-gray-900">Client Information</h3>
-            
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Contact Person</label>
-              <input 
-                v-model="orderData.contactPerson"
-                type="text" 
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Contact person name"
-              />
-            </div>
-            
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Project Reference</label>
-              <input 
-                v-model="orderData.projectReference"
-                type="text" 
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Project reference number"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Scheduling -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Required Date *</label>
-            <input 
-              v-model="orderData.requiredDate"
-              type="date" 
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Priority Level</label>
-            <select 
-              v-model="orderData.priority"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      <!-- Navigation Menu -->
+      <nav class="flex-1 p-4">
+        <ul class="space-y-2">
+          <li>
+            <button
+              @click="activeSection = 'details'"
+              :class="[
+                'w-full flex items-center px-4 py-3 text-left rounded-lg transition-all duration-200',
+                activeSection === 'details'
+                  ? 'bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500'
+                  : 'text-gray-700 hover:bg-gray-100'
+              ]"
             >
-              <option value="standard">Standard</option>
-              <option value="rush">Rush</option>
-              <option value="low">Low</option>
-            </select>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Line</label>
-            <select 
-              v-model="orderData.preferredLine"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="auto">Auto Assignment</option>
-              <option value="line1">Line 1</option>
-              <option value="line2">Line 2</option>
-              <option value="line3">Line 3</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Volume and Species -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Expected Volume</label>
-            <div class="flex space-x-2">
-              <input 
-                v-model="orderData.expectedVolume"
-                type="number" 
-                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="0"
-              />
-              <select 
-                v-model="orderData.volumeUnit"
-                class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="m3">m³</option>
-                <option value="bf">Board Feet</option>
-                <option value="pieces">Pieces</option>
-              </select>
-            </div>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Species</label>
-            <select 
-              v-model="orderData.species"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select species...</option>
-              <option v-for="species in speciesList" :key="species" :value="species">
-                {{ species }}
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Special Instructions -->
-        <div class="mt-6">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Special Instructions</label>
-          <textarea 
-            v-model="orderData.specialInstructions"
-            rows="3"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Any special requirements or notes..."
-          ></textarea>
-        </div>
-      </div>
-
-      <!-- Step 2: Define Sorts -->
-      <div v-if="currentStep === 2" class="bg-white rounded-lg shadow-sm p-6">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-xl font-semibold text-gray-900">Define Sorts</h2>
-          <div class="flex space-x-3">
-            <button 
-              @click="showExistingSorts = true"
-              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Select Existing Sort
-            </button>
-            <button 
-              @click="showNewSortForm = true"
-              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-            >
-              Create New Sort
-            </button>
-          </div>
-        </div>
-
-        <!-- Added Sorts List -->
-        <div v-if="orderData.sorts.length > 0" class="mb-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">Added Sorts ({{ orderData.sorts.length }})</h3>
-          <div class="space-y-3">
-            <div v-for="(sort, index) in orderData.sorts" :key="index" 
-                 class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-              <div class="flex-1">
-                <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
-                <p class="text-sm text-gray-600">
-                  {{ sort.targetVolume }} {{ sort.volumeUnit }} • {{ sort.qualityLevel }} Quality
-                </p>
-                <p class="text-xs text-gray-500 mt-1">{{ sort.description }}</p>
+              <div class="flex items-center">
+                <div :class="[
+                  'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium mr-3',
+                  isStepComplete('details')
+                    ? 'bg-emerald-500 text-white'
+                    : activeSection === 'details'
+                    ? 'bg-emerald-200 text-emerald-700'
+                    : 'bg-gray-200 text-gray-600'
+                ]">
+                  <CheckCircle v-if="isStepComplete('details')" class="w-4 h-4" />
+                  <span v-else>1</span>
+                </div>
+                <div>
+                  <div class="font-medium">Order Details</div>
+                  <div class="text-xs text-gray-500">Basic information & scheduling</div>
+                </div>
               </div>
-              <button 
-                @click="removeSort(index)"
-                class="ml-4 px-3 py-1 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+            </button>
+          </li>
+
+          <li>
+            <button
+              @click="activeSection = 'sorts'"
+              :class="[
+                'w-full flex items-center px-4 py-3 text-left rounded-lg transition-all duration-200',
+                activeSection === 'sorts'
+                  ? 'bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500'
+                  : 'text-gray-700 hover:bg-gray-100'
+              ]"
+            >
+              <div class="flex items-center">
+                <div :class="[
+                  'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium mr-3',
+                  isStepComplete('sorts')
+                    ? 'bg-emerald-500 text-white'
+                    : activeSection === 'sorts'
+                    ? 'bg-emerald-200 text-emerald-700'
+                    : 'bg-gray-200 text-gray-600'
+                ]">
+                  <CheckCircle v-if="isStepComplete('sorts')" class="w-4 h-4" />
+                  <span v-else>2</span>
+                </div>
+                <div>
+                  <div class="font-medium">Define Sorts</div>
+                  <div class="text-xs text-gray-500">Product specifications</div>
+                </div>
+              </div>
+            </button>
+          </li>
+
+          <li>
+            <button
+              @click="activeSection = 'grades'"
+              :class="[
+                'w-full flex items-center px-4 py-3 text-left rounded-lg transition-all duration-200',
+                activeSection === 'grades'
+                  ? 'bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500'
+                  : 'text-gray-700 hover:bg-gray-100'
+              ]"
+            >
+              <div class="flex items-center">
+                <div :class="[
+                  'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium mr-3',
+                  isStepComplete('grades')
+                    ? 'bg-emerald-500 text-white'
+                    : activeSection === 'grades'
+                    ? 'bg-emerald-200 text-emerald-700'
+                    : 'bg-gray-200 text-gray-600'
+                ]">
+                  <CheckCircle v-if="isStepComplete('grades')" class="w-4 h-4" />
+                  <span v-else>3</span>
+                </div>
+                <div>
+                  <div class="font-medium">Optional Grades</div>
+                  <div class="text-xs text-gray-500">Grade library selection</div>
+                </div>
+              </div>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Order Summary -->
+      <div class="p-4 border-t border-gray-200 bg-gray-50">
+        <h3 class="text-sm font-medium text-gray-900 mb-2">Order Summary</h3>
+        <div class="space-y-1 text-xs text-gray-600">
+          <div v-if="orderData.name">Name: {{ orderData.name }}</div>
+          <div v-if="orderData.clientId">Client: {{ getClientName(orderData.clientId) }}</div>
+          <div v-if="orderData.sorts.length > 0">Sorts: {{ orderData.sorts.length }}</div>
+          <div v-if="orderData.selectedGrades.length > 0">Grades: {{ orderData.selectedGrades.length }}</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="p-4 border-t border-gray-200">
+        <div class="space-y-2">
+          <Button 
+            @click="createOrder"
+            :disabled="!canCreateOrder"
+            class="w-full"
+          >
+            Create Order
+          </Button>
+          <Button variant="outline" class="w-full">
+            Save as Draft
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 overflow-auto">
+      <div class="max-w-4xl mx-auto p-8">
+        <!-- Order Details Section -->
+        <div v-if="activeSection === 'details'" class="bg-white rounded-lg shadow-sm p-8">
+          <div class="mb-6">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">Order Details</h2>
+            <p class="text-gray-600">Configure the basic information for your production order</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Basic Information -->
+            <div class="space-y-6">
+              <h3 class="text-lg font-medium text-gray-900">Basic Information</h3>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Order Name *</label>
+                <input 
+                  v-model="orderData.name"
+                  type="text" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Enter order name"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Custom Order ID</label>
+                <input 
+                  v-model="orderData.customId"
+                  type="text" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Optional custom ID"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Client *</label>
+                <select 
+                  v-model="orderData.clientId"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                >
+                  <option value="">Select client...</option>
+                  <option v-for="client in clients" :key="client.id" :value="client.id">
+                    {{ client.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Client Information -->
+            <div class="space-y-6">
+              <h3 class="text-lg font-medium text-gray-900">Client Information</h3>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Contact Person</label>
+                <input 
+                  v-model="orderData.contactPerson"
+                  type="text" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Contact person name"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Project Reference</label>
+                <input 
+                  v-model="orderData.projectReference"
+                  type="text" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Project reference number"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Scheduling -->
+          <div class="mt-8">
+            <h3 class="text-lg font-medium text-gray-900 mb-6">Scheduling</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Required Date *</label>
+                <input 
+                  v-model="orderData.requiredDate"
+                  type="date" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
+                <select 
+                  v-model="orderData.priority"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                >
+                  <option value="standard">Standard</option>
+                  <option value="rush">Rush</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Line</label>
+                <select 
+                  v-model="orderData.preferredLine"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                >
+                  <option value="auto">Auto Assignment</option>
+                  <option value="line1">Line 1</option>
+                  <option value="line2">Line 2</option>
+                  <option value="line3">Line 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Volume and Species -->
+          <div class="mt-8">
+            <h3 class="text-lg font-medium text-gray-900 mb-6">Volume and Species</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Expected Volume</label>
+                <div class="flex space-x-2">
+                  <input 
+                    v-model="orderData.expectedVolume"
+                    type="number" 
+                    class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="0"
+                  />
+                  <select 
+                    v-model="orderData.volumeUnit"
+                    class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  >
+                    <option value="m3">m³</option>
+                    <option value="bf">Board Feet</option>
+                    <option value="pieces">Pieces</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Species</label>
+                <select 
+                  v-model="orderData.species"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                >
+                  <option value="">Select species...</option>
+                  <option v-for="species in speciesList" :key="species" :value="species">
+                    {{ species }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Special Instructions -->
+          <div class="mt-8">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Special Instructions</label>
+            <textarea 
+              v-model="orderData.specialInstructions"
+              rows="4"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              placeholder="Any special requirements or notes..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Define Sorts Section -->
+        <div v-if="activeSection === 'sorts'" class="bg-white rounded-lg shadow-sm p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-900 mb-2">Define Sorts</h2>
+              <p class="text-gray-600">Add the sorts you want to include in this order</p>
+            </div>
+            <div class="flex space-x-3">
+              <Button 
+                @click="showExistingSorts = true"
+                variant="outline"
               >
-                Remove
-              </button>
+                <Package class="w-4 h-4 mr-2" />
+                Select Existing Sort
+              </Button>
+              <Button 
+                @click="showNewSortForm = true"
+              >
+                <Plus class="w-4 h-4 mr-2" />
+                Create New Sort
+              </Button>
+            </div>
+          </div>
+
+          <!-- Added Sorts List -->
+          <div v-if="orderData.sorts.length > 0" class="mb-8">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Added Sorts ({{ orderData.sorts.length }})</h3>
+            <div class="space-y-4">
+              <div v-for="(sort, index) in orderData.sorts" :key="index" 
+                   class="flex items-center justify-between p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+                <div class="flex-1">
+                  <h4 class="font-medium text-gray-900 text-lg">{{ sort.name }}</h4>
+                  <p class="text-sm text-gray-600 mt-1">
+                    {{ sort.targetVolume }} {{ sort.volumeUnit }} • {{ sort.qualityLevel }} Quality
+                  </p>
+                  <p class="text-xs text-gray-500 mt-2">{{ sort.description }}</p>
+                  <div v-if="sort.specialRequirements" class="text-xs text-blue-600 mt-1">
+                    Special: {{ sort.specialRequirements }}
+                  </div>
+                </div>
+                <Button 
+                  @click="removeSort(index)"
+                  variant="outline"
+                  size="sm"
+                  class="text-red-600 hover:text-red-700 hover:border-red-300"
+                >
+                  <X class="w-4 h-4 mr-1" />
+                  Remove
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div v-else class="text-center py-16">
+            <div class="text-gray-400 mb-4">
+              <Package class="w-16 h-16 mx-auto" />
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No sorts added yet</h3>
+            <p class="text-gray-600 mb-6">Add sorts to define what products you want to create from this order.</p>
+            <div class="flex justify-center space-x-3">
+              <Button @click="showExistingSorts = true" variant="outline">
+                Select Existing Sort
+              </Button>
+              <Button @click="showNewSortForm = true">
+                Create New Sort
+              </Button>
+            </div>
+          </div>
+
+          <!-- Existing Sorts Modal -->
+          <div v-if="showExistingSorts" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-semibold text-gray-900">Select Existing Sort</h3>
+                <Button @click="showExistingSorts = false" variant="outline" size="sm">
+                  <X class="w-4 h-4" />
+                </Button>
+              </div>
+
+              <!-- Search and Filter -->
+              <div class="flex space-x-4 mb-6">
+                <input 
+                  v-model="sortSearch"
+                  type="text" 
+                  placeholder="Search sorts..."
+                  class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                />
+                <select 
+                  v-model="sortFilter"
+                  class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                >
+                  <option value="">All Quality Levels</option>
+                  <option value="Premium">Premium</option>
+                  <option value="Standard">Standard</option>
+                  <option value="Economy">Economy</option>
+                  <option value="Construction">Construction</option>
+                </select>
+              </div>
+
+              <!-- Sort Templates Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <div v-for="sort in filteredExistingSorts" :key="sort.id"
+                     @click="selectExistingSort(sort)"
+                     :class="[
+                       'p-4 border-2 rounded-lg cursor-pointer transition-all',
+                       selectedExistingSort?.id === sort.id 
+                         ? 'border-emerald-500 bg-emerald-50' 
+                         : 'border-gray-200 hover:border-gray-300'
+                     ]">
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
+                    <span :class="[
+                      'px-2 py-1 text-xs rounded-full',
+                      sort.qualityLevel === 'Premium' ? 'bg-purple-100 text-purple-800' :
+                      sort.qualityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
+                      sort.qualityLevel === 'Economy' ? 'bg-green-100 text-green-800' :
+                      'bg-gray-100 text-gray-800'
+                    ]">
+                      {{ sort.qualityLevel }}
+                    </span>
+                  </div>
+                  <p class="text-sm text-gray-600 mb-2">{{ sort.description }}</p>
+                  <div class="text-xs text-gray-500 space-y-1">
+                    <div>Dimensions: {{ sort.dimensions }}</div>
+                    <div>Defect Tolerance: {{ sort.defectTolerance }}%</div>
+                    <div>Moisture: {{ sort.moistureContent }}%</div>
+                  </div>
+                  <div v-if="selectedExistingSort?.id === sort.id" class="mt-2 flex items-center text-emerald-600">
+                    <CheckCircle class="w-4 h-4 mr-1" />
+                    Selected
+                  </div>
+                </div>
+              </div>
+
+              <!-- Configuration for Selected Sort -->
+              <div v-if="selectedExistingSort" class="border-t pt-6">
+                <h4 class="font-medium text-gray-900 mb-4">Configure "{{ selectedExistingSort.name }}"</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
+                    <div class="flex space-x-2">
+                      <input 
+                        v-model="existingSortConfig.targetVolume"
+                        type="number" 
+                        class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                        placeholder="0"
+                      />
+                      <select 
+                        v-model="existingSortConfig.volumeUnit"
+                        class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      >
+                        <option value="m3">m³</option>
+                        <option value="bf">Board Feet</option>
+                        <option value="pieces">Pieces</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                    <input 
+                      v-model="existingSortConfig.specialRequirements"
+                      type="text" 
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="Any special requirements..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal Actions -->
+              <div class="flex justify-end space-x-3 mt-6">
+                <Button 
+                  @click="showExistingSorts = false"
+                  variant="outline"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  @click="addExistingSort"
+                  :disabled="!selectedExistingSort || !existingSortConfig.targetVolume"
+                >
+                  Add Sort to Order
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Sort Form Modal -->
+          <div v-if="showNewSortForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-semibold text-gray-900">Create New Sort</h3>
+                <Button @click="showNewSortForm = false" variant="outline" size="sm">
+                  <X class="w-4 h-4" />
+                </Button>
+              </div>
+
+              <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Sort Name *</label>
+                    <input 
+                      v-model="newSort.name"
+                      type="text" 
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="Enter sort name"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Quality Level</label>
+                    <select 
+                      v-model="newSort.qualityLevel"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    >
+                      <option value="Premium">Premium</option>
+                      <option value="Standard">Standard</option>
+                      <option value="Economy">Economy</option>
+                      <option value="Construction">Construction</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
+                    <div class="flex space-x-2">
+                      <input 
+                        v-model="newSort.targetVolume"
+                        type="number" 
+                        class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                        placeholder="0"
+                      />
+                      <select 
+                        v-model="newSort.volumeUnit"
+                        class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      >
+                        <option value="m3">m³</option>
+                        <option value="bf">Board Feet</option>
+                        <option value="pieces">Pieces</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Defect Tolerance (%)</label>
+                    <input 
+                      v-model="newSort.defectTolerance"
+                      type="number" 
+                      min="0" 
+                      max="100"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="5"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Dimensions</label>
+                    <input 
+                      v-model="newSort.dimensions"
+                      type="text" 
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="e.g., 200-400cm × 15-25cm × 40mm"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Moisture Content (%)</label>
+                    <input 
+                      v-model="newSort.moistureContent"
+                      type="number" 
+                      min="0" 
+                      max="100"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="12"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                  <textarea 
+                    v-model="newSort.description"
+                    rows="3"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="Brief description of this sort..."
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                  <input 
+                    v-model="newSort.specialRequirements"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="Any special requirements..."
+                  />
+                </div>
+              </div>
+
+              <!-- Modal Actions -->
+              <div class="flex justify-end space-x-3 mt-6">
+                <Button 
+                  @click="showNewSortForm = false"
+                  variant="outline"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  @click="addNewSort"
+                  :disabled="!newSort.name || !newSort.targetVolume"
+                >
+                  Add Sort to Order
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Empty State -->
-        <div v-else class="text-center py-12">
-          <div class="text-gray-400 mb-4">
-            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-            </svg>
+        <!-- Optional Grade Selection Section -->
+        <div v-if="activeSection === 'grades'" class="bg-white rounded-lg shadow-sm p-8">
+          <div class="mb-6">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">Optional Grade Selection</h2>
+            <p class="text-gray-600">You can optionally apply predefined grades to enhance your sorts, or skip this step entirely.</p>
           </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No sorts added yet</h3>
-          <p class="text-gray-600 mb-4">Add sorts to define what products you want to create from this order.</p>
-        </div>
 
-        <!-- Existing Sorts Modal -->
-        <div v-if="showExistingSorts" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-lg font-semibold text-gray-900">Select Existing Sort</h3>
-              <button @click="showExistingSorts = false" class="text-gray-400 hover:text-gray-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
+          <!-- Toggle Option -->
+          <div class="mb-8">
+            <label class="flex items-center">
+              <input 
+                v-model="orderData.useGrades"
+                type="checkbox" 
+                class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 h-4 w-4"
+              />
+              <span class="ml-3 text-sm font-medium text-gray-700">Apply grades from library</span>
+            </label>
+          </div>
 
+          <!-- Grade Selection (only if enabled) -->
+          <div v-if="orderData.useGrades">
             <!-- Search and Filter -->
             <div class="flex space-x-4 mb-6">
               <input 
-                v-model="sortSearch"
+                v-model="gradeSearch"
                 type="text" 
-                placeholder="Search sorts..."
-                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Search grades..."
+                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               />
               <select 
-                v-model="sortFilter"
-                class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                v-model="gradeFilter"
+                class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               >
-                <option value="">All Quality Levels</option>
-                <option value="Premium">Premium</option>
-                <option value="Standard">Standard</option>
-                <option value="Economy">Economy</option>
-                <option value="Construction">Construction</option>
+                <option value="">All Types</option>
+                <option value="Hardwood">Hardwood</option>
+                <option value="Softwood">Softwood</option>
+                <option value="Engineered">Engineered</option>
               </select>
             </div>
 
-            <!-- Sort Templates Grid -->
+            <!-- Grade Library -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-              <div v-for="sort in filteredExistingSorts" :key="sort.id"
-                   @click="selectExistingSort(sort)"
+              <div v-for="grade in filteredGrades" :key="grade.id"
+                   @click="toggleGrade(grade)"
                    :class="[
                      'p-4 border-2 rounded-lg cursor-pointer transition-all',
-                     selectedExistingSort?.id === sort.id 
-                       ? 'border-blue-500 bg-blue-50' 
+                     orderData.selectedGrades.some(g => g.id === grade.id)
+                       ? 'border-emerald-500 bg-emerald-50' 
                        : 'border-gray-200 hover:border-gray-300'
                    ]">
                 <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
+                  <h4 class="font-medium text-gray-900">{{ grade.name }}</h4>
                   <span :class="[
                     'px-2 py-1 text-xs rounded-full',
-                    sort.qualityLevel === 'Premium' ? 'bg-purple-100 text-purple-800' :
-                    sort.qualityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
-                    sort.qualityLevel === 'Economy' ? 'bg-green-100 text-green-800' :
-                    'bg-gray-100 text-gray-800'
+                    grade.type === 'Hardwood' ? 'bg-green-100 text-green-800' :
+                    grade.type === 'Softwood' ? 'bg-blue-100 text-blue-800' :
+                    'bg-purple-100 text-purple-800'
                   ]">
-                    {{ sort.qualityLevel }}
+                    {{ grade.type }}
                   </span>
                 </div>
-                <p class="text-sm text-gray-600 mb-2">{{ sort.description }}</p>
+                <p class="text-sm text-gray-600 mb-2">{{ grade.description }}</p>
                 <div class="text-xs text-gray-500 space-y-1">
-                  <div>Dimensions: {{ sort.dimensions }}</div>
-                  <div>Defect Tolerance: {{ sort.defectTolerance }}%</div>
-                  <div>Moisture: {{ sort.moistureContent }}%</div>
+                  <div v-for="spec in grade.keySpecs" :key="spec">• {{ spec }}</div>
                 </div>
-                <div v-if="selectedExistingSort?.id === sort.id" class="mt-2 flex items-center text-blue-600">
-                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
+                <div v-if="orderData.selectedGrades.some(g => g.id === grade.id)" class="mt-2 flex items-center text-emerald-600">
+                  <CheckCircle class="w-4 h-4 mr-1" />
                   Selected
                 </div>
               </div>
             </div>
 
-            <!-- Configuration for Selected Sort -->
-            <div v-if="selectedExistingSort" class="border-t pt-6">
-              <h4 class="font-medium text-gray-900 mb-4">Configure "{{ selectedExistingSort.name }}"</h4>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
-                  <div class="flex space-x-2">
-                    <input 
-                      v-model="existingSortConfig.targetVolume"
-                      type="number" 
-                      class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="0"
-                    />
-                    <select 
-                      v-model="existingSortConfig.volumeUnit"
-                      class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                      <option value="m3">m³</option>
-                      <option value="bf">Board Feet</option>
-                      <option value="pieces">Pieces</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
-                  <input 
-                    v-model="existingSortConfig.specialRequirements"
-                    type="text" 
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Any special requirements..."
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- Modal Actions -->
-            <div class="flex justify-end space-x-3 mt-6">
-              <button 
-                @click="showExistingSorts = false"
-                class="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button 
-                @click="addExistingSort"
-                :disabled="!selectedExistingSort || !existingSortConfig.targetVolume"
-                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                Add Sort to Order
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- New Sort Form Modal -->
-        <div v-if="showNewSortForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-lg font-semibold text-gray-900">Create New Sort</h3>
-              <button @click="showNewSortForm = false" class="text-gray-400 hover:text-gray-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="space-y-4">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Sort Name *</label>
-                  <input 
-                    v-model="newSort.name"
-                    type="text" 
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter sort name"
-                  />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Quality Level</label>
-                  <select 
-                    v-model="newSort.qualityLevel"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="Premium">Premium</option>
-                    <option value="Standard">Standard</option>
-                    <option value="Economy">Economy</option>
-                    <option value="Construction">Construction</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
-                  <div class="flex space-x-2">
-                    <input 
-                      v-model="newSort.targetVolume"
-                      type="number" 
-                      class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="0"
-                    />
-                    <select 
-                      v-model="newSort.volumeUnit"
-                      class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                      <option value="m3">m³</option>
-                      <option value="bf">Board Feet</option>
-                      <option value="pieces">Pieces</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Defect Tolerance (%)</label>
-                  <input 
-                    v-model="newSort.defectTolerance"
-                    type="number" 
-                    min="0" 
-                    max="100"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="5"
-                  />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Dimensions</label>
-                  <input 
-                    v-model="newSort.dimensions"
-                    type="text" 
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="e.g., 200-400cm × 15-25cm × 40mm"
-                  />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Moisture Content (%)</label>
-                  <input 
-                    v-model="newSort.moistureContent"
-                    type="number" 
-                    min="0" 
-                    max="100"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="12"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea 
-                  v-model="newSort.description"
-                  rows="2"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Brief description of this sort..."
-                ></textarea>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
-                <input 
-                  v-model="newSort.specialRequirements"
-                  type="text" 
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Any special requirements..."
-                />
-              </div>
-            </div>
-
-            <!-- Modal Actions -->
-            <div class="flex justify-end space-x-3 mt-6">
-              <button 
-                @click="showNewSortForm = false"
-                class="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button 
-                @click="addNewSort"
-                :disabled="!newSort.name || !newSort.targetVolume"
-                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                Add Sort to Order
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3: Optional Grade Selection -->
-      <div v-if="currentStep === 3" class="bg-white rounded-lg shadow-sm p-6">
-        <div class="mb-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-2">Optional Grade Selection</h2>
-          <p class="text-gray-600">You can optionally apply predefined grades to enhance your sorts, or skip this step entirely.</p>
-        </div>
-
-        <!-- Toggle Option -->
-        <div class="mb-6">
-          <label class="flex items-center">
-            <input 
-              v-model="orderData.useGrades"
-              type="checkbox" 
-              class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-            />
-            <span class="ml-2 text-sm font-medium text-gray-700">Apply grades from library</span>
-          </label>
-        </div>
-
-        <!-- Grade Selection (only if enabled) -->
-        <div v-if="orderData.useGrades">
-          <!-- Search and Filter -->
-          <div class="flex space-x-4 mb-6">
-            <input 
-              v-model="gradeSearch"
-              type="text" 
-              placeholder="Search grades..."
-              class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <select 
-              v-model="gradeFilter"
-              class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">All Types</option>
-              <option value="Hardwood">Hardwood</option>
-              <option value="Softwood">Softwood</option>
-              <option value="Engineered">Engineered</option>
-            </select>
-          </div>
-
-          <!-- Grade Library -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div v-for="grade in filteredGrades" :key="grade.id"
-                 @click="toggleGrade(grade)"
-                 :class="[
-                   'p-4 border-2 rounded-lg cursor-pointer transition-all',
-                   orderData.selectedGrades.some(g => g.id === grade.id)
-                     ? 'border-blue-500 bg-blue-50' 
-                     : 'border-gray-200 hover:border-gray-300'
-                 ]">
-              <div class="flex items-center justify-between mb-2">
-                <h4 class="font-medium text-gray-900">{{ grade.name }}</h4>
-                <span :class="[
-                  'px-2 py-1 text-xs rounded-full',
-                  grade.type === 'Hardwood' ? 'bg-green-100 text-green-800' :
-                  grade.type === 'Softwood' ? 'bg-blue-100 text-blue-800' :
-                  'bg-purple-100 text-purple-800'
-                ]">
-                  {{ grade.type }}
+            <!-- Selected Grades Summary -->
+            <div v-if="orderData.selectedGrades.length > 0" class="p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+              <h4 class="font-medium text-gray-900 mb-2">Selected Grades ({{ orderData.selectedGrades.length }})</h4>
+              <div class="flex flex-wrap gap-2">
+                <span v-for="grade in orderData.selectedGrades" :key="grade.id"
+                      class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">
+                  {{ grade.name }}
                 </span>
               </div>
-              <p class="text-sm text-gray-600 mb-2">{{ grade.description }}</p>
-              <div class="text-xs text-gray-500 space-y-1">
-                <div v-for="spec in grade.keySpecs" :key="spec">• {{ spec }}</div>
-              </div>
-              <div v-if="orderData.selectedGrades.some(g => g.id === grade.id)" class="mt-2 flex items-center text-blue-600">
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Selected
-              </div>
             </div>
           </div>
 
-          <!-- Selected Grades Summary -->
-          <div v-if="orderData.selectedGrades.length > 0" class="mt-6 p-4 bg-blue-50 rounded-lg">
-            <h4 class="font-medium text-gray-900 mb-2">Selected Grades ({{ orderData.selectedGrades.length }})</h4>
-            <div class="flex flex-wrap gap-2">
-              <span v-for="grade in orderData.selectedGrades" :key="grade.id"
-                    class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                {{ grade.name }}
-              </span>
+          <!-- Skip Message -->
+          <div v-else class="text-center py-12">
+            <div class="text-gray-400 mb-4">
+              <CheckCircle class="w-16 h-16 mx-auto" />
             </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Grades Skipped</h3>
+            <p class="text-gray-600">Your order will use only the sorts you defined without additional grade specifications.</p>
           </div>
-        </div>
-
-        <!-- Skip Message -->
-        <div v-else class="text-center py-8">
-          <div class="text-gray-400 mb-4">
-            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">Grades Skipped</h3>
-          <p class="text-gray-600">Your order will use only the sorts you defined without additional grade specifications.</p>
-        </div>
-      </div>
-
-      <!-- Navigation -->
-      <div class="flex justify-between mt-8">
-        <button 
-          v-if="currentStep > 1"
-          @click="previousStep"
-          class="px-6 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-        >
-          Previous Step
-        </button>
-        <div v-else></div>
-        
-        <div class="flex space-x-3">
-          <button 
-            v-if="currentStep < 3"
-            @click="nextStep"
-            :disabled="!canProceed"
-            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Next Step
-          </button>
-          <button 
-            v-else
-            @click="createOrder"
-            :disabled="!canCreateOrder"
-            class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Create Order
-          </button>
         </div>
       </div>
     </div>
@@ -631,12 +719,7 @@ export default {
   name: 'CreateProductionOrder',
   data() {
     return {
-      currentStep: 1,
-      steps: [
-        { number: 1, title: 'Order Details' },
-        { number: 2, title: 'Define Sorts' },
-        { number: 3, title: 'Optional Grades' }
-      ],
+      activeSection: 'details',
       
       // Order data
       orderData: {
@@ -834,15 +917,6 @@ export default {
   },
 
   computed: {
-    canProceed() {
-      if (this.currentStep === 1) {
-        return this.orderData.name && this.orderData.clientId && this.orderData.requiredDate
-      } else if (this.currentStep === 2) {
-        return this.orderData.sorts.length > 0
-      }
-      return true
-    },
-
     canCreateOrder() {
       return this.orderData.name && 
              this.orderData.clientId && 
@@ -886,16 +960,22 @@ export default {
   },
 
   methods: {
-    nextStep() {
-      if (this.canProceed && this.currentStep < 3) {
-        this.currentStep++
+    isStepComplete(step) {
+      switch (step) {
+        case 'details':
+          return this.orderData.name && this.orderData.clientId && this.orderData.requiredDate
+        case 'sorts':
+          return this.orderData.sorts.length > 0
+        case 'grades':
+          return true // Optional step is always "complete"
+        default:
+          return false
       }
     },
 
-    previousStep() {
-      if (this.currentStep > 1) {
-        this.currentStep--
-      }
+    getClientName(clientId) {
+      const client = this.clients.find(c => c.id === clientId)
+      return client ? client.name : ''
     },
 
     selectExistingSort(sort) {
@@ -964,10 +1044,7 @@ export default {
 
     createOrder() {
       if (this.canCreateOrder) {
-        // Here you would typically send the order data to your API
         console.log('Creating order:', this.orderData)
-        
-        // For demo purposes, show success message and redirect
         alert('Order created successfully!')
         this.$router.push('/orders')
       }
