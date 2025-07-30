@@ -70,36 +70,6 @@
               </div>
             </button>
           </li>
-
-          <li>
-            <button
-              @click="activeSection = 'grades'"
-              :class="[
-                'w-full flex items-center px-4 py-3 text-left rounded-lg transition-all duration-200',
-                activeSection === 'grades'
-                  ? 'bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500'
-                  : 'text-gray-700 hover:bg-gray-100'
-              ]"
-            >
-              <div class="flex items-center">
-                <div :class="[
-                  'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium mr-3',
-                  isStepComplete('grades')
-                    ? 'bg-emerald-500 text-white'
-                    : activeSection === 'grades'
-                    ? 'bg-emerald-200 text-emerald-700'
-                    : 'bg-gray-200 text-gray-600'
-                ]">
-                  <CheckCircle v-if="isStepComplete('grades')" class="w-4 h-4" />
-                  <span v-else>3</span>
-                </div>
-                <div>
-                  <div class="font-medium">Optional Grades</div>
-                  <div class="text-xs text-gray-500">Grade library selection</div>
-                </div>
-              </div>
-            </button>
-          </li>
         </ul>
       </nav>
 
