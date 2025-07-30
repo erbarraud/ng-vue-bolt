@@ -23,8 +23,8 @@
     </div>
 
     <!-- First Line: KPIs and Chart -->
-    <BaseCard v-else class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
-      <BaseCardContent class="p-6">
+    <Card v-else class="mb-8 bg-white/70 backdrop-blur-sm border-0 shadow-sm">
+      <CardContent class="p-6">
         <!-- Header with Shift Status -->
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center space-x-6">
@@ -32,9 +32,9 @@
               <Calendar class="w-5 h-5 text-emerald-600" />
               <span class="text-lg font-semibold text-slate-900">Production Overview</span>
             </div>
-            <BaseBadge variant="secondary" class="bg-emerald-50 text-emerald-700 border-emerald-200">
+            <Badge variant="secondary" class="bg-emerald-50 text-emerald-700 border-emerald-200">
               No Active Shift
-            </BaseBadge>
+            </Badge>
           </div>
           <BaseButton variant="outline" size="sm" class="bg-white/80">
             <Download class="w-4 h-4 mr-2" />
@@ -124,8 +124,8 @@
             <Bar :data="chartData" :options="chartOptions" />
           </div>
         </div>
-      </BaseCardContent>
-    </BaseCard>
+      </CardContent>
+    </Card>
 
     <!-- Second Line: Recent Orders and System Alerts -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -383,9 +383,9 @@ import {
   Legend
 } from 'chart.js'
 import BaseButton from '@/components/ui/BaseButton.vue'
-import BaseCard from '@/components/ui/BaseCard.vue'
-import BaseCardContent from '@/components/ui/BaseCardContent.vue'
-import BaseBadge from '@/components/ui/BaseBadge.vue'
+import Card from '@/components/ui/card.vue'
+import CardContent from '@/components/ui/card-content.vue'
+import Badge from '@/components/ui/badge.vue'
 import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
 
 // Register Chart.js components

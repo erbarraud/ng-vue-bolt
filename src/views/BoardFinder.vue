@@ -25,7 +25,7 @@
             <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs">
               Active
             </span>
-          </BaseButton>
+          </Button>
         </div>
         <div class="flex items-center space-x-2">
           <span class="text-sm text-gray-600">Show</span>
@@ -524,11 +524,11 @@
 
             <!-- Full Inspection Button -->
             <div class="flex justify-end">
-              <BaseButton class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2">
+              <Button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2">
                 <router-link to="/inspector">
                   Full Inspection
                 </router-link>
-              </BaseButton>
+              </Button>
             </div>
           </div>
         </div>
@@ -544,7 +544,6 @@ import {
   Clock, ChevronLeft, ChevronRight, X, EyeOff, BookOpen, CheckCircle, XCircle, FileText,
   Layers, DollarSign
 } from 'lucide-vue-next'
-import BaseButton from '@/components/ui/BaseButton.vue'
 
 const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
