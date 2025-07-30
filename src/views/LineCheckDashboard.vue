@@ -46,7 +46,7 @@
             Pause
           </button>
           <button 
-            @click="toggleFullScreen"
+            @click="toggleFullscreen"
             class="flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
             title="Enter Full Screen"
           >
@@ -140,13 +140,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Clock, Square, RefreshCw, Maximize, Minimize, Camera } from 'lucide-vue-next'
+import { useFullscreen } from '@/composables/useFullscreen'
 
 // Reactive state
 const isScanning = ref(true)
 const scanInterval = ref(12000) // 5/min default
 const currentTime = ref('')
 const recentBoards = ref([])
-const isFullScreen = ref(false)
+const { isFullscreen: isFullScreen, toggleFullscreen } = useFullscreen()
 
 // Timers
 let clockTimer = null
@@ -254,45 +255,17 @@ const getGradeBadgeClass = (grade) => {
 }
 
 /**
- * Toggle full screen mode for office display
- */
-const toggleFullScreen = async () => {
-  try {
-    if (!document.fullscreenElement) {
-      // Enter full screen
-      await document.documentElement.requestFullscreen()
-      isFullScreen.value = true
-    } else {
-      // Exit full screen
-      await document.exitFullscreen()
-      isFullScreen.value = false
-    }
-  } catch (error) {
-    console.error('Error toggling fullscreen:', error)
-    // Fallback for browsers that don't support fullscreen API
-    alert('Full screen mode is not supported in this browser')
-  }
-}
-
-/**
- * Handle fullscreen change events
- */
-const handleFullscreenChange = () => {
-  isFullScreen.value = !!document.fullscreenElement
-}
-
-/**
  * Handle keyboard shortcuts for fullscreen
  */
 const handleKeydown = (event) => {
   // F11 or F key for fullscreen toggle
   if (event.key === 'F11' || (event.key === 'f' && event.ctrlKey)) {
     event.preventDefault()
-    toggleFullScreen()
+    toggleFullscreen()
   }
   // Escape key to exit fullscreen
   if (event.key === 'Escape' && isFullScreen.value) {
-    toggleFullScreen()
+    toggleFullscreen()
   }
 }
 /**
@@ -341,20 +314,13 @@ onMounted(() => {
     startScanning()
   }
   
-  // Add fullscreen event listeners
-  document.addEventListener('fullscreenchange', handleFullscreenChange)
   document.addEventListener('keydown', handleKeydown)
-  
-  // Check initial fullscreen state
-  isFullScreen.value = !!document.fullscreenElement
 })
 
 onUnmounted(() => {
   if (scanTimer) clearInterval(scanTimer)
   if (clockTimer) clearInterval(clockTimer)
   
-  // Remove fullscreen event listeners
-  document.removeEventListener('fullscreenchange', handleFullscreenChange)
   document.removeEventListener('keydown', handleKeydown)
 })
 </script>

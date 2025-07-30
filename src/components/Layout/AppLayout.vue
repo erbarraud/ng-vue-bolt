@@ -187,42 +187,17 @@ import {
   Bell, User, Minimize
 } from 'lucide-vue-next'
 import ErrorBoundary from '@/components/error/error-boundary.vue'
+import { useFullscreen } from '@/composables/useFullscreen'
 
 const showToolsMenu = ref(false)
-const isFullScreen = ref(false)
-
-/**
- * Handle fullscreen change events
- */
-const handleFullscreenChange = () => {
-  isFullScreen.value = !!document.fullscreenElement
-}
+const { isFullscreen: isFullScreen, toggleFullscreen } = useFullscreen()
 
 /**
  * Exit full screen mode
  */
 const exitFullScreen = async () => {
-  try {
-    if (document.fullscreenElement) {
-      await document.exitFullscreen()
-    }
-  } catch (error) {
-    console.error('Error exiting fullscreen:', error)
-  }
+  await toggleFullscreen()
 }
-
-onMounted(() => {
-  // Add fullscreen event listener
-  document.addEventListener('fullscreenchange', handleFullscreenChange)
-  
-  // Check initial fullscreen state
-  isFullScreen.value = !!document.fullscreenElement
-})
-
-onUnmounted(() => {
-  // Remove fullscreen event listener
-  document.removeEventListener('fullscreenchange', handleFullscreenChange)
-})
 </script>
 
 <style scoped>

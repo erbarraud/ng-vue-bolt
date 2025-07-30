@@ -73,14 +73,14 @@
       
       <!-- Actions -->
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button @click="retry" variant="default" :disabled="isRetrying">
+        <BaseButton @click="retry" variant="default" :disabled="isRetrying">
           <RefreshCw :class="['w-4 h-4 mr-2', isRetrying && 'animate-spin']" />
           {{ isRetrying ? 'Retrying...' : 'Try Again' }}
-        </Button>
-        <Button @click="goOffline" variant="outline">
+        </BaseButton>
+        <BaseButton @click="goOffline" variant="outline">
           <Monitor class="w-4 h-4 mr-2" />
           Work Offline
-        </Button>
+        </BaseButton>
       </div>
       
       <!-- Support -->
@@ -98,9 +98,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { WifiOff, RefreshCw, Monitor } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import { usePageReload } from '@/composables/usePageReload'
 
 const router = useRouter()
+const { reloadPage } = usePageReload()
 
 const isOnline = ref(navigator.onLine)
 const isRetrying = ref(false)
@@ -125,7 +127,7 @@ const retry = async () => {
     })
     
     // If successful, reload the page
-    window.location.reload()
+    await reloadPage()
   } catch (error) {
     // Still offline, update status
     updateOnlineStatus()

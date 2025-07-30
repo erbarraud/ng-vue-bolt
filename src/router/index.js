@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PageLoading from '../components/ui/page-loading.vue'
+import PageLoading from '@/components/ui/page-loading.vue'
 import NotFound from '../views/error/NotFound.vue'
 import ServerError from '../views/error/ServerError.vue'
 import NetworkError from '../views/error/NetworkError.vue'
-import Dashboard from '../views/Dashboard.vue'
-import ProductionOrders from '../views/ProductionOrders.vue'
+import TheDashboard from '../views/TheDashboard.vue'
+import TheProductionOrders from '../views/TheProductionOrders.vue'
 import CreateProductionOrder from '../views/CreateProductionOrder.vue'
 import UserManagement from '../views/UserManagement.vue'
 import ShiftScheduler from '../views/ShiftScheduler.vue'
@@ -21,12 +21,12 @@ const routes = [
   {
     path: '/',
     name: 'Dashboard',
-    component: Dashboard
+    component: TheDashboard
   },
   {
     path: '/orders',
     name: 'ProductionOrders',
-    component: ProductionOrders
+    component: TheProductionOrders
   },
   {
     path: '/orders/create',

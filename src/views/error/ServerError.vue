@@ -50,14 +50,14 @@
       
       <!-- Actions -->
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button @click="retry" variant="default">
+        <BaseButton @click="retry" variant="default">
           <RefreshCw class="w-4 h-4 mr-2" />
           Try Again
-        </Button>
-        <Button @click="goHome" variant="outline">
+        </BaseButton>
+        <BaseButton @click="goHome" variant="outline">
           <Home class="w-4 h-4 mr-2" />
           Go Home
-        </Button>
+        </BaseButton>
       </div>
       
       <!-- Support -->
@@ -84,15 +84,17 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ServerCrash, RefreshCw, Home } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import { usePageReload } from '@/composables/usePageReload'
 
 const router = useRouter()
+const { hardReload } = usePageReload()
 
 // Generate a unique error ID for tracking
 const errorId = ref(`ERR-${Date.now().toString(36).toUpperCase()}`)
 
 const retry = () => {
-  window.location.reload()
+  hardReload()
 }
 
 const goHome = () => {
