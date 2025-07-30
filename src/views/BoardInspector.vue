@@ -501,7 +501,7 @@ import {
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
   Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const route = useRoute()
 
