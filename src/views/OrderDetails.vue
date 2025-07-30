@@ -209,8 +209,8 @@
         <!-- Right Column - Progress & Actions -->
         <div class="space-y-8">
           <!-- Progress Tracking -->
-          <BaseCard>
-            <BaseCardContent class="p-6">
+          <Card>
+            <CardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Progress</h3>
               <div class="space-y-4">
                 <div>
@@ -241,12 +241,12 @@
                   <div class="text-sm font-medium text-gray-900">{{ order.completedTime }}</div>
                 </div>
               </div>
-            </BaseCardContent>
-          </BaseCard>
+            </CardContent>
+          </Card>
 
           <!-- Quick Actions -->
-          <BaseCard>
-            <BaseCardContent class="p-6">
+          <Card>
+            <CardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h3>
               <div class="space-y-3">
                 <BaseButton class="w-full justify-start" variant="outline">
@@ -266,12 +266,12 @@
                   Duplicate Order
                 </BaseButton>
               </div>
-            </BaseCardContent>
-          </BaseCard>
+            </CardContent>
+          </Card>
 
           <!-- Order Notes -->
-          <BaseCard>
-            <BaseCardContent class="p-6">
+          <Card>
+            <CardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Notes</h3>
               <div class="space-y-3">
                 <textarea 
@@ -285,8 +285,8 @@
                   Save Notes
                 </BaseButton>
               </div>
-            </BaseCardContent>
-          </BaseCard>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

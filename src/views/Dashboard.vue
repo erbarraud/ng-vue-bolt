@@ -327,8 +327,8 @@
       </BaseCard>
 
       <!-- System Alerts -->
-      <BaseCard>
-        <BaseCardContent class="p-6">
+      <Card>
+        <CardContent class="p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-slate-900">System Alerts</h3>
           <BaseButton variant="link" class="text-emerald-600 hover:text-emerald-700 p-0">View All Alerts</BaseButton>
@@ -360,8 +360,8 @@
             </div>
           </div>
         </div>
-        </BaseCardContent>
-      </BaseCard>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>

@@ -45,10 +45,10 @@
                 <span class="text-sm font-semibold text-gray-900">{{ isScanning ? 'Active' : 'Paused' }}</span>
               </div>
             </div>
-            <BaseButton>
+            <Button>
               <Maximize class="w-4 h-4 mr-2" />
               Full Screen
-            </BaseButton>
+            </Button>
           </div>
         </div>
       </div>
