@@ -52,7 +52,7 @@
             <BaseButton variant="outline" @click="clearFilters">
               <X class="w-4 h-4 mr-2" />
               Clear Filters
-            </Button>
+            </BaseButton>
           </div>
           <div class="text-sm text-gray-600">
             Showing {{ filteredOrders.length }} of {{ pastOrders.length }} orders
