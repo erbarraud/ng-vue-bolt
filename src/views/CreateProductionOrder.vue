@@ -397,55 +397,55 @@
                   <h4 class="font-medium text-blue-900">Board Geometry</h4>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <!-- Width Range -->
                   <div>
-                    <label class="block text-sm font-medium text-blue-800 mb-2">Width Range (inches)</label>
-                    <div class="flex space-x-2">
+                    <label class="block text-sm font-medium text-blue-800 mb-3">Width Range (inches)</label>
+                    <div class="flex space-x-3">
                       <input 
                         v-model="newSort.geometry.widthMin"
                         type="number" 
                         step="0.25"
                         placeholder="Min"
-                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
                       />
                       <input 
                         v-model="newSort.geometry.widthMax"
                         type="number" 
                         step="0.25"
                         placeholder="Max"
-                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
                       />
                     </div>
                   </div>
 
                   <!-- Length Range -->
                   <div>
-                    <label class="block text-sm font-medium text-blue-800 mb-2">Length Range (feet)</label>
-                    <div class="flex space-x-2">
+                    <label class="block text-sm font-medium text-blue-800 mb-3">Length Range (feet)</label>
+                    <div class="flex space-x-3">
                       <input 
                         v-model="newSort.geometry.lengthMin"
                         type="number" 
                         step="0.5"
                         placeholder="Min"
-                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
                       />
                       <input 
                         v-model="newSort.geometry.lengthMax"
                         type="number" 
                         step="0.5"
                         placeholder="Max"
-                        class="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
                       />
                     </div>
                   </div>
 
                   <!-- Thickness -->
                   <div>
-                    <label class="block text-sm font-medium text-blue-800 mb-2">Thickness</label>
+                    <label class="block text-sm font-medium text-blue-800 mb-3">Thickness</label>
                     <select 
                       v-model="newSort.geometry.thickness"
-                      class="w-full px-3 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     >
                       <option value="">Select thickness...</option>
                       <option value="4/4">4/4 (1 inch)</option>
