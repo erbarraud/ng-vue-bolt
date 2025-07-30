@@ -1,520 +1,622 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
-    <div class="bg-white border-b border-gray-200 px-6 py-4">
-      <div class="flex items-center justify-between">
+  <div class="min-h-screen bg-gray-50 p-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Progress Indicator -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <h1 class="text-3xl font-bold text-gray-900">Create New Production Order</h1>
+          <div class="text-sm text-gray-500">Step {{ currentStep }} of 3</div>
+        </div>
+        
         <div class="flex items-center space-x-4">
-          <button @click="$router.go(-1)" class="text-gray-400 hover:text-gray-600">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-          </button>
-          <div>
-            <h1 class="text-2xl font-bold text-gray-900">Order Builder</h1>
-            <p class="text-sm text-gray-600">Build your order by combining sorts, grades, and color sorting</p>
-          </div>
-        </div>
-        <div class="flex items-center space-x-3">
-          <button @click="saveAsDraft" class="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50">
-            Save Draft
-          </button>
-          <button @click="createOrder" :disabled="!canCreateOrder" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
-            Create Order
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex h-[calc(100vh-80px)]">
-      <!-- Left Panel - Component Library -->
-      <div class="w-80 bg-white border-r border-gray-200 overflow-y-auto">
-        <div class="p-4">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Component Library</h2>
-          
-          <!-- Search -->
-          <div class="relative mb-6">
-            <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <input 
-              v-model="searchQuery"
-              type="text" 
-              placeholder="Find components..."
-              class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-
-          <!-- Sorts Section -->
-          <div class="mb-6">
-            <button @click="sortsExpanded = !sortsExpanded" class="flex items-center justify-between w-full p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-              <div class="flex items-center">
-                <span class="text-2xl mr-2">📋</span>
-                <span class="font-medium text-blue-900">SORTS</span>
-                <span class="ml-2 text-sm text-blue-600">({{ availableSorts.length }})</span>
-              </div>
-              <svg :class="sortsExpanded ? 'rotate-180' : ''" class="w-4 h-4 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            
-            <div v-if="sortsExpanded" class="mt-3 space-y-2">
-              <div 
-                v-for="sort in filteredSorts" 
-                :key="sort.id"
-                @dragstart="handleDragStart($event, 'sort', sort)"
-                @dragend="handleDragEnd"
-                draggable="true"
-                class="p-3 border-2 border-blue-200 rounded-lg cursor-move hover:border-blue-300 hover:shadow-md transition-all bg-white"
-              >
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-medium text-gray-900">📋 {{ sort.name }}</h4>
-                  <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">{{ sort.quality }}</span>
-                </div>
-                <div class="text-xs text-gray-600 space-y-1">
-                  <div>Length: {{ sort.length }}</div>
-                  <div>Knot limit: {{ sort.knotLimit }}</div>
-                </div>
-                <div class="mt-2 text-xs text-blue-600 font-medium">+ Drag to Order</div>
-              </div>
-              
-              <button @click="showCreateSortModal = true" class="w-full p-3 border-2 border-dashed border-blue-300 rounded-lg text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-colors">
-                <span class="text-sm font-medium">+ Create New Sort</span>
-              </button>
+          <div v-for="step in steps" :key="step.number" class="flex items-center">
+            <div :class="[
+              'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium',
+              currentStep >= step.number 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-200 text-gray-600'
+            ]">
+              {{ step.number }}
             </div>
-          </div>
-
-          <!-- Standard Grades Section -->
-          <div class="mb-6">
-            <button @click="gradesExpanded = !gradesExpanded" class="flex items-center justify-between w-full p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-colors">
-              <div class="flex items-center">
-                <span class="text-2xl mr-2">⭐</span>
-                <span class="font-medium text-yellow-900">STANDARD GRADES</span>
-                <span class="ml-2 text-sm text-yellow-600">({{ standardGrades.length }})</span>
-              </div>
-              <svg :class="gradesExpanded ? 'rotate-180' : ''" class="w-4 h-4 text-yellow-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            
-            <div v-if="gradesExpanded" class="mt-3 space-y-2">
-              <div 
-                v-for="grade in filteredGrades" 
-                :key="grade.id"
-                @dragstart="handleDragStart($event, 'grade', grade)"
-                @dragend="handleDragEnd"
-                draggable="true"
-                class="p-3 border-2 border-yellow-200 rounded-lg cursor-move hover:border-yellow-300 hover:shadow-md transition-all bg-white"
-              >
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-medium text-gray-900">⭐ {{ grade.name }}</h4>
-                </div>
-                <div class="text-xs text-gray-600 space-y-1">
-                  <div>Min clear face: {{ grade.clearFaceReq }}</div>
-                  <div>Min size: {{ grade.minBoardSize }}</div>
-                </div>
-                <div class="mt-2 text-xs text-yellow-600 font-medium">+ Drag to Order</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Color Sorting Section -->
-          <div class="mb-6">
-            <button @click="colorExpanded = !colorExpanded" class="flex items-center justify-between w-full p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-              <div class="flex items-center">
-                <span class="text-2xl mr-2">🎨</span>
-                <span class="font-medium text-purple-900">COLOR SORTING</span>
-                <span class="ml-2 text-sm text-purple-600">({{ colorSortingOptions.length }})</span>
-              </div>
-              <svg :class="colorExpanded ? 'rotate-180' : ''" class="w-4 h-4 text-purple-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            
-            <div v-if="colorExpanded" class="mt-3 space-y-2">
-              <div 
-                v-for="colorOption in filteredColorOptions" 
-                :key="colorOption.id"
-                @dragstart="handleDragStart($event, 'color', colorOption)"
-                @dragend="handleDragEnd"
-                draggable="true"
-                class="p-3 border-2 border-purple-200 rounded-lg cursor-move hover:border-purple-300 hover:shadow-md transition-all bg-white"
-              >
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-medium text-gray-900">🎨 {{ colorOption.name }}</h4>
-                </div>
-                <div class="text-xs text-gray-600">
-                  {{ colorOption.description }}
-                </div>
-                <div class="mt-2 text-xs text-purple-600 font-medium">+ Drag to Order</div>
-              </div>
-            </div>
+            <span :class="[
+              'ml-2 text-sm font-medium',
+              currentStep >= step.number ? 'text-blue-600' : 'text-gray-500'
+            ]">
+              {{ step.title }}
+            </span>
+            <div v-if="step.number < steps.length" class="w-12 h-0.5 bg-gray-200 ml-4"></div>
           </div>
         </div>
       </div>
 
-      <!-- Center Panel - Order Builder Canvas -->
-      <div class="flex-1 p-6">
-        <div class="bg-white rounded-lg border-2 border-gray-200 h-full">
-          <!-- Canvas Header -->
-          <div class="p-6 border-b border-gray-200">
-            <div class="flex items-center justify-between">
-              <div>
-                <input 
-                  v-model="orderName"
-                  type="text" 
-                  placeholder="Enter order name..."
-                  class="text-xl font-semibold text-gray-900 bg-transparent border-none focus:outline-none focus:ring-0 p-0"
-                />
-                <div class="flex items-center space-x-4 mt-1 text-sm text-gray-600">
-                  <span>{{ orderComponents.length }} components</span>
-                  <span>Est. {{ totalVolume.toFixed(1) }} m³</span>
-                  <span>{{ estimatedDuration.toFixed(1) }} hours</span>
-                </div>
-              </div>
-              <div class="flex items-center space-x-2">
-                <div class="text-sm text-gray-600">Complexity:</div>
-                <div class="flex items-center">
-                  <div class="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div :style="{ width: complexityPercentage + '%' }" :class="complexityColor" class="h-full transition-all"></div>
-                  </div>
-                  <span class="ml-2 text-sm font-medium" :class="complexityTextColor">{{ complexityLevel }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Drop Zone -->
-          <div 
-            class="p-6 min-h-96"
-            @dragover="handleDragOver"
-            @drop="handleDrop"
-            :class="isDragOver ? 'bg-blue-50 border-blue-300' : ''"
-          >
-            <div v-if="orderComponents.length === 0" class="text-center py-20">
-              <div class="text-6xl mb-4">🧩</div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-2">Build Your Order</h3>
-              <p class="text-gray-600 mb-4">Drag components from the library to create your order</p>
-              <div class="text-sm text-gray-500">
-                Combine <span class="text-blue-600 font-medium">📋 Sorts</span>, 
-                <span class="text-yellow-600 font-medium">⭐ Grades</span>, and 
-                <span class="text-purple-600 font-medium">🎨 Color Sorting</span>
-              </div>
-            </div>
-
-            <!-- Order Components -->
-            <div v-else class="space-y-4">
-              <div 
-                v-for="(component, index) in orderComponents" 
-                :key="component.id + '_' + index"
-                class="flex items-center p-4 border-2 rounded-lg transition-all"
-                :class="getComponentClasses(component.type)"
-              >
-                <!-- Drag Handle -->
-                <div class="cursor-move mr-3 text-gray-400 hover:text-gray-600">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
-                  </svg>
-                </div>
-
-                <!-- Component Icon and Info -->
-                <div class="flex-1">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                      <span class="text-xl mr-3">{{ getComponentIcon(component.type) }}</span>
-                      <div>
-                        <h4 class="font-medium text-gray-900">{{ component.name }}</h4>
-                        <div class="text-sm text-gray-600">
-                          Volume: {{ component.volume }} m³
-                          <span v-if="component.priority" class="ml-2">• Priority: {{ component.priority }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                      <!-- Edit Button -->
-                      <button 
-                        @click="editComponent(component, index)"
-                        class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                        title="Edit component"
-                      >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                        </svg>
-                      </button>
-                      <!-- Remove Button -->
-                      <button 
-                        @click="removeComponent(index)"
-                        class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                        title="Remove component"
-                      >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Add Component Button -->
-              <button 
-                @click="showComponentSelector = true"
-                class="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-gray-400 hover:bg-gray-50 transition-colors"
-              >
-                <span class="text-lg">+ Add Component</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Panel - Live Preview & Summary -->
-      <div class="w-80 bg-white border-l border-gray-200 overflow-y-auto">
-        <div class="p-6">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h2>
-          
-          <!-- Overview Card -->
-          <div class="bg-gray-50 rounded-lg p-4 mb-6">
-            <div class="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <div class="text-gray-600">Total Volume</div>
-                <div class="font-semibold text-gray-900">{{ totalVolume.toFixed(1) }} m³</div>
-              </div>
-              <div>
-                <div class="text-gray-600">Components</div>
-                <div class="font-semibold text-gray-900">{{ orderComponents.length }}</div>
-              </div>
-              <div>
-                <div class="text-gray-600">Est. Duration</div>
-                <div class="font-semibold text-gray-900">{{ estimatedDuration.toFixed(1) }} hrs</div>
-              </div>
-              <div>
-                <div class="text-gray-600">Complexity</div>
-                <div class="font-semibold" :class="complexityTextColor">{{ complexityLevel }}</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Component Breakdown -->
-          <div v-if="orderComponents.length > 0" class="mb-6">
-            <h3 class="font-medium text-gray-900 mb-3">Component Breakdown</h3>
-            <div class="space-y-2">
-              <div v-for="(component, index) in orderComponents" :key="index" class="flex items-center justify-between text-sm">
-                <div class="flex items-center">
-                  <span class="mr-2">{{ getComponentIcon(component.type) }}</span>
-                  <span class="text-gray-900">{{ component.name }}</span>
-                </div>
-                <div class="text-gray-600">
-                  {{ component.volume }} m³ ({{ ((component.volume / totalVolume) * 100).toFixed(0) }}%)
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Processing Timeline -->
-          <div v-if="orderComponents.length > 0" class="mb-6">
-            <h3 class="font-medium text-gray-900 mb-3">Processing Timeline</h3>
-            <div class="space-y-3">
-              <div v-for="(component, index) in orderComponents" :key="index" class="flex items-center justify-between text-sm">
-                <div class="flex items-center">
-                  <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs font-medium mr-3">
-                    {{ index + 1 }}
-                  </div>
-                  <span class="text-gray-900">{{ component.name }}</span>
-                </div>
-                <div class="text-gray-600">{{ (component.volume * 0.15).toFixed(1) }} hrs</div>
-              </div>
-              <div class="border-t pt-2 flex items-center justify-between font-medium">
-                <span class="text-gray-900">Total Processing Time</span>
-                <span class="text-gray-900">{{ estimatedDuration.toFixed(1) }} hrs</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Compatibility Checker -->
-          <div class="mb-6">
-            <h3 class="font-medium text-gray-900 mb-3">Compatibility Check</h3>
-            <div class="space-y-2 text-sm">
-              <div class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-700">All components compatible</span>
-              </div>
-              <div v-if="hasColorSorting" class="flex items-center">
-                <svg class="w-4 h-4 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                </svg>
-                <span class="text-gray-700">Color sorting may extend processing time</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Order Actions -->
-          <div class="space-y-3">
-            <button 
-              @click="showOrderDetailsModal = true"
-              :disabled="orderComponents.length === 0"
-              class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Add Order Details
-            </button>
-            <button 
-              @click="saveAsTemplate"
-              :disabled="orderComponents.length === 0"
-              class="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Save as Template
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Component Edit Modal -->
-    <div v-if="editingComponent" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-semibold text-gray-900">Edit Component</h3>
-          <button @click="editingComponent = null" class="text-gray-400 hover:text-gray-600">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Volume for this component</label>
-            <div class="flex space-x-2">
-              <input 
-                v-model="editingComponent.volume"
-                type="number" 
-                step="0.1"
-                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-              <span class="px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-700">m³</span>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-            <select 
-              v-model="editingComponent.priority"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Special Notes</label>
-            <textarea 
-              v-model="editingComponent.notes"
-              rows="3"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Any special requirements..."
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="flex justify-end space-x-3 mt-6">
-          <button 
-            @click="editingComponent = null"
-            class="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50"
-          >
-            Cancel
-          </button>
-          <button 
-            @click="saveComponentEdit"
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            Save Changes
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Order Details Modal -->
-    <div v-if="showOrderDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-semibold text-gray-900">Order Details</h3>
-          <button @click="showOrderDetailsModal = false" class="text-gray-400 hover:text-gray-600">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-
+      <!-- Step 1: Order Details -->
+      <div v-if="currentStep === 1" class="bg-white rounded-lg shadow-sm p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-6">Order Details</h2>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Client *</label>
-            <select 
-              v-model="orderDetails.clientId"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">Select client...</option>
-              <option v-for="client in clients" :key="client.id" :value="client.id">
-                {{ client.name }}
-              </option>
-            </select>
+          <!-- Basic Information -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-medium text-gray-900">Basic Information</h3>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Order Name *</label>
+              <input 
+                v-model="orderData.name"
+                type="text" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter order name"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Custom Order ID</label>
+              <input 
+                v-model="orderData.customId"
+                type="text" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Optional custom ID"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Client *</label>
+              <select 
+                v-model="orderData.clientId"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select client...</option>
+                <option v-for="client in clients" :key="client.id" :value="client.id">
+                  {{ client.name }}
+                </option>
+              </select>
+            </div>
           </div>
 
+          <!-- Client Information -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-medium text-gray-900">Client Information</h3>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Contact Person</label>
+              <input 
+                v-model="orderData.contactPerson"
+                type="text" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Contact person name"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Project Reference</label>
+              <input 
+                v-model="orderData.projectReference"
+                type="text" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Project reference number"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Scheduling -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Required Date *</label>
             <input 
-              v-model="orderDetails.requiredDate"
+              v-model="orderData.requiredDate"
               type="date" 
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Contact Person</label>
-            <input 
-              v-model="orderDetails.contactPerson"
-              type="text" 
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Contact person name"
-            />
-          </div>
-
+          
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Priority Level</label>
             <select 
-              v-model="orderDetails.priority"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              v-model="orderData.priority"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="Standard">Standard</option>
-              <option value="Rush">Rush</option>
-              <option value="Low">Low</option>
+              <option value="standard">Standard</option>
+              <option value="rush">Rush</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Line</label>
+            <select 
+              v-model="orderData.preferredLine"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="auto">Auto Assignment</option>
+              <option value="line1">Line 1</option>
+              <option value="line2">Line 2</option>
+              <option value="line3">Line 3</option>
             </select>
           </div>
         </div>
 
+        <!-- Volume and Species -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Expected Volume</label>
+            <div class="flex space-x-2">
+              <input 
+                v-model="orderData.expectedVolume"
+                type="number" 
+                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="0"
+              />
+              <select 
+                v-model="orderData.volumeUnit"
+                class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="m3">m³</option>
+                <option value="bf">Board Feet</option>
+                <option value="pieces">Pieces</option>
+              </select>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Species</label>
+            <select 
+              v-model="orderData.species"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select species...</option>
+              <option v-for="species in speciesList" :key="species" :value="species">
+                {{ species }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Special Instructions -->
         <div class="mt-6">
           <label class="block text-sm font-medium text-gray-700 mb-1">Special Instructions</label>
           <textarea 
-            v-model="orderDetails.specialInstructions"
+            v-model="orderData.specialInstructions"
             rows="3"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Any special requirements or notes..."
           ></textarea>
         </div>
+      </div>
 
-        <div class="flex justify-end space-x-3 mt-6">
+      <!-- Step 2: Define Sorts -->
+      <div v-if="currentStep === 2" class="bg-white rounded-lg shadow-sm p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-semibold text-gray-900">Define Sorts</h2>
+          <div class="flex space-x-3">
+            <button 
+              @click="showExistingSorts = true"
+              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Select Existing Sort
+            </button>
+            <button 
+              @click="showNewSortForm = true"
+              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+            >
+              Create New Sort
+            </button>
+          </div>
+        </div>
+
+        <!-- Added Sorts List -->
+        <div v-if="orderData.sorts.length > 0" class="mb-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Added Sorts ({{ orderData.sorts.length }})</h3>
+          <div class="space-y-3">
+            <div v-for="(sort, index) in orderData.sorts" :key="index" 
+                 class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+              <div class="flex-1">
+                <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
+                <p class="text-sm text-gray-600">
+                  {{ sort.targetVolume }} {{ sort.volumeUnit }} • {{ sort.qualityLevel }} Quality
+                </p>
+                <p class="text-xs text-gray-500 mt-1">{{ sort.description }}</p>
+              </div>
+              <button 
+                @click="removeSort(index)"
+                class="ml-4 px-3 py-1 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div v-else class="text-center py-12">
+          <div class="text-gray-400 mb-4">
+            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No sorts added yet</h3>
+          <p class="text-gray-600 mb-4">Add sorts to define what products you want to create from this order.</p>
+        </div>
+
+        <!-- Existing Sorts Modal -->
+        <div v-if="showExistingSorts" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-gray-900">Select Existing Sort</h3>
+              <button @click="showExistingSorts = false" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="flex space-x-4 mb-6">
+              <input 
+                v-model="sortSearch"
+                type="text" 
+                placeholder="Search sorts..."
+                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <select 
+                v-model="sortFilter"
+                class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">All Quality Levels</option>
+                <option value="Premium">Premium</option>
+                <option value="Standard">Standard</option>
+                <option value="Economy">Economy</option>
+                <option value="Construction">Construction</option>
+              </select>
+            </div>
+
+            <!-- Sort Templates Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              <div v-for="sort in filteredExistingSorts" :key="sort.id"
+                   @click="selectExistingSort(sort)"
+                   :class="[
+                     'p-4 border-2 rounded-lg cursor-pointer transition-all',
+                     selectedExistingSort?.id === sort.id 
+                       ? 'border-blue-500 bg-blue-50' 
+                       : 'border-gray-200 hover:border-gray-300'
+                   ]">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
+                  <span :class="[
+                    'px-2 py-1 text-xs rounded-full',
+                    sort.qualityLevel === 'Premium' ? 'bg-purple-100 text-purple-800' :
+                    sort.qualityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
+                    sort.qualityLevel === 'Economy' ? 'bg-green-100 text-green-800' :
+                    'bg-gray-100 text-gray-800'
+                  ]">
+                    {{ sort.qualityLevel }}
+                  </span>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">{{ sort.description }}</p>
+                <div class="text-xs text-gray-500 space-y-1">
+                  <div>Dimensions: {{ sort.dimensions }}</div>
+                  <div>Defect Tolerance: {{ sort.defectTolerance }}%</div>
+                  <div>Moisture: {{ sort.moistureContent }}%</div>
+                </div>
+                <div v-if="selectedExistingSort?.id === sort.id" class="mt-2 flex items-center text-blue-600">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Selected
+                </div>
+              </div>
+            </div>
+
+            <!-- Configuration for Selected Sort -->
+            <div v-if="selectedExistingSort" class="border-t pt-6">
+              <h4 class="font-medium text-gray-900 mb-4">Configure "{{ selectedExistingSort.name }}"</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
+                  <div class="flex space-x-2">
+                    <input 
+                      v-model="existingSortConfig.targetVolume"
+                      type="number" 
+                      class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="0"
+                    />
+                    <select 
+                      v-model="existingSortConfig.volumeUnit"
+                      class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="m3">m³</option>
+                      <option value="bf">Board Feet</option>
+                      <option value="pieces">Pieces</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                  <input 
+                    v-model="existingSortConfig.specialRequirements"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Any special requirements..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal Actions -->
+            <div class="flex justify-end space-x-3 mt-6">
+              <button 
+                @click="showExistingSorts = false"
+                class="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                @click="addExistingSort"
+                :disabled="!selectedExistingSort || !existingSortConfig.targetVolume"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Add Sort to Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- New Sort Form Modal -->
+        <div v-if="showNewSortForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-gray-900">Create New Sort</h3>
+              <button @click="showNewSortForm = false" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Sort Name *</label>
+                  <input 
+                    v-model="newSort.name"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter sort name"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Quality Level</label>
+                  <select 
+                    v-model="newSort.qualityLevel"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="Premium">Premium</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Construction">Construction</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
+                  <div class="flex space-x-2">
+                    <input 
+                      v-model="newSort.targetVolume"
+                      type="number" 
+                      class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="0"
+                    />
+                    <select 
+                      v-model="newSort.volumeUnit"
+                      class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="m3">m³</option>
+                      <option value="bf">Board Feet</option>
+                      <option value="pieces">Pieces</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Defect Tolerance (%)</label>
+                  <input 
+                    v-model="newSort.defectTolerance"
+                    type="number" 
+                    min="0" 
+                    max="100"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="5"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Dimensions</label>
+                  <input 
+                    v-model="newSort.dimensions"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g., 200-400cm × 15-25cm × 40mm"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Moisture Content (%)</label>
+                  <input 
+                    v-model="newSort.moistureContent"
+                    type="number" 
+                    min="0" 
+                    max="100"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="12"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea 
+                  v-model="newSort.description"
+                  rows="2"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Brief description of this sort..."
+                ></textarea>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                <input 
+                  v-model="newSort.specialRequirements"
+                  type="text" 
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Any special requirements..."
+                />
+              </div>
+            </div>
+
+            <!-- Modal Actions -->
+            <div class="flex justify-end space-x-3 mt-6">
+              <button 
+                @click="showNewSortForm = false"
+                class="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                @click="addNewSort"
+                :disabled="!newSort.name || !newSort.targetVolume"
+                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Add Sort to Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Optional Grade Selection -->
+      <div v-if="currentStep === 3" class="bg-white rounded-lg shadow-sm p-6">
+        <div class="mb-6">
+          <h2 class="text-xl font-semibold text-gray-900 mb-2">Optional Grade Selection</h2>
+          <p class="text-gray-600">You can optionally apply predefined grades to enhance your sorts, or skip this step entirely.</p>
+        </div>
+
+        <!-- Toggle Option -->
+        <div class="mb-6">
+          <label class="flex items-center">
+            <input 
+              v-model="orderData.useGrades"
+              type="checkbox" 
+              class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            />
+            <span class="ml-2 text-sm font-medium text-gray-700">Apply grades from library</span>
+          </label>
+        </div>
+
+        <!-- Grade Selection (only if enabled) -->
+        <div v-if="orderData.useGrades">
+          <!-- Search and Filter -->
+          <div class="flex space-x-4 mb-6">
+            <input 
+              v-model="gradeSearch"
+              type="text" 
+              placeholder="Search grades..."
+              class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <select 
+              v-model="gradeFilter"
+              class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">All Types</option>
+              <option value="Hardwood">Hardwood</option>
+              <option value="Softwood">Softwood</option>
+              <option value="Engineered">Engineered</option>
+            </select>
+          </div>
+
+          <!-- Grade Library -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div v-for="grade in filteredGrades" :key="grade.id"
+                 @click="toggleGrade(grade)"
+                 :class="[
+                   'p-4 border-2 rounded-lg cursor-pointer transition-all',
+                   orderData.selectedGrades.some(g => g.id === grade.id)
+                     ? 'border-blue-500 bg-blue-50' 
+                     : 'border-gray-200 hover:border-gray-300'
+                 ]">
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="font-medium text-gray-900">{{ grade.name }}</h4>
+                <span :class="[
+                  'px-2 py-1 text-xs rounded-full',
+                  grade.type === 'Hardwood' ? 'bg-green-100 text-green-800' :
+                  grade.type === 'Softwood' ? 'bg-blue-100 text-blue-800' :
+                  'bg-purple-100 text-purple-800'
+                ]">
+                  {{ grade.type }}
+                </span>
+              </div>
+              <p class="text-sm text-gray-600 mb-2">{{ grade.description }}</p>
+              <div class="text-xs text-gray-500 space-y-1">
+                <div v-for="spec in grade.keySpecs" :key="spec">• {{ spec }}</div>
+              </div>
+              <div v-if="orderData.selectedGrades.some(g => g.id === grade.id)" class="mt-2 flex items-center text-blue-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Selected
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Grades Summary -->
+          <div v-if="orderData.selectedGrades.length > 0" class="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h4 class="font-medium text-gray-900 mb-2">Selected Grades ({{ orderData.selectedGrades.length }})</h4>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="grade in orderData.selectedGrades" :key="grade.id"
+                    class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                {{ grade.name }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skip Message -->
+        <div v-else class="text-center py-8">
+          <div class="text-gray-400 mb-4">
+            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">Grades Skipped</h3>
+          <p class="text-gray-600">Your order will use only the sorts you defined without additional grade specifications.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex justify-between mt-8">
+        <button 
+          v-if="currentStep > 1"
+          @click="previousStep"
+          class="px-6 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+        >
+          Previous Step
+        </button>
+        <div v-else></div>
+        
+        <div class="flex space-x-3">
           <button 
-            @click="showOrderDetailsModal = false"
-            class="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50"
+            v-if="currentStep < 3"
+            @click="nextStep"
+            :disabled="!canProceed"
+            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            Cancel
+            Next Step
           </button>
           <button 
-            @click="finalizeOrder"
-            :disabled="!orderDetails.clientId || !orderDetails.requiredDate"
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            v-else
+            @click="createOrder"
+            :disabled="!canCreateOrder"
+            class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Create Order
           </button>
@@ -524,352 +626,359 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+<script>
+export default {
+  name: 'CreateProductionOrder',
+  data() {
+    return {
+      currentStep: 1,
+      steps: [
+        { number: 1, title: 'Order Details' },
+        { number: 2, title: 'Define Sorts' },
+        { number: 3, title: 'Optional Grades' }
+      ],
+      
+      // Order data
+      orderData: {
+        name: '',
+        customId: '',
+        clientId: '',
+        contactPerson: '',
+        projectReference: '',
+        requiredDate: '',
+        priority: 'standard',
+        preferredLine: 'auto',
+        expectedVolume: '',
+        volumeUnit: 'm3',
+        species: '',
+        specialInstructions: '',
+        sorts: [],
+        useGrades: false,
+        selectedGrades: []
+      },
 
-const router = useRouter()
+      // Sort management
+      showExistingSorts: false,
+      showNewSortForm: false,
+      selectedExistingSort: null,
+      existingSortConfig: {
+        targetVolume: '',
+        volumeUnit: 'm3',
+        specialRequirements: ''
+      },
+      newSort: {
+        name: '',
+        qualityLevel: 'Standard',
+        targetVolume: '',
+        volumeUnit: 'm3',
+        defectTolerance: 5,
+        dimensions: '',
+        moistureContent: 12,
+        description: '',
+        specialRequirements: ''
+      },
 
-// Component state
-const searchQuery = ref('')
-const sortsExpanded = ref(true)
-const gradesExpanded = ref(true)
-const colorExpanded = ref(true)
-const isDragOver = ref(false)
-const editingComponent = ref(null)
-const editingIndex = ref(-1)
-const showOrderDetailsModal = ref(false)
-const showCreateSortModal = ref(false)
-const showComponentSelector = ref(false)
+      // Search and filters
+      sortSearch: '',
+      sortFilter: '',
+      gradeSearch: '',
+      gradeFilter: '',
 
-// Order data
-const orderName = ref('Untitled Order')
-const orderComponents = ref([])
-const orderDetails = ref({
-  clientId: '',
-  contactPerson: '',
-  requiredDate: '',
-  priority: 'Standard',
-  specialInstructions: ''
-})
+      // Sample data
+      clients: [
+        { id: 'client1', name: 'Johnson Lumber Co.' },
+        { id: 'client2', name: 'Artisan Furniture Ltd.' },
+        { id: 'client3', name: 'Premium Hardwoods Inc.' },
+        { id: 'client4', name: 'Cabinet Masters LLC' },
+        { id: 'client5', name: 'Construction Supply Co.' }
+      ],
 
-// Sample data
-const clients = ref([
-  { id: 'client1', name: 'Johnson Lumber Co.' },
-  { id: 'client2', name: 'Artisan Furniture Ltd.' },
-  { id: 'client3', name: 'Premium Hardwoods Inc.' },
-  { id: 'client4', name: 'Cabinet Masters LLC' },
-  { id: 'client5', name: 'Construction Supply Co.' }
-])
+      speciesList: [
+        'Oak', 'Maple', 'Cherry', 'Walnut', 'Pine', 'Cedar', 'Birch', 'Ash', 'Mahogany', 'Teak'
+      ],
 
-const availableSorts = ref([
-  {
-    id: 'sort1',
-    name: 'Premium Oak Sort',
-    quality: 'Premium',
-    length: '200-400cm',
-    knotLimit: '<30cm',
-    defaultVolume: 10
+      existingSorts: [
+        {
+          id: 'sort1',
+          name: 'Premium Flooring Sort',
+          qualityLevel: 'Premium',
+          description: 'High-grade flooring with minimal defects',
+          dimensions: '200-400cm × 15-25cm × 20-40mm',
+          defectTolerance: 2,
+          moistureContent: 8
+        },
+        {
+          id: 'sort2',
+          name: 'Cabinet Grade Select',
+          qualityLevel: 'Premium',
+          description: 'Premium cabinet-grade lumber with excellent finish',
+          dimensions: '150-300cm × 10-20cm × 15-30mm',
+          defectTolerance: 3,
+          moistureContent: 10
+        },
+        {
+          id: 'sort3',
+          name: 'Construction Standard',
+          qualityLevel: 'Standard',
+          description: 'Reliable construction-grade lumber',
+          dimensions: '200-600cm × 20-30cm × 40-60mm',
+          defectTolerance: 8,
+          moistureContent: 15
+        },
+        {
+          id: 'sort4',
+          name: 'Furniture Hardwood',
+          qualityLevel: 'Premium',
+          description: 'Premium hardwood for fine furniture',
+          dimensions: '100-250cm × 8-15cm × 20-50mm',
+          defectTolerance: 2,
+          moistureContent: 8
+        },
+        {
+          id: 'sort5',
+          name: 'Economy Utility',
+          qualityLevel: 'Economy',
+          description: 'Cost-effective utility lumber',
+          dimensions: '150-400cm × 15-25cm × 20-40mm',
+          defectTolerance: 15,
+          moistureContent: 18
+        },
+        {
+          id: 'sort6',
+          name: 'Millwork Select',
+          qualityLevel: 'Standard',
+          description: 'Quality millwork and trim lumber',
+          dimensions: '200-350cm × 5-12cm × 15-25mm',
+          defectTolerance: 5,
+          moistureContent: 12
+        },
+        {
+          id: 'sort7',
+          name: 'Pallet Grade',
+          qualityLevel: 'Construction',
+          description: 'Industrial pallet and crating lumber',
+          dimensions: '100-300cm × 10-20cm × 20-40mm',
+          defectTolerance: 20,
+          moistureContent: 20
+        },
+        {
+          id: 'sort8',
+          name: 'Pressure Treated Decking',
+          qualityLevel: 'Standard',
+          description: 'Weather-resistant decking lumber',
+          dimensions: '300-500cm × 12-20cm × 25-40mm',
+          defectTolerance: 10,
+          moistureContent: 15
+        }
+      ],
+
+      gradeLibrary: [
+        {
+          id: 'grade1',
+          name: 'FAS (First and Seconds)',
+          type: 'Hardwood',
+          description: 'Highest grade hardwood lumber',
+          keySpecs: ['83.3% clear face', 'Min 6" wide × 8" long', 'Premium appearance']
+        },
+        {
+          id: 'grade2',
+          name: 'Select Grade',
+          type: 'Hardwood',
+          description: 'High-quality hardwood with minor defects',
+          keySpecs: ['Good one face', 'Min 4" wide × 6" long', 'Small defects allowed']
+        },
+        {
+          id: 'grade3',
+          name: 'Common No. 1',
+          type: 'Hardwood',
+          description: 'Standard grade with character marks',
+          keySpecs: ['66.7% clear face', 'Sound knots allowed', 'Good for staining']
+        },
+        {
+          id: 'grade4',
+          name: 'Common No. 2',
+          type: 'Hardwood',
+          description: 'Economy grade with more character',
+          keySpecs: ['50% clear face', 'Larger defects allowed', 'Paint grade quality']
+        },
+        {
+          id: 'grade5',
+          name: 'Select Structural',
+          type: 'Softwood',
+          description: 'High-strength structural lumber',
+          keySpecs: ['High strength rating', 'Minimal defects', 'Load-bearing applications']
+        },
+        {
+          id: 'grade6',
+          name: 'Construction Grade',
+          type: 'Softwood',
+          description: 'Standard construction lumber',
+          keySpecs: ['Good strength properties', 'Some defects allowed', 'General framing']
+        },
+        {
+          id: 'grade7',
+          name: 'Utility Grade',
+          type: 'Softwood',
+          description: 'Economy structural lumber',
+          keySpecs: ['Lower strength rating', 'More defects allowed', 'Non-critical applications']
+        },
+        {
+          id: 'grade8',
+          name: 'Engineered Composite',
+          type: 'Engineered',
+          description: 'Manufactured composite lumber',
+          keySpecs: ['Consistent properties', 'Moisture resistant', 'Dimensional stability']
+        }
+      ]
+    }
   },
-  {
-    id: 'sort2',
-    name: 'Cabinet Grade Select',
-    quality: 'Premium',
-    length: '150-300cm',
-    knotLimit: '<20cm',
-    defaultVolume: 8
+
+  computed: {
+    canProceed() {
+      if (this.currentStep === 1) {
+        return this.orderData.name && this.orderData.clientId && this.orderData.requiredDate
+      } else if (this.currentStep === 2) {
+        return this.orderData.sorts.length > 0
+      }
+      return true
+    },
+
+    canCreateOrder() {
+      return this.orderData.name && 
+             this.orderData.clientId && 
+             this.orderData.requiredDate && 
+             this.orderData.sorts.length > 0
+    },
+
+    filteredExistingSorts() {
+      let filtered = this.existingSorts
+
+      if (this.sortSearch) {
+        filtered = filtered.filter(sort => 
+          sort.name.toLowerCase().includes(this.sortSearch.toLowerCase()) ||
+          sort.description.toLowerCase().includes(this.sortSearch.toLowerCase())
+        )
+      }
+
+      if (this.sortFilter) {
+        filtered = filtered.filter(sort => sort.qualityLevel === this.sortFilter)
+      }
+
+      return filtered
+    },
+
+    filteredGrades() {
+      let filtered = this.gradeLibrary
+
+      if (this.gradeSearch) {
+        filtered = filtered.filter(grade => 
+          grade.name.toLowerCase().includes(this.gradeSearch.toLowerCase()) ||
+          grade.description.toLowerCase().includes(this.gradeSearch.toLowerCase())
+        )
+      }
+
+      if (this.gradeFilter) {
+        filtered = filtered.filter(grade => grade.type === this.gradeFilter)
+      }
+
+      return filtered
+    }
   },
-  {
-    id: 'sort3',
-    name: 'Construction Standard',
-    quality: 'Standard',
-    length: '200-600cm',
-    knotLimit: '<50cm',
-    defaultVolume: 15
+
+  methods: {
+    nextStep() {
+      if (this.canProceed && this.currentStep < 3) {
+        this.currentStep++
+      }
+    },
+
+    previousStep() {
+      if (this.currentStep > 1) {
+        this.currentStep--
+      }
+    },
+
+    selectExistingSort(sort) {
+      this.selectedExistingSort = sort
+      this.existingSortConfig = {
+        targetVolume: '',
+        volumeUnit: 'm3',
+        specialRequirements: ''
+      }
+    },
+
+    addExistingSort() {
+      if (this.selectedExistingSort && this.existingSortConfig.targetVolume) {
+        const sortToAdd = {
+          ...this.selectedExistingSort,
+          targetVolume: this.existingSortConfig.targetVolume,
+          volumeUnit: this.existingSortConfig.volumeUnit,
+          specialRequirements: this.existingSortConfig.specialRequirements
+        }
+        
+        this.orderData.sorts.push(sortToAdd)
+        this.showExistingSorts = false
+        this.selectedExistingSort = null
+        this.existingSortConfig = {
+          targetVolume: '',
+          volumeUnit: 'm3',
+          specialRequirements: ''
+        }
+      }
+    },
+
+    addNewSort() {
+      if (this.newSort.name && this.newSort.targetVolume) {
+        this.orderData.sorts.push({
+          ...this.newSort,
+          id: 'custom_' + Date.now()
+        })
+        
+        this.showNewSortForm = false
+        this.newSort = {
+          name: '',
+          qualityLevel: 'Standard',
+          targetVolume: '',
+          volumeUnit: 'm3',
+          defectTolerance: 5,
+          dimensions: '',
+          moistureContent: 12,
+          description: '',
+          specialRequirements: ''
+        }
+      }
+    },
+
+    removeSort(index) {
+      this.orderData.sorts.splice(index, 1)
+    },
+
+    toggleGrade(grade) {
+      const index = this.orderData.selectedGrades.findIndex(g => g.id === grade.id)
+      if (index > -1) {
+        this.orderData.selectedGrades.splice(index, 1)
+      } else {
+        this.orderData.selectedGrades.push(grade)
+      }
+    },
+
+    createOrder() {
+      if (this.canCreateOrder) {
+        // Here you would typically send the order data to your API
+        console.log('Creating order:', this.orderData)
+        
+        // For demo purposes, show success message and redirect
+        alert('Order created successfully!')
+        this.$router.push('/orders')
+      }
+    }
   },
-  {
-    id: 'sort4',
-    name: 'Furniture Hardwood',
-    quality: 'Premium',
-    length: '100-250cm',
-    knotLimit: '<25cm',
-    defaultVolume: 12
-  },
-  {
-    id: 'sort5',
-    name: 'Economy Utility',
-    quality: 'Economy',
-    length: '150-400cm',
-    knotLimit: '<60cm',
-    defaultVolume: 20
+
+  mounted() {
+    // Set default required date to tomorrow
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    this.orderData.requiredDate = tomorrow.toISOString().split('T')[0]
   }
-])
-
-const standardGrades = ref([
-  {
-    id: 'fas',
-    name: 'FAS (First and Seconds)',
-    clearFaceReq: '83.3%',
-    minBoardSize: '6" x 8\'',
-    defaultVolume: 5
-  },
-  {
-    id: 'fas_one_face',
-    name: 'FAS One Face (F1F)',
-    clearFaceReq: '83.3% one face',
-    minBoardSize: '6" x 8\'',
-    defaultVolume: 6
-  },
-  {
-    id: 'select_better',
-    name: 'Select and Better',
-    clearFaceReq: '83.3%',
-    minBoardSize: '4" x 6\'',
-    defaultVolume: 7
-  },
-  {
-    id: 'no1_common',
-    name: 'No. 1 Common',
-    clearFaceReq: '66.7%',
-    minBoardSize: '3" x 4\'',
-    defaultVolume: 8
-  },
-  {
-    id: 'no2a_common',
-    name: 'No. 2A Common',
-    clearFaceReq: '50%',
-    minBoardSize: '3" x 4\'',
-    defaultVolume: 10
-  },
-  {
-    id: 'no2b_common',
-    name: 'No. 2B Common',
-    clearFaceReq: '25%',
-    minBoardSize: '2" x 4\'',
-    defaultVolume: 12
-  }
-])
-
-const colorSortingOptions = ref([
-  {
-    id: 'heartwood_dominant',
-    name: 'Heartwood Dominant',
-    description: '>70% heartwood showing',
-    defaultVolume: 5
-  },
-  {
-    id: 'uniform_color',
-    name: 'Uniform Color',
-    description: 'Minimal color variation',
-    defaultVolume: 4
-  },
-  {
-    id: 'sapwood_focus',
-    name: 'Light Sapwood Focus',
-    description: 'Emphasize lighter sapwood',
-    defaultVolume: 3
-  },
-  {
-    id: 'balanced_mix',
-    name: 'Balanced Mix',
-    description: 'Even heartwood/sapwood blend',
-    defaultVolume: 6
-  },
-  {
-    id: 'high_variation',
-    name: 'High Variation',
-    description: 'Mixed colors acceptable',
-    defaultVolume: 8
-  }
-])
-
-// Computed properties
-const filteredSorts = computed(() => {
-  if (!searchQuery.value) return availableSorts.value
-  return availableSorts.value.filter(sort => 
-    sort.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
-
-const filteredGrades = computed(() => {
-  if (!searchQuery.value) return standardGrades.value
-  return standardGrades.value.filter(grade => 
-    grade.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
-
-const filteredColorOptions = computed(() => {
-  if (!searchQuery.value) return colorSortingOptions.value
-  return colorSortingOptions.value.filter(option => 
-    option.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    option.description.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
-
-const totalVolume = computed(() => {
-  return orderComponents.value.reduce((sum, component) => sum + (component.volume || 0), 0)
-})
-
-const estimatedDuration = computed(() => {
-  return orderComponents.value.reduce((sum, component) => sum + (component.volume * 0.15), 0)
-})
-
-const complexityPercentage = computed(() => {
-  const baseComplexity = orderComponents.value.length * 10
-  const colorComplexity = orderComponents.value.filter(c => c.type === 'color').length * 20
-  const gradeComplexity = orderComponents.value.filter(c => c.type === 'grade').length * 15
-  return Math.min(baseComplexity + colorComplexity + gradeComplexity, 100)
-})
-
-const complexityLevel = computed(() => {
-  const percentage = complexityPercentage.value
-  if (percentage < 30) return 'Low'
-  if (percentage < 60) return 'Medium'
-  return 'High'
-})
-
-const complexityColor = computed(() => {
-  const level = complexityLevel.value
-  if (level === 'Low') return 'bg-green-500'
-  if (level === 'Medium') return 'bg-yellow-500'
-  return 'bg-red-500'
-})
-
-const complexityTextColor = computed(() => {
-  const level = complexityLevel.value
-  if (level === 'Low') return 'text-green-600'
-  if (level === 'Medium') return 'text-yellow-600'
-  return 'text-red-600'
-})
-
-const hasColorSorting = computed(() => {
-  return orderComponents.value.some(component => component.type === 'color')
-})
-
-const canCreateOrder = computed(() => {
-  return orderComponents.value.length > 0 && orderName.value.trim()
-})
-
-// Methods
-const handleDragStart = (event, type, item) => {
-  event.dataTransfer.setData('application/json', JSON.stringify({ type, item }))
-  event.dataTransfer.effectAllowed = 'copy'
 }
-
-const handleDragEnd = (event) => {
-  event.target.style.opacity = '1'
-}
-
-const handleDragOver = (event) => {
-  event.preventDefault()
-  event.dataTransfer.dropEffect = 'copy'
-  isDragOver.value = true
-}
-
-const handleDrop = (event) => {
-  event.preventDefault()
-  isDragOver.value = false
-  
-  try {
-    const data = JSON.parse(event.dataTransfer.getData('application/json'))
-    addComponent(data.type, data.item)
-  } catch (error) {
-    console.error('Error parsing drop data:', error)
-  }
-}
-
-const addComponent = (type, item) => {
-  const component = {
-    id: item.id,
-    type: type,
-    name: item.name,
-    volume: item.defaultVolume || 5,
-    priority: 'Medium',
-    notes: '',
-    originalData: item
-  }
-  
-  orderComponents.value.push(component)
-}
-
-const removeComponent = (index) => {
-  orderComponents.value.splice(index, 1)
-}
-
-const editComponent = (component, index) => {
-  editingComponent.value = { ...component }
-  editingIndex.value = index
-}
-
-const saveComponentEdit = () => {
-  if (editingIndex.value >= 0) {
-    orderComponents.value[editingIndex.value] = { ...editingComponent.value }
-  }
-  editingComponent.value = null
-  editingIndex.value = -1
-}
-
-const getComponentIcon = (type) => {
-  switch (type) {
-    case 'sort': return '📋'
-    case 'grade': return '⭐'
-    case 'color': return '🎨'
-    default: return '🧩'
-  }
-}
-
-const getComponentClasses = (type) => {
-  switch (type) {
-    case 'sort': return 'border-blue-200 bg-blue-50'
-    case 'grade': return 'border-yellow-200 bg-yellow-50'
-    case 'color': return 'border-purple-200 bg-purple-50'
-    default: return 'border-gray-200 bg-gray-50'
-  }
-}
-
-const saveAsDraft = () => {
-  // Implementation for saving as draft
-  alert('Order saved as draft!')
-}
-
-const saveAsTemplate = () => {
-  // Implementation for saving as template
-  alert('Order saved as template!')
-}
-
-const createOrder = () => {
-  if (orderComponents.value.length === 0) {
-    alert('Please add at least one component to your order.')
-    return
-  }
-  showOrderDetailsModal.value = true
-}
-
-const finalizeOrder = () => {
-  if (!orderDetails.value.clientId || !orderDetails.value.requiredDate) {
-    alert('Please fill in all required fields.')
-    return
-  }
-
-  // Create the order
-  const order = {
-    name: orderName.value,
-    components: orderComponents.value,
-    details: orderDetails.value,
-    totalVolume: totalVolume.value,
-    estimatedDuration: estimatedDuration.value,
-    complexity: complexityLevel.value
-  }
-
-  console.log('Creating order:', order)
-  alert('Order created successfully!')
-  router.push('/orders')
-}
-
-// Initialize with tomorrow's date
-onMounted(() => {
-  const tomorrow = new Date()
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  orderDetails.value.requiredDate = tomorrow.toISOString().split('T')[0]
-})
 </script>
