@@ -145,18 +145,18 @@
             <div class="font-medium text-gray-900 mb-4">Sunday</div>
             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-32 flex flex-col items-center justify-center">
               <div class="text-gray-500 text-sm mb-3">Weekend - No shifts</div>
-              <Button size="sm">
+              <BaseButton size="sm">
                 Add Shift
-              </Button>
+              </BaseButton>
             </div>
           </div>
         </div>
 
         <!-- Central Add Shift Button for Monday -->
         <div class="mt-6 text-center">
-          <Button>
+          <BaseButton>
             Add Shift for Monday
-          </Button>
+          </BaseButton>
         </div>
       </div>
     </div>

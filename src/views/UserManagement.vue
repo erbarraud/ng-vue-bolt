@@ -75,10 +75,10 @@
             <option value="Inactive">Inactive</option>
           </select>
         </div>
-        <Button @click="showAddUserModal = true">
+        <BaseButton @click="showAddUserModal = true">
           <UserPlus class="w-4 h-4 mr-2" />
           Add User
-        </Button>
+        </BaseButton>
       </div>
 
       <!-- Users Table -->
