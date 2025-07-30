@@ -309,22 +309,6 @@
               <h2 class="text-2xl font-semibold text-gray-900 mb-2">Define Sorts</h2>
               <p class="text-gray-600">Add the sorts you want to include in this order</p>
             </div>
-            <div class="flex space-x-3">
-              <button 
-                @click="showExistingSorts = true"
-                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center"
-              >
-                <Package class="w-4 h-4 mr-2" />
-                Select Existing Sort
-              </button>
-              <button 
-                @click="showNewSortForm = true"
-                class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors flex items-center"
-              >
-                <Plus class="w-4 h-4 mr-2" />
-                Create New Sort
-              </button>
-            </div>
           </div>
 
           <!-- Added Sorts List -->
@@ -354,267 +338,150 @@
             </div>
           </div>
 
-          <!-- Empty State -->
-          <div v-else class="text-center py-16">
-            <div class="text-gray-400 mb-4">
-              <Package class="w-16 h-16 mx-auto" />
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No sorts added yet</h3>
-            <p class="text-gray-600 mb-6">Add sorts to define what products you want to create from this order.</p>
-            <div class="flex justify-center space-x-3">
-              <button @click="showExistingSorts = true" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                Select Existing Sort
-              </button>
-              <button @click="showNewSortForm = true" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
-                Create New Sort
-              </button>
-            </div>
-          </div>
-
-          <!-- Existing Sorts Modal -->
-          <div v-if="showExistingSorts" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-              <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-semibold text-gray-900">Select Existing Sort</h3>
-                <button @click="showExistingSorts = false" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                  <X class="w-4 h-4" />
-                </button>
-              </div>
-
-              <!-- Search and Filter -->
-              <div class="flex space-x-4 mb-6">
+          <!-- Combined Sort Creation Interface -->
+          <div class="space-y-6">
+            <!-- Search and Filter Bar -->
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="relative flex-1 max-w-md">
+                <Search class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
                 <input 
                   v-model="sortSearch"
                   type="text" 
-                  placeholder="Search sorts..."
-                  class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Search existing sorts..."
+                  class="pl-10 pr-3 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                 />
-                <select 
-                  v-model="sortFilter"
-                  class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                >
-                  <option value="">All Quality Levels</option>
-                  <option value="Premium">Premium</option>
-                  <option value="Standard">Standard</option>
-                  <option value="Economy">Economy</option>
-                  <option value="Construction">Construction</option>
-                </select>
               </div>
-
-              <!-- Sort Templates Grid -->
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <div v-for="sort in filteredExistingSorts" :key="sort.id"
-                     @click="selectExistingSort(sort)"
-                     :class="[
-                       'p-4 border-2 rounded-lg cursor-pointer transition-all',
-                       selectedExistingSort?.id === sort.id 
-                         ? 'border-emerald-500 bg-emerald-50' 
-                         : 'border-gray-200 hover:border-gray-300'
-                     ]">
-                  <div class="flex items-center justify-between mb-2">
-                    <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
-                    <span :class="[
-                      'px-2 py-1 text-xs rounded-full',
-                      sort.qualityLevel === 'Premium' ? 'bg-purple-100 text-purple-800' :
-                      sort.qualityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
-                      sort.qualityLevel === 'Economy' ? 'bg-green-100 text-green-800' :
-                      'bg-gray-100 text-gray-800'
-                    ]">
-                      {{ sort.qualityLevel }}
-                    </span>
-                  </div>
-                  <p class="text-sm text-gray-600 mb-2">{{ sort.description }}</p>
-                  <div class="text-xs text-gray-500 space-y-1">
-                    <div>Dimensions: {{ sort.dimensions }}</div>
-                    <div>Defect Tolerance: {{ sort.defectTolerance }}%</div>
-                    <div>Moisture: {{ sort.moistureContent }}%</div>
-                  </div>
-                  <div v-if="selectedExistingSort?.id === sort.id" class="mt-2 flex items-center text-emerald-600">
-                    <CheckCircle class="w-4 h-4 mr-1" />
-                    Selected
-                  </div>
-                </div>
-              </div>
-
-              <!-- Configuration for Selected Sort -->
-              <div v-if="selectedExistingSort" class="border-t pt-6">
-                <h4 class="font-medium text-gray-900 mb-4">Configure "{{ selectedExistingSort.name }}"</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
-                    <div class="flex space-x-2">
-                      <input 
-                        v-model="existingSortConfig.targetVolume"
-                        type="number" 
-                        class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                        placeholder="0"
-                      />
-                      <select 
-                        v-model="existingSortConfig.volumeUnit"
-                        class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      >
-                        <option value="m3">m³</option>
-                        <option value="bf">Board Feet</option>
-                        <option value="pieces">Pieces</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
-                    <input 
-                      v-model="existingSortConfig.specialRequirements"
-                      type="text" 
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      placeholder="Any special requirements..."
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Modal Actions -->
-              <div class="flex justify-end space-x-3 mt-6">
-                <button 
-                  @click="showExistingSorts = false"
-                  class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button 
-                  @click="addExistingSort"
-                  :disabled="!selectedExistingSort || !existingSortConfig.targetVolume"
-                  :class="[
-                    'px-4 py-2 rounded-lg transition-colors',
-                    (!selectedExistingSort || !existingSortConfig.targetVolume)
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-emerald-600 text-white hover:bg-emerald-700'
-                  ]"
-                >
-                  Add Sort to Order
-                </button>
-              </div>
+              <select 
+                v-model="sortFilter"
+                class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              >
+                <option value="">All Quality Levels</option>
+                <option value="Premium">Premium</option>
+                <option value="Standard">Standard</option>
+                <option value="Economy">Economy</option>
+                <option value="Construction">Construction</option>
+              </select>
+              <button 
+                @click="showCreateNew = !showCreateNew"
+                :class="[
+                  'px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center',
+                  showCreateNew 
+                    ? 'bg-emerald-600 text-white hover:bg-emerald-700' 
+                    : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                ]"
+              >
+                <Plus class="w-4 h-4 mr-2" />
+                {{ showCreateNew ? 'Hide Form' : 'Create New' }}
+              </button>
             </div>
-            </div>
-          </div>
 
-          <!-- New Sort Form Modal -->
-          <div v-if="showNewSortForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-              <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-semibold text-gray-900">Create New Sort</h3>
-                <button @click="showNewSortForm = false" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                  <X class="w-4 h-4" />
-                </button>
-              </div>
-
-              <div class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Sort Name *</label>
+            <!-- Create New Sort Form (Collapsible) -->
+            <div v-if="showCreateNew" class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Create New Sort</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Sort Name *</label>
+                  <input 
+                    v-model="newSort.name"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="Enter sort name"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Quality Level</label>
+                  <select 
+                    v-model="newSort.qualityLevel"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  >
+                    <option value="Premium">Premium</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Construction">Construction</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
+                  <div class="flex space-x-2">
                     <input 
-                      v-model="newSort.name"
-                      type="text" 
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      placeholder="Enter sort name"
+                      v-model="newSort.targetVolume"
+                      type="number" 
+                      class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="0"
                     />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Quality Level</label>
                     <select 
-                      v-model="newSort.qualityLevel"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      v-model="newSort.volumeUnit"
+                      class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                     >
-                      <option value="Premium">Premium</option>
-                      <option value="Standard">Standard</option>
-                      <option value="Economy">Economy</option>
-                      <option value="Construction">Construction</option>
+                      <option value="m3">m³</option>
+                      <option value="bf">Board Feet</option>
+                      <option value="pieces">Pieces</option>
                     </select>
                   </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
-                    <div class="flex space-x-2">
-                      <input 
-                        v-model="newSort.targetVolume"
-                        type="number" 
-                        class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                        placeholder="0"
-                      />
-                      <select 
-                        v-model="newSort.volumeUnit"
-                        class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      >
-                        <option value="m3">m³</option>
-                        <option value="bf">Board Feet</option>
-                        <option value="pieces">Pieces</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Defect Tolerance (%)</label>
-                    <input 
-                      v-model="newSort.defectTolerance"
-                      type="number" 
-                      min="0" 
-                      max="100"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      placeholder="5"
-                    />
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Dimensions</label>
-                    <input 
-                      v-model="newSort.dimensions"
-                      type="text" 
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      placeholder="e.g., 200-400cm × 15-25cm × 40mm"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Moisture Content (%)</label>
-                    <input 
-                      v-model="newSort.moistureContent"
-                      type="number" 
-                      min="0" 
-                      max="100"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      placeholder="12"
-                    />
-                  </div>
-                </div>
-
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                  <textarea 
-                    v-model="newSort.description"
-                    rows="3"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="Brief description of this sort..."
-                  ></textarea>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Defect Tolerance (%)</label>
                   <input 
-                    v-model="newSort.specialRequirements"
-                    type="text" 
+                    v-model="newSort.defectTolerance"
+                    type="number" 
+                    min="0" 
+                    max="100"
                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="Any special requirements..."
+                    placeholder="5"
                   />
                 </div>
               </div>
 
-              <!-- Modal Actions -->
-              <div class="flex justify-end space-x-3 mt-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Dimensions</label>
+                  <input 
+                    v-model="newSort.dimensions"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="e.g., 200-400cm × 15-25cm × 40mm"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Moisture Content (%)</label>
+                  <input 
+                    v-model="newSort.moistureContent"
+                    type="number" 
+                    min="0" 
+                    max="100"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="12"
+                  />
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea 
+                  v-model="newSort.description"
+                  rows="2"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Brief description of this sort..."
+                ></textarea>
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                <input 
+                  v-model="newSort.specialRequirements"
+                  type="text" 
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Any special requirements..."
+                />
+              </div>
+
+              <div class="flex justify-end space-x-3">
                 <button 
-                  @click="showNewSortForm = false"
+                  @click="resetNewSort"
                   class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  Cancel
+                  Reset
                 </button>
                 <button 
                   @click="addNewSort"
@@ -628,8 +495,117 @@
                 >
                   Add Sort to Order
                 </button>
+              </div>
+            </div>
+
+            <!-- Existing Sort Templates -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                {{ sortSearch || sortFilter ? 'Filtered' : 'Available' }} Sort Templates
+              </h3>
+              
+              <div v-if="filteredExistingSorts.length === 0" class="text-center py-8 text-gray-500">
+                <Package class="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                <p>No sorts match your search criteria</p>
+              </div>
+              
+              <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div v-for="sort in filteredExistingSorts" :key="sort.id"
+                     class="p-4 border border-gray-200 rounded-lg hover:border-emerald-300 hover:shadow-md transition-all cursor-pointer"
+                     @click="quickAddSort(sort)">
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-medium text-gray-900">{{ sort.name }}</h4>
+                    <span :class="[
+                      'px-2 py-1 text-xs rounded-full',
+                      sort.qualityLevel === 'Premium' ? 'bg-purple-100 text-purple-800' :
+                      sort.qualityLevel === 'Standard' ? 'bg-blue-100 text-blue-800' :
+                      sort.qualityLevel === 'Economy' ? 'bg-green-100 text-green-800' :
+                      'bg-gray-100 text-gray-800'
+                    ]">
+                      {{ sort.qualityLevel }}
+                    </span>
+                  </div>
+                  <p class="text-sm text-gray-600 mb-3">{{ sort.description }}</p>
+                  <div class="text-xs text-gray-500 space-y-1 mb-3">
+                    <div>Dimensions: {{ sort.dimensions }}</div>
+                    <div>Defect Tolerance: {{ sort.defectTolerance }}%</div>
+                    <div>Moisture: {{ sort.moistureContent }}%</div>
+                  </div>
+                  <button 
+                    @click.stop="configureSort(sort)"
+                    class="w-full px-3 py-1.5 bg-emerald-600 text-white text-sm rounded hover:bg-emerald-700 transition-colors"
+                  >
+                    Configure & Add
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Sort Configuration Modal -->
+          <div v-if="showSortConfig" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Configure "{{ selectedSort.name }}"</h3>
+                <button @click="showSortConfig = false" class="p-1 text-gray-400 hover:text-gray-600">
+                  <X class="w-4 h-4" />
+                </button>
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Volume *</label>
+                  <div class="flex space-x-2">
+                    <input 
+                      v-model="sortConfig.targetVolume"
+                      type="number" 
+                      class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      placeholder="0"
+                    />
+                    <select 
+                      v-model="sortConfig.volumeUnit"
+                      class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    >
+                      <option value="m3">m³</option>
+                      <option value="bf">Board Feet</option>
+                      <option value="pieces">Pieces</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Special Requirements</label>
+                  <input 
+                    v-model="sortConfig.specialRequirements"
+                    type="text" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="Any special requirements..."
+                  />
+                </div>
+              </div>
+
+              <div class="flex justify-end space-x-3 mt-6">
+                <button 
+                  @click="showSortConfig = false"
+                  class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  @click="addConfiguredSort"
+                  :disabled="!sortConfig.targetVolume"
+                  :class="[
+                    'px-4 py-2 rounded-lg transition-colors',
+                    !sortConfig.targetVolume
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                  ]"
+                >
+                  Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- Optional Grade Selection Section -->
@@ -757,10 +733,10 @@ export default {
       },
 
       // Sort management
-      showExistingSorts: false,
-      showNewSortForm: false,
-      selectedExistingSort: null,
-      existingSortConfig: {
+      showCreateNew: false,
+      showSortConfig: false,
+      selectedSort: null,
+      sortConfig: {
         targetVolume: '',
         volumeUnit: 'm3',
         specialRequirements: ''
@@ -994,28 +970,40 @@ export default {
       return client ? client.name : ''
     },
 
-    selectExistingSort(sort) {
-      this.selectedExistingSort = sort
-      this.existingSortConfig = {
+    quickAddSort(sort) {
+      // Add sort with default volume
+      const sortToAdd = {
+        ...sort,
+        targetVolume: '1000',
+        volumeUnit: 'bf',
+        specialRequirements: ''
+      }
+      this.orderData.sorts.push(sortToAdd)
+    },
+
+    configureSort(sort) {
+      this.selectedSort = sort
+      this.sortConfig = {
         targetVolume: '',
         volumeUnit: 'm3',
         specialRequirements: ''
       }
+      this.showSortConfig = true
     },
 
-    addExistingSort() {
-      if (this.selectedExistingSort && this.existingSortConfig.targetVolume) {
+    addConfiguredSort() {
+      if (this.selectedSort && this.sortConfig.targetVolume) {
         const sortToAdd = {
-          ...this.selectedExistingSort,
-          targetVolume: this.existingSortConfig.targetVolume,
-          volumeUnit: this.existingSortConfig.volumeUnit,
-          specialRequirements: this.existingSortConfig.specialRequirements
+          ...this.selectedSort,
+          targetVolume: this.sortConfig.targetVolume,
+          volumeUnit: this.sortConfig.volumeUnit,
+          specialRequirements: this.sortConfig.specialRequirements
         }
         
         this.orderData.sorts.push(sortToAdd)
-        this.showExistingSorts = false
-        this.selectedExistingSort = null
-        this.existingSortConfig = {
+        this.showSortConfig = false
+        this.selectedSort = null
+        this.sortConfig = {
           targetVolume: '',
           volumeUnit: 'm3',
           specialRequirements: ''
@@ -1030,7 +1018,11 @@ export default {
           id: 'custom_' + Date.now()
         })
         
-        this.showNewSortForm = false
+        this.resetNewSort()
+      }
+    },
+
+    resetNewSort() {
         this.newSort = {
           name: '',
           qualityLevel: 'Standard',
@@ -1042,7 +1034,6 @@ export default {
           description: '',
           specialRequirements: ''
         }
-      }
     },
 
     removeSort(index) {
