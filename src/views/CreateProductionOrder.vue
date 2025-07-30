@@ -716,18 +716,11 @@ export default {
         volumeUnit: 'm3',
         specialRequirements: '',
         geometry: {
-          width: '',
-          widthTolerance: {
-            enabled: false,
-            value: ''
-          },
+          widthMin: '',
+          widthMax: '',
           lengthMin: '',
           lengthMax: '',
-          thickness: '',
-          thicknessTolerance: {
-            enabled: false,
-            value: ''
-          }
+          thickness: ''
         },
         grades: [],
         colorSorting: {
@@ -763,7 +756,7 @@ export default {
       return this.newSort.name && 
              this.newSort.targetVolume && 
              this.newSort.grades.length > 0 &&
-             (this.newSort.geometry.widthMin || this.newSort.geometry.lengthMin || this.newSort.geometry.thickness)
+             (this.newSort.geometry.width || this.newSort.geometry.lengthMin || this.newSort.geometry.thickness)
     }
   },
 
@@ -806,18 +799,11 @@ export default {
         volumeUnit: 'm3',
         specialRequirements: '',
         geometry: {
-          width: '',
-          widthTolerance: {
-            enabled: false,
-            value: ''
-          },
+          widthMin: '',
+          widthMax: '',
           lengthMin: '',
           lengthMax: '',
-          thickness: '',
-          thicknessTolerance: {
-            enabled: false,
-            value: ''
-          }
+          thickness: ''
         },
         grades: [],
         colorSorting: {
