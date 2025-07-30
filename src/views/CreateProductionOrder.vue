@@ -730,8 +730,11 @@ export default {
             enabled: false,
             value: ''
           },
-          lengthMin: '',
-          lengthMax: '',
+          length: '',
+          lengthTolerance: {
+            enabled: false,
+            value: ''
+          },
           thickness: '',
           thicknessTolerance: {
             enabled: false,
@@ -820,8 +823,11 @@ export default {
             enabled: false,
             value: ''
           },
-          lengthMin: '',
-          lengthMax: '',
+          length: '',
+          lengthTolerance: {
+            enabled: false,
+            value: ''
+          },
           thickness: '',
           thicknessTolerance: {
             enabled: false,
