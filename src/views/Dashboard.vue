@@ -323,8 +323,8 @@
             </div>
           </div>
         </div>
-        </CardContent>
-      </Card>
+        </BaseCardContent>
+      </BaseCard>
 
       <!-- System Alerts -->
       <BaseCard>
@@ -387,7 +387,6 @@ import BaseCard from '@/components/ui/BaseCard.vue'
 import BaseCardContent from '@/components/ui/BaseCardContent.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
-import { useAsyncState } from '@/composables/useAsyncState.js'
 
 // Register Chart.js components
 ChartJS.register(

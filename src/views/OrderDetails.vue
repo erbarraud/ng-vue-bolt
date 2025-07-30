@@ -31,7 +31,7 @@
         <AlertCircle class="w-16 h-16 text-red-500 mx-auto mb-4" />
         <h2 class="text-xl font-semibold text-gray-900 mb-2">Order Not Found</h2>
         <p class="text-gray-600 mb-4">{{ error }}</p>
-        <Button @click="$router.push('/orders')">
+        <BaseButton @click="$router.push('/orders')">
           <ArrowLeft class="w-4 h-4 mr-2" />
           Back to Orders
         </BaseButton>
@@ -53,28 +53,28 @@
           </div>
         </div>
         <div class="flex items-center space-x-3">
-          <Badge :variant="getStatusVariant(order.status)" class="text-sm px-3 py-1">
+          <BaseBadge :variant="getStatusVariant(order.status)" class="text-sm px-3 py-1">
             {{ order.status }}
-          </Badge>
-          <Button variant="outline">
+          </BaseBadge>
+          <BaseButton variant="outline">
             <Download class="w-4 h-4 mr-2" />
             Export Report
-          </Button>
-          <Button v-if="order.status === 'Running'" variant="destructive">
+          </BaseButton>
+          <BaseButton v-if="order.status === 'Running'" variant="destructive">
             <Square class="w-4 h-4 mr-2" />
             Stop Order
-          </Button>
-          <Button v-else-if="order.status === 'Scheduled'">
+          </BaseButton>
+          <BaseButton v-else-if="order.status === 'Scheduled'">
             <Play class="w-4 h-4 mr-2" />
             Start Order
-          </Button>
+          </BaseButton>
         </div>
       </div>
 
       <!-- Order Overview Cards -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <Card>
-          <CardContent class="p-6">
+        <BaseCard>
+          <BaseCardContent class="p-6">
             <div class="flex items-center">
               <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
                 <Package class="w-5 h-5 text-emerald-600" />
@@ -84,11 +84,11 @@
                 <div class="text-2xl font-bold text-gray-900">{{ order.volume }}</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </BaseCardContent>
+        </BaseCard>
 
-        <Card>
-          <CardContent class="p-6">
+        <BaseCard>
+          <BaseCardContent class="p-6">
             <div class="flex items-center">
               <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                 <BarChart3 class="w-5 h-5 text-blue-600" />
@@ -98,11 +98,11 @@
                 <div class="text-2xl font-bold text-gray-900">{{ order.boardsProcessed || 0 }}</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </BaseCardContent>
+        </BaseCard>
 
-        <Card>
-          <CardContent class="p-6">
+        <BaseCard>
+          <BaseCardContent class="p-6">
             <div class="flex items-center">
               <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                 <DollarSign class="w-5 h-5 text-green-600" />
@@ -112,11 +112,11 @@
                 <div class="text-2xl font-bold text-gray-900">${{ order.totalValue || '0' }}</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </BaseCardContent>
+        </BaseCard>
 
-        <Card>
-          <CardContent class="p-6">
+        <BaseCard>
+          <BaseCardContent class="p-6">
             <div class="flex items-center">
               <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                 <Target class="w-5 h-5 text-purple-600" />
@@ -126,8 +126,8 @@
                 <div class="text-2xl font-bold text-gray-900">{{ order.accuracyRate || 'N/A' }}</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </BaseCardContent>
+        </BaseCard>
       </div>
 
       <!-- Main Content Grid -->
@@ -135,8 +135,8 @@
         <!-- Left Column - Order Information -->
         <div class="lg:col-span-2 space-y-8">
           <!-- Basic Information -->
-          <Card>
-            <CardContent class="p-6">
+          <BaseCard>
+            <BaseCardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Order Information</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -164,12 +164,12 @@
                   <div class="font-medium text-gray-900">{{ order.operator || 'Not assigned' }}</div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </BaseCardContent>
+          </BaseCard>
 
           <!-- Grade Distribution -->
-          <Card>
-            <CardContent class="p-6">
+          <BaseCard>
+            <BaseCardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Grade Distribution</h3>
               <div class="space-y-4">
                 <div v-for="grade in order.gradeDistribution" :key="grade.name" class="flex items-center justify-between">
@@ -183,12 +183,12 @@
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </BaseCardContent>
+          </BaseCard>
 
           <!-- Recent Activity -->
-          <Card>
-            <CardContent class="p-6">
+          <BaseCard>
+            <BaseCardContent class="p-6">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Recent Activity</h3>
               <div class="space-y-4">
                 <div v-for="activity in order.recentActivity" :key="activity.id" class="flex items-start space-x-3">
@@ -202,8 +202,8 @@
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </BaseCardContent>
+          </BaseCard>
         </div>
 
         <!-- Right Column - Progress & Actions -->
@@ -301,10 +301,10 @@ import {
   DollarSign, Target, Eye, FileText, Settings, Copy, Save,
   CheckCircle, Clock, AlertTriangle
 } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
-import Card from '@/components/ui/card.vue'
-import CardContent from '@/components/ui/card-content.vue'
-import Badge from '@/components/ui/badge.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import BaseCard from '@/components/ui/BaseCard.vue'
+import BaseCardContent from '@/components/ui/BaseCardContent.vue'
+import BaseBadge from '@/components/ui/BaseBadge.vue'
 import LoadingSkeleton from '@/components/ui/loading-skeleton.vue'
 
 const route = useRoute()
