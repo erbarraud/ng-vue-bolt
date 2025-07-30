@@ -307,8 +307,155 @@
             </div>
           </div>
 
+          <!-- Sort Selection Mode -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Add Sort</h3>
+            <div class="flex items-center space-x-4 mb-6">
+              <button
+                @click="sortMode = 'existing'"
+                :class="[
+                  'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                  sortMode === 'existing'
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ]"
+              >
+                <Package class="w-4 h-4 mr-2 inline" />
+                Select Existing Sort
+              </button>
+              <button
+                @click="sortMode = 'new'"
+                :class="[
+                  'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                  sortMode === 'new'
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ]"
+              >
+                <Plus class="w-4 h-4 mr-2 inline" />
+                Create New Sort
+              </button>
+            </div>
+          </div>
+
+          <!-- Existing Sorts Selection -->
+          <div v-if="sortMode === 'existing'" class="border border-gray-200 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Select from Existing Sorts</h3>
+            
+            <!-- Search and Filter -->
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="flex-1 relative">
+                <Search class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                <input
+                  v-model="existingSortSearch"
+                  type="text"
+                  placeholder="Search existing sorts..."
+                  class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                />
+              </div>
+              <select
+                v-model="existingSortFilter"
+                class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              >
+                <option value="">All Quality Levels</option>
+                <option value="premium">Premium</option>
+                <option value="standard">Standard</option>
+                <option value="economy">Economy</option>
+                <option value="construction">Construction</option>
+              </select>
+            </div>
+
+            <!-- Existing Sorts Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div
+                v-for="sort in filteredExistingSorts"
+                :key="sort.id"
+                @click="selectExistingSort(sort)"
+                :class="[
+                  'border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 hover:shadow-md',
+                  selectedExistingSort?.id === sort.id
+                    ? 'border-emerald-500 bg-emerald-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                ]"
+              >
+                <div class="flex items-start justify-between mb-3">
+                  <h4 class="text-lg font-semibold text-gray-900">{{ sort.name }}</h4>
+                  <div v-if="selectedExistingSort?.id === sort.id" class="text-emerald-600">
+                    <CheckCircle class="w-5 h-5" />
+                  </div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600">
+                  <div class="flex justify-between">
+                    <span>Quality:</span>
+                    <span class="font-medium capitalize">{{ sort.qualityLevel }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Dimensions:</span>
+                    <span class="font-medium">{{ sort.dimensions }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Defect Tolerance:</span>
+                    <span class="font-medium">{{ sort.defectTolerance }}%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Moisture:</span>
+                    <span class="font-medium">{{ sort.moistureContent }}</span>
+                  </div>
+                </div>
+                <div v-if="sort.description" class="mt-3 text-xs text-gray-500">
+                  {{ sort.description }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Volume Input for Selected Sort -->
+            <div v-if="selectedExistingSort" class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+              <h4 class="font-medium text-emerald-900 mb-3">Configure Selected Sort: {{ selectedExistingSort.name }}</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Target Volume <span class="text-red-500">*</span>
+                  </label>
+                  <div class="flex space-x-2">
+                    <input
+                      v-model="existingSortVolume"
+                      type="number"
+                      placeholder="Volume"
+                      class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    />
+                    <select
+                      v-model="existingSortUnit"
+                      class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    >
+                      <option value="bf">board feet</option>
+                      <option value="m3">m³</option>
+                      <option value="pieces">pieces</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Special Requirements</label>
+                  <textarea
+                    v-model="existingSortRequirements"
+                    rows="3"
+                    placeholder="Any specific requirements for this sort..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mt-4">
+                <Button
+                  @click="addExistingSort"
+                  :disabled="!existingSortVolume"
+                  class="px-6"
+                >
+                  Add Selected Sort
+                </Button>
+              </div>
+            </div>
+          </div>
           <!-- Add New Sort Form -->
-          <div class="border border-gray-200 rounded-lg p-6">
+          <div v-if="sortMode === 'new'" class="border border-gray-200 rounded-lg p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">
               {{ editingSort !== null ? 'Edit Sort' : 'Add New Sort' }}
             </h3>
@@ -661,10 +808,17 @@ const showSuccessModal = ref(false)
 const generatedOrderId = ref('')
 const useGradeLibrary = ref(false)
 const editingSort = ref(null)
+const sortMode = ref('existing') // 'existing' or 'new'
+const selectedExistingSort = ref(null)
+const existingSortVolume = ref('')
+const existingSortUnit = ref('bf')
+const existingSortRequirements = ref('')
 
 // Search and filter
 const gradeSearchQuery = ref('')
 const gradeTypeFilter = ref('')
+const existingSortSearch = ref('')
+const existingSortFilter = ref('')
 
 // Form data
 const orderForm = ref({
@@ -697,6 +851,82 @@ const currentSort = ref({
 
 // Selected grades
 const selectedGrades = ref([])
+
+// Sample existing sorts data
+const existingSorts = ref([
+  {
+    id: 'sort-premium-flooring',
+    name: 'Premium Flooring Grade',
+    qualityLevel: 'premium',
+    dimensions: '2" x 4" x 8-16\'',
+    defectTolerance: 3,
+    moistureContent: 'Kiln Dried (KD)',
+    description: 'High-quality flooring grade with minimal defects, perfect for premium residential applications.'
+  },
+  {
+    id: 'sort-cabinet-grade',
+    name: 'Cabinet Grade Select',
+    qualityLevel: 'premium',
+    dimensions: '3/4" x 6" x 8-12\'',
+    defectTolerance: 2,
+    moistureContent: 'Kiln Dried (KD)',
+    description: 'Premium cabinet-grade lumber with tight grain and minimal color variation.'
+  },
+  {
+    id: 'sort-construction-standard',
+    name: 'Standard Construction',
+    qualityLevel: 'standard',
+    dimensions: '2" x 8" x 8-20\'',
+    defectTolerance: 8,
+    moistureContent: 'Air Dried (AD)',
+    description: 'Reliable construction-grade lumber suitable for framing and structural applications.'
+  },
+  {
+    id: 'sort-furniture-hardwood',
+    name: 'Furniture Hardwood',
+    qualityLevel: 'premium',
+    dimensions: '1" x 4-8" x 6-12\'',
+    defectTolerance: 4,
+    moistureContent: 'Kiln Dried (KD)',
+    description: 'Premium hardwood suitable for fine furniture making with excellent grain patterns.'
+  },
+  {
+    id: 'sort-economy-utility',
+    name: 'Economy Utility Grade',
+    qualityLevel: 'economy',
+    dimensions: '2" x 4" x 8-12\'',
+    defectTolerance: 15,
+    moistureContent: 'Green',
+    description: 'Cost-effective utility grade for non-structural applications and temporary construction.'
+  },
+  {
+    id: 'sort-millwork-select',
+    name: 'Millwork Select',
+    qualityLevel: 'premium',
+    dimensions: '1" x 2-6" x 8-16\'',
+    defectTolerance: 2,
+    moistureContent: 'Kiln Dried (KD)',
+    description: 'High-grade lumber specifically selected for millwork and trim applications.'
+  },
+  {
+    id: 'sort-pallet-grade',
+    name: 'Pallet Grade',
+    qualityLevel: 'construction',
+    dimensions: '1" x 4" x 4-8\'',
+    defectTolerance: 20,
+    moistureContent: 'Air Dried (AD)',
+    description: 'Industrial grade lumber suitable for pallet manufacturing and shipping applications.'
+  },
+  {
+    id: 'sort-decking-treated',
+    name: 'Pressure Treated Decking',
+    qualityLevel: 'standard',
+    dimensions: '5/4" x 6" x 8-16\'',
+    defectTolerance: 10,
+    moistureContent: 'Pressure Treated',
+    description: 'Weather-resistant decking lumber treated for outdoor applications.'
+  }
+])
 
 // Wizard steps
 const steps = ref([
@@ -820,6 +1050,18 @@ const filteredGrades = computed(() => {
   })
 })
 
+const filteredExistingSorts = computed(() => {
+  return existingSorts.value.filter(sort => {
+    const matchesSearch = !existingSortSearch.value || 
+      sort.name.toLowerCase().includes(existingSortSearch.value.toLowerCase()) ||
+      sort.description.toLowerCase().includes(existingSortSearch.value.toLowerCase())
+    
+    const matchesFilter = !existingSortFilter.value || sort.qualityLevel === existingSortFilter.value
+    
+    return matchesSearch && matchesFilter
+  })
+})
+
 // Methods
 const nextStep = () => {
   if (currentStep.value < 3) {
@@ -877,6 +1119,42 @@ const cancelEdit = () => {
     moistureContent: 'kiln-dried',
     specialRequirements: ''
   }
+}
+
+const selectExistingSort = (sort) => {
+  selectedExistingSort.value = selectedExistingSort.value?.id === sort.id ? null : sort
+  // Reset volume inputs when selecting a different sort
+  if (selectedExistingSort.value) {
+    existingSortVolume.value = ''
+    existingSortUnit.value = 'bf'
+    existingSortRequirements.value = ''
+  }
+}
+
+const addExistingSort = () => {
+  if (!selectedExistingSort.value || !existingSortVolume.value) return
+  
+  const newSort = {
+    name: selectedExistingSort.value.name,
+    targetVolume: existingSortVolume.value,
+    unit: existingSortUnit.value,
+    qualityLevel: selectedExistingSort.value.qualityLevel,
+    dimensions: selectedExistingSort.value.dimensions,
+    defectTolerance: selectedExistingSort.value.defectTolerance,
+    moistureContent: selectedExistingSort.value.moistureContent,
+    specialRequirements: existingSortRequirements.value,
+    sourceId: selectedExistingSort.value.id // Track that this came from existing sort
+  }
+  
+  orderForm.value.sorts.push(newSort)
+  
+  // Reset selection
+  selectedExistingSort.value = null
+  existingSortVolume.value = ''
+  existingSortUnit.value = 'bf'
+  existingSortRequirements.value = ''
+  existingSortSearch.value = ''
+  existingSortFilter.value = ''
 }
 
 const toggleGrade = (grade) => {
