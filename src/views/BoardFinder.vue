@@ -25,7 +25,7 @@
             <span v-if="hasActiveFilters" class="ml-2 px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs">
               Active
             </span>
-          </Button>
+          </BaseButton>
         </div>
         <div class="flex items-center space-x-2">
           <span class="text-sm text-gray-600">Show</span>
@@ -46,10 +46,10 @@
           <Button variant="outline" size="sm" @click="clearAllFilters" v-if="hasActiveFilters">
             <X class="w-4 h-4 mr-1" />
             Clear All
-          </Button>
+          </BaseButton>
           <Button variant="ghost" size="sm" @click="showFilters = false">
             <X class="w-4 h-4" />
-          </Button>
+          </BaseButton>
         </div>
       </div>
 
@@ -544,7 +544,7 @@ import {
   Clock, ChevronLeft, ChevronRight, X, EyeOff, BookOpen, CheckCircle, XCircle, FileText,
   Layers, DollarSign
 } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
