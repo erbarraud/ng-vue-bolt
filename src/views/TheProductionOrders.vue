@@ -35,7 +35,7 @@
                 </router-link> | Customer: {{ runningOrder.customer }}
               </div>
             </div>
-            <BaseBadge variant="secondary" class="border">{{ runningOrder.status }}</BaseBadge>
+            <BaseBadge variant="secondary" class="border">Running</BaseBadge>
           </div>
 
           <div class="grid grid-cols-3 gap-8 mb-8">
@@ -75,7 +75,7 @@
           </div>
 
           <div class="flex justify-end">
-            <BaseButton variant="outline" @click="stopOrder">
+            <BaseButton variant="outline">
               <Power class="w-4 h-4 mr-2" />
               Stop & Complete
             </BaseButton>
@@ -88,7 +88,7 @@
     <div>
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-900">Upcoming Orders ({{ upcomingOrders.length }})</h2>
-        <BaseButton variant="outline" as-child>
+        <BaseButton variant="outline" asChild>
           <router-link to="/orders/all">Show All</router-link>
         </BaseButton>
       </div>
@@ -201,10 +201,10 @@ import {
   Plus, Zap, TreePine, Clock, User, Power, BarChart3, Timer, Menu, Edit, Play,
   Eye, Package, Settings
 } from 'lucide-vue-next'
-
-// Components
 import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseCard from '@/components/ui/BaseCard.vue'
+import BaseCardContent from '@/components/ui/BaseCardContent.vue'
+import BaseBadge from '@/components/ui/BaseBadge.vue'
 import BaseCardContent from '@/components/ui/BaseCardContent.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import ThePageHeader from '@/components/common/ThePageHeader.vue'

@@ -10,7 +10,7 @@
         <div class="text-right">
           <div class="text-sm text-gray-600">Order: B-4873 - Red Oak 4/4 Premium</div>
         </div>
-        <Button variant="outline" class="flex items-center">
+        <BaseButton variant="outline" class="flex items-center">
           <List class="w-4 h-4 mr-2" />
           View All Boards in This Order
         </BaseButton>
@@ -501,7 +501,7 @@ import {
   ZoomIn, EyeOff, CheckCircle, XCircle, FileText, BookOpen, List,
   Search, RotateCcw, ArrowLeftRight, Box, AlertTriangle, TrendingUp
 } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const route = useRoute()
 
