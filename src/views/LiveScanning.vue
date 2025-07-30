@@ -11,15 +11,15 @@
       <div class="bg-white rounded-lg p-6 mb-8 shadow border">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-4">
-            <BaseButton variant="secondary">
+            <Button variant="secondary">
               <Pause v-if="isScanning" class="w-4 h-4 mr-2" />
               <Play v-else class="w-4 h-4 mr-2" />
               {{ isScanning ? 'Pause' : 'Resume' }}
-            </BaseButton>
-            <BaseButton>
+            </Button>
+            <Button>
               <RefreshCw class="w-4 h-4 mr-2" />
               Refresh
-            </BaseButton>
+            </Button>
             <div class="flex items-center space-x-2">
               <span class="text-gray-600 text-sm">Refresh Rate:</span>
               <select 
@@ -142,9 +142,9 @@
               </div>
             </div>
 
-            <BaseButton class="w-full mt-4">
+            <Button class="w-full mt-4">
               View All Recent Boards
-            </BaseButton>
+            </Button>
           </div>
         </div>
       </div>
@@ -190,7 +190,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Pause, Play, RefreshCw, Maximize } from 'lucide-vue-next'
-import Button from '@/components/ui/button.vue'
+import Button from '@/components/ui/BaseButton.vue'
 
 // Reactive state
 const isScanning = ref(true)

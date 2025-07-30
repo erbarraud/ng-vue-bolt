@@ -46,10 +46,10 @@
           <Button variant="outline" size="sm" @click="clearAllFilters" v-if="hasActiveFilters">
             <X class="w-4 h-4 mr-1" />
             Clear All
-          </BaseButton>
+          </Button>
           <Button variant="ghost" size="sm" @click="showFilters = false">
             <X class="w-4 h-4" />
-          </BaseButton>
+          </Button>
         </div>
       </div>
 
@@ -544,6 +544,7 @@ import {
   Clock, ChevronLeft, ChevronRight, X, EyeOff, BookOpen, CheckCircle, XCircle, FileText,
   Layers, DollarSign
 } from 'lucide-vue-next'
+import Button from '@/components/ui/BaseButton.vue'
 
 const searchQuery = ref('')
 const selectedBoard = ref('BRD-4625')
