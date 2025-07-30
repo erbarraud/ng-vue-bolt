@@ -430,21 +430,30 @@
 
                   <!-- Length Range -->
                   <div>
-                    <label class="block text-sm font-medium text-blue-800 mb-3">Length Range (feet)</label>
-                    <div class="flex space-x-3">
+                    <label class="block text-sm font-medium text-blue-800 mb-3">Length (feet)</label>
+                    <div class="space-y-2">
                       <input 
-                        v-model="newSort.geometry.lengthMin"
+                        v-model="newSort.geometry.length"
                         type="number" 
                         step="0.5"
-                        placeholder="Min"
-                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
+                        placeholder="Length"
+                        class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
+                      <div class="flex items-center space-x-2">
+                        <input 
+                          type="checkbox" 
+                          v-model="newSort.geometry.lengthTolerance.enabled"
+                          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-blue-300 rounded"
+                        />
+                        <label class="text-sm text-blue-700">Add tolerance</label>
+                      </div>
                       <input 
-                        v-model="newSort.geometry.lengthMax"
+                        v-if="newSort.geometry.lengthTolerance.enabled"
+                        v-model="newSort.geometry.lengthTolerance.value"
                         type="number" 
                         step="0.5"
-                        placeholder="Max"
-                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
+                        placeholder="± Tolerance (feet)"
+                        class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
                     </div>
                   </div>
