@@ -70,36 +70,6 @@
               </div>
             </button>
           </li>
-
-          <li>
-            <button
-              @click="activeSection = 'grades'"
-              :class="[
-                'w-full flex items-center px-4 py-3 text-left rounded-lg transition-all duration-200',
-                activeSection === 'grades'
-                  ? 'bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500'
-                  : 'text-gray-700 hover:bg-gray-100'
-              ]"
-            >
-              <div class="flex items-center">
-                <div :class="[
-                  'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium mr-3',
-                  isStepComplete('grades')
-                    ? 'bg-emerald-500 text-white'
-                    : activeSection === 'grades'
-                    ? 'bg-emerald-200 text-emerald-700'
-                    : 'bg-gray-200 text-gray-600'
-                ]">
-                  <CheckCircle v-if="isStepComplete('grades')" class="w-4 h-4" />
-                  <span v-else>3</span>
-                </div>
-                <div>
-                  <div class="font-medium">Optional Grades</div>
-                  <div class="text-xs text-gray-500">Grade library selection</div>
-                </div>
-              </div>
-            </button>
-          </li>
         </ul>
       </nav>
 
@@ -110,7 +80,6 @@
           <div v-if="orderData.name">Name: {{ orderData.name }}</div>
           <div v-if="orderData.clientId">Client: {{ getClientName(orderData.clientId) }}</div>
           <div v-if="orderData.sorts.length > 0">Sorts: {{ orderData.sorts.length }}</div>
-          <div v-if="orderData.selectedGrades.length > 0">Grades: {{ orderData.selectedGrades.length }}</div>
         </div>
       </div>
 
@@ -710,9 +679,7 @@ export default {
         volumeUnit: 'm3',
         species: '',
         specialInstructions: '',
-        sorts: [],
-        useGrades: false,
-        selectedGrades: []
+        sorts: []
       },
 
       // New sort form
@@ -735,10 +702,6 @@ export default {
         }
       },
 
-      // Search and filters
-      gradeSearch: '',
-      gradeFilter: '',
-
       // Sample data
       clients: [
         { id: 'client1', name: 'Johnson Lumber Co.' },
@@ -750,65 +713,6 @@ export default {
 
       speciesList: [
         'Oak', 'Maple', 'Cherry', 'Walnut', 'Pine', 'Cedar', 'Birch', 'Ash', 'Mahogany', 'Teak'
-      ],
-
-      gradeLibrary: [
-        {
-          id: 'grade1',
-          name: 'FAS (First and Seconds)',
-          type: 'Hardwood',
-          description: 'Highest grade hardwood lumber',
-          keySpecs: ['83.3% clear face', 'Min 6" wide × 8" long', 'Premium appearance']
-        },
-        {
-          id: 'grade2',
-          name: 'Select Grade',
-          type: 'Hardwood',
-          description: 'High-quality hardwood with minor defects',
-          keySpecs: ['Good one face', 'Min 4" wide × 6" long', 'Small defects allowed']
-        },
-        {
-          id: 'grade3',
-          name: 'Common No. 1',
-          type: 'Hardwood',
-          description: 'Standard grade with character marks',
-          keySpecs: ['66.7% clear face', 'Sound knots allowed', 'Good for staining']
-        },
-        {
-          id: 'grade4',
-          name: 'Common No. 2',
-          type: 'Hardwood',
-          description: 'Economy grade with more character',
-          keySpecs: ['50% clear face', 'Larger defects allowed', 'Paint grade quality']
-        },
-        {
-          id: 'grade5',
-          name: 'Select Structural',
-          type: 'Softwood',
-          description: 'High-strength structural lumber',
-          keySpecs: ['High strength rating', 'Minimal defects', 'Load-bearing applications']
-        },
-        {
-          id: 'grade6',
-          name: 'Construction Grade',
-          type: 'Softwood',
-          description: 'Standard construction lumber',
-          keySpecs: ['Good strength properties', 'Some defects allowed', 'General framing']
-        },
-        {
-          id: 'grade7',
-          name: 'Utility Grade',
-          type: 'Softwood',
-          description: 'Economy structural lumber',
-          keySpecs: ['Lower strength rating', 'More defects allowed', 'Non-critical applications']
-        },
-        {
-          id: 'grade8',
-          name: 'Engineered Composite',
-          type: 'Engineered',
-          description: 'Manufactured composite lumber',
-          keySpecs: ['Consistent properties', 'Moisture resistant', 'Dimensional stability']
-        }
       ]
     }
   },
@@ -826,23 +730,6 @@ export default {
              this.newSort.targetVolume && 
              this.newSort.grades.length > 0 &&
              (this.newSort.geometry.widthMin || this.newSort.geometry.lengthMin || this.newSort.geometry.thickness)
-    },
-
-    filteredGrades() {
-      let filtered = this.gradeLibrary
-
-      if (this.gradeSearch) {
-        filtered = filtered.filter(grade => 
-          grade.name.toLowerCase().includes(this.gradeSearch.toLowerCase()) ||
-          grade.description.toLowerCase().includes(this.gradeSearch.toLowerCase())
-        )
-      }
-
-      if (this.gradeFilter) {
-        filtered = filtered.filter(grade => grade.type === this.gradeFilter)
-      }
-
-      return filtered
     }
   },
 
@@ -853,8 +740,6 @@ export default {
           return this.orderData.name && this.orderData.clientId && this.orderData.requiredDate
         case 'sorts':
           return this.orderData.sorts.length > 0
-        case 'grades':
-          return true // Optional step is always "complete"
         default:
           return false
       }
