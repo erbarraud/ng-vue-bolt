@@ -190,7 +190,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Pause, Play, RefreshCw, Maximize } from 'lucide-vue-next'
-import BaseButton from '@/components/ui/BaseButton.vue'
+import Button from '@/components/ui/button.vue'
 
 // Reactive state
 const isScanning = ref(true)

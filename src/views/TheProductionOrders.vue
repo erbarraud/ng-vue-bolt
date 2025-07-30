@@ -88,9 +88,9 @@
     <div>
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-900">Upcoming Orders ({{ upcomingOrders.length }})</h2>
-        <Button variant="outline" asChild>
+        <BaseButton variant="outline" asChild>
           <router-link to="/orders/all">Show All</router-link>
-        </Button>
+        </BaseButton>
       </div>
       
       <!-- Upcoming Orders Table -->
