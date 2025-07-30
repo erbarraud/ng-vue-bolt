@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex">
     <!-- Left Sidebar Navigation -->
-    <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+    <div class="w-64 bg-white shadow-lg border-r border-gray-200 flex flex-col">
       <!-- Header -->
       <div class="p-6 border-b border-gray-200">
         <h1 class="text-2xl font-bold text-gray-900">Create New Order</h1>
@@ -117,23 +117,28 @@
       <!-- Action Buttons -->
       <div class="p-4 border-t border-gray-200">
         <div class="space-y-2">
-          <Button 
+          <button 
             @click="createOrder"
             :disabled="!canCreateOrder"
-            class="w-full"
+            :class="[
+              'w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+              canCreateOrder
+                ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            ]"
           >
             Create Order
-          </Button>
-          <Button variant="outline" class="w-full">
+          </button>
+          <button class="w-full px-4 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
             Save as Draft
-          </Button>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Main Content Area -->
     <div class="flex-1 overflow-auto">
-      <div class="max-w-4xl mx-auto p-8">
+      <div class="max-w-5xl mx-auto p-6">
         <!-- Order Details Section -->
         <div v-if="activeSection === 'details'" class="bg-white rounded-lg shadow-sm p-8">
           <div class="mb-6">
@@ -305,19 +310,20 @@
               <p class="text-gray-600">Add the sorts you want to include in this order</p>
             </div>
             <div class="flex space-x-3">
-              <Button 
+              <button 
                 @click="showExistingSorts = true"
-                variant="outline"
+                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center"
               >
                 <Package class="w-4 h-4 mr-2" />
                 Select Existing Sort
-              </Button>
-              <Button 
+              </button>
+              <button 
                 @click="showNewSortForm = true"
+                class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors flex items-center"
               >
                 <Plus class="w-4 h-4 mr-2" />
                 Create New Sort
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -337,15 +343,13 @@
                     Special: {{ sort.specialRequirements }}
                   </div>
                 </div>
-                <Button 
+                <button 
                   @click="removeSort(index)"
-                  variant="outline"
-                  size="sm"
-                  class="text-red-600 hover:text-red-700 hover:border-red-300"
+                  class="px-3 py-1 bg-white border border-red-300 text-red-600 rounded text-sm hover:bg-red-50 hover:border-red-400 transition-colors flex items-center"
                 >
                   <X class="w-4 h-4 mr-1" />
                   Remove
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -358,12 +362,12 @@
             <h3 class="text-lg font-medium text-gray-900 mb-2">No sorts added yet</h3>
             <p class="text-gray-600 mb-6">Add sorts to define what products you want to create from this order.</p>
             <div class="flex justify-center space-x-3">
-              <Button @click="showExistingSorts = true" variant="outline">
+              <button @click="showExistingSorts = true" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                 Select Existing Sort
-              </Button>
-              <Button @click="showNewSortForm = true">
+              </button>
+              <button @click="showNewSortForm = true" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                 Create New Sort
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -372,9 +376,9 @@
             <div class="bg-white rounded-lg p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
               <div class="flex items-center justify-between mb-6">
                 <h3 class="text-xl font-semibold text-gray-900">Select Existing Sort</h3>
-                <Button @click="showExistingSorts = false" variant="outline" size="sm">
+                <button @click="showExistingSorts = false" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                   <X class="w-4 h-4" />
-                </Button>
+                </button>
               </div>
 
               <!-- Search and Filter -->
@@ -469,18 +473,24 @@
 
               <!-- Modal Actions -->
               <div class="flex justify-end space-x-3 mt-6">
-                <Button 
+                <button 
                   @click="showExistingSorts = false"
-                  variant="outline"
+                  class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
-                </Button>
-                <Button 
+                </button>
+                <button 
                   @click="addExistingSort"
                   :disabled="!selectedExistingSort || !existingSortConfig.targetVolume"
+                  :class="[
+                    'px-4 py-2 rounded-lg transition-colors',
+                    (!selectedExistingSort || !existingSortConfig.targetVolume)
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                  ]"
                 >
                   Add Sort to Order
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -490,9 +500,9 @@
             <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
               <div class="flex items-center justify-between mb-6">
                 <h3 class="text-xl font-semibold text-gray-900">Create New Sort</h3>
-                <Button @click="showNewSortForm = false" variant="outline" size="sm">
+                <button @click="showNewSortForm = false" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                   <X class="w-4 h-4" />
-                </Button>
+                </button>
               </div>
 
               <div class="space-y-6">
@@ -599,19 +609,25 @@
 
               <!-- Modal Actions -->
               <div class="flex justify-end space-x-3 mt-6">
-                <Button 
+                <button 
                   @click="showNewSortForm = false"
-                  variant="outline"
+                  class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
-                </Button>
-                <Button 
+                </button>
+                <button 
                   @click="addNewSort"
                   :disabled="!newSort.name || !newSort.targetVolume"
+                  :class="[
+                    'px-4 py-2 rounded-lg transition-colors',
+                    (!newSort.name || !newSort.targetVolume)
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-emerald-600 text-white hover:bg-emerald-700'
+              <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-colors">
                 >
                   Add Sort to Order
-                </Button>
-              </div>
+                </button>
+              </button>
             </div>
           </div>
         </div>
