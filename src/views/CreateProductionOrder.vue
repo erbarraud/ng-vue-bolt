@@ -1035,39 +1035,6 @@ export default {
         this.resetNewSort()
       }
     },
-
-    resetNewSort() {
-      this.newSort = {
-        name: '',
-        targetVolume: '',
-        volumeUnit: 'm3',
-        specialRequirements: '',
-        geometry: {
-          widthMin: '',
-          widthMax: '',
-          lengthMin: '',
-          lengthMax: '',
-          thickness: ''
-        },
-        grades: [],
-        colorSorting: {
-          enabled: false,
-          type: ''
-        }
-      }
-    },
-          name: '',
-          qualityLevel: 'Standard',
-          targetVolume: '',
-          volumeUnit: 'm3',
-          defectTolerance: 5,
-          dimensions: '',
-          moistureContent: 12,
-          description: '',
-          specialRequirements: ''
-        }
-    },
-
     removeSort(index) {
       this.orderData.sorts.splice(index, 1)
     },
