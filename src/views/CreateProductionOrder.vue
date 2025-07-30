@@ -400,21 +400,30 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <!-- Width Range -->
                   <div>
-                    <label class="block text-sm font-medium text-blue-800 mb-3">Width Range (inches)</label>
-                    <div class="flex space-x-3">
+                    <label class="block text-sm font-medium text-blue-800 mb-3">Width (inches)</label>
+                    <div class="space-y-2">
                       <input 
-                        v-model="newSort.geometry.widthMin"
+                        v-model="newSort.geometry.width"
                         type="number" 
                         step="0.25"
-                        placeholder="Min"
-                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
+                        placeholder="Width"
+                        class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
+                      <div class="flex items-center space-x-2">
+                        <input 
+                          type="checkbox" 
+                          v-model="newSort.geometry.widthTolerance.enabled"
+                          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-blue-300 rounded"
+                        />
+                        <label class="text-sm text-blue-700">Add tolerance</label>
+                      </div>
                       <input 
-                        v-model="newSort.geometry.widthMax"
+                        v-if="newSort.geometry.widthTolerance.enabled"
+                        v-model="newSort.geometry.widthTolerance.value"
                         type="number" 
                         step="0.25"
-                        placeholder="Max"
-                        class="flex-1 px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm min-w-0"
+                        placeholder="± Tolerance"
+                        class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                       />
                     </div>
                   </div>
@@ -443,18 +452,36 @@
                   <!-- Thickness -->
                   <div>
                     <label class="block text-sm font-medium text-blue-800 mb-3">Thickness</label>
-                    <select 
-                      v-model="newSort.geometry.thickness"
-                      class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    >
-                      <option value="">Select thickness...</option>
-                      <option value="4/4">4/4 (1 inch)</option>
-                      <option value="5/4">5/4 (1.25 inches)</option>
-                      <option value="6/4">6/4 (1.5 inches)</option>
-                      <option value="8/4">8/4 (2 inches)</option>
-                      <option value="10/4">10/4 (2.5 inches)</option>
-                      <option value="12/4">12/4 (3 inches)</option>
-                    </select>
+                    <div class="space-y-2">
+                      <select 
+                        v-model="newSort.geometry.thickness"
+                        class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      >
+                        <option value="">Select thickness...</option>
+                        <option value="4/4">4/4 (1 inch)</option>
+                        <option value="5/4">5/4 (1.25 inches)</option>
+                        <option value="6/4">6/4 (1.5 inches)</option>
+                        <option value="8/4">8/4 (2 inches)</option>
+                        <option value="10/4">10/4 (2.5 inches)</option>
+                        <option value="12/4">12/4 (3 inches)</option>
+                      </select>
+                      <div class="flex items-center space-x-2">
+                        <input 
+                          type="checkbox" 
+                          v-model="newSort.geometry.thicknessTolerance.enabled"
+                          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-blue-300 rounded"
+                        />
+                        <label class="text-sm text-blue-700">Add tolerance</label>
+                      </div>
+                      <input 
+                        v-if="newSort.geometry.thicknessTolerance.enabled"
+                        v-model="newSort.geometry.thicknessTolerance.value"
+                        type="number" 
+                        step="0.125"
+                        placeholder="± Tolerance (inches)"
+                        class="w-full px-3 py-2.5 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
