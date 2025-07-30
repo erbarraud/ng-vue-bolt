@@ -664,7 +664,7 @@
             </div>
 
             <!-- Form Actions -->
-            <div class="flex justify-end space-x-3">
+            <div class="flex justify-end space-x-3 mt-6">
               <button 
                 @click="resetNewSort"
                 class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
@@ -683,6 +683,7 @@
               >
                 Add Sort to Order
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -853,46 +854,6 @@ export default {
         console.log('Creating order:', this.orderData)
         alert('Order created successfully!')
         this.$router.push('/orders')
-      }
-    },
-
-    // Template methods
-    updateTemplateOptions() {
-      this.selectedTemplate = null
-      this.resetTemplateCustomization()
-    },
-
-    selectTemplate(template) {
-      this.selectedTemplate = template
-      this.templateCustomization.name = template.name
-    },
-
-    resetTemplateSelection() {
-      this.selectedTemplateCategory = ''
-      this.selectedTemplate = null
-      this.resetTemplateCustomization()
-    },
-
-    resetTemplateCustomization() {
-      this.templateCustomization = {
-        name: '',
-        targetVolume: '',
-        volumeUnit: 'm3'
-      }
-    },
-
-    addTemplateSort() {
-      if (this.selectedTemplate && this.templateCustomization.targetVolume) {
-        const templateSort = {
-          ...this.selectedTemplate,
-          name: this.templateCustomization.name || this.selectedTemplate.name,
-          targetVolume: this.templateCustomization.targetVolume,
-          volumeUnit: this.templateCustomization.volumeUnit,
-          id: 'template_' + Date.now()
-        }
-        
-        this.orderData.sorts.push(templateSort)
-        this.resetTemplateSelection()
       }
     }
   },
