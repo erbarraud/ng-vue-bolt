@@ -166,7 +166,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Calendar, ChevronDown, Edit, Plus } from 'lucide-vue-next'
-import BaseButton from '@/components/ui/BaseButton.vue'
+import Button from '@/components/ui/BaseButton.vue'
 
 const showHolidays = ref(false)
 
