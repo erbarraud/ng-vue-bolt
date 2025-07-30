@@ -305,8 +305,8 @@
                       <h5 class="font-medium text-blue-900">Board Geometry</h5>
                     </div>
                     <div class="space-y-2 text-sm text-blue-800">
-                      <div>Width: {{ sort.geometry.widthMin }}" - {{ sort.geometry.widthMax }}"</div>
-                      <div>Length: {{ sort.geometry.lengthMin }}' - {{ sort.geometry.lengthMax }}'</div>
+                      <div>Width: {{ sort.geometry.width }}"{{ sort.geometry.widthTolerance.enabled ? ' ±' + sort.geometry.widthTolerance.value + '"' : '' }}</div>
+                      <div>Length: {{ sort.geometry.length }}'{{ sort.geometry.lengthTolerance.enabled ? ' ±' + sort.geometry.lengthTolerance.value + '\'' : '' }}</div>
                       <div>Thickness: {{ sort.geometry.thickness }}</div>
                     </div>
                   </div>
