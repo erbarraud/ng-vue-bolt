@@ -623,11 +623,10 @@
                     (!newSort.name || !newSort.targetVolume)
                       ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       : 'bg-emerald-600 text-white hover:bg-emerald-700'
-              <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-colors">
+                  ]"
                 >
                   Add Sort to Order
                 </button>
-              </button>
             </div>
           </div>
         </div>
