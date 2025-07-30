@@ -493,6 +493,7 @@
                 </button>
               </div>
             </div>
+            </div>
           </div>
 
           <!-- New Sort Form Modal -->
